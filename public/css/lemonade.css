@@ -1,0 +1,89 @@
+body{
+    margin: 0;
+    font-family: 'VL PGothic', "Segoe UI", sans-serif;
+    padding-top: 60px;
+    min-height: calc(100vh - 60px);
+    overflow-y: scroll;
+    background-color: #F4F5F9;
+    background-image: repeating-linear-gradient(0deg,  #DEE0EC, #DEE0EC 1px, transparent 2px, transparent 100px),
+                      repeating-linear-gradient(90deg, #DEE0EC, #DEE0EC 1px, transparent 2px, transparent 100px),
+                      linear-gradient(115deg, #E4E7EE, #E4E7EE 30%, transparent 30.1%, transparent);
+    background-attachment: fixed;
+    background-position: top center;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    box-sizing: border-box;
+    width: 100%;
+    background: #F9FAFC;
+    border-top: solid 5px #23232D;
+    overflow: hidden;
+    box-shadow: 0 0 3px darkgray;
+}
+header > h1{
+    font-size: 30px;
+    padding-left: calc(50vw - 650px);
+    padding-right: 40px;
+    height: 60px;
+    min-width: 350px;
+    margin: 0;
+    color: #F9FAFC;
+    line-height: 50px;
+    background: linear-gradient(295deg, transparent, transparent 30px, #23232D 31px, #23232D);
+    flex-shrink: 0;
+}
+header > *:last-child{
+    padding-right: calc(50vw - 650px);
+    flex-shrink: 0;
+}
+
+header > #info{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-grow: 1;
+}
+header > #info > #date{
+    position: relative;
+    background: #EFF1FD;
+    width: 50px;
+    box-shadow: inset 0 0 8px #cfd4ff;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    text-align: center;
+    padding: 2px 0;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 15px;
+}
+header > #info > #date::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 3px;
+    background: cornflowerblue;
+}
+#date > #date-month{
+    color: cornflowerblue;
+}
+header > #info > #clock{
+    font-weight: bold;
+    font-size: 17px;
+    padding-bottom: 2px;
+    border-bottom: solid 5px dimgray;
+}
+header hr{
+    border: none;
+    height: 25px;
+    width: 1px;
+    background: lightgray;
+    margin: 0 15px;
+}
