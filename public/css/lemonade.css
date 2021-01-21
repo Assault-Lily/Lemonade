@@ -1,15 +1,20 @@
 body{
     margin: 0;
-    font-family: 'VL PGothic', "Segoe UI", sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     padding-top: 60px;
     min-height: calc(100vh - 60px);
+    min-width: 1320px;
     overflow-y: scroll;
     background-color: #F4F5F9;
     background-image: repeating-linear-gradient(0deg,  #DEE0EC, #DEE0EC 1px, transparent 2px, transparent 100px),
-                      repeating-linear-gradient(90deg, #DEE0EC, #DEE0EC 1px, transparent 2px, transparent 100px),
-                      linear-gradient(115deg, #E4E7EE, #E4E7EE 30%, transparent 30.1%, transparent);
+                      repeating-linear-gradient(90deg, #DEE0EC, #DEE0EC 1px, transparent 2px, transparent 100px);
     background-attachment: fixed;
     background-position: top center;
+}
+body[data-pagetype="back-triangle"]{
+    background-image: repeating-linear-gradient(0deg,  #DEE0EC, #DEE0EC 1px, transparent 2px, transparent 100px),
+                      repeating-linear-gradient(90deg, #DEE0EC, #DEE0EC 1px, transparent 2px, transparent 100px),
+                      linear-gradient(115deg, #E4E7EE, #E4E7EE 30%, transparent 30%, transparent);
 }
 
 header{
@@ -20,14 +25,16 @@ header{
     justify-content: space-between;
     height: 60px;
     box-sizing: border-box;
+    padding-top: 6px;
     width: 100%;
-    background: #F9FAFC;
-    border-top: solid 5px #23232D;
+    min-width: 1300px;
+    background: linear-gradient(#23232D, #23232D 5px, #F9FAFC 5px, #F9FAFC);
     overflow: hidden;
     box-shadow: 0 0 3px darkgray;
+    cursor: default;
 }
 header > h1{
-    font-size: 30px;
+    font-size: 25px;
     padding-left: calc(50vw - 650px);
     padding-right: 40px;
     height: 60px;
@@ -37,6 +44,7 @@ header > h1{
     line-height: 50px;
     background: linear-gradient(295deg, transparent, transparent 30px, #23232D 31px, #23232D);
     flex-shrink: 0;
+    font-weight: normal;
 }
 header > *:last-child{
     padding-right: calc(50vw - 650px);
@@ -57,10 +65,11 @@ header > #info > #date{
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
     text-align: center;
-    padding: 2px 0;
-    font-weight: bold;
+    padding: 3px 0;
+    font-weight: 500;
+    line-height: 16px;
     margin-right: 15px;
-    font-size: 15px;
+    font-size: 17px;
 }
 header > #info > #date::before{
     content: '';
@@ -73,11 +82,11 @@ header > #info > #date::before{
 }
 #date > #date-month{
     color: cornflowerblue;
+    font-size: 15px;
 }
 header > #info > #clock{
-    font-weight: bold;
+    font-weight: 500;
     font-size: 17px;
-    padding-bottom: 2px;
     border-bottom: solid 5px dimgray;
 }
 header hr{
@@ -86,4 +95,22 @@ header hr{
     width: 1px;
     background: lightgray;
     margin: 0 15px;
+}
+header > nav > a{
+    display: inline-block;
+    text-align: center;
+    margin-left: 10px;
+    text-decoration: none;
+    font-size: 12px;
+    color: #37496F;
+}
+header > nav > a > i.fas {
+    display: block;
+    font-size: 25px;
+}
+
+
+main{
+    width: 1300px;
+    margin: 0 auto;
 }
