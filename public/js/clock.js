@@ -29,7 +29,7 @@ function monthName(num) {
 }
 
 function showClock() {
-    var nowTime = new Date();
+    var nowTime = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
     document.getElementById("date-month").innerText = monthName(nowTime.getMonth());
     document.getElementById("date-date").innerText = keta(nowTime.getDate());
     document.getElementById("clock").innerText = "JST " + keta(nowTime.getHours()) + ":" + keta(nowTime.getMinutes());
