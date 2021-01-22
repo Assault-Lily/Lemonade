@@ -39,10 +39,10 @@ header > h1{
     padding-right: 40px;
     height: 60px;
     min-width: 350px;
-    margin: 0;
+    margin: -6px 0 0 0;
     color: #F9FAFC;
-    line-height: 50px;
-    background: linear-gradient(295deg, transparent, transparent 30px, #23232D 31px, #23232D);
+    line-height: 55px;
+    background: linear-gradient(295deg, transparent, transparent 30px, #23232D 31px, #2D3049);
     flex-shrink: 0;
     font-weight: normal;
 }
@@ -84,11 +84,29 @@ header > #info > #date::before{
     color: cornflowerblue;
     font-size: 15px;
 }
-header > #info > #clock{
+header > #info > #clock-wrap{
+    position: relative;
+}
+#clock-wrap > #clock{
     font-weight: 500;
     font-size: 17px;
-    border-bottom: solid 5px dimgray;
 }
+#clock-wrap > #clock::before{
+    content: 'JST';
+    font-size: 16px;
+    margin-right: 10px;
+    color: cornflowerblue;
+}
+#clock-wrap > #clock-progress{
+    width: 100%;
+    height: 4px;
+    background: #99A1C3;
+}
+#clock-wrap > #clock-progress > #clock-value{
+    height: 4px;
+    background: #FF508E;
+}
+
 header hr{
     border: none;
     height: 25px;
@@ -99,7 +117,7 @@ header hr{
 header > nav > a{
     display: inline-block;
     text-align: center;
-    margin-left: 10px;
+    margin-left: 13px;
     text-decoration: none;
     font-size: 12px;
     color: #37496F;

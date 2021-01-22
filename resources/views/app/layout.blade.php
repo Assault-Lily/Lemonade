@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <script src="{{ asset('js/clock.js') }}"></script>
+    @yield('head')
 </head>
 <body {{ !empty($pagetype) ? 'data-pagetype='.$pagetype : '' }}>
 <header>
@@ -17,10 +18,14 @@
             <div id="date-month">---</div>
             <div id="date-date">--</div>
         </div>
-        <div id="clock">--- --:--</div>
+        <div id="clock-wrap">
+            <div id="clock">--:--</div>
+            <div id="clock-progress"><div id="clock-value"></div></div>
+        </div>
+
         <hr>
         <div id="system-info">
-            {{ config('app.name').' '.config('lemonade.version','') }}
+            {{ config('app.name').' Ver'.config('lemonade.version','') }}
         </div>
     </div>
     <hr>

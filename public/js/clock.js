@@ -8,8 +8,7 @@ function keta(num) {
     return ret;
 }
 function monthName(num) {
-    var months;
-    months = ["JAN",
+    const months = ["JAN",
         "FEB",
         "MAR",
         "APR",
@@ -29,10 +28,13 @@ function monthName(num) {
 }
 
 function showClock() {
-    var nowTime = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
+    const nowTime = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
     document.getElementById("date-month").innerText = monthName(nowTime.getMonth());
     document.getElementById("date-date").innerText = keta(nowTime.getDate());
-    document.getElementById("clock").innerText = "JST " + keta(nowTime.getHours()) + ":" + keta(nowTime.getMinutes());
+    document.getElementById("clock").innerText = keta(nowTime.getHours()) + ":" + keta(nowTime.getMinutes());
+
+    let percent = (nowTime.getMinutes() + nowTime.getHours() * 60) / (60 * 24);
+    document.getElementById("clock-value").setAttribute('style', 'width:'+(percent * 100)+'%');
 }
 document.addEventListener('DOMContentLoaded',()=>{
     showClock();
