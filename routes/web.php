@@ -17,3 +17,7 @@ use App\Http\Controllers\InfoController;
 Route::get('/', [InfoController::class, 'index']);
 
 Route::get('/ed/403', [InfoController::class, 'ed403']);
+
+Route::get('/eyecatch', function(){
+    return response()->view('eyecatch');
+});
