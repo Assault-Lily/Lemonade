@@ -12,7 +12,12 @@
 </head>
 <body {{ !empty($pagetype) ? 'data-pagetype='.$pagetype : '' }}>
 <header>
-    <h1>{{ $title ?? 'Lemonade' }}</h1>
+    <div id="title">
+        <a href="{{ url('/') }}"><i class="fas fa-home"></i>{{--<i class="fas fa-chevron-left">--}}</i></a>
+        <h1>
+            {{ $title ?? 'Lemonade' }}
+        </h1>
+    </div>
     <div id="info">
         <div id="date">
             <div id="date-month">---</div>
@@ -27,11 +32,17 @@
         <div id="system-info">
             {{ config('app.name').' Ver'.config('lemonade.version','') }}
         </div>
+        @if(!App::environment('production'))
+            <div class="indicator">ENV : {{ App::environment() }}</div>
+        @endif
+        @if(config('app.debug'))
+            <div class="indicator">Debug Mode</div>
+        @endif
     </div>
     <hr>
     <nav>
         <a href="{{ url('/') }}"><i class="fas fa-home"></i>Top</a>
-        <a href="{{ url('/') }}"><i class="fas fa-users"></i>Lily</a>
+        <a href="{{ url('/lily') }}"><i class="fas fa-address-book"></i>Lily</a>
     </nav>
 </header>
 
