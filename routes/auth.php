@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 //use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 //use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -52,6 +53,13 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
                 ->middleware(['auth', 'throttle:6,1'])
                 ->name('verification.send');
 */
+
+Route::get('/change-password', [ChangePasswordController::class, 'edit'])
+                ->middleware('auth')
+                ->name('password.change');
+Route::patch('/change-password', [ChangePasswordController::class, 'update'])
+                ->middleware('auth');
+
 Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
                 ->middleware('auth')
                 ->name('password.confirm');
