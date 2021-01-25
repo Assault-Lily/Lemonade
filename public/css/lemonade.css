@@ -301,6 +301,7 @@ button.primary, a.button.primary{
     text-align: center;
     font-size: larger;
     transform: translateY(-50%);
+    box-sizing: border-box;
     animation: 3s linear flash-message forwards;
 }
 @keyframes flash-message {
