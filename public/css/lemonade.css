@@ -125,14 +125,6 @@ header > #info > #clock-wrap{
     height: 4px;
     background: #FF508E;
 }
-header > #info .indicator{
-    background: darkred;
-    padding: 0 6px;
-    color: white;
-    margin-left: 7px;
-    border-radius: 2px;
-    font-size: smaller;
-}
 
 header hr{
     border: none;
@@ -193,4 +185,90 @@ main h1::before{
     background-size: 4px 4px;
     filter: drop-shadow(0 0 3px lightgray);
     z-index: -1;
+}
+
+.indicator{
+    display: inline-block;
+    background: darkred;
+    padding: 0 6px;
+    color: white;
+    margin-left: 7px;
+    border-radius: 2px;
+    font-size: smaller;
+}
+
+.window-a{
+    border: solid 2px #7A8DFE;
+    background-color: rgba(255,255,255,0.4);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 10px, white 10px, white 12px);
+    backdrop-filter: blur(2px);
+    cursor: default;
+}
+.window-a > .header{
+    background: linear-gradient(#454555 ,#3C3C4D, #454555);
+    padding: 5px 13px;
+    color: #F9FAFC;
+    font-size: 20px;
+    position: relative;
+}
+.window-a > .header::before{
+    position: relative;
+    top: -2px;
+    content: '';
+    display: inline-block;
+    height: 12px;
+    width: 26px;
+    background: #7A95FF;
+    margin-right: 10px;
+    border-radius: 6px 6px 6px 0;
+    box-shadow: -2px 2px 0 #525886;
+}
+.window-a > .body{
+    padding: 0 20px;
+}
+.window-a hr{
+    border: none;
+    border-top: solid 1px #7A8DFE;
+    margin: 1em 0;
+}
+
+input{
+    font-family: 'Noto Sans JP', sans-serif;
+}
+input[type="email"], input[type="password"]{
+    background: #ececec;
+    border-radius: 3px;
+    border: none;
+    text-align: center;
+    box-shadow: inset 0 0 2px lightgray;
+    padding: 5px;
+}
+input[type="email"]:focus, input[type="password"]:focus{
+    background: #E5E7EC;
+    outline: none;
+}
+
+.buttons{
+    margin: 1em auto;
+    text-align: center;
+}
+button, a.button{
+    font-family: 'Noto Sans JP', sans-serif;
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+    box-sizing: border-box;
+    min-width: 120px;
+    padding: 6px 10px;
+    margin: 0 10px;
+    font-size: 16px;
+    background: white;
+    border: none;
+    box-shadow: 1px 1px 1px 1px #6a77cb;
+    outline: none;
+}
+button.primary, a.button.primary{
+    color: white;
+    background: #4F538A;
+    box-shadow: 1px 1px 1px 1px #353a99;
 }
