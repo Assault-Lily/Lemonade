@@ -103,6 +103,13 @@ header > #info > #date::before{
     color: cornflowerblue;
     font-size: 15px;
 }
+header > #info > a{
+    color: inherit;
+    text-decoration: none;
+}
+header > #info > a > i.fas{
+    margin-right: 8px;
+}
 header > #info > #clock-wrap{
     position: relative;
 }
@@ -124,14 +131,6 @@ header > #info > #clock-wrap{
 #clock-wrap > #clock-progress > #clock-value{
     height: 4px;
     background: #FF508E;
-}
-header > #info .indicator{
-    background: darkred;
-    padding: 0 6px;
-    color: white;
-    margin-left: 7px;
-    border-radius: 2px;
-    font-size: smaller;
 }
 
 header hr{
@@ -176,13 +175,19 @@ main{
     100% { opacity: 1 }
 }
 
-main h1{
+main h1, h2{
     position: relative;
     margin: .6em auto .6em 15px;
     padding-left: 15px;
     border-left: ridge 6px cornflowerblue;
 }
-main h1::before{
+main h1{
+    font-size: 30px;
+}
+h2{
+    font-size: 25px;
+}
+main h1::before, h2::before{
     position: absolute;
     bottom: -5px;
     left: -20px;
@@ -193,4 +198,128 @@ main h1::before{
     background-size: 4px 4px;
     filter: drop-shadow(0 0 3px lightgray);
     z-index: -1;
+}
+
+.indicator{
+    display: inline-block;
+    background: darkred;
+    padding: 0 6px;
+    color: white;
+    margin-left: 7px;
+    border-radius: 2px;
+    font-size: smaller;
+}
+
+.window-a{
+    border: solid 2px #7A8DFE;
+    background-color: rgba(255,255,255,0.4);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 10px, white 10px, white 12px);
+    backdrop-filter: blur(2px);
+    cursor: default;
+}
+.window-a > .header{
+    background: linear-gradient(#454555 ,#3C3C4D, #454555);
+    padding: 5px 13px;
+    color: #F9FAFC;
+    font-size: 20px;
+    position: relative;
+}
+.window-a > .header::before{
+    position: relative;
+    top: -2px;
+    content: '';
+    display: inline-block;
+    height: 12px;
+    width: 26px;
+    background: #7A95FF;
+    margin-right: 10px;
+    border-radius: 6px 6px 6px 0;
+    box-shadow: -2px 2px 0 #525886;
+}
+.window-a > .body{
+    padding: 0 20px;
+}
+.window-a hr{
+    border: none;
+    border-top: solid 1px #7A8DFE;
+    margin: 1em 0;
+}
+
+input{
+    font-family: 'Noto Sans JP', sans-serif;
+}
+input[type="email"], input[type="password"]{
+    background: #ececec;
+    border-radius: 3px;
+    border: none;
+    text-align: center;
+    box-shadow: inset 0 0 2px lightgray;
+    padding: 5px;
+}
+input[type="email"]:focus, input[type="password"]:focus{
+    background: #E5E7EC;
+    outline: none;
+}
+
+.buttons{
+    margin: 1em auto;
+    text-align: center;
+}
+.buttons.three > a.button{
+    width: 25%;
+    margin: 10px 3%;
+}
+button, a.button{
+    font-family: 'Noto Sans JP', sans-serif;
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+    box-sizing: border-box;
+    min-width: 120px;
+    padding: 6px 10px;
+    margin: 0 10px;
+    font-size: 16px;
+    background: white;
+    border: none;
+    box-shadow: 1px 1px 1px 1px #6a77cb;
+    outline: none;
+    border-radius: 1px;
+    font-weight: 500;
+}
+button.primary, a.button.primary{
+    color: white;
+    background: #4F538A;
+    box-shadow: 1px 1px 1px 1px #353a99;
+}
+
+.flash-message{
+    position: fixed;
+    top: 40vh;
+    width: 100%;
+    padding: 1em 30px;
+    background: rgba(255,255,255,0.8);
+    text-align: center;
+    font-size: larger;
+    transform: translateY(-50%);
+    box-sizing: border-box;
+    animation: 3s linear flash-message forwards;
+}
+@keyframes flash-message {
+    0%, 5%{
+        display: block;
+        transform: scaleY(0);
+    }
+    12%{
+        display: block;
+        transform: scaleY(1);
+    }
+    93%{
+        display: block;
+        transform: scaleY(1);
+    }
+    100%{
+        display: none;
+        transform: scaleY(0);
+    }
+
 }

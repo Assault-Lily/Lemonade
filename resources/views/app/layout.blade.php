@@ -32,19 +32,28 @@
         <div id="system-info">
             {{ config('app.name').' Ver'.config('lemonade.version','') }}
         </div>
-        @if(!App::environment('production'))
-            <div class="indicator">ENV : {{ App::environment() }}</div>
-        @endif
-        @if(config('app.debug'))
-            <div class="indicator">Debug Mode</div>
+        <hr>
+        @if(Auth::check())
+            <a href="{{ route('admin.dashboard') }}" id="user-auth">
+                <i class="fas fa-user-check"></i>{{ Auth::user()->name ?? 'Authed' }}</a>
+        @else
+            <a href="{{ route('admin.login') }}" id="user-auth">
+                <i class="fas fa-user"></i>Guest</a>
         @endif
     </div>
+    @if(config('app.debug'))
+        <div class="indicator">Debug Mode</div>
+    @endif
     <hr>
     <nav>
         <a href="{{ url('/') }}"><i class="fas fa-home"></i>Top</a>
         <a href="{{ url('/lily') }}"><i class="fas fa-address-book"></i>Lily</a>
     </nav>
 </header>
+
+@if(session('message'))
+    <div class="flash-message">{{ session('message') }}</div>
+@endif
 
 @yield('main')
 

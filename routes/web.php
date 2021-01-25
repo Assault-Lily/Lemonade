@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LilyController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,11 @@ use App\Http\Controllers\LilyController;
 
 Route::get('/', [InfoController::class, 'index']);
 
-Route::resource('/lily', LilyController::class, ['only' => ['index', 'show']]);
+Route::resource('/lily', LilyController::class);
 
-Route::get('/ed/403', [InfoController::class, 'ed403']);
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
+    Route::get('/', [AdminController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
-Route::get('/eyecatch', function(){
-    return response()->view('eyecatch');
+    require __DIR__.'/auth.php';
+
 });
