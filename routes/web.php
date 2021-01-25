@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LilyController;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,7 @@ Route::get('/', [InfoController::class, 'index']);
 Route::resource('/lily', LilyController::class);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
-    Route::get('/', function () {
-        return view('dashboard');
-    })->middleware(['auth'])->name('dashboard');
+    Route::get('/', [AdminController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
     require __DIR__.'/auth.php';
 

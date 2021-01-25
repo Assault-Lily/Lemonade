@@ -103,6 +103,13 @@ header > #info > #date::before{
     color: cornflowerblue;
     font-size: 15px;
 }
+header > #info > a{
+    color: inherit;
+    text-decoration: none;
+}
+header > #info > a > i.fas{
+    margin-right: 8px;
+}
 header > #info > #clock-wrap{
     position: relative;
 }
@@ -168,13 +175,19 @@ main{
     100% { opacity: 1 }
 }
 
-main h1{
+main h1, h2{
     position: relative;
     margin: .6em auto .6em 15px;
     padding-left: 15px;
     border-left: ridge 6px cornflowerblue;
 }
-main h1::before{
+main h1{
+    font-size: 30px;
+}
+h2{
+    font-size: 25px;
+}
+main h1::before, h2::before{
     position: absolute;
     bottom: -5px;
     left: -20px;
@@ -252,6 +265,10 @@ input[type="email"]:focus, input[type="password"]:focus{
     margin: 1em auto;
     text-align: center;
 }
+.buttons.three > a.button{
+    width: 25%;
+    margin: 10px 3%;
+}
 button, a.button{
     font-family: 'Noto Sans JP', sans-serif;
     color: black;
@@ -266,9 +283,42 @@ button, a.button{
     border: none;
     box-shadow: 1px 1px 1px 1px #6a77cb;
     outline: none;
+    border-radius: 1px;
+    font-weight: 500;
 }
 button.primary, a.button.primary{
     color: white;
     background: #4F538A;
     box-shadow: 1px 1px 1px 1px #353a99;
+}
+
+.flash-message{
+    position: fixed;
+    top: 40vh;
+    width: 100%;
+    padding: 1em 30px;
+    background: rgba(255,255,255,0.8);
+    text-align: center;
+    font-size: larger;
+    transform: translateY(-50%);
+    animation: 3s linear flash-message forwards;
+}
+@keyframes flash-message {
+    0%, 5%{
+        display: block;
+        transform: scaleY(0);
+    }
+    12%{
+        display: block;
+        transform: scaleY(1);
+    }
+    93%{
+        display: block;
+        transform: scaleY(1);
+    }
+    100%{
+        display: none;
+        transform: scaleY(0);
+    }
+
 }

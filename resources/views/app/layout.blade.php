@@ -34,9 +34,11 @@
         </div>
         <hr>
         @if(Auth::check())
-            <span><i class="fas fa-user-check" style="margin-right: 8px"></i>{{ Auth::user()->name ?? 'Authed' }}</span>
+            <a href="{{ route('admin.dashboard') }}" id="user-auth">
+                <i class="fas fa-user-check"></i>{{ Auth::user()->name ?? 'Authed' }}</a>
         @else
-            <span><i class="fas fa-user" style="margin-right: 8px"></i>Guest</span>
+            <a href="{{ route('admin.login') }}" id="user-auth">
+                <i class="fas fa-user"></i>Guest</a>
         @endif
     </div>
     @if(config('app.debug'))
@@ -48,6 +50,10 @@
         <a href="{{ url('/lily') }}"><i class="fas fa-address-book"></i>Lily</a>
     </nav>
 </header>
+
+@if(session('message'))
+    <div class="flash-message">{{ session('message') }}</div>
+@endif
 
 @yield('main')
 
