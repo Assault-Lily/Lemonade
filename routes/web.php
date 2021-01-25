@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InfoController;
+use App\Http\Controllers\LilyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,8 @@ use App\Http\Controllers\InfoController;
 */
 
 Route::get('/', [InfoController::class, 'index']);
+
+Route::resource('/lily', LilyController::class, ['only' => ['index', 'show']]);
 
 Route::get('/ed/403', [InfoController::class, 'ed403']);
 
