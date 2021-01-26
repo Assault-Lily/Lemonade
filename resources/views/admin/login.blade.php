@@ -22,7 +22,7 @@
         <div class="window-a" id="auth">
             <div class="header">認証</div>
             <div class="body">
-                <p>管理者としてログインが必要です</p>
+                <p style="text-align: center">管理コンソールへアクセスするには認証が必要です</p>
                 <form action="{{ route('admin.login') }}" method="post">
                     @csrf
                     <label>
