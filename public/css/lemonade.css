@@ -210,6 +210,12 @@ main h1::before, h2::before{
     font-size: smaller;
 }
 
+.white-box{
+    background: rgba(255,255,255,0.8);
+    padding: 1px 20px 10px;
+    box-shadow: 0 0 2px 1px #7A8DFE;
+}
+
 .window-a{
     border: solid 2px #7A8DFE;
     background-color: rgba(255,255,255,0.4);
@@ -239,7 +245,7 @@ main h1::before, h2::before{
 .window-a > .body{
     padding: 0 20px;
 }
-.window-a hr{
+.window-a hr, .white-box hr{
     border: none;
     border-top: solid 1px #7A8DFE;
     margin: 1em 0;
@@ -248,15 +254,20 @@ main h1::before, h2::before{
 input{
     font-family: 'Noto Sans JP', sans-serif;
 }
-input[type="email"], input[type="password"]{
+input[type="email"],
+input[type="password"],
+input[type="text"]{
     background: #ececec;
     border-radius: 3px;
     border: none;
     text-align: center;
     box-shadow: inset 0 0 2px lightgray;
     padding: 5px;
+    box-sizing: border-box;
 }
-input[type="email"]:focus, input[type="password"]:focus{
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus{
     background: #E5E7EC;
     outline: none;
 }
@@ -265,11 +276,11 @@ input[type="email"]:focus, input[type="password"]:focus{
     margin: 1em auto;
     text-align: center;
 }
-.buttons.three > a.button{
+.buttons.three > .button{
     width: 25%;
     margin: 10px 3%;
 }
-button, a.button{
+button, .button{
     font-family: 'Noto Sans JP', sans-serif;
     color: black;
     text-decoration: none;
@@ -285,11 +296,22 @@ button, a.button{
     outline: none;
     border-radius: 1px;
     font-weight: 500;
+    transition: transform .1s;
+    text-align: center;
 }
-button.primary, a.button.primary{
+button:active, .button:active{
+    transform: scale(0.95);
+}
+button.primary, .button.primary{
     color: white;
     background: #4F538A;
     box-shadow: 1px 1px 1px 1px #353a99;
+}
+button.smaller, .button.smaller{
+    min-width: 0;
+    padding: 2px 6px;
+    font-size: smaller;
+    margin: 0 5px;
 }
 
 .flash-message{

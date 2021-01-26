@@ -10,4 +10,6 @@ class Lily extends Model
     use HasFactory;
 
     protected $table = 'lilies';
+
+    protected $guarded = ['id'];
 }
