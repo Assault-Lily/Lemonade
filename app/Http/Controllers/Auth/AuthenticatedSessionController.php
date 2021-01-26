@@ -26,6 +26,7 @@ class AuthenticatedSessionController extends Controller
      *
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(LoginRequest $request)
     {
@@ -33,7 +34,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect(RouteServiceProvider::HOME)->with('message','ログインに成功しました');
+        return redirect()->intended(RouteServiceProvider::HOME)->with('message','ログインに成功しました');
     }
 
     /**
