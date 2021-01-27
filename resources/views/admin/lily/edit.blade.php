@@ -49,7 +49,7 @@
                 <div id="more">
                     <label>
                         スラッグ<br>
-                        <input type="text" name="slug" required value="{{ old('slug', $lily->slug) }}" disabled id="slug">
+                        <input type="text" name="slug" required value="{{ old('slug', $lily->slug) }}" readonly id="slug">
                     </label>
                     <label>
                         カラーコード<br>
@@ -68,7 +68,7 @@
                 <p>
                     スラッグはリリィ詳細画面のURIパスとして既に機能しています。
                     既存ページにアクセスできなくなるため、よほどのことがない限り変更されるべきではありません。<br>
-                    <a href="javascript:document.getElementById('slug').removeAttribute('disabled')">
+                    <a href="javascript:document.getElementById('slug').removeAttribute('readonly')">
                         理解した上で、編集ロックを解除します。
                     </a>
                 </p>
