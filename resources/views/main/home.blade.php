@@ -3,10 +3,13 @@
 @section('head')
     <style>
         #home-pic-wrap{
+            margin-top: -60px;
+            padding-top: 60px;
             width: 100%;
-            background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.6))
+            background-image: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.5))
             , url("{{ asset('image/home-pic/background.jpg') }}");
             background-size: cover;
+            background-position: top center;
         }
         #home-pic{
             display: block;
