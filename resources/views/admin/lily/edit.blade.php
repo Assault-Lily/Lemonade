@@ -76,7 +76,7 @@
                 <p>カラーコードは必須入力ではありません。</p>
                 <hr>
                 <div class="buttons">
-                    <a href="{{ route('admin.lily.index') }}" class="button">一覧に戻る</a>
+                    <a href="{{ route('admin.lily.show',['lily' => $lily->id]) }}" class="button">キャンセル</a>
                     <input type="reset" class="button" value="初期化">
                     <input type="submit" class="button primary" value="登録実行">
                 </div>

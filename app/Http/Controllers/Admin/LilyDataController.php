@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Lily;
 use App\Rules\HexColorCode;
 use App\Rules\Hiragana;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class LilyDataController extends Controller
@@ -68,11 +69,18 @@ class LilyDataController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        try {
+            $lily = Lily::findOrFail($id);
+        }catch (ModelNotFoundException $e){
+            abort(404, 'レコードが存在しません');
+        }
+
+
+        return view('admin.lily.show', compact('lily'));
     }
 
     /**
@@ -83,7 +91,12 @@ class LilyDataController extends Controller
      */
     public function edit($id)
     {
-        $lily = Lily::find($id);
+        try {
+            $lily = Lily::findOrFail($id);
+        }catch (ModelNotFoundException $e){
+            abort(404, 'レコードが存在しません');
+        }
+
         return view('admin.lily.edit', compact('lily'));
     }
 
@@ -92,11 +105,37 @@ class LilyDataController extends Controller
      *
      * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $lily = Lily::findOrFail($id);
+        }catch (ModelNotFoundException $e){
+            abort(404, 'レコードが存在しません');
+        }
+
+        if ($request->id != $id){
+            abort(400);
+        }
+
+        $request->validate([
+            'slug'   => ['required', 'alpha'],
+            'name'   => 'required',
+            'name_y' => ['required', new Hiragana('・ ')],
+            'name_a' => ['required'],
+            'color'  => [new HexColorCode],
+        ]);
+
+        $lily->slug = strtolower($request->slug);
+        $lily->name = $request->name;
+        $lily->name_y = $request->name_y;
+        $lily->name_a = $request->name_a;
+        $lily->color = $request->color;
+
+        $lily->save();
+
+        return redirect(route('admin.lily.index'))->with('message', "レコードを更新しました");
     }
 
     /**
@@ -107,6 +146,6 @@ class LilyDataController extends Controller
      */
     public function destroy($id)
     {
-        //
+        abort(400);
     }
 }

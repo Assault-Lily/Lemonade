@@ -35,6 +35,7 @@
                         <td>{{ $row->name_a }}</td>
                         <td>{{ $row->color }}</td>
                         <td>
+                            <a href="{{ route('admin.lily.show',['lily' => $row->id]) }}" class="button smaller">詳細</a>
                             <a href="{{ route('admin.lily.edit',['lily' => $row->id]) }}" class="button smaller">編集</a>
                         </td>
                     </tr>
