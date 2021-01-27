@@ -48,6 +48,14 @@
                     <th>スラッグ</th>
                     <td>{{ $lily->slug }}</td>
                 </tr>
+                <tr>
+                    <th>登録日時</th>
+                    <td>{{ $lily->created_at }}</td>
+                </tr>
+                <tr>
+                    <th>更新日時</th>
+                    <td>{{ $lily->updated_at }}</td>
+                </tr>
             </table>
             <hr>
             <div class="buttons three">
