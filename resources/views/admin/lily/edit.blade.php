@@ -31,6 +31,7 @@
         <div class="white-box" style="text-align: center">
             <form action="{{ route('admin.lily.update',['lily' => $lily->id]) }}" method="post">
                 @csrf
+                @method('patch')
                 <input type="hidden" name="id" value="{{ $lily->id }}">
                 <div id="name">
                     <label>
