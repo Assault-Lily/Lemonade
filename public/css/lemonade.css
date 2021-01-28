@@ -274,6 +274,11 @@ input[type="number"]:focus{
     background: #E5E7EC;
     outline: none;
 }
+input[readonly], input[disabled]{
+    color: #585858;
+    background: #d6d6d6;
+    font-style: italic;
+}
 
 .buttons{
     margin: 1em auto;
