@@ -22,6 +22,8 @@ namespace App\Models{
  * @property string|null $color
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Triple[] $triples
+ * @property-read int|null $triples_count
  * @method static \Illuminate\Database\Eloquent\Builder|Lily newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Lily newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Lily query()
@@ -35,6 +37,31 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Lily whereUpdatedAt($value)
  */
 	class Lily extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Triple
+ *
+ * @property int $id
+ * @property \App\Models\Lily $lily
+ * @property string $predicate
+ * @property string $object
+ * @property int $spoiler
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereLily($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereObject($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple wherePredicate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereSpoiler($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereUpdatedAt($value)
+ */
+	class Triple extends \Eloquent {}
 }
 
 namespace App\Models{
