@@ -74,9 +74,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($lily->triples() as $triple)
+                @forelse($lily->triples as $triple)
+                    <?php
+                    $predicate = config('triplePredicate.'.$triple->predicate)
+                    ?>
                     <tr>
-                        <th>{{ $triple->predicate }}</th>
+                        <th>{{ !empty($predicate) ? $predicate.' ('.$triple->predicate.')' : $triple->predicate }}</th>
                         <td>{{ $triple->object }}</td>
                     </tr>
                 @empty
@@ -88,7 +91,7 @@
             </table>
             <hr>
             <div class="buttons three">
-                <a href="javascript:void(0)" class="button">トリプル詳細・編集</a>
+                <a href="{{ route('admin.triple.index',['lily_id' => $lily->id]) }}" class="button">トリプル詳細・編集</a>
             </div>
         </div>
     </main>
