@@ -12,4 +12,8 @@ class Lily extends Model
     protected $table = 'lilies';
 
     protected $guarded = ['id'];
+
+    public function triples(){
+        return $this->hasMany(Triple::class, 'lily');
+    }
 }
