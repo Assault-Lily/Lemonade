@@ -3,17 +3,18 @@
 <?php
     /**
      * @var $lily \App\Models\Lily
+     * @var $triple \App\Models\Triple
      */
 ?>
 
 @section('head')
     <style>
-        table#data{
+        table.data{
             margin: 10px auto;
             max-width: 100%;
             border-spacing: 16px 5px;
         }
-        table#data th{
+        table.data th{
             text-align: right;
         }
     </style>
@@ -23,7 +24,7 @@
     <main>
         <h1>基本データ：{{ $lily->name }}</h1>
         <div class="white-box">
-            <table id="data">
+            <table class="data">
                 <tr>
                     <th>名前</th>
                     <td style="font-size: 30px">{{ $lily->name }}</td>
@@ -61,6 +62,33 @@
             <div class="buttons three">
                 <a href="{{ route('admin.lily.index') }}" class="button">一覧に戻る</a>
                 <a href="{{ route('admin.lily.edit',['lily' => $lily->id]) }}" class="button">データ編集</a>
+            </div>
+        </div>
+        <h2>トリプル簡易参照</h2>
+        <div class="white-box">
+            <table class="data">
+                <thead>
+                <tr>
+                    <th>述語</th>
+                    <th style="text-align: left">目的語(オブジェクト)</th>
+                </tr>
+                </thead>
+                <tbody>
+                @forelse($lily->triples() as $triple)
+                    <tr>
+                        <th>{{ $triple->predicate }}</th>
+                        <td>{{ $triple->object }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="2" style="color: darkred; font-style: italic; text-align: center">トリプルが登録されていません</td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
+            <hr>
+            <div class="buttons three">
+                <a href="javascript:void(0)" class="button">トリプル詳細・編集</a>
             </div>
         </div>
     </main>
