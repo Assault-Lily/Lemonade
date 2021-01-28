@@ -257,7 +257,8 @@ input{
 }
 input[type="email"],
 input[type="password"],
-input[type="text"]{
+input[type="text"],
+input[type="number"]{
     background: #ececec;
     border-radius: 3px;
     border: none;
@@ -268,7 +269,8 @@ input[type="text"]{
 }
 input[type="email"]:focus,
 input[type="password"]:focus,
-input[type="text"]:focus{
+input[type="text"]:focus,
+input[type="number"]:focus{
     background: #E5E7EC;
     outline: none;
 }
