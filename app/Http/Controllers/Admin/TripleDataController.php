@@ -72,6 +72,10 @@ class TripleDataController extends Controller
             'spoiler' => ['boolean']
         ]);
 
+        if(Triple::whereLilyId($request->lily)->where('predicate', 'like', $request->predicate)->exists()){
+            return back()->withInput()->withErrors('同じ述語を持つトリプルが既に存在します。技術的な問題から、同じ述語を持つトリプルを登録することはできません。');
+        }
+
         $triple = new Triple();
         $triple->lily_id   = $request->lily;
         $triple->predicate = $request->predicate;
