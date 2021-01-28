@@ -15,7 +15,7 @@ class CreateTriplesTable extends Migration
     {
         Schema::create('triples', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('lily')->unsigned();
+            $table->bigInteger('lily_id')->unsigned();
             $table->string('predicate');
             $table->text('object');
             $table->boolean('spoiler')->default(false);

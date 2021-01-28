@@ -12,6 +12,6 @@ class Triple extends Model
     protected $table = 'triples';
 
     public function lily(){
-        return $this->belongsTo(Lily::class, 'lily');
+        return $this->belongsTo(Lily::class);
     }
 }
