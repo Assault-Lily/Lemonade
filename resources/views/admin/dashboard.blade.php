@@ -15,13 +15,13 @@
         <div class="buttons three">
             <a href="{{ route('admin.lily.index') }}" class="button">データ一覧</a>
             <a href="{{ route('admin.lily.create') }}" class="button">新規登録</a>
-            <a href="{{ route('admin.dashboard') }}" class="button">データ整合チェック</a>
+            <a href="javascript:void(0)" class="button">データ整合チェック</a>
         </div>
         <h2>トリプルデータ管理</h2>
         <div class="buttons three">
-            <a href="{{ route('admin.dashboard') }}" class="button">データ一覧</a>
-            <a href="{{ route('admin.dashboard') }}" class="button">新規登録</a>
-            <a href="{{ route('admin.dashboard') }}" class="button">データ整合チェック</a>
+            <a href="{{ route('admin.triple.index') }}" class="button">データ一覧</a>
+            <a href="{{ route('admin.triple.create') }}" class="button">新規登録</a>
+            <a href="javascript:void(0)" class="button">データ整合チェック</a>
         </div>
     </main>
 @endsection

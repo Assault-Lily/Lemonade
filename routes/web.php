@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LilyDataController;
+use App\Http\Controllers\Admin\TripleDataController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LilyController;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +28,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
     require __DIR__.'/auth.php';
 
     Route::resource('/lily', LilyDataController::class);
+    Route::resource('/triple', TripleDataController::class);
 
 });
