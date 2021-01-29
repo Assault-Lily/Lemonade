@@ -7,6 +7,7 @@ use App\Models\Lily;
 use App\Models\Triple;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Sarhan\Flatten\Flatten;
 
 class TripleDataController extends Controller
 {
@@ -19,7 +20,6 @@ class TripleDataController extends Controller
     public function index(Request $request)
     {
         $triples = null;
-        $triple_info = '';
         if(!empty($request->get('lily_id'))){
             try {
                 $lily = Lily::findOrFail($request->get('lily_id'));
@@ -31,8 +31,6 @@ class TripleDataController extends Controller
             $triples = Triple::with('lily')->get();
             $lily = null;
         }
-
-        //dd($triples->toArray());
 
         return view('admin.triple.index', compact('triples', 'lily'));
     }
@@ -54,7 +52,11 @@ class TripleDataController extends Controller
         }else{
             $lily = null;
         }
-        return view('admin.triple.create', compact('lily'));
+
+        $flatten = new Flatten();
+        $predicates = $flatten->flattenToArray(config('triplePredicate'));
+
+        return view('admin.triple.create', compact('lily', 'predicates'));
     }
 
     /**

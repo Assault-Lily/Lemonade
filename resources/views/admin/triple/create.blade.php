@@ -43,7 +43,7 @@
                         述語
                         <input type="text" name="predicate" list="predicates" required value="{{ old('predicate') }}">
                         <datalist id="predicates">
-                            @foreach(config('triplePredicate') as $key => $predicate)
+                            @foreach($predicates as $key => $predicate)
                                 <option value="{{ $key }}">{{ $predicate }}</option>
                             @endforeach
                         </datalist>
