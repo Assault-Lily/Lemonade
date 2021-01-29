@@ -19,6 +19,7 @@ class CreateTriplesTable extends Migration
             $table->string('predicate');
             $table->text('object');
             $table->boolean('spoiler')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

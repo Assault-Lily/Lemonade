@@ -48,6 +48,7 @@ namespace App\Models{
  * @property string $predicate
  * @property string $object
  * @property int $spoiler
+ * @property string|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Lily $lily
@@ -55,6 +56,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Triple newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Triple query()
  * @method static \Illuminate\Database\Eloquent\Builder|Triple whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Triple whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Triple whereLilyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Triple whereObject($value)
