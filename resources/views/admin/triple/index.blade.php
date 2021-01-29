@@ -29,10 +29,14 @@
                     <a href="{{ route('admin.triple.create',['lily_id' => $lily->id]) }}" class="button">
                         トリプル新規登録 ({{ $lily->name }})
                     </a>
+                    <a href="{{ route('admin.triple.index',['lily_id' => $lily->id, 'trashed' => 'contain']) }}" class="button">削除済みトリプルも表示</a>
+                    <a href="{{ route('admin.triple.index',['lily_id' => $lily->id, 'trashed' => 'only']) }}" class="button">削除済みトリプルのみ表示</a>
                 </div>
             @else
                 <div class="buttons three">
-                    <a href="{{ route('admin.triple.create') }}" class="button">トリプル新規登録</a>
+                    <a href="{{ route('admin.triple.create') }}" class="button primary">トリプル新規登録</a>
+                    <a href="{{ route('admin.triple.index',['trashed' => 'contain']) }}" class="button">削除済みトリプルも表示</a>
+                    <a href="{{ route('admin.triple.index',['trashed' => 'only']) }}" class="button">削除済みトリプルのみ表示</a>
                 </div>
             @endif
             <hr>
@@ -52,13 +56,15 @@
                     <?php
                         $predicate = config('triplePredicate.'.$triple->predicate)
                     ?>
-                    <tr>
+                    <tr @if($triple->trashed()) style="font-style: italic;" @endif>
                         <td>{{ $triple->id }}</td>
                         <td>{{ $triple->lily->name }}</td>
                         <td>{{ !empty($predicate) ? $predicate.' ('.$triple->predicate.')' : $triple->predicate }}</td>
                         <td>{{ $triple->object }}</td>
-                        <td>{{ $triple->updated_at }}</td>
-                        <td></td>
+                        <td>{{ $triple->updated_at }}@if($triple->trashed()) (削除済み)@endif</td>
+                        <td>
+                            <a href="{{ route('admin.triple.edit',['triple' => $triple->id]) }}" class="button smaller">編集</a>
+                        </td>
                     </tr>
                 @empty
                     <tr>

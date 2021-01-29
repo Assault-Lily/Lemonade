@@ -92,6 +92,7 @@
             <hr>
             <div class="buttons three">
                 <a href="{{ route('admin.triple.index',['lily_id' => $lily->id]) }}" class="button">トリプル詳細・編集</a>
+                <a href="{{ route('admin.triple.create',['lily_id' => $lily->id]) }}" class="button">トリプル新規登録</a>
             </div>
         </div>
     </main>
