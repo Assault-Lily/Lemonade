@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "250749b942aca67744a9d419ed93dd9f",
+    "content-hash": "e51056d88dff2307d801854d1ca4df49",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2351,6 +2351,56 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
+        },
+        {
+            "name": "sarhan/php-flatten",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AlaaSarhan/php-flatten.git",
+                "reference": "974bef407110f4451b681fc8d671b75f9dfc207c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlaaSarhan/php-flatten/zipball/974bef407110f4451b681fc8d671b75f9dfc207c",
+                "reference": "974bef407110f4451b681fc8d671b75f9dfc207c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7|^6.0",
+                "squizlabs/php_codesniffer": "^2.3|^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sarhan\\Flatten\\": "./src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Alaa Sarhan",
+                    "email": "sarhan.alaa@protonmail.com"
+                }
+            ],
+            "description": "Flattens multidimensional arrays, traversables and vars into one dimensional array.",
+            "homepage": "https://github.com/AlaaSarhan/php-flatten",
+            "keywords": [
+                "array",
+                "arrays",
+                "flatten"
+            ],
+            "support": {
+                "issues": "https://github.com/AlaaSarhan/php-flatten/issues",
+                "source": "https://github.com/AlaaSarhan/php-flatten/tree/next"
+            },
+            "time": "2019-01-05T23:41:46+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
