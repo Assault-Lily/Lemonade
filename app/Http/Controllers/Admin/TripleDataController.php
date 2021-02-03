@@ -61,18 +61,25 @@ class TripleDataController extends Controller
     {
         if(!empty($request->get('lily_id'))){
             try {
-                $lily = Lily::findOrFail($request->get('lily_id'));
+                $args = [
+                    'lily' => Lily::findOrFail($request->get('lily_id'))
+                ];
+                $lilies = [];
             }catch (ModelNotFoundException $e){
                 abort(404, '指定されたリリィのレコードが存在しません');
             }
         }else{
-            $lily = null;
+            $args = [
+                'predicate' => $request->get('predicate'),
+                'object'    => $request->get('object')
+            ];
+            $lilies = Lily::orderBy('id')->get();
         }
 
         $flatten = new Flatten();
         $predicates = $flatten->flattenToArray(config('triplePredicate'));
 
-        return view('admin.triple.create', compact('lily', 'predicates'));
+        return view('admin.triple.create', compact('args', 'predicates', 'lilies'));
     }
 
     /**

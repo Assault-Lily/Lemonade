@@ -19,10 +19,10 @@
     <main>
         <h1>トリプル新規登録</h1>
         <div class="white-box" style="text-align: center">
-            @if(!empty($lily))
+            @if(!empty($args['lily']))
                 <p>
                     リリィIDが既に指定されています。
-                    このトリプルは <span style="font-size: large; font-weight: bold">{{ $lily->name }}</span> に紐付けられます。
+                    このトリプルは <span style="font-size: large; font-weight: bold">{{ $args['lily']->name }}</span> に紐付けられます。
                 </p>
             @else
                 <p>トリプルはリリィ基本データに紐付けられます。先にリリィ基本データがデータベースに存在する必要があります。</p>
@@ -36,12 +36,22 @@
                 <div id="triple">
                     <label>
                         主語(リリィID)
-                        <input type="number" name="lily" required
-                               @if(!empty($lily))value="{{ $lily->id }}" readonly @else value="{{ old('lily') }}" @endif>
+                        <input type="number" name="lily" list="lilies" required
+                               @if(!empty($args['lily']))value="{{ $args['lily']->id }}" readonly @else value="{{ old('lily') }}" @endif>
+                        <datalist id="lilies">
+                            <?php
+                            /**
+                             * @var $lily \App\Models\Lily
+                             */
+                            ?>
+                            @foreach($lilies as $lily)
+                                <option value="{{ $lily->id }}">{{ $lily->name }}</option>
+                            @endforeach
+                        </datalist>
                     </label>
                     <label>
                         述語
-                        <input type="text" name="predicate" list="predicates" required value="{{ old('predicate') }}">
+                        <input type="text" name="predicate" list="predicates" required value="{{ old('predicate', $args['predicate'] ?? '') }}">
                         <datalist id="predicates">
                             @foreach($predicates as $key => $predicate)
                                 <option value="{{ $key }}">{{ $predicate }}</option>
@@ -50,7 +60,7 @@
                     </label>
                     <label>
                         目的語(オブジェクト)
-                        <input type="text" name="object" required value="{{ old('object') }}">
+                        <input type="text" name="object" required value="{{ old('object', $args['object'] ?? '') }}">
                     </label>
                 </div>
                 <p>

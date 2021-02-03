@@ -36,6 +36,7 @@
                     <a href="{{ route('admin.lily.show',['lily' => $triple->lily->id]) }}" class="button">リリィデータ参照</a>
                     <a href="{{ route('admin.triple.index',['lily_id' => $triple->lily->id]) }}" class="button">トリプル絞り込み参照</a>
                     <a href="{{ route('admin.triple.create',['lily_id' => $triple->lily->id]) }}" class="button">編集ではなく新規作成する</a>
+                    <a href="{{ route('admin.triple.create',['predicate' => $triple->predicate, 'object' => $triple->object]) }}" class="button">このトリプルを別のリリィにコピーする</a>
                 </div>
                 <hr>
                 <form action="{{ route('admin.triple.update',['triple' => $triple->id]) }}" method="post">
