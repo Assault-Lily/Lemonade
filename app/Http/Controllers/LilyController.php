@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lily;
+use App\Models\Triple;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class LilyController extends Controller
@@ -13,7 +16,12 @@ class LilyController extends Controller
      */
     public function index()
     {
-        return response()->view('lily.index');
+        $lilies = Lily::orderBy('name_y')->get();
+        $triples = array();
+        foreach (Triple::all() as $triple){
+            $triples[$triple->lily_id][$triple->predicate] = $triple->object;
+        }
+        return response()->view('lily.index', compact('lilies','triples'));
     }
 
     /**
@@ -40,13 +48,22 @@ class LilyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        abort(403, '未実装です');
-        return response('Yet',403);
+        try {
+            $lily = Lily::whereSlug($slug)->with('triples')->firstOrFail();
+            $triples = array();
+            foreach ($lily->triples as $triple){
+                $triples[$triple->predicate] = $triple->object;
+            }
+        }catch (ModelNotFoundException $e){
+            abort(404, '該当するデータが存在しません');
+        }
+
+        dd($triples);
     }
 
     /**

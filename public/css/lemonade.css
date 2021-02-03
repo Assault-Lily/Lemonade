@@ -322,6 +322,94 @@ button.smaller, .button.smaller{
     margin: 0 5px;
 }
 
+.top-options{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: dashed 1px #7d93c6;
+    padding: 15px 0;
+    margin-bottom: 15px;
+}
+.top-options .info{
+    background: rgba(255,255,255,0.5);
+    border-radius: 1px;
+    padding: 2px 10px;
+}
+
+.list{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.list-item-a{
+    display: inline-flex; /* default */
+    width: 32%;
+    flex-shrink: 0;
+    background: linear-gradient(#F6F7FB, #E1E5EF);
+    box-shadow: 1px 2px 1px #9DA6BA, inset 0 0 1px gray;
+    margin-left: 7px;
+    margin-bottom: 15px;
+    padding: 10px 17px;
+    outline: solid 1px rgb(193, 193, 193);
+    outline-offset: -6px;
+    box-sizing: border-box;
+    position: relative;
+    color: black;
+    text-decoration: none;
+    transition: transform .1s;
+}
+.list-item-a:active{
+    transform: scale(0.95);
+}
+.list-item-a::before{
+    content: '';
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(#BDDBEB, #9A91C1);
+    position: absolute;
+    left: -7px;
+    top: 1px;
+}
+.list-item-a::after{
+    content: '';
+    height: 19px;
+    width: 5px;
+    position: absolute;
+    top: 10px;
+    left: 3px;
+    background: linear-gradient(
+        #8898BC,
+        #8898BC 5px,
+    transparent 5px,
+    transparent 7px,
+        #98AFD7 7px,
+        #98AFD7 12px,
+    transparent 12px,
+    transparent 14px,
+        #B6C3D7 14px,
+        #B6C3D7
+    );
+}
+.list-item-a > .list-item-image{
+    width: 60px;
+    background: #E8EBF4;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+.list-item-data{
+    width: 100%;
+    font-size: 13px;
+    overflow-x: hidden;
+}
+.list-item-data > .title{
+    font-size: 20px;
+    padding-bottom: 3px;
+    margin-bottom: 3px;
+    border-bottom: dashed 1px dimgray;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .flash-message{
     position: fixed;
     top: 40vh;
