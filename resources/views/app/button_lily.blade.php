@@ -7,6 +7,7 @@
         <div style="color: {{ $lily->color ?: 'transparent' }}; font-weight: bold; text-align: right;font-size: 13px;">{{ $lily->color ?: '' }}</div>
     </div>
     <div class="list-item-data">
+        <div class="title-ruby">{{ $lily->name_y }}</div>
         <div class="title">{{ $lily->name }}</div>
         <div>
             {{ $triple['garden.name'] ?? 'ガーデン情報なし' }}
