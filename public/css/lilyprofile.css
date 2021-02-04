@@ -1,0 +1,108 @@
+#profile{
+    background: rgba(255,255,255,0.5);
+    box-sizing: border-box;
+    margin: 20px 10px;
+    padding: 30px;
+    box-shadow: 1px 1px 2px lightgray;
+    outline: solid 1px white;
+    outline-offset: -10px;
+    display: flex;
+}
+#profile > .left{
+    width: 50%;
+    flex-shrink: 0;
+}
+
+.name-plate{
+    display: flex;
+    width: 100%;
+}
+.name-plate > .pic{
+    width: 90px;
+    height: 90px;
+    background: gray;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+.name-plate > .profile{
+    width: 100%;
+    font-weight: 500;
+}
+.name-plate > .profile > .name{
+    font-size: 30px;
+    line-height: 46px;
+    border-bottom: solid 2px black;
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: 3px;
+}
+.name-plate > .profile > .name::before{
+    position: absolute;
+    bottom: 4px;
+    right: 0;
+    content: '';
+    width: 25px;
+    height: 5px;
+    background: repeating-linear-gradient(-45deg, gray, gray 1px, transparent 1px, transparent 2px, transparent 3px, gray 4px, gray 5px);
+}
+.name-plate > .profile > .name::after{
+    position: absolute;
+    bottom: -2px;
+    right: 0;
+    content: '';
+    width: 45px;
+    height: 2px;
+    background: linear-gradient(90deg, gray, gray 38px, white 38px, white 40px, black 40px, black);
+}
+.name-plate > .profile > .name-ruby{
+    font-size: 15px;
+    line-height: 13px;
+}
+.name-plate > .profile > .summary{
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+}
+.name-plate > .profile > .summary > hr{
+    display: inline-block;
+    border: none;
+    margin: auto 10px;
+    width: 1px;
+    height: 1em;
+    background: black;
+}
+
+table#profile-table{
+    width: calc(100% + 30px);
+    margin: 10px -15px;
+    font-size: 16px;
+    border-spacing: 15px 6px;
+}
+table#profile-table th{
+    background: linear-gradient(90deg, #70738d, #A7AFC9);
+    color: white;
+    font-weight: normal;
+    padding: 2px 14px;
+    text-align: left;
+    box-shadow: 0 1px 1px #5d6381;
+    position: relative;
+    width: 150px;
+}
+table#profile-table th::before{
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    top: 3px;
+    left: 3px;
+    background: whitesmoke;
+}
+table#profile-table td{
+    border-bottom: dashed 1px gray;
+    padding: 2px 0;
+    vertical-align: top;
+}
+table#profile-table td.spacer{
+    opacity: 0;
+    height: 100%;
+}
