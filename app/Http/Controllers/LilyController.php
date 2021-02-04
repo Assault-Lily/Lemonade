@@ -49,7 +49,7 @@ class LilyController extends Controller
      * Display the specified resource.
      *
      * @param  string $slug
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($slug)
     {
@@ -63,7 +63,7 @@ class LilyController extends Controller
             abort(404, '該当するデータが存在しません');
         }
 
-        dd($triples);
+        return view('lily.show', compact('lily', 'triples'));
     }
 
     /**
