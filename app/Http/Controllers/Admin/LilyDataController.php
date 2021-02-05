@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Lily;
 use App\Rules\HexColorCode;
 use App\Rules\Hiragana;
+use Http;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Log;
 
 class LilyDataController extends Controller
 {
@@ -61,6 +63,18 @@ class LilyDataController extends Controller
         $lily->color = $request->color;
 
         $lily->save();
+
+        // Logging and Notify
+
+        $user = \Auth::user();
+        $notify = 'リリィデータが追加されました！'.PHP_EOL
+            .'登録名 : '.$lily->name.' ('.route('admin.lily.show',['lily' => $lily->id]).')'.PHP_EOL
+            .'なまえ : '.$lily->name_y.', Name : '.$lily->name_a.', Color : '.($lily->color ?? 'N/A').PHP_EOL
+            .'登録者 : '.$user->name.'('.$user->email.')';
+        Http::post(env('DISCORD_URL'), [
+            'content' => $notify
+        ]);
+        Log::channel('adminlog')->info($notify);
 
         return redirect(route('admin.lily.index'))->with('message', "レコードを追加しました");
     }
@@ -134,6 +148,18 @@ class LilyDataController extends Controller
         $lily->color = $request->color;
 
         $lily->save();
+
+        // Logging and Notify
+
+        $user = \Auth::user();
+        $notify = 'リリィデータが編集されました！'.PHP_EOL
+            .'登録名 : '.$lily->name.' ('.route('admin.lily.show',['lily' => $lily->id]).')'.PHP_EOL
+            .'なまえ : '.$lily->name_y.', Name : '.$lily->name_a.', Color : '.($lily->color ?? 'N/A').PHP_EOL
+            .'登録者 : '.$user->name.'('.$user->email.')';
+        Http::post(env('DISCORD_URL'), [
+            'content' => $notify
+        ]);
+        Log::channel('adminlog')->info($notify);
 
         return redirect(route('admin.lily.index'))->with('message', "レコードを更新しました");
     }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Lily;
 use App\Models\Triple;
+use Http;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Log;
 use Sarhan\Flatten\Flatten;
 
 class TripleDataController extends Controller
@@ -109,6 +111,20 @@ class TripleDataController extends Controller
 
         $triple->save();
 
+        // Logging and Notify
+
+        $user = \Auth::user();
+        $notify = 'トリプルが追加されました！'.PHP_EOL
+            .'登録先リリィ : '.$triple->lily->name.' ('.route('admin.triple.show',['triple' => $triple->id]).')'.PHP_EOL
+            .'述語　 : '.$triple->predicate.PHP_EOL
+            .'目的語 : '.$triple->object.PHP_EOL
+            .'スポイラーフラグ : '.($triple->spoiler ? 'True' : 'False').PHP_EOL
+            .'登録者：'.$user->name.'('.$user->email.')';
+        Http::post(env('DISCORD_URL'), [
+            'content' => $notify
+        ]);
+        Log::channel('adminlog')->info($notify);
+
         return redirect(route('admin.triple.edit',['triple' => $triple->id]))->with('message', 'トリプルを追加しました');
     }
 
@@ -158,6 +174,18 @@ class TripleDataController extends Controller
             }catch(ModelNotFoundException $e){
                 abort(404, '指定されたトリプルはレストアできません');
             }
+
+            // Logging and Notify
+
+            $user = \Auth::user();
+            $notify = 'トリプルがレストアされました！'.PHP_EOL
+                .'トリプルID : '.$id.' ('.route('admin.triple.show',['triple' => $id]).')'.PHP_EOL
+                .'更新者 : '.$user->name.'('.$user->email.')';
+            Http::post(env('DISCORD_URL'), [
+                'content' => $notify
+            ]);
+            Log::channel('adminlog')->info($notify);
+
             return redirect(route('admin.triple.edit',['triple' => $id]))->with('message', 'トリプルをレストアしました');
         }
 
@@ -182,6 +210,20 @@ class TripleDataController extends Controller
 
         $triple->save();
 
+        // Logging and Notify
+
+        $user = \Auth::user();
+        $notify = 'トリプルが編集されました！'.PHP_EOL
+            .'登録先リリィ : '.$triple->lily->name.' ('.route('admin.triple.show',['triple' => $triple->id]).')'.PHP_EOL
+            .'述語　 : '.$triple->predicate.PHP_EOL
+            .'目的語 : '.$triple->object.PHP_EOL
+            .'スポイラーフラグ : '.($triple->spoiler ? 'True' : 'False').PHP_EOL
+            .'登録者 : '.$user->name.'('.$user->email.')';
+        Http::post(env('DISCORD_URL'), [
+            'content' => $notify
+        ]);
+        Log::channel('adminlog')->info($notify);
+
         return redirect(route('admin.triple.index'))->with('message', 'トリプルを更新しました');
     }
 
@@ -198,6 +240,17 @@ class TripleDataController extends Controller
         }catch (ModelNotFoundException $e){
             abort(400, '指定したトリプルが存在しません');
         }
+
+        // Logging and Notify
+
+        $user = \Auth::user();
+        $notify = 'トリプルが削除されました...'.PHP_EOL
+            .'トリプルID : '.$id.' ('.route('admin.triple.show',['triple' => $id]).')'.PHP_EOL
+            .'更新者 : '.$user->name.'('.$user->email.')';
+        Http::post(env('DISCORD_URL'), [
+            'content' => $notify
+        ]);
+        Log::channel('adminlog')->info($notify);
 
         return redirect(route('admin.triple.edit',['triple' => $id]))->with('message', 'トリプルを削除しました');
     }
