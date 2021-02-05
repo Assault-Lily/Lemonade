@@ -14,11 +14,11 @@ class ConfirmablePasswordController extends Controller
      * Show the confirm password view.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function show(Request $request)
     {
-        return view('auth.confirm-password');
+        return view('admin.confirm-password');
     }
 
     /**
@@ -40,6 +40,6 @@ class ConfirmablePasswordController extends Controller
 
         $request->session()->put('auth.password_confirmed_at', time());
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::HOME)->with('message', 'パスワードを確認しました');
     }
 }
