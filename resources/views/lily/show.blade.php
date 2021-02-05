@@ -58,6 +58,10 @@
                         <th>所持レアスキル</th>
                         <td>{{ $triples['rareSkill'] ?? 'N/A' }}</td>
                     </tr>
+                    <tr>
+                        <th>主な使用CHARM</th>
+                        <td>{{ $triples['charm'] ?? 'N/A' }}</td>
+                    </tr>
                     @if(!empty($lily->color))
                         <tr>
                             <th>カラーコード</th>
