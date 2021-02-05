@@ -114,16 +114,14 @@ class TripleDataController extends Controller
         // Logging and Notify
 
         $user = \Auth::user();
-        $notify = 'トリプルが追加されました！'.PHP_EOL
-            .'登録先リリィ : '.$triple->lily->name.' ('.route('admin.triple.show',['triple' => $triple->id]).')'.PHP_EOL
-            .'述語　 : '.$triple->predicate.PHP_EOL
-            .'目的語 : '.$triple->object.PHP_EOL
-            .'スポイラーフラグ : '.($triple->spoiler ? 'True' : 'False').PHP_EOL
+        $log_text = 'トリプルが追加されました'.PHP_EOL
+            .$this->generateLogText($triple).PHP_EOL
             .'登録者：'.$user->name.'('.$user->email.')';
         Http::post(env('DISCORD_URL'), [
-            'content' => $notify
+            'content' => 'トリプルが追加されました！'.PHP_EOL.'追加実施者は '.$user->name.'('.$user->email.') です',
+            'embeds' => [$this->generateDiscordEmbed($triple)]
         ]);
-        Log::channel('adminlog')->info($notify);
+        Log::channel('adminlog')->info($log_text);
 
         return redirect(route('admin.triple.edit',['triple' => $triple->id]))->with('message', 'トリプルを追加しました');
     }
@@ -213,16 +211,14 @@ class TripleDataController extends Controller
         // Logging and Notify
 
         $user = \Auth::user();
-        $notify = 'トリプルが編集されました！'.PHP_EOL
-            .'登録先リリィ : '.$triple->lily->name.' ('.route('admin.triple.show',['triple' => $triple->id]).')'.PHP_EOL
-            .'述語　 : '.$triple->predicate.PHP_EOL
-            .'目的語 : '.$triple->object.PHP_EOL
-            .'スポイラーフラグ : '.($triple->spoiler ? 'True' : 'False').PHP_EOL
-            .'登録者 : '.$user->name.'('.$user->email.')';
+        $log_text = 'トリプルが更新されました'.PHP_EOL
+            .$this->generateLogText($triple).PHP_EOL
+            .'登録者：'.$user->name.'('.$user->email.')';
         Http::post(env('DISCORD_URL'), [
-            'content' => $notify
+            'content' => 'トリプルが更新されました！'.PHP_EOL.'更新実施者は '.$user->name.'('.$user->email.') です',
+            'embeds' => [$this->generateDiscordEmbed($triple)]
         ]);
-        Log::channel('adminlog')->info($notify);
+        Log::channel('adminlog')->info($log_text);
 
         return redirect(route('admin.triple.index'))->with('message', 'トリプルを更新しました');
     }
@@ -253,5 +249,41 @@ class TripleDataController extends Controller
         Log::channel('adminlog')->info($notify);
 
         return redirect(route('admin.triple.edit',['triple' => $id]))->with('message', 'トリプルを削除しました');
+    }
+
+    protected function generateDiscordEmbed(Triple $triple)
+    {
+        return [
+            'title' => '更新データ詳細',
+            'url' => route('admin.triple.show',['triple' => $triple->id]),
+            'footer' => [
+                'text' => config('app.name').' Ver'.config('lemonade.version')
+            ],
+            'timestamp' => $triple->updated_at->format(\DateTime::ISO8601),
+            'fields' => [
+                [
+                    'name' => '主語',
+                    'value' => $triple->lily->name,
+                    'inline' => true
+                ],
+                [
+                    'name' => '述語',
+                    'value' => config('triplePredicate.'.$triple->predicate).'('.$triple->predicate.')',
+                    'inline' => true
+                ],
+                [
+                    'name' => '目的語',
+                    'value' => $triple->object
+                ]
+            ]
+        ];
+    }
+
+    protected function generateLogText(Triple $triple)
+    {
+        return '主語　 : '.$triple->lily->name.' ('.route('admin.triple.show',['triple' => $triple->id]).')'.PHP_EOL
+            .'述語　 : '.$triple->predicate.PHP_EOL
+            .'目的語 : '.$triple->object.PHP_EOL
+            .'スポイラーフラグ : '.($triple->spoiler ? 'True' : 'False');
     }
 }
