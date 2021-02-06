@@ -18,7 +18,8 @@
                     <div class="pic"></div>
                     <div class="profile">
                         <div class="name-ruby">{{ $lily->name_y }}</div>
-                        <div class="name" @if(mb_strlen($lily->name) >= 16) style="font-size: 24px" @endif>{{ $lily->name }}</div>
+                        <div class="name" style="
+                        @if(mb_strlen($lily->name) >= 16) font-size: 24px; @endif">{{ $lily->name }}</div>
                         <div class="summary">
                             <div>誕生日 : {{ $triples['birthday'] ?? 'N/A' }}</div><hr>
                             <div>年齢 : {{ $triples['age'] ?? 'N/A' }}歳</div><hr>
@@ -68,10 +69,28 @@
                             <td style="font-weight: bold; color: {{ $lily->color }}">{{ $lily->color }}</td>
                         </tr>
                     @endif
+                    @if(!empty($triples['cast']))
+                        <tr>
+                            <th>キャスト</th>
+                            <td>{{ $triples['cast'] }}</td>
+                        </tr>
+                    @endif
+                    @if(!empty($triples['remarks']))
+                        <tr>
+                            <th>特記事項</th>
+                            <td rowspan="2" style="height: 5em">{!! nl2br($triples['remarks']) !!}</td>
+                        </tr>
+                        <tr>
+                            <td class="spacer"></td>
+                        </tr>
+                    @endif
                     </tbody>
                 </table>
             </div>
-            <div class="right" style="width: 100%">
+            <div class="right" style="width: 100%;position: relative">
+                @if(!empty($triples['KIA']))
+                    <div class="KIA">{{ $triples['KIA'] }}<br>戦死・殉職者</div>
+                @endif
                 <p style="text-align: center; padding-top: 100px; color: gray; font-size: large;">Image Unavailable</p>
             </div>
         </div>

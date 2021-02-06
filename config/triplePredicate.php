@@ -28,6 +28,7 @@ return [
         'name' => '所属レギオン',
         'position' => 'レギオン役職',
     ],
+    'KIA' => '戦死・殉職',
     'introduction' => '公式紹介',
     'cast' => 'キャスト',
     'miyadoc' => 'MiyaDoc記事名',

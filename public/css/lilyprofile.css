@@ -106,3 +106,15 @@ table#profile-table td.spacer{
     opacity: 0;
     height: 100%;
 }
+
+.KIA{
+    position: absolute;
+    top: -15px;
+    right: -32px;
+    background: linear-gradient(45deg ,#1a202c, #22242b);
+    color: lightgray;
+    padding: 5px 13px;
+    border-radius: 2px;
+    text-align: center;
+    box-shadow: 2px 0 3px lightgray;
+}
