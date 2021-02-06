@@ -11,6 +11,7 @@ return [
     'charm' => '主な使用CHARM',
     'rareSkill' => 'レアスキル',
     'subSkill' => 'サブスキル',
+    'skillerValue' => 'スキラー数値',
     'tacticalPosition' => '戦術ポジション',
     'partner' => [
         'schutzengel' => 'シュッツエンゲル',
