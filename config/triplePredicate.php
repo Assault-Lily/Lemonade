@@ -11,6 +11,7 @@ return [
     'charm' => '主な使用CHARM',
     'rareSkill' => 'レアスキル',
     'subSkill' => 'サブスキル',
+    'boostedSkill' => 'ブーステッドスキル',
     'skillerValue' => 'スキラー数値',
     'tacticalPosition' => '戦術ポジション',
     'partner' => [
@@ -20,6 +21,7 @@ return [
     ],
     'garden' => [
         'name' => '所属ガーデン',
+        'course' => '学科',
         'grade' => '学年',
         'position' => 'ガーデン役職',
         'rank' => '序列',
