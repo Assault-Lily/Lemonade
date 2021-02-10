@@ -42,6 +42,10 @@ class Handler extends ExceptionHandler
     protected function renderHttpException(HttpExceptionInterface $e)
     {
         $status = $e->getStatusCode();
-        return response()->view('errors.error',['exception' => $e],$status);
+        if(app()->isDownForMaintenance()){
+            return response()->view('errors.maintenance',['exception' => $e],$status);
+        }else{
+            return response()->view('errors.error',['exception' => $e],$status);
+        }
     }
 }
