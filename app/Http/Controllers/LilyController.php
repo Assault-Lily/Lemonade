@@ -63,6 +63,15 @@ class LilyController extends Controller
             abort(404, '該当するデータが存在しません');
         }
 
+        // Partner infos
+        foreach (array_keys(config('triplePredicate.partner')) as $partner){
+            if(!empty($triples['partner.'.$partner])){
+                if(ctype_digit($triples['partner.'.$partner])){
+                    $triples['partner.'.$partner] = Lily::find($triples['partner.'.$partner]);
+                }
+            }
+        }
+
         return view('lily.show', compact('lily', 'triples'));
     }
 

@@ -2,12 +2,28 @@
 
 <?php
     /**
-     * @var $lily \App\Models\Lily
+     * @var $lily Lily
      */
+
+use App\Models\Lily;
+
+    $color_rgb = str_replace('#','',$lily->color ?? '');
+    if(strlen($color_rgb) !== 6) $color_rgba = 'rgba(0,0,0,0.1)';
+    else {
+        $r = hexdec(substr($color_rgb,0,2));
+        $g = hexdec(substr($color_rgb,2,2));
+        $b = hexdec(substr($color_rgb,4,2));
+        $color_rgba = 'rgba('.$r.','.$g.','.$b.',0.6)';
+    }
 ?>
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/lilyprofile.css') }}">
+    <style>
+        #profile{
+            background-image: radial-gradient(circle farthest-corner at 90% 100%, {{ $color_rgba }}, transparent 50%, transparent);
+        }
+    </style>
 @endsection
 
 @section('main')
