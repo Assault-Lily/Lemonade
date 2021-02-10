@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [InfoController::class, 'index']);
 
-Route::resource('/lily', LilyController::class);
+Route::resource('/lily', LilyController::class, ['only' => ['index','show']]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
     Route::get('/', [AdminController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
