@@ -35,6 +35,7 @@ header{
     box-shadow: 0 0 3px darkgray;
     cursor: default;
     animation: .8s ease-out header-float-in;
+    z-index: 100;
 }
 header > div#title{
     font-size: 25px;
