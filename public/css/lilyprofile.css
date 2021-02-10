@@ -1,5 +1,5 @@
 #profile{
-    background: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.5);
     box-sizing: border-box;
     margin: 20px 10px;
     padding: 30px;
@@ -11,6 +11,7 @@
 #profile > .left{
     width: 50%;
     flex-shrink: 0;
+    margin-right: 20px;
 }
 
 .name-plate{
@@ -114,7 +115,14 @@ table#profile-table td.spacer{
     background: linear-gradient(45deg ,#1a202c, #22242b);
     color: lightgray;
     padding: 5px 13px;
-    border-radius: 2px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
     text-align: center;
     box-shadow: 2px 0 3px lightgray;
+}
+
+#pics{
+    height: 300px;
+    background: rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
