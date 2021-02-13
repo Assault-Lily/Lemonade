@@ -46,11 +46,14 @@ use App\Models\Lily;
                 </div>
                 <table id="profile-table">
                     <tbody>
-                    @include('app.lilyprofiletable.record',['object' => $triples['garden.name'] ?? '', 'th' => '所属ガーデン'])
+                    @include('app.lilyprofiletable.record',['object' => $triples['garden.name'] ?? null, 'th' => '所属ガーデン'])
+                    @if(!empty($triples['garden.course']))
+                        @include('app.lilyprofiletable.record',['object' => $triples['garden.course'], 'th' => '学科'])
+                    @endif
                     @if(!empty($triples['garden.position']))
                         @include('app.lilyprofiletable.record',['object' => $triples['garden.position'], 'th' => 'ガーデン役職'])
                     @endif
-                    @include('app.lilyprofiletable.record',['object' => $triples['legion.name'], 'th' => '所属レギオン'])
+                    @include('app.lilyprofiletable.record',['object' => $triples['legion.name'] ?? null, 'th' => '所属レギオン'])
                     @if(!empty($triples['legion.position']))
                         @include('app.lilyprofiletable.record',['object' => $triples['legion.position'], 'th' => 'レギオン役職'])
                     @endif
@@ -88,6 +91,9 @@ use App\Models\Lily;
                     @endif
                     </tbody>
                 </table>
+                <div>
+                    <a href="{{ route('admin.lily.show',['lily' => $lily->id]) }}" class="button smaller">管理</a>
+                </div>
             </div>
             <div class="right" style="width: 100%;position: relative">
                 @if(!empty($triples['KIA']))
