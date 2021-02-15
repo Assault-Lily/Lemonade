@@ -413,7 +413,7 @@ button.smaller, .button.smaller{
 }
 .list-item-data > .title-ruby{
     font-size: 11px;
-    line-height: 11px;
+    line-height: 12px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
