@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
-    <title>{{ (!empty($title) ? $title.' - ' : '').config('app.name') }}</title>
+    <title>{{ (!empty($titlebar) ? $titlebar.' - ' : (!empty($title) ? $title.' - ' : '')).config('app.name') }}</title>
     <link rel="stylesheet" href="{{ asset('css/lemonade.css') }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
