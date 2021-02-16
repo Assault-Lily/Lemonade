@@ -58,6 +58,24 @@
 .name-plate > .profile > .name-ruby{
     font-size: 15px;
     line-height: 13px;
+    height: 13px;
+}
+.name-plate > .profile > .name-ruby.flip{
+    position: relative;
+}
+.name-plate > .profile > .name-ruby.flip > span{
+    position: absolute;
+    left: 0;
+    transition: opacity .3s;
+}
+.name-plate > .profile > .name-ruby.flip > .name-a{
+    opacity: 0;
+}
+.name-plate > .profile > .name-ruby.flip:hover > .name-a{
+    opacity: 1;
+}
+.name-plate > .profile > .name-ruby.flip:hover > .name-y{
+    opacity: 0;
 }
 .name-plate > .profile > .summary{
     font-size: 17px;

@@ -33,9 +33,16 @@ use App\Models\Lily;
                 <div class="name-plate">
                     <div class="pic"></div>
                     <div class="profile">
-                        <div class="name-ruby">{{ $lily->name_y }}</div>
-                        <div class="name" style="
-                        @if(mb_strlen($lily->name) >= 16) font-size: 24px; @endif">{{ $lily->name }}</div>
+                        @if(mb_strlen($lily->name) < 16)
+                            <div class="name-ruby">{{ $lily->name_y }} - {{ $lily->name_a }}</div>
+                            <div class="name">{{ $lily->name }}</div>
+                        @else
+                            <div class="name-ruby flip">
+                                <span class="name-y">{{ $lily->name_y }}</span>
+                                <span class="name-a">{{ $lily->name_a }}</span>
+                            </div>
+                            <div class="name" style="font-size: 24px">{{ $lily->name }}</div>
+                        @endif
                         <div class="summary">
                             <div>誕生日 : {{ $triples['birthday'] ?? 'N/A' }}</div><hr>
                             <div>年齢 : {{ $triples['age'] ?? 'N/A' }}歳</div><hr>
