@@ -1,9 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "miyacorata/lemonade",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "AssaultLily Triple-based Information System",
     "keywords": [
-        "framework",
         "laravel"
     ],
     "license": "MIT",
