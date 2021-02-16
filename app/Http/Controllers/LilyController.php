@@ -56,8 +56,10 @@ class LilyController extends Controller
         try {
             $lily = Lily::whereSlug($slug)->with('triples')->firstOrFail();
             $triples = array();
+            $triples['_last_update'] = $lily->updated_at;
             foreach ($lily->triples as $triple){
                 $triples[$triple->predicate] = $triple->object;
+                if($triple->updated_at->gte($triples['_last_update'])) $triples['_last_update'] = $triple->updated_at;
             }
         }catch (ModelNotFoundException $e){
             abort(404, '該当するデータが存在しません');

@@ -98,8 +98,10 @@ use App\Models\Lily;
                     @endif
                     </tbody>
                 </table>
-                <div>
+                <div style="font-size: smaller">
                     <a href="{{ route('admin.lily.show',['lily' => $lily->id]) }}" class="button smaller">管理</a>
+                    基本データ更新 : {{ $lily->updated_at->format('Y-m/d H:i:s') }},
+                    トリプル更新 : {{ $triples['_last_update']->format('Y-m/d H:i:s') }}
                 </div>
             </div>
             <div class="right" style="width: 100%;position: relative">
