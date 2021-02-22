@@ -177,7 +177,7 @@ main{
     100% { opacity: 1 }
 }
 
-main h1, h2{
+main h1, h2, h3{
     position: relative;
     margin: .6em auto .6em 15px;
     padding-left: 15px;
