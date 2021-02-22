@@ -34,5 +34,10 @@ return [
     'introduction' => '公式紹介',
     'cast' => 'キャスト',
     'miyadoc' => 'MiyaDoc記事名',
+    'officialUrls' => [
+        'acus' => 'acus版公式ページURL',
+        'anime' => 'アニメ版公式ページスラッグ',
+        'lb' => 'ラスバレ版公式ページスラッグ',
+    ],
     'remarks' => '特記事項',
 ];
