@@ -3,7 +3,7 @@
 @else
     <tr>
         <th>{{ $th }}</th>
-        <td>{{ $object ?? 'N/A' }}</td>
+        <td>{!! empty($object) ? "<span style=\"color:gray;\">N/A</span>" : e($object) !!}</td>
     </tr>
 @endif
 
