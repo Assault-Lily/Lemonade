@@ -111,6 +111,33 @@ use App\Models\Lily;
                 <div id="pics">
                     <div style="text-align: center; padding-top: 130px; color: gray; font-size: large;">Image Unavailable</div>
                 </div>
+                <div id="links">
+                    <h3>公式リンク</h3>
+                    <?php
+                    if (!empty($triples['officialUrls.acus']) && !str_starts_with($triples['officialUrls.acus'],'http')){
+                        $triples['officialUrls.acus'] = str_replace('{no}', $triples['officialUrls.acus'], config('lemonade.officialUrls.acus'));
+                    }
+                    if (!empty($triples['officialUrls.anime']) && !str_starts_with($triples['officialUrls.anime'],'http')){
+                        $triples['officialUrls.anime'] = $triples['officialUrls.anime'] !== '=' ?: $lily->slug;
+                        $triples['officialUrls.anime'] = str_replace('{slug}', $triples['officialUrls.anime'], config('lemonade.officialUrls.anime'));
+                    }
+                    if (!empty($triples['officialUrls.lb']) && !str_starts_with($triples['officialUrls.lb'],'http')){
+                        $triples['officialUrls.lb'] = $triples['officialUrls.lb'] !== '=' ?: $lily->slug;
+                        $triples['officialUrls.lb'] = str_replace('{slug}', $triples['officialUrls.lb'], config('lemonade.officialUrls.lb'));
+                    }
+                    ?>
+                    <div class="buttons">
+                        @if(!empty($triples['officialUrls.acus']))
+                            <a class="button" href="{{ $triples['officialUrls.acus'] }}" target="_blank">AssaultLily.com</a>
+                        @endif
+                        @if(!empty($triples['officialUrls.anime']))
+                            <a class="button" href="{{ $triples['officialUrls.anime'] }}" target="_blank">BOUQUET(アニメ版)</a>
+                        @endif
+                        @if(!empty($triples['officialUrls.lb']))
+                            <a class="button" href="{{ $triples['officialUrls.lb'] }}" target="_blank">Last Bullet</a>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </main>
