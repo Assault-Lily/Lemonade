@@ -2,6 +2,39 @@
 
 @section('main')
     <main>
+        <h2>サーバ情報</h2>
+        <div class="white-box">
+            <table style="margin: .4em auto 0;border-spacing: 1em 0">
+                <tr>
+                    <th>ホスト</th>
+                    <td>{{ $_SERVER['HTTP_HOST'] }}</td>
+                </tr>
+                <tr>
+                    <th>アプリ名</th>
+                    <td>{{ config('app.name') }}</td>
+                </tr>
+                <tr>
+                    <th>バージョン</th>
+                    <td>{{ 'Ver'.config('lemonade.version') }}</td>
+                </tr>
+                <tr>
+                    <th>環境</th>
+                    <td>{{ config('app.env') }}</td>
+                </tr>
+                <tr>
+                    <th>マシン情報</th>
+                    <td>{{ php_uname() }}</td>
+                </tr>
+                <tr>
+                    <th>PHPバージョン</th>
+                    <td>{{ phpversion() }}</td>
+                </tr>
+                <tr>
+                    <th>DBサーバ</th>
+                    <td>{{ config('database.connections.'.config('database.default','mysql').'.host') }}</td>
+                </tr>
+            </table>
+        </div>
         <h2>アカウント操作</h2>
         <div class="buttons three">
             <a href="{{ route('admin.logout') }}" class="button"
