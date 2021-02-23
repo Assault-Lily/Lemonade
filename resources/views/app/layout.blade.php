@@ -58,5 +58,17 @@
 
 @yield('main')
 
+<footer>
+    <p>{{ config('app.name') }}<span style="font-size: smaller;margin-left: 1em">{{ 'Ver'.config('lemonade.version') }}</span></p>
+    <p style="font-size: smaller; color: gray;line-height: 2em">
+        Lemonadeは一個人が開発・運用しているプロジェクトです。誤った情報あるいは公式の情報ではない独自の情報や見解が含まれる場合があります。
+    </p>
+    <div class="buttons" style="font-size: smaller">
+        <a href="{{ config('lemonade.repository') }}" class="button smaller" target="_blank">GitHub Repository</a>
+        <a href="{{ config('lemonade.mastodon') }}" class="button smaller" target="_blank">Mastodon</a>
+        <a href="{{ 'https://twitter.com/'.config('lemonade.developer.twitter') }}" class="button smaller" target="_blank">Twitter {{ '@'.config('lemonade.developer.twitter') }}</a>
+    </div>
+</footer>
+
 </body>
 </html>

@@ -212,6 +212,14 @@ main h1::before, h2::before{
     font-size: smaller;
 }
 
+footer{
+    width: 1280px;
+    margin: 40px auto 0;
+    padding-bottom: 10px;
+    border-top: dashed 1px gray;
+    text-align: center;
+}
+
 .white-box{
     background: rgba(255,255,255,0.8);
     padding: 1px 20px 10px;
