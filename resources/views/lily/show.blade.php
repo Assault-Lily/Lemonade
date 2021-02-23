@@ -23,6 +23,10 @@ use App\Models\Lily;
         #profile{
             background-image: radial-gradient(circle farthest-corner at 90% 100%, {{ $color_rgba }}, transparent 50%, transparent);
         }
+        .buttons.two > .button{
+            margin: 5px 10px;
+            width: 45%;
+        }
     </style>
 @endsection
 
@@ -127,18 +131,23 @@ use App\Models\Lily;
                         $triples['officialUrls.lb'] = str_replace('{slug}', $triples['officialUrls.lb'], config('lemonade.officialUrls.lb'));
                     }
                     ?>
-                    <div class="buttons">
+                    <div class="buttons two">
                         @if(!empty($triples['officialUrls.acus']))
-                            <a class="button" href="{{ $triples['officialUrls.acus'] }}" target="_blank">AssaultLily.com</a>
+                            <a class="button" href="{{ $triples['officialUrls.acus'] }}" target="_blank"
+                               title="原作公式サイトのキャラクターページを開きます">AssaultLily.com (原作公式)</a>
                         @endif
+                            <?php
+                            $tweet_search = 'https://twitter.com/search?q=from%3A'.config('lemonade.fumi.twitter').'%20'.$lily->getFirstName();
+                            ?>
+                            <a class="button" href="{{ $tweet_search }}" target="_blank"
+                               title="二水ちゃんのツイートを検索します">{{ '@'.config('lemonade.fumi.twitter') }} ツイート検索</a>
                         @if(!empty($triples['officialUrls.anime']))
-                            <a class="button" href="{{ $triples['officialUrls.anime'] }}" target="_blank">BOUQUET(アニメ版)</a>
+                            <a class="button" href="{{ $triples['officialUrls.anime'] }}" target="_blank"
+                               title="アニメ「アサルトリリィ BOUQUET」のキャラクターページを開きます">BOUQUET (アニメ版)</a>
                         @endif
                         @if(!empty($triples['officialUrls.lb']))
-                            <a class="button" href="{{ $triples['officialUrls.lb'] }}" target="_blank">Last Bullet</a>
-                        @endif
-                        @if(empty($triples['officialUrls.acus']) && empty($triples['officialUrls.anime']) && empty($triples['officialUrls.lb']))
-                            <span style="color: darkred">いずれの公式リンクも登録されていません</span>
+                            <a class="button" href="{{ $triples['officialUrls.lb'] }}" target="_blank"
+                               title="ゲーム「アサルトリリィ Last Bullet」のキャラクターページを開きます">Last Bullet (ラスバレ)</a>
                         @endif
                     </div>
                 </div>
