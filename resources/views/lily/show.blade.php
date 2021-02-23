@@ -118,11 +118,12 @@ use App\Models\Lily;
                         $triples['officialUrls.acus'] = str_replace('{no}', $triples['officialUrls.acus'], config('lemonade.officialUrls.acus'));
                     }
                     if (!empty($triples['officialUrls.anime']) && !str_starts_with($triples['officialUrls.anime'],'http')){
-                        $triples['officialUrls.anime'] = $triples['officialUrls.anime'] !== '=' ?: $lily->slug;
+                        $triples['officialUrls.anime'] = $triples['officialUrls.anime'] === '=' ? $lily->slug.'/' : $triples['officialUrls.anime'];
+                        $triples['officialUrls.anime'] = $triples['officialUrls.anime'] === '/' ? '' : $triples['officialUrls.anime'];
                         $triples['officialUrls.anime'] = str_replace('{slug}', $triples['officialUrls.anime'], config('lemonade.officialUrls.anime'));
                     }
                     if (!empty($triples['officialUrls.lb']) && !str_starts_with($triples['officialUrls.lb'],'http')){
-                        $triples['officialUrls.lb'] = $triples['officialUrls.lb'] !== '=' ?: $lily->slug;
+                        $triples['officialUrls.lb'] = $triples['officialUrls.lb'] === '=' ? $lily->slug : $triples['officialUrls.anime'];
                         $triples['officialUrls.lb'] = str_replace('{slug}', $triples['officialUrls.lb'], config('lemonade.officialUrls.lb'));
                     }
                     ?>
@@ -135,6 +136,9 @@ use App\Models\Lily;
                         @endif
                         @if(!empty($triples['officialUrls.lb']))
                             <a class="button" href="{{ $triples['officialUrls.lb'] }}" target="_blank">Last Bullet</a>
+                        @endif
+                        @if(empty($triples['officialUrls.acus']) && empty($triples['officialUrls.anime']) && empty($triples['officialUrls.lb']))
+                            <span style="color: darkred">いずれの公式リンクも登録されていません</span>
                         @endif
                     </div>
                 </div>
