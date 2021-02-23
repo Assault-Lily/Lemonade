@@ -18,7 +18,7 @@ $messages = [
     500 => "サーバ内部でエラーが発生しました\n管理者までお知らせください",
     503 => "アクセス集中かメンテナンスのためアクセスできません\nしばらく待ってからやり直してください",
 ];
-$message = $exception->getMessage() ?: $messages[$sc] ?? '何かがおかしいようです';
+$message = $exception->getMessage() && $sc !== 500 ? $exception->getMessage() : $messages[$sc] ?? '何かがおかしいようです';
 ?>
 
 @section('main')
