@@ -13,7 +13,7 @@
             {{ $triple['garden.name'] ?? 'ガーデン情報なし' }}
             {{ !empty($triple['garden.grade']) ? $triple['garden.grade'].'年' : '' }}
             | {{ $triple['legion.name'] ?? 'レギオン情報なし' }}
-            {{ $triple['legion.position'] ?? '' }}
+            {{-- $triple['legion.position'] ?? '' --}}
         </div>
         <div>レアスキル : {{ $triple['rareSkill'] ?? 'N/A' }}</div>
     </div>
