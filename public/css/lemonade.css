@@ -39,7 +39,7 @@ header{
 }
 header > div#title{
     font-size: 25px;
-    padding-left: calc(50vw - 670px);
+    padding-left: calc(50vw - 665px);
     padding-right: 40px;
     height: 60px;
     min-width: 350px;
@@ -68,7 +68,7 @@ header > div#title > a{
     box-shadow: 0 0 4px black;
 }
 header > *:last-child{
-    padding-right: calc(50vw - 670px);
+    padding-right: calc(50vw - 665px);
     flex-shrink: 0;
 }
 
