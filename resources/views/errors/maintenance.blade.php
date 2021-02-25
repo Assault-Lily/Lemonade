@@ -65,6 +65,8 @@
             left: 0;
             padding: 15px;
             box-sizing: border-box;
+            border: none;
+            margin: 0;
         }
         footer > #links > a{
             display: inline-block;
