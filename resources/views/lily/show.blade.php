@@ -88,6 +88,12 @@ use App\Models\Lily;
                         @include('app.lilyprofiletable.record',['object' => $triples['boostedSkill'] ?? null, 'th' => 'ブーステッドスキル'])
                     @endif
                     @include('app.lilyprofiletable.record',['object' => $triples['charm'] ?? null, 'th' => '主な使用CHARM'])
+                    @if(!empty($triples['height']))
+                        @include('app.lilyprofiletable.record',['object' => $triples['height'] ?? null, 'th' => '身長', 'suffix' => 'cm'])
+                    @endif
+                    @if(!empty($triples['weight']))
+                        @include('app.lilyprofiletable.record',['object' => $triples['weight'] ?? null, 'th' => '身長', 'suffix' => 'kg'])
+                    @endif
                     @if(!empty($lily->color))
                         <tr>
                             <th>カラーコード</th>
@@ -105,7 +111,8 @@ use App\Models\Lily;
                 <div style="font-size: smaller">
                     <a href="{{ route('admin.lily.show',['lily' => $lily->id]) }}" class="button smaller">管理</a>
                     基本データ更新 : {{ $lily->updated_at->format('Y-m/d H:i:s') }},
-                    トリプル更新 : {{ $triples['_last_update']->format('Y-m/d H:i:s') }}
+                    トリプル更新 : {{ $triples['_last_update']->format('Y-m/d H:i:s') }},
+                    トリプル数 : {{ count($triples) }}
                 </div>
             </div>
             <div class="right" style="width: 100%;position: relative">
