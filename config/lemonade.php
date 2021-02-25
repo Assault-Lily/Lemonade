@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '0.1.0 Fujisawa',
+    'version' => '1.0.0 Fujisawa',
 
     'mastodon' => 'https://mstdn.miyacorata.net/@assaultlily',
     'developer' => [
