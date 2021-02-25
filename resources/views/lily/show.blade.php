@@ -79,7 +79,7 @@ use App\Models\Lily;
                     @endif
                     @include('app.lilyprofiletable.record',['object' => $triples['favorite'] ?? null, 'th' => '好きなもの'])
                     @include('app.lilyprofiletable.record',['object' => $triples['notGood'] ?? null, 'th' => '苦手なもの'])
-                    @include('app.lilyprofiletable.record2line',['object' => $triples['skill_hobby'] ?? null, 'th' => '特技・趣味'])
+                    @include('app.lilyprofiletable.record',['object' => $triples['skill_hobby'] ?? null, 'th' => '特技・趣味', 'multiline' => true])
                     @include('app.lilyprofiletable.record',['object' => $triples['rareSkill'] ?? null, 'th' => '所持レアスキル'])
                     @if(!empty($triples['subSkill']))
                         @include('app.lilyprofiletable.record',['object' => $triples['subSkill'] ?? null, 'th' => '所持サブスキル'])
@@ -98,7 +98,7 @@ use App\Models\Lily;
                         @include('app.lilyprofiletable.record',['object' => $triples['cast'] ?? null, 'th' => 'キャスト'])
                     @endif
                     @if(!empty($triples['remarks']))
-                        @include('app.lilyprofiletable.record2line',['object' => $triples['remarks'] ?? null, 'th' => '特記事項'])
+                        @include('app.lilyprofiletable.record',['object' => $triples['remarks'] ?? null, 'th' => '特記事項'])
                     @endif
                     </tbody>
                 </table>
