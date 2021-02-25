@@ -65,7 +65,7 @@
     </p>
     <div class="buttons" style="font-size: smaller">
         <a href="{{ config('lemonade.repository') }}" class="button smaller" target="_blank">GitHub Repository</a>
-        <a href="{{ config('lemonade.mastodon') }}" class="button smaller" target="_blank">Mastodon</a>
+        <a href="{{ config('lemonade.mastodon') }}" class="button smaller" target="_blank" rel="me">Mastodon</a>
         <a href="{{ 'https://twitter.com/'.config('lemonade.developer.twitter') }}" class="button smaller" target="_blank">Twitter {{ '@'.config('lemonade.developer.twitter') }}</a>
     </div>
 </footer>
