@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LilyDataController;
+use App\Http\Controllers\Admin\LilyRdfController;
 use App\Http\Controllers\Admin\TripleDataController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LilyController;
@@ -29,5 +30,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
 
     Route::resource('/lily', LilyDataController::class);
     Route::resource('/triple', TripleDataController::class);
+
+    Route::get('/rdf',  [LilyRdfController::class, 'index'])->name('rdf.index');
+    Route::post('/rdf', [LilyRdfController::class, 'check'])->name('rdf.check');
+
 
 });

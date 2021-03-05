@@ -22,7 +22,7 @@ $message = $exception->getMessage() && $sc !== 500 ? $exception->getMessage() : 
 ?>
 
 @section('main')
-    <div style="margin: 20vh auto 0;width: fit-content">
+    <div style="margin: 25vh auto;width: fit-content">
         <h1 style="font-size: 40px; color: #2d3748">{{ 'Error '.$sc }}</h1>
         <p>{!! nl2br($message) !!}</p>
     </div>
