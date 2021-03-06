@@ -16,6 +16,7 @@ class ChangeTriplesTable extends Migration
         Schema::table('triples', function (Blueprint $table) {
             $table->dropColumn('lily_id');
             $table->string('lily_slug');
+            $table->renameColumn('spoiler','synced');
         });
     }
 
@@ -29,6 +30,7 @@ class ChangeTriplesTable extends Migration
         Schema::table('triples', function (Blueprint $table) {
             $table->bigInteger('lily_id')->unsigned();
             $table->dropColumn('lily_slug');
+            $table->renameColumn('synced','spoiler');
         });
     }
 }
