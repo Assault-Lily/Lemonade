@@ -33,6 +33,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Triple withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Triple withoutTrashed()
  * @mixin \Eloquent
+ * @property int $synced
+ * @property string $lily_slug
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereLilySlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereSynced($value)
  */
 class Triple extends Model
 {
@@ -44,6 +48,6 @@ class Triple extends Model
     protected $guarded = ['id'];
 
     public function lily(){
-        return $this->belongsTo(Lily::class);
+        return $this->belongsTo(Lily::class,'lily_slug','slug');
     }
 }
