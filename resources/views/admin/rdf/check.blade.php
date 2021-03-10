@@ -14,11 +14,13 @@
                 <tbody>
                 @forelse($triples as $resource => $triple)
                     @foreach($triple as $key => $value)
-                        <tr>
-                            <td>{{ $resource }}</td>
-                            <td>{{ $key }}</td>
-                            <td>{{ $value }}</td>
-                        </tr>
+                        @foreach($value as $v)
+                            <tr>
+                                <td>{{ $resource }}</td>
+                                <td>{{ config('triplePredicate.'.explode('@',$key)[0], '').' ('.$key.')' }}</td>
+                                <td>{{ $v }}</td>
+                            </tr>
+                        @endforeach
                     @endforeach
                 @empty
                 @endforelse
