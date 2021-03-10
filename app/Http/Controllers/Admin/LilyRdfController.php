@@ -27,8 +27,9 @@ class LilyRdfController extends Controller
 
             foreach($lily as $triple){
                 $predicate = str_replace('__',':',$triple->getName());
-                $predicate .= (!empty($triple->attributes()->xml__lang) ? '_'.$triple->attributes()->xml__lang : '');
-                $triples[$lily_i][$predicate] = (!empty($triple[0]) ? $triple[0] : str_replace('__',':',$triple->attributes()->rdf__resource));
+                $predicate .= (!empty($triple->attributes()->xml__lang) ? '@'.$triple->attributes()->xml__lang : '');
+
+                $triples[$lily_i][$predicate][] = (!empty($triple[0]) ? $triple[0] : str_replace('__',':',$triple->attributes()->rdf__resource));
             }
         }
 
