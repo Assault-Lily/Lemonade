@@ -32,7 +32,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
     Route::resource('/triple', TripleDataController::class);
 
     Route::get('/rdf',  [LilyRdfController::class, 'index'])->name('rdf.index');
-    Route::post('/rdf', [LilyRdfController::class, 'check'])->name('rdf.check');
+    Route::get('/rdf/lily', [LilyRdfController::class, 'lily'])->name('rdf.lily');
 
 
 });

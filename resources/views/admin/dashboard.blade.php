@@ -33,6 +33,10 @@
                     <th>DBサーバ</th>
                     <td>{{ config('database.connections.'.config('database.default','mysql').'.host') }}</td>
                 </tr>
+                <tr>
+                    <th>SPARQLエンドポイント</th>
+                    <td>{{ config('lemonade.sparqlEndpoint') }}</td>
+                </tr>
             </table>
         </div>
         <h2>アカウント操作</h2>

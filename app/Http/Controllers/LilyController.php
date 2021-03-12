@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lily;
 use App\Models\Triple;
+use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 

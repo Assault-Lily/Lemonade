@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.5",
         "sarhan/php-flatten": "^3.0",
         "ext-simplexml": "*",
-        "ext-libxml": "*"
+        "ext-libxml": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",
