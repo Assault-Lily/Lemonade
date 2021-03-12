@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
 
     Route::get('/rdf',  [LilyRdfController::class, 'index'])->name('rdf.index');
     Route::get('/rdf/lily', [LilyRdfController::class, 'lily'])->name('rdf.lily');
+    Route::post('/rdf/lily',[LilyRdfController::class, 'lilySync'])->name('rdf.lilySync');
 
 
 });

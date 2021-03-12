@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Request;
+use App\Models\Lily;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ConnectException;
@@ -15,8 +17,45 @@ class LilyRdfController extends Controller
         return view('admin.rdf.index');
     }
 
-    public function lily(Request $request){
+    public function lily(){
 
+        $lilies = $this->getLiliesViaSparql();
+
+        $lilies_exists = array();
+        foreach (Lily::all() as $lily){
+            $lilies_exists[$lily->slug] = $lily;
+        }
+
+        return view('admin.rdf.lily-check', compact('lilies','lilies_exists'));
+    }
+
+    public function lilySync(){
+
+        Lily::truncate();
+
+        $lilies = $this->getLiliesViaSparql();
+        $now = Carbon::now();
+
+        $insert = array();
+
+        foreach ($lilies as $lily){
+            $insert[] = [
+                'slug' => str_replace(config('lemonade.rdfPrefix.lilyrdf'),'', $lily->lily->value),
+                'name' => $lily->name->value,
+                'name_a' => $lily->nameen->value,
+                'name_y' => $lily->namekana->value,
+                'created_at' => $now,
+                'updated_at' => $now
+            ];
+        }
+
+        Lily::insert($insert);
+
+        return redirect(route('admin.rdf.index'))->with('message','同期が完了しました');
+
+    }
+
+    private function getLiliesViaSparql(){
         $client = new Client();
         try {
             $res = $client->get(config('lemonade.sparqlEndpoint'), [
@@ -51,9 +90,6 @@ SPARQL
             abort(502, $message);
         }
 
-        $lilies = json_decode($res->getBody())->results->bindings;
-        //dd(json_decode($res->getBody())->results->bindings);
-
-        return view('admin.rdf.lily-check', compact('lilies'));
+        return json_decode($res->getBody())->results->bindings;
     }
 }
