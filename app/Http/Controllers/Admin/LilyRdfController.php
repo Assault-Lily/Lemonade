@@ -56,13 +56,8 @@ class LilyRdfController extends Controller
     }
 
     private function getLiliesViaSparql(){
-        $client = new Client();
-        try {
-            $res = $client->get(config('lemonade.sparqlEndpoint'), [
-                'timeout' => 3,
-                'query' => [
-                    'format' => 'json',
-                    'query' => <<<SPARQL
+
+        $res = sparqlQueryOrDie(<<<SPARQL
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX schema: <http://schema.org/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
@@ -78,18 +73,8 @@ WHERE {
   FILTER(lang(?nameen) = 'en')
 }
 SPARQL
-                ]
-            ]);
-        }catch (ConnectException $e){
-            $message = "SPARQLエンドポイントに接続できませんでした。\n\n";
-            $message .= $e->getHandlerContext()['error'];
-            abort(502, $message);
-        }catch (BadResponseException $e){
-            $message = "SPARQLエンドポイントから無効な応答が返されました。\n\n";
-            $message .= 'SPARQL endpoint returned '.$e->getCode();
-            abort(502, $message);
-        }
+);
 
-        return json_decode($res->getBody())->results->bindings;
+        return $res->results->bindings;
     }
 }
