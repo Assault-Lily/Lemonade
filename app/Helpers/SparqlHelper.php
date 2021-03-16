@@ -1,6 +1,12 @@
 <?php
 
-function sparqlQuery($query): object
+/**
+ * @param $query string SPARQL Query
+ * @return object
+ * @throws \Illuminate\Http\Client\RequestException
+ * @throws \Illuminate\Http\Client\ConnectionException
+ */
+function sparqlQuery(string $query): object
 {
 
     return Http::timeout(3)->get(config('lemonade.sparqlEndpoint'), [
@@ -10,14 +16,18 @@ function sparqlQuery($query): object
 
 }
 
-function sparqlQueryOrDie($query){
+/**
+ * @param $query string SPARQL Query
+ * @return object
+ */
+function sparqlQueryOrDie(string $query): object
+{
     try {
         $res = sparqlQuery($query);
-    }catch (\GuzzleHttp\Exception\ConnectException $e){
+    }catch (\Illuminate\Http\Client\ConnectionException $e){
         $message = "SPARQLエンドポイントに接続できませんでした。\n\n";
-        $message .= $e->getHandlerContext()['error'];
         abort(502, $message);
-    }catch (\GuzzleHttp\Exception\BadResponseException $e){
+    }catch (\Illuminate\Http\Client\RequestException $e){
         $message = "SPARQLエンドポイントから無効な応答が返されました。\n\n";
         $message .= 'SPARQL endpoint returned '.$e->getCode();
         abort(502, $message);
