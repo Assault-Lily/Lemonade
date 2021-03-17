@@ -73,7 +73,7 @@ WHERE {
   FILTER(lang(?nameen) = 'en')
 }
 SPARQL
-);
+, false);
 
         return $res->results->bindings;
     }
