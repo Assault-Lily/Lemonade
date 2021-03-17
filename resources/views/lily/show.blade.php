@@ -1,4 +1,6 @@
-@extends('app.layout',['title' => 'リリィプロフィール', 'titlebar' => $lily->name, 'pagetype' => 'back-triangle'])
+@extends('app.layout',[
+    'title' => 'リリィプロフィール', 'titlebar' => $lily->name,
+    'pagetype' => 'back-triangle', 'previous' => route('lily.index')])
 
 <?php
     /**

@@ -1,4 +1,4 @@
-@extends('app.layout',['title' => 'RDF同期管理'])
+@extends('app.layout',['title' => 'RDF同期管理', 'previous' => route('admin.rdf.index')])
 
 @section('head')
     <style>

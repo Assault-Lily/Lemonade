@@ -1,4 +1,6 @@
-@extends('app.layout',['title' => 'パスワード変更', 'pagetype' => 'back-triangle'])
+@extends('app.layout',[
+    'title' => 'パスワード変更', 'pagetype' => 'back-triangle',
+    'previous' => route('admin.dashboard')])
 
 @section('head')
     <style>

@@ -14,7 +14,11 @@
 <body {{ !empty($pagetype) ? 'data-pagetype='.$pagetype : '' }}>
 <header>
     <div id="title">
-        <a href="{{ url('/') }}"><i class="fas fa-home"></i>{{--<i class="fas fa-chevron-left">--}}</i></a>
+        @if(!empty($previous))
+            <a href="{{ url($previous['route'] ?? $previous) }}"><i class="fas fa-chevron-left"></i></a>
+        @else
+            <a href="{{ url('/') }}" title="Top"><i class="fas fa-home"></i></a>
+        @endif
         <h1>
             {{ $title ?? 'Lemonade' }}
         </h1>
