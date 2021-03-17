@@ -32,7 +32,12 @@
         <h1>Welcome to {{ config('app.name') }}</h1>
         <p>
             {{ config('app.name') }}へようこそ。
-            {{ config('app.name') }}はアサルトリリィ関連情報を取り扱う非公式のデータベースです。
+            {{ config('app.name') }}はアサルトリリィ関連情報を取り扱う非公式ファンサイトです。
+        </p>
+        <p>
+            {{ config('app.name') }}はデータソースとしてアサルトリリィ非公式データベース
+            <a href="https://github.com/fvh-P/assaultlily-rdf" style="font-weight: bold">assaultlily-rdf</a>
+            の情報を基にサービスを提供しています。
         </p>
     </main>
 @endsection
