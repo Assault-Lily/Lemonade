@@ -61,7 +61,7 @@
 <footer>
     <p>{{ config('app.name') }}<span style="font-size: smaller;margin-left: 1em">{{ 'Ver'.config('lemonade.version') }}</span></p>
     <p style="font-size: smaller; color: gray;line-height: 2em">
-        Lemonadeは一個人が開発・運用しているプロジェクトです。誤った情報あるいは公式の情報ではない独自の情報や見解が含まれる場合があります。
+        Dataset powered by AssaultLily unofficial database "assaultlily-rdf"
     </p>
     <div class="buttons" style="font-size: smaller">
         <a href="{{ config('lemonade.repository') }}" class="button smaller" target="_blank">GitHub Repository</a>

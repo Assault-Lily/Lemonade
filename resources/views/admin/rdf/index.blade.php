@@ -8,7 +8,7 @@
                 SPARQLエンドポイントに問い合わせを行い、基本データについて同期を試みます
             </p>
             <div class="buttons three">
-                <a href="{{ route('admin.rdf.lily') }}" class="button">SPARQL同期</a>
+                <a href="{{ route('admin.rdf.lily') }}" class="button">リリィ基本データ同期</a>
             </div>
         </div>
 
