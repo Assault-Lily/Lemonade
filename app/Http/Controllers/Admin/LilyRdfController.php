@@ -61,14 +61,13 @@ class LilyRdfController extends Controller
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX schema: <http://schema.org/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?lily ?name ?namekana ?nameen
 WHERE {
-  ?lily rdf:type lily:Lily;
+  ?lily a lily:Lily;
         schema:name ?name;
         schema:name ?nameen;
-        lily:nameKana ?namekana
+        lily:nameKana ?namekana.
   FILTER(lang(?name) = 'ja')
   FILTER(lang(?nameen) = 'en')
 }
