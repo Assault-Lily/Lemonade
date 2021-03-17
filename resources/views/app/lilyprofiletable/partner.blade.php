@@ -1,13 +1,8 @@
-@if($partner instanceof \App\Models\Lily)
-    <?php
-        /**
-         * @var $partner \App\Models\Lily
-         */
-    ?>
+@if(!empty($partner_data))
     <tr>
         <th>{{ $th }}</th>
-        <td><a href="{{ route('lily.show',['lily' => $partner->slug]) }}">
-                {{ $partner->name }}</a></td>
+        <td><a href="{{ route('lily.show',['lily' => str_replace('lilyrdf:', '', $partner)]) }}">
+                {{ $partner_data['schema:name'][0] }}</a></td>
     </tr>
 @else
     <tr>
