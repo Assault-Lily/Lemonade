@@ -108,6 +108,7 @@ table#profile-table th{
     width: 170px;
     height: 28px;
     box-sizing: border-box;
+    white-space: nowrap;
 }
 table#profile-table th::before{
     content: '';
