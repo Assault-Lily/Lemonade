@@ -36,7 +36,7 @@
         </p>
         <p>
             {{ config('app.name') }}はデータソースとしてアサルトリリィ非公式データベース
-            <a href="https://github.com/fvh-P/assaultlily-rdf" style="font-weight: bold">assaultlily-rdf</a>
+            <a href="https://github.com/fvh-P/assaultlily-rdf" style="font-weight: bold" target="_blank">assaultlily-rdf</a>
             の情報を基にサービスを提供しています。
         </p>
     </main>
