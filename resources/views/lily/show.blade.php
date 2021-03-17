@@ -69,7 +69,8 @@ else {
                             <div class="name" style="font-size: 24px">{{ $lily->name }}</div>
                         @endif
                         <div class="summary">
-                            <div>誕生日 : {{ $triples[$ts]['schema:birthDate'][0] ?? 'N/A' }}</div><hr>
+                            <div>誕生日 : {{ !empty($triples[$ts]['schema:birthDate'][0]) ?
+                                                convertDateString($triples[$ts]['schema:birthDate'][0])->format('n月j日') : 'N/A' }}</div><hr>
                             <div>年齢 : {{ $triples[$ts]['foaf:age'][0] ?? 'N/A' }}歳</div><hr>
                             <div>血液型 : {{ $triples[$ts]['lily:bloodType'][0] ?? 'N/A' }}</div><hr>
                             <div>学年 : {{ !empty($triples[$ts]['lily:grade'][0]) ? $triples[$ts]['lily:grade'][0].'年' : 'N/A' }}</div>
