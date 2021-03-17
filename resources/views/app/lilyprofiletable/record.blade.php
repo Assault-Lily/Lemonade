@@ -1,5 +1,13 @@
 <?php
 /** @var $object */
+if(is_array($object)){
+    $array = $object;
+    $object = '';
+    foreach ($array as $value){
+        $object .= $value.', ';
+    }
+    $object = mb_substr($object, 0, mb_strlen($object) - 2);
+}
 if(!empty($suffix)){
     $object .= $suffix;
 }
