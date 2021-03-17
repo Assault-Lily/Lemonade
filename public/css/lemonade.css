@@ -268,7 +268,8 @@ input{
 input[type="email"],
 input[type="password"],
 input[type="text"],
-input[type="number"]{
+input[type="number"],
+textarea{
     background: #ececec;
     border-radius: 3px;
     border: none;
@@ -280,11 +281,13 @@ input[type="number"]{
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="text"]:focus,
-input[type="number"]:focus{
+input[type="number"]:focus,
+textarea{
     background: #E5E7EC;
     outline: none;
 }
-input[readonly], input[disabled]{
+input[readonly], input[disabled],
+textarea[disabled], textarea[readonly]{
     color: #585858;
     background: #d6d6d6;
     font-style: italic;

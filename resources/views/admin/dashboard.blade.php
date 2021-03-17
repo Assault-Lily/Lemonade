@@ -33,6 +33,10 @@
                     <th>DBサーバ</th>
                     <td>{{ config('database.connections.'.config('database.default','mysql').'.host') }}</td>
                 </tr>
+                <tr>
+                    <th>SPARQLエンドポイント</th>
+                    <td>{{ config('lemonade.sparqlEndpoint') }}</td>
+                </tr>
             </table>
         </div>
         <h2>アカウント操作</h2>
@@ -44,6 +48,10 @@
         <form action="{{ route('admin.logout') }}" method="post" style="display: none" id="logout">
             @csrf
         </form>
+        <h2>RDF同期管理</h2>
+        <div class="buttons three">
+            <a href="{{ route('admin.rdf.index') }}" class="button">RDF同期管理</a>
+        </div>
         <h2>リリィデータ管理</h2>
         <div class="buttons three">
             <a href="{{ route('admin.lily.index') }}" class="button">データ一覧</a>

@@ -15,8 +15,7 @@
                     <th>スラッグ</th>
                     <th>名前</th>
                     <th>名前(読み)</th>
-                    <th>名前(アルファベット)</th>
-                    <th>カラー</th>
+{{--                    <th>名前(アルファベット)</th>--}}
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -32,8 +31,7 @@
                         <td>{{ $row->slug }}</td>
                         <td>{{ $row->name }}</td>
                         <td>{{ $row->name_y }}</td>
-                        <td>{{ $row->name_a }}</td>
-                        <td>{{ $row->color }}</td>
+{{--                        <td>{{ $row->name_a }}</td>--}}
                         <td>
                             <a href="{{ route('admin.lily.show',['lily' => $row->id]) }}" class="button smaller">詳細</a>
                             <a href="{{ route('admin.lily.edit',['lily' => $row->id]) }}" class="button smaller">編集</a>

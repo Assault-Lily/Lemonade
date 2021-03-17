@@ -13,7 +13,10 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "sarhan/php-flatten": "^3.0"
+        "sarhan/php-flatten": "^3.0",
+        "ext-simplexml": "*",
+        "ext-libxml": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

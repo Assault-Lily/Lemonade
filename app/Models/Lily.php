@@ -40,14 +40,6 @@ class Lily extends Model
     protected $guarded = ['id'];
 
     public function triples(){
-        return $this->hasMany(Triple::class);
-    }
-
-    public function getFirstName(){
-        if(str_contains($this->name,'・')){
-            return explode('・', $this->name, 2)[0];
-        }else{
-            return explode(' ', $this->name)[1];
-        }
+        return $this->hasMany(Triple::class,'lily_slug');
     }
 }
