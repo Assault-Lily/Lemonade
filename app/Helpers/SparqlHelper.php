@@ -30,10 +30,10 @@ function sparqlQuery(string $query, bool $predicateReplace = true): object
  * @param $predicateReplace bool Replace predicate to prefixed string
  * @return object
  */
-function sparqlQueryOrDie(string $query, bool $predicateReplace): object
+function sparqlQueryOrDie(string $query, bool $predicateReplace = true): object
 {
     try {
-        $res = sparqlQuery($query);
+        $res = sparqlQuery($query, $predicateReplace);
     }catch (\Illuminate\Http\Client\ConnectionException $e){
         $message = "SPARQLエンドポイントに接続できませんでした。\n\n";
         abort(502, $message);
