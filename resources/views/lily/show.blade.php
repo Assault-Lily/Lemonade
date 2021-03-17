@@ -177,7 +177,7 @@ else {
                 <div style="font-size: smaller">
                     <a href="{{ route('admin.lily.show',['lily' => $lily->id]) }}" class="button smaller">管理</a>
                     基本データ更新 : {{ $lily->updated_at->format('Y-m/d H:i:s') }},
-                    トリプル数 : {{ count($triples[$ts], 1) - 1 }}
+                    トリプル数 : {{ count($triples[$ts], 1) - count($triples[$ts]) }}
                 </div>
             </div>
             <div class="right" style="width: 100%;position: relative">
