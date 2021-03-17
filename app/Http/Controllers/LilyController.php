@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lily;
-use App\Models\Triple;
-use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
-use Illuminate\Http\Request;
 
 class LilyController extends Controller
 {
@@ -21,10 +18,43 @@ class LilyController extends Controller
     {
         $lilies = Lily::orderBy('name_y')->get();
         $triples = array();
-        foreach (Triple::all() as $triple){
-            $triples[$triple->lily_id][$triple->predicate] = $triple->object;
+        $rdf_error = null;
+        try {
+            $triples_sparql = sparqlQuery(<<<SPQRQL
+PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+
+SELECT DISTINCT ?subject ?garden ?grade ?legion ?legionAlternate ?rareSkill ?color
+WHERE {
+  ?subject rdf:type lily:Lily;
+           lily:garden ?garden.
+  OPTIONAL{?subject lily:grade ?grade}
+  OPTIONAL{?subject lily:rareSkill ?rareSkill}
+  OPTIONAL{?subject lily:legion/schema:name ?legion}
+  OPTIONAL{?subject lily:legion/schema:alternateName ?legionAlternate}
+  OPTIONAL{?subject lily:color ?color}
+  FILTER(LANG(?legion) = 'ja' || !bound(?legion))
+  FILTER(LANG(?legionAlternate) = 'ja' || !bound(?legionAlternate))
+}
+SPQRQL
+);
+            foreach ($triples_sparql->results->bindings as $triple){
+                $triples[str_replace('lilyrdf:','', $triple->subject->value)] = [
+                    'garden' => $triple->garden->value,
+                    'grade'  => $triple->grade->value ?? null,
+                    'legion' => $triple->legion->value ?? null,
+                    'legionAlternate' => $triple->legionAlternate->value ?? null,
+                    'rareSkill' => $triple->rareSkill->value ?? null,
+                    'color' => $triple->color->value ?? null,
+                ];
+            }
+        }catch (ConnectionException | RequestException $e){
+            $rdf_error = $e;
         }
-        return response()->view('lily.index', compact('lilies','triples'));
+
+        return response()->view('lily.index', compact('lilies','triples', 'rdf_error'));
     }
 
     /**
@@ -95,9 +125,7 @@ SPARQL
             foreach ($triples_sparql->results->bindings as $triple){
                 $triples[$triple->subject->value][$triple->predicate->value][] = $triple->object->value;
             }
-        }catch (ConnectionException $e){
-            $rdf_error = $e;
-        }catch (RequestException $e){
+        }catch (ConnectionException | RequestException $e){
             $rdf_error = $e;
         }
 
