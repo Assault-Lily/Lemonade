@@ -72,12 +72,7 @@ class LilyController extends Controller
 
         try {
             $triples_sparql = sparqlQuery(<<<SPARQL
-PREFIX schema: <http://schema.org/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?subject ?predicate ?object
 WHERE {
