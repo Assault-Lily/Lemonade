@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '2-prt Branch-RDF',
+    'version' => '2.0.0 Ishigami',
 
     'mastodon' => 'https://mstdn.miyacorata.net/@assaultlily',
     'developer' => [
