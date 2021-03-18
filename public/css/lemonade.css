@@ -18,6 +18,17 @@ body[data-pagetype="back-triangle"]{
                       repeating-linear-gradient(90deg, #DEE0EC, #DEE0EC 1px, transparent 2px, transparent 100px),
                       linear-gradient(115deg, #E4E7EE, #E4E7EE 30%, transparent 30%, transparent);
 }
+body.hide{
+    animation: .3s ease-in fade-out forwards;
+}
+@keyframes fade-out {
+    0%   { opacity: 1 }
+    100% { opacity: 0 }
+}
+
+template{
+    display: none;
+}
 
 header{
     position: fixed;
