@@ -127,11 +127,11 @@ header > #info > #clock-wrap{
 }
 #clock-wrap > #clock-progress{
     width: 100%;
-    height: 4px;
+    height: 5px;
     background: #99A1C3;
 }
 #clock-wrap > #clock-progress > #clock-value{
-    height: 4px;
+    height: 5px;
     background: #FF508E;
 }
 
