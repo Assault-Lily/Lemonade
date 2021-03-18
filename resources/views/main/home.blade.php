@@ -21,6 +21,22 @@
             overflow: hidden;
             opacity: 1;
         }
+
+        .white-box.big-buttons{
+            padding: 20px;
+        }
+        .white-box.big-buttons > a{
+            display: inline-block;
+            width: 200px;
+            color: #4E5B8A;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .white-box.big-buttons > a > i.fas{
+            display: block;
+            font-size: 4em;
+            margin-bottom: 5px;
+        }
     </style>
 @endsection
 
@@ -39,5 +55,12 @@
             <a href="https://github.com/fvh-P/assaultlily-rdf" style="font-weight: bold" target="_blank">assaultlily-rdf</a>
             の情報を基にサービスを提供しています。
         </p>
+        <h2>Start</h2>
+        <div class="white-box big-buttons" style="text-align: center">
+            <a href="{{ route('lily.index') }}" >
+                <i class="fas fa-address-book"></i>
+                <span>リリィ一覧</span>
+            </a>
+        </div>
     </main>
 @endsection
