@@ -148,6 +148,9 @@ else {
                                 ?><span>{{ $charm_name }}</span><?php
                             }
                             ?>
+                            @if(count($triples[$ts]['lily:charm'] ?? array()) < 1)
+                                    <span style="color:gray;">N/A</span>
+                            @endif
                         </td>
                     </tr>
                     @if(count($triples[$ts]['lily:charm'] ?? array()) >= 2)
