@@ -162,10 +162,10 @@ else {
                         </tr>
                     @endif
                     @if(!empty($triples[$ts]['schema:height'][0]))
-                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['schema:height'][0] ?? null, 'th' => '身長', 'suffix' => 'cm'])
+                        @include('app.lilyprofiletable.record',['object' => !empty($triples[$ts]['schema:height'][0]) ? floatval($triples[$ts]['schema:height'][0]) : null, 'th' => '身長', 'suffix' => 'cm'])
                     @endif
                     @if(!empty($triples[$ts]['schema:weight'][0]))
-                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['schema:weight'][0] ?? null, 'th' => '体重', 'suffix' => 'kg'])
+                        @include('app.lilyprofiletable.record',['object' => !empty($triples[$ts]['schema:weight'][0]) ? floatval($triples[$ts]['schema:weight'][0]) : null, 'th' => '体重', 'suffix' => 'kg'])
                     @endif
                     @if(!empty($triples[$ts]['schema:birthPlace'][0]))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['schema:birthPlace'][0] ?? null, 'th' => '出身地'])
