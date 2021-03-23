@@ -122,6 +122,9 @@ else {
                     @if(!empty($triples[$ts]['lily:pastSchild'][0]))
                         @include('app.lilyprofiletable.partner', ['partner' => $triples[$ts]['lily:pastSchild'][0], 'partner_data' => $triples[$triples[$ts]['lily:pastSchild'][0]], 'th' => '過去のシルト'])
                     @endif
+                    @if(!empty($triples[$ts]['lily:roomMate'][0]))
+                        @include('app.lilyprofiletable.partner', ['partner' => $triples[$ts]['lily:roomMate'][0], 'partner_data' => $triples[$triples[$ts]['lily:roomMate'][0]], 'th' => 'ルームメイト'])
+                    @endif
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:favorite'] ?? null, 'th' => '好きなもの'])
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:notGood'] ?? null, 'th' => '苦手なもの'])
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:hobby_talent'] ?? null, 'th' => '特技・趣味', 'multiline' => true])
@@ -163,6 +166,9 @@ else {
                     @endif
                     @if(!empty($triples[$ts]['schema:weight'][0]))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['schema:weight'][0] ?? null, 'th' => '体重', 'suffix' => 'kg'])
+                    @endif
+                    @if(!empty($triples[$ts]['schema:birthPlace'][0]))
+                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['schema:birthPlace'][0] ?? null, 'th' => '出身地'])
                     @endif
                     @if(!empty($triples[$ts]['lily:color'][0]))
                         <tr>
