@@ -5,7 +5,13 @@ return [
     /* Application Version */
     'version' => '2.1.0 Ishigami',
 
-    'mastodon' => 'https://mstdn.miyacorata.net/@assaultlily',
+
+    'mastodon' => [
+        'server' => 'https://mstdn.miyacorata.net',
+        'account' => '@assaultlily',
+        'accessToken' => env('MASTODON_TOKEN'),
+    ],
+
     'developer' => [
         'twitter' => 'miyacorata',
         'github' => 'miyacorata'
