@@ -95,6 +95,9 @@ else {
                         }
                     ?>
                     @include('app.lilyprofiletable.record',['object' => $legion_name ?? null, 'th' => '所属レギオン'])
+                    @if(!empty($triples[$ts]['lily:legionJobTitle'][0]))
+                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:legionJobTitle'][0], 'th' => 'レギオン役職'])
+                    @endif
                     @if(!empty($triples[$ts]['lily:pastLegion']))
                         <?php
                         $past_legion_name = $triples[$triples[$ts]['lily:pastLegion'][0] ?? 0]['schema:name'][0] ?? null;
@@ -103,9 +106,6 @@ else {
                         }
                         ?>
                         @include('app.lilyprofiletable.record',['object' => $past_legion_name ?? null, 'th' => '過去の所属レギオン'])
-                    @endif
-                    @if(!empty($triples[$ts]['lily:legionJobTitle'][0]))
-                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:legionJobTitle'][0], 'th' => 'レギオン役職'])
                     @endif
                     @if(!empty($triples[$ts]['lily:position']))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:position'], 'th' => 'ポジション'])
