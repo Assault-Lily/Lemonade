@@ -25,6 +25,11 @@ return [
         'lb' => 'https://assaultlily.bushimo.jp/character/{slug}/',
     ],
 
+    'specialLegion' => [
+        'anime' => ['lilyrdf:Radgrid'],
+        'lb' => ['lilyrdf:Radgrid', 'lilyrdf:Hervarar', 'lilyrdf:Gran_Eple'],
+    ],
+
     'fumi' => [
         'twitter' => 'assault_lily',
     ],
