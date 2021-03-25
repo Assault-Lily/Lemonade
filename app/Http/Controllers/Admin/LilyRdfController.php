@@ -53,13 +53,16 @@ class LilyRdfController extends Controller
         Lily::insert($insert);
 
         // status share to Mastodon
-        $share_text = "【お知らせ】リリィ基本データのRDF同期が行われました。\n".
-            "現在".Lily::count()."のリリィが登録されています。\n".
-            config('app.url')." (".$now->format('Y/m/d G:i:s e').")";
-        $client = Http::withToken(config('lemonade.mastodon.accessToken'))
-            ->post(config('lemonade.mastodon.server').'/api/v1/statuses',[
-                'status' => $share_text, 'visibility' => 'public',
-        ]);
+        if(config('lemonade.mastodon.accessToken')){
+            $share_text = "【お知らせ】リリィ基本データのRDF同期が行われました。\n".
+                "現在".Lily::count()."のリリィが登録されています。\n".
+                config('app.url')." (".$now->format('Y/m/d G:i:s e').")";
+            $client = Http::withToken(config('lemonade.mastodon.accessToken'))
+                ->post(config('lemonade.mastodon.server').'/api/v1/statuses',[
+                    'status' => $share_text,
+                    'visibility' => config('lemonade.mastodon.tootVisibility', 'public'),
+                ]);
+        }
 
         return redirect(route('admin.rdf.index'))->with('message','同期が完了しました');
 

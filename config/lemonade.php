@@ -10,6 +10,7 @@ return [
         'server' => 'https://mstdn.miyacorata.net',
         'account' => '@assaultlily',
         'accessToken' => env('MASTODON_TOKEN'),
+        'tootVisibility' => env('MASTODON_VISIBILITY', 'public'),
     ],
 
     'developer' => [
