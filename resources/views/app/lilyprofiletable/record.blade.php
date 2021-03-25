@@ -4,16 +4,24 @@ if(is_array($object)){
     $array = $object;
     $object = '';
     foreach ($array as $value){
+        if(!empty($suffix)){
+            $value .= $suffix;
+        }
+        if(!empty($prefix)){
+            $value = $prefix.$value;
+        }
         $object .= $value.', ';
     }
     $object = mb_substr($object, 0, mb_strlen($object) - 2);
+}else{
+    if(!empty($suffix)){
+        $object .= $suffix;
+    }
+    if(!empty($prefix)){
+        $object = $prefix.$object;
+    }
 }
-if(!empty($suffix)){
-    $object .= $suffix;
-}
-if(!empty($prefix)){
-    $object = $prefix.$object;
-}
+
 ?>
 @if(mb_strlen($object ?? '') > 27 || (!empty($multiline) && $multiline))
     <tr>
