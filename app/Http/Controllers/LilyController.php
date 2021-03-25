@@ -108,7 +108,6 @@ SELECT ?subject ?predicate ?object
 WHERE {
   {
     lilyrdf:$slug ?predicate ?object.
-    FILTER(!isLiteral(?object) || LANG(?object) IN ('','ja'))
     BIND(lilyrdf:$slug AS ?subject)
   }
   UNION
@@ -116,14 +115,19 @@ WHERE {
     lilyrdf:$slug ?rp ?ro.
     FILTER(!isLiteral(?ro)).
     ?ro ?predicate ?object.
-    FILTER(LANG(?object) IN ('','ja'))
     BIND(?ro as ?subject)
   }
 }
 SPARQL
 );
             foreach ($triples_sparql->results->bindings as $triple){
-                $triples[$triple->subject->value][$triple->predicate->value][] = $triple->object->value;
+                if(!empty($triple->object->{'xml:lang'}) && $triple->object->{'xml:lang'} !== 'ja'){
+                    // 日本語以外の目的語については述語に言語サフィックスをつける
+                    $triples[$triple->subject->value][$triple->predicate->value.'@'.$triple->object->{'xml:lang'}][] =
+                        $triple->object->value;
+                }else{
+                    $triples[$triple->subject->value][$triple->predicate->value][] = $triple->object->value;
+                }
             }
         }catch (ConnectionException | RequestException $e){
             $rdf_error = $e;
