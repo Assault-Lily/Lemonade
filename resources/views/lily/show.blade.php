@@ -142,11 +142,12 @@ else {
                             foreach ($triples[$ts]['lily:charm'] ?? array() as $charm){
                                 $charm_name = ($triples[$charm]['schema:productID'][0] ?? '').' '.$triples[$charm]['schema:name'][0];
                                 if(!empty($triples[$ts]['lily:charmAdditionalInformation'])){
-                                    $charm_name .= ' ( ';
+                                    $charm_name .= ' (';
+                                    $additional_info = '';
                                     foreach ($triples[$ts]['lily:charmAdditionalInformation'] as $info){
-                                        $charm_name .= $info.' ';
+                                        $additional_info .= $info.' ';
                                     }
-                                    $charm_name .= ')';
+                                    $charm_name .= trim($additional_info).')';
                                 }
                                 ?><span>{{ $charm_name }}</span><?php
                             }
