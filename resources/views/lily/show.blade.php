@@ -81,6 +81,9 @@ else {
                 </div>
                 <table id="profile-table">
                     <tbody>
+                    @if(!empty($triples[$ts]['lily:anotherName']))
+                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:anotherName'], 'th' => '異名・二つ名', 'prefix' => '「', 'suffix' => '」'])
+                    @endif
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:garden'] ?? null, 'th' => '所属ガーデン'])
                     @if(!empty($triples[$ts]['lily:gardenDepartment']))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:gardenDepartment'], 'th' => '学科'])
