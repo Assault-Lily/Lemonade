@@ -240,9 +240,9 @@ footer{
 
 .window-a{
     border: solid 2px #7A8DFE;
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(255,255,255,0.8);
     background-image: repeating-linear-gradient(135deg, transparent, transparent 10px, white 10px, white 12px);
-    backdrop-filter: blur(2px);
+    /*backdrop-filter: blur(2px);*/
     cursor: default;
 }
 .window-a > .header{
