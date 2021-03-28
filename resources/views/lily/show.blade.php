@@ -60,7 +60,10 @@ else {
                 <div class="name-plate">
                     <div class="pic"></div>
                     <div class="profile">
-                        @if(mb_strlen($lily->name) < 16)
+                        @if(empty($lily->name_y))
+                            <div class="name-ruby" style="color: gray">読みデータなし</div>
+                            <div class="name">{{ $lily->name }}</div>
+                        @elseif(mb_strlen($lily->name) < 16)
                             <div class="name-ruby">{{ $lily->name_y }} - {{ $lily->name_a }}</div>
                             <div class="name">{{ $lily->name }}</div>
                         @else

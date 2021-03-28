@@ -42,9 +42,9 @@ class LilyRdfController extends Controller
         foreach ($lilies as $lily){
             $insert[] = [
                 'slug' => str_replace(config('lemonade.rdfPrefix.lilyrdf'),'', $lily->lily->value),
-                'name' => $lily->name->value,
-                'name_a' => $lily->nameen->value,
-                'name_y' => $lily->namekana->value,
+                'name' => $lily->name->value ?? null,
+                'name_a' => $lily->nameen->value ?? null,
+                'name_y' => $lily->namekana->value ?? null,
                 'created_at' => $now,
                 'updated_at' => $now
             ];
@@ -75,14 +75,13 @@ PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX schema: <http://schema.org/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 
-SELECT ?lily ?name ?namekana ?nameen
+SELECT ?lily ?name ?nameen ?namekana
 WHERE {
   ?lily a lily:Lily;
-        schema:name ?name;
-        schema:name ?nameen;
-        lily:nameKana ?namekana.
-  FILTER(lang(?name) = 'ja')
-  FILTER(lang(?nameen) = 'en')
+        schema:name ?name.
+  FILTER(LANG(?name) = 'ja')
+  OPTIONAL{ ?lily schema:name ?nameen. FILTER(LANG(?nameen) = 'en') }
+  OPTIONAL{ ?lily lily:nameKana ?namekana. }
 }
 SPARQL
 , false);

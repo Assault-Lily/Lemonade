@@ -33,8 +33,8 @@
                         ?>
                         <tr>
                             <td>{{ $resource }}</td>
-                            <td>{{ $lily->name->value }}</td>
-                            <td>{{ $lily->nameen->value }}</td>
+                            <td>{{ $lily->name->value ?? '(N/A)' }}</td>
+                            <td>{{ $lily->nameen->value ?? '(N/A)' }}</td>
                             <td>{{ !empty($lilies_exists[$resource]) ? 'Yes' : 'No' }}</td>
                         </tr>
                     @empty
