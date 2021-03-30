@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c47c28850b1603201187ef82ce9d4496",
+    "content-hash": "80450959d9c9117d87c0b1810a75e9af",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2355,23 +2355,23 @@
         },
         {
             "name": "sarhan/php-flatten",
-            "version": "v3.0.0",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AlaaSarhan/php-flatten.git",
-                "reference": "974bef407110f4451b681fc8d671b75f9dfc207c"
+                "reference": "69cccabe8f93cb89a9b4aead8c7eff79a2e8ca9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AlaaSarhan/php-flatten/zipball/974bef407110f4451b681fc8d671b75f9dfc207c",
-                "reference": "974bef407110f4451b681fc8d671b75f9dfc207c",
+                "url": "https://api.github.com/repos/AlaaSarhan/php-flatten/zipball/69cccabe8f93cb89a9b4aead8c7eff79a2e8ca9a",
+                "reference": "69cccabe8f93cb89a9b4aead8c7eff79a2e8ca9a",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6|^7.0"
+                "php": "^7.1|^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7|^6.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0",
                 "squizlabs/php_codesniffer": "^2.3|^3.0"
             },
             "type": "library",
@@ -2399,9 +2399,9 @@
             ],
             "support": {
                 "issues": "https://github.com/AlaaSarhan/php-flatten/issues",
-                "source": "https://github.com/AlaaSarhan/php-flatten/tree/next"
+                "source": "https://github.com/AlaaSarhan/php-flatten/tree/v4.0.0"
             },
-            "time": "2019-01-05T23:41:46+00:00"
+            "time": "2021-03-30T07:30:56+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
