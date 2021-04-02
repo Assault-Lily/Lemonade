@@ -40,6 +40,9 @@
             </table>
         </div>
         <h2>アカウント操作</h2>
+        <p style="text-align: center">
+            <strong>{{ Auth::user()->name.' ('.Auth::user()->email.')' }}</strong> としてログインしています
+        </p>
         <div class="buttons three">
             <a href="{{ route('admin.logout') }}" class="button"
                onclick="event.preventDefault();document.getElementById('logout').submit();">ログアウト</a>
