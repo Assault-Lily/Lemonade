@@ -45,7 +45,7 @@
                     <div id="triple">
                         <label>
                             主語(リリィID)
-                            <input type="number" name="lily_id" required value="{{ $triple->lily->id }}" readonly>
+                            <input type="text" name="lily_slug" required value="{{ $triple->lily->slug }}" readonly>
                         </label>
                         <label>
                             述語
@@ -62,12 +62,6 @@
                             <input type="text" name="object" required value="{{ old('object', $triple->object) }}">
                         </label>
                     </div>
-                    <p>
-                        <label>
-                            ネタバレとしてマークする
-                            <input type="checkbox" name="spoiler" {{ old('spoiler', $triple->spoiler) ? 'checked' : ''}}>
-                        </label>
-                    </p>
                     @if($errors->any())
                         <hr>
                         <div style="color: darkred">

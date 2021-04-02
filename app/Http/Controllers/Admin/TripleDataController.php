@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Lily;
 use App\Models\Triple;
+use Auth;
+use DateTime;
 use Http;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -93,23 +95,21 @@ class TripleDataController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'lily' => ['required', 'exists:lilies,id'],
+            'lily' => ['required', 'exists:lilies,slug'],
             'predicate' => ['required', 'string'],
-            'object' => ['required', 'string'],
-            'spoiler' => ['boolean']
+            'object' => ['required', 'string']
         ]);
 
         $triple = new Triple();
-        $triple->lily_id   = $request->lily;
+        $triple->lily_slug = $request->lily;
         $triple->predicate = $request->predicate;
         $triple->object    = $request->object;
-        $triple->spoiler   = (bool)$request->spoiler ?? false;
 
         $triple->save();
 
         // Logging and Notify
 
-        $user = \Auth::user();
+        $user = Auth::user();
         $log_text = 'トリプルが追加されました'.PHP_EOL
             .$this->generateLogText($triple).PHP_EOL
             .'登録者：'.$user->name.'('.$user->email.')';
@@ -171,7 +171,7 @@ class TripleDataController extends Controller
 
             // Logging and Notify
 
-            $user = \Auth::user();
+            $user = Auth::user();
             $notify = 'トリプルがレストアされました！'.PHP_EOL
                 .'トリプルID : '.$id.' ('.route('admin.triple.show',['triple' => $id]).')'.PHP_EOL
                 .'更新者 : '.$user->name.'('.$user->email.')';
@@ -194,19 +194,17 @@ class TripleDataController extends Controller
 
         $request->validate([
             'predicate' => ['required', 'string'],
-            'object' => ['required', 'string'],
-            'spoiler' => ['boolean']
+            'object' => ['required', 'string']
         ]);
 
         $triple->predicate = $request->predicate;
         $triple->object    = $request->object;
-        $triple->spoiler   = (bool)$request->spoiler ?? false;
 
         $triple->save();
 
         // Logging and Notify
 
-        $user = \Auth::user();
+        $user = Auth::user();
         $log_text = 'トリプルが更新されました'.PHP_EOL
             .$this->generateLogText($triple).PHP_EOL
             .'登録者：'.$user->name.'('.$user->email.')';
@@ -216,7 +214,7 @@ class TripleDataController extends Controller
         ]);
         Log::channel('adminlog')->info($log_text);
 
-        return redirect(route('admin.triple.index'))->with('message', 'トリプルを更新しました');
+        return redirect(route('admin.triple.edit',['triple' => $id]))->with('message', 'トリプルを更新しました');
     }
 
     /**
@@ -235,7 +233,7 @@ class TripleDataController extends Controller
 
         // Logging and Notify
 
-        $user = \Auth::user();
+        $user = Auth::user();
         $notify = 'トリプルが削除されました...'.PHP_EOL
             .'トリプルID : '.$id.' ('.route('admin.triple.show',['triple' => $id]).')'.PHP_EOL
             .'更新者 : '.$user->name.'('.$user->email.')';
@@ -255,7 +253,7 @@ class TripleDataController extends Controller
             'footer' => [
                 'text' => config('app.name').' Ver'.config('lemonade.version')
             ],
-            'timestamp' => $triple->updated_at->format(\DateTime::ISO8601),
+            'timestamp' => $triple->updated_at->format(DateTime::ISO8601),
             'fields' => [
                 [
                     'name' => '主語',

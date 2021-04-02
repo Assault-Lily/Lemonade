@@ -35,8 +35,8 @@
                 @csrf
                 <div id="triple">
                     <label>
-                        主語(リリィID)
-                        <input type="number" name="lily" list="lilies" required
+                        主語(リリィスラッグ)
+                        <input type="text" name="lily" list="lilies" required
                                @if(!empty($args['lily']))value="{{ $args['lily']->id }}" readonly @else value="{{ old('lily') }}" @endif>
                         <datalist id="lilies">
                             <?php
@@ -45,7 +45,7 @@
                              */
                             ?>
                             @foreach($lilies as $lily)
-                                <option value="{{ $lily->id }}">{{ $lily->name }}</option>
+                                <option value="{{ $lily->slug }}">{{ $lily->name }}</option>
                             @endforeach
                         </datalist>
                     </label>
@@ -63,12 +63,6 @@
                         <input type="text" name="object" required value="{{ old('object', $args['object'] ?? '') }}">
                     </label>
                 </div>
-                <p>
-                    <label>
-                        ネタバレとしてマークする
-                        <input type="checkbox" name="spoiler" {{ old('spoiler') ? 'checked' : ''}}>
-                    </label>
-                </p>
                 @if($errors->any())
                     <hr>
                     <div style="color: darkred">
