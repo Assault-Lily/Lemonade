@@ -103,6 +103,7 @@ SPQRQL
         try {
             $triples_sparql = sparqlQuery(<<<SPARQL
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 
 SELECT ?subject ?predicate ?object
 WHERE {
@@ -116,6 +117,14 @@ WHERE {
     FILTER(!isLiteral(?ro)).
     ?ro ?predicate ?object.
     BIND(?ro as ?subject)
+  }
+  UNION
+  {
+    lilyrdf:$slug lily:charm/lily:resource ?charm.
+    ?charm ?cp ?co.
+    BIND(?charm as ?subject)
+    BIND(?cp as ?predicate)
+    BIND(?co as ?object)
   }
 }
 SPARQL
