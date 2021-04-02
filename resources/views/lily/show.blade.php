@@ -143,19 +143,33 @@ else {
                     @endif
                     <tr>
                         <th>主な使用CHARM</th>
-                        <td {{ count($triples[$ts]['lily:charm'] ?? array()) >= 2 ? 'rowspan="2" style="height: 4em;"' : ''}}>
+                        <td {!! count($triples[$ts]['lily:charm'] ?? array()) >= 2 ? 'rowspan="2" style="height: 4em;"' : '' !!}>
                             <?php
                             foreach ($triples[$ts]['lily:charm'] ?? array() as $charm){
-                                $charm_name = ($triples[$charm]['schema:productID'][0] ?? '').' '.$triples[$charm]['schema:name'][0];
-                                if(!empty($triples[$ts]['lily:charmAdditionalInformation'])){
+                                // CHARM情報が取得できない場合のスキップ
+                                if(empty($triples[$triples[$charm]['lily:resource'][0]]))continue;
+                                $charm_resource = $triples[$triples[$charm]['lily:resource'][0]] ?? array();
+
+                                // CHARM名の取得と追加情報の付加
+                                $charm_name = ($charm_resource['schema:productID'][0] ?? '').' '.$charm_resource['schema:name'][0];
+                                if(!empty($triples[$charm]['lily:additionalInformation'])){
                                     $charm_name .= ' (';
                                     $additional_info = '';
-                                    foreach ($triples[$ts]['lily:charmAdditionalInformation'] as $info){
+                                    foreach ($triples[$charm]['lily:additionalInformation'] as $info){
                                         $additional_info .= $info.' ';
                                     }
                                     $charm_name .= trim($additional_info).')';
                                 }
-                                ?><span>{{ $charm_name }}</span><?php
+
+                                // 使用場面情報の付加
+                                if(!empty($triples[$charm]['lily:usedIn'])){
+                                    $charm_used_in = '登場媒体：';
+                                    foreach ($triples[$charm]['lily:usedIn'] as $used_in){
+                                        $charm_used_in .= $used_in.', ';
+                                    }
+                                    $charm_used_in = mb_substr($charm_used_in, 0, mb_strlen($charm_used_in) - 2);
+                                }
+                                ?><div {!! !empty($charm_used_in) ? 'title="'.$charm_used_in.'"' : '' !!}>{{ $charm_name }}</div><?php
                             }
                             ?>
                             @if(count($triples[$ts]['lily:charm'] ?? array()) < 1)

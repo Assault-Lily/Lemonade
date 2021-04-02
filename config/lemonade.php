@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '3.0.0 Yanagikoji',
+    'version' => '4-prt Branch-CharmDetail',
 
 
     'mastodon' => [
