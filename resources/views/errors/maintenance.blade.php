@@ -97,7 +97,7 @@
             </p>
         @endif
         <div class="buttons" style="margin-top: 40px">
-            <a href="{{ config('lemonade.mastodon') }}" class="button primary" target="_blank">Mastodon</a>
+            <a href="{{ config('lemonade.mastodon.server').'/'.config('lemonade.mastodon.account') }}" class="button primary" target="_blank">Mastodon</a>
             <a href="{{ 'https://twitter.com/'.config('lemonade.developer.twitter') }}" class="button primary" target="_blank">開発者Twitter</a>
             <a href="javascript:location.reload()" class="button">リロード</a>
         </div>
