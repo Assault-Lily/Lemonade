@@ -38,10 +38,6 @@
                     <td>{{ $lily->name_a }}</td>
                 </tr>
                 <tr>
-                    <th>カラーコード</th>
-                    <td style="color: {{ $lily->color }}; font-weight: bold">{{ $lily->color }}</td>
-                </tr>
-                <tr>
                     <th>システム内部ID</th>
                     <td>{{ $lily->id }}</td>
                 </tr>
