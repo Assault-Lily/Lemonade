@@ -46,11 +46,7 @@
                 <div id="more">
                     <label>
                         スラッグ<br>
-                        <input type="text" name="slug" required placeholder="riri"  value="{{ old('slug') }}">
-                    </label>
-                    <label>
-                        カラーコード<br>
-                        <input type="text" name="color" maxlength="7" placeholder="#ff9dae" value="{{ old('color') }}">
+                        <input type="text" name="slug" required placeholder="Hitotsuyanagi_Riri" value="{{ old('slug') }}">
                     </label>
                 </div>
                 @if($errors->any())
@@ -63,10 +59,13 @@
                 @endif
                 <hr>
                 <p>
-                    スラッグはリリィ詳細画面のURIパスとなります。特に事情がない限り、名前が指定されるべきです。<br>
-                    大文字小文字を混ぜて入力しても、データベース登録時に小文字に修正されます。
+                    スラッグはリリィ詳細画面のURIパスとなります。<br>
+                    特に事情がない限り、名前のアルファベット表記のうちスペースをアンダーバーに置換した文字列が指定されるべきです。
                 </p>
-                <p>カラーコードは必須入力ではありません。</p>
+                <p>
+                    assaultlily-rdfからの同期時にリリィ基本データは一度TRUNCATEされます。
+                    独自に追加したリリィのデータについてはバックアップを取るべきです。
+                </p>
                 <hr>
                 <div class="buttons">
                     <a href="{{ route('admin.lily.index') }}" class="button">一覧に戻る</a>

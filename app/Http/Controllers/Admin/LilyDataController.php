@@ -53,7 +53,6 @@ class LilyDataController extends Controller
             'name'   => 'required',
             'name_y' => ['required', new Hiragana('・ ')],
             'name_a' => ['required'],
-            'color'  => [new HexColorCode],
         ]);
 
         $lily = new Lily;
@@ -61,7 +60,6 @@ class LilyDataController extends Controller
         $lily->name = $request->name;
         $lily->name_y = $request->name_y;
         $lily->name_a = $request->name_a;
-        $lily->color = $request->color;
 
         $lily->save();
 
@@ -138,14 +136,12 @@ class LilyDataController extends Controller
             'name'   => 'required',
             'name_y' => ['required', new Hiragana('・ ')],
             'name_a' => ['required'],
-            'color'  => [new HexColorCode],
         ]);
 
         $lily->slug = strtolower($request->slug);
         $lily->name = $request->name;
         $lily->name_y = $request->name_y;
         $lily->name_a = $request->name_a;
-        $lily->color = $request->color;
 
         $lily->save();
 
@@ -200,11 +196,6 @@ class LilyDataController extends Controller
                     'name' => 'スラッグ',
                     'value' => $lily->slug,
                     'inline' => true
-                ],
-                [
-                    'name' => 'カラーコード',
-                    'value' => $lily->color ?? 'N/A',
-                    'inline' => true
                 ]
             ]
         ];
@@ -213,6 +204,6 @@ class LilyDataController extends Controller
     protected function generateLogText($lily)
     {
         return '登録名 : '.$lily->name.' ('.route('admin.lily.show',['lily' => $lily->id]).')'.PHP_EOL
-            .'なまえ : '.$lily->name_y.', Name : '.$lily->name_a.', Color : '.($lily->color ?? 'N/A').PHP_EOL;
+            .'なまえ : '.$lily->name_y.', Name : '.$lily->name_a.PHP_EOL;
     }
 }

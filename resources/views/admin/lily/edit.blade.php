@@ -52,10 +52,6 @@
                         スラッグ<br>
                         <input type="text" name="slug" required value="{{ old('slug', $lily->slug) }}" readonly id="slug">
                     </label>
-                    <label>
-                        カラーコード<br>
-                        <input type="text" name="color" maxlength="7" value="{{ old('color', $lily->color) }}">
-                    </label>
                 </div>
                 @if($errors->any())
                     <hr>
