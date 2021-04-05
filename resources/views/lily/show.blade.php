@@ -225,18 +225,10 @@ else {
                     $tweet_search = 'https://twitter.com/search?q=from%3A'.config('lemonade.fumi.twitter').'%20';
                     $tweet_search .= urlencode($triples[$ts]['schema:givenName'][0] ?? $lily->name);
 
-                    if (!empty($triples['officialUrls.acus']) && !str_starts_with($triples['officialUrls.acus'],'http')){
-                        $triples['officialUrls.acus'] = str_replace('{no}', $triples['officialUrls.acus'], config('lemonade.officialUrls.acus'));
+                    if (!empty($triples[$ts]['officialUrls.acus'][0]) && !str_starts_with($triples[$ts]['officialUrls.acus'][0],'http')){
+                        $official_urls['acus'] = str_replace('{no}', $triples[$ts]['officialUrls.acus'][0], config('lemonade.officialUrls.acus'));
                     }
-                    /*if (!empty($triples['officialUrls.anime']) && !str_starts_with($triples['officialUrls.anime'],'http')){
-                        $triples['officialUrls.anime'] = $triples['officialUrls.anime'] === '=' ? $lily->slug.'/' : $triples['officialUrls.anime'];
-                        $triples['officialUrls.anime'] = $triples['officialUrls.anime'] === '/' ? '' : $triples['officialUrls.anime'];
-                        $triples['officialUrls.anime'] = str_replace('{slug}', $triples['officialUrls.anime'], config('lemonade.officialUrls.anime'));
-                    }
-                    if (!empty($triples['officialUrls.lb']) && !str_starts_with($triples['officialUrls.lb'],'http')){
-                        $triples['officialUrls.lb'] = $triples['officialUrls.lb'] === '=' ? $lily->slug : $triples['officialUrls.anime'];
-                        $triples['officialUrls.lb'] = str_replace('{slug}', $triples['officialUrls.lb'], config('lemonade.officialUrls.lb'));
-                    }*/
+                    // リリィが特定のレギオンに所属する場合、公式サイトへのリンクを生成
                     if (!empty($triples[$ts]['lily:legion'][0]) && in_array($triples[$ts]['lily:legion'][0], config('lemonade.specialLegion.anime'))){
                         $official_urls['anime'] = str_replace('{slug}', $slug, config('lemonade.officialUrls.anime'));
                     }
@@ -245,8 +237,8 @@ else {
                     }
                     ?>
                     <div class="buttons two">
-                        @if(!empty($triples['officialUrls.acus'])){{-- TODO: リンク対応 --}}
-                            <a class="button" href="{{ $triples['officialUrls.acus'] }}" target="_blank"
+                        @if(!empty($official_urls['acus']))
+                            <a class="button" href="{{ $official_urls['acus'] }}" target="_blank"
                                title="原作公式サイトのキャラクターページを開きます">AssaultLily.com (原作公式)</a>
                         @endif
                             <a class="button" href="{{ $tweet_search }}" target="_blank"
