@@ -268,10 +268,6 @@ class TripleDataController extends Controller
                 [
                     'name' => '目的語',
                     'value' => $triple->object
-                ],
-                [
-                    'name' => 'スポイラーフラグ',
-                    'value' => ($triple->spoiler ? 'True' : 'False')
                 ]
             ]
         ];
