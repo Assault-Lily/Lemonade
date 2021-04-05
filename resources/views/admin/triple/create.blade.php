@@ -37,7 +37,7 @@
                     <label>
                         主語(リリィスラッグ)
                         <input type="text" name="lily" list="lilies" required
-                               @if(!empty($args['lily']))value="{{ $args['lily']->id }}" readonly @else value="{{ old('lily') }}" @endif>
+                               @if(!empty($args['lily']))value="{{ $args['lily']->slug }}" readonly @else value="{{ old('lily') }}" @endif>
                         <datalist id="lilies">
                             <?php
                             /**
