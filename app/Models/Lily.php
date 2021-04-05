@@ -40,6 +40,6 @@ class Lily extends Model
     protected $guarded = ['id'];
 
     public function triples(){
-        return $this->hasMany(Triple::class,'lily_slug');
+        return $this->hasMany(Triple::class,'lily_slug', 'slug');
     }
 }
