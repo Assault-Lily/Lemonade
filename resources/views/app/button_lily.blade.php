@@ -15,6 +15,6 @@
             | {{ $triple['legion'] ?? 'レギオン情報なし' }}
             {{ !empty($triple['legionAlternate']) ? '('.$triple['legionAlternate'].')' : '' }}
         </div>
-        <div>レアスキル : {!! e($triple['rareSkill']) ?: "<span style=\"color:gray\">N/A</span>" !!}</div>
+        <div>レアスキル : {!! e($triple['rareSkill'] ?? '') ?: "<span style=\"color:gray\">N/A</span>" !!}</div>
     </div>
 </a>
