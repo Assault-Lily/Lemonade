@@ -41,10 +41,20 @@
         <hr>
         @if(Auth::check())
             <a href="{{ route('admin.dashboard') }}" id="user-auth">
-                <i class="fas fa-user-check"></i>{{ Auth::user()->name ?? 'Authed' }}</a>
+                <i class="fas fa-user-check"></i>
+                <div style="display: inline-block">
+                    {{ Auth::user()->name ?? 'Authed' }}
+                    <div style="font-size: 12px">{{ Auth::user()->email }}</div>
+                </div>
+            </a>
         @else
             <a href="{{ route('admin.login') }}" id="user-auth">
-                <i class="fas fa-user"></i>Guest</a>
+                <i class="fas fa-user"></i>
+                <div style="display: inline-block">
+                    Guest
+                    <div style="font-size: 12px">{{ 'guest'.substr(md5($_SERVER['REMOTE_ADDR']),0,9) }}</div>
+                </div>
+            </a>
         @endif
     </div>
     @if(config('app.debug'))

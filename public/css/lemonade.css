@@ -146,6 +146,11 @@ header > #info > #clock-wrap{
     background: #FF508E;
 }
 
+header > #info > a#user-auth{
+    display: flex;
+    align-items: center;
+}
+
 header hr{
     border: none;
     height: 25px;
