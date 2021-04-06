@@ -36,7 +36,7 @@
         @endif
         <div class="top-options">
             <div>
-                ならべかえ
+                ならべかえ : 読み順
             </div>
             <div>
                 <span class="info">リリィ登録数 : {{ $lilies->count() }}</span>
@@ -48,6 +48,9 @@
             @empty
                 <p style="text-align: center; color: darkred; margin: 3em auto">該当するデータがありません</p>
             @endforelse
+            @if(($lilies->count() % 3) != 0)
+                <div style="width: 32%; margin-left: 6px"></div>
+            @endif
         </div>
     </main>
 @endsection
