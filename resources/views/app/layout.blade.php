@@ -64,6 +64,7 @@
     <nav>
         <a href="{{ url('/') }}"><i class="fas fa-home"></i>Top</a>
         <a href="{{ url('/lily') }}"><i class="fas fa-address-book"></i>Lily</a>
+        <a href="{{ url('/legion') }}"><i class="fas fa-users"></i>Legion</a>
     </nav>
 </header>
 
