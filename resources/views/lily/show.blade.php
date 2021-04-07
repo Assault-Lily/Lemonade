@@ -100,7 +100,18 @@ else {
                             $legion_name .= ' ('.$triples[$triples[$ts]['lily:legion'][0]]['schema:alternateName'][0].')';
                         }
                     ?>
-                    @include('app.lilyprofiletable.record',['object' => $legion_name ?? null, 'th' => '所属レギオン'])
+                    <tr>
+                        <th>所属レギオン</th>
+                        <td>
+                            @if(!empty($legion_name))
+                                <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$triples[$ts]['lily:legion'][0])]) }}">
+                                    {{ $legion_name }}
+                                </a>
+                            @else
+                                <span style="color:gray;">N/A</span>
+                            @endif
+                        </td>
+                    </tr>
                     @if(!empty($triples[$ts]['lily:legionJobTitle'][0]))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:legionJobTitle'][0], 'th' => 'レギオン役職'])
                     @endif
@@ -111,7 +122,14 @@ else {
                             $past_legion_name .= ' ('.$triples[$triples[$ts]['lily:pastLegion'][0]]['schema:alternateName'][0].')';
                         }
                         ?>
-                        @include('app.lilyprofiletable.record',['object' => $past_legion_name ?? null, 'th' => '過去の所属レギオン'])
+                        <tr>
+                            <th>過去の所属レギオン</th>
+                            <td>
+                                <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$triples[$ts]['lily:pastLegion'][0])]) }}">
+                                    {{ $past_legion_name }}
+                                </a>
+                            </td>
+                        </tr>
                     @endif
                     @if(!empty($triples[$ts]['lily:position']))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:position'], 'th' => 'ポジション'])
