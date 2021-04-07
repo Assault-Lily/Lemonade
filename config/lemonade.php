@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '4.1.0 Kugenuma',
+    'version' => '4.1.1 Kugenuma',
 
 
     'mastodon' => [
