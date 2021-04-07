@@ -44,3 +44,18 @@ function sparqlQueryOrDie(string $query, bool $predicateReplace = true): object
     }
     return $res;
 }
+
+function sparqlToArray(object $sparqlObject): array
+{
+    $result = array();
+    foreach ($sparqlObject->results->bindings as $triple){
+        if(!empty($triple->object->{'xml:lang'}) && $triple->object->{'xml:lang'} !== 'ja'){
+            // 日本語以外の目的語については述語に言語サフィックスをつける
+            $result[$triple->subject->value][$triple->predicate->value.'@'.$triple->object->{'xml:lang'}][] =
+                $triple->object->value;
+        }else{
+            $result[$triple->subject->value][$triple->predicate->value][] = $triple->object->value;
+        }
+    }
+    return $result;
+}

@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '4.0.0 Kugenuma',
+    'version' => '4+prt Branch-Legion',
 
 
     'mastodon' => [
