@@ -76,7 +76,7 @@ $ls /* LegionSubject */ = 'lilyrdf:'.$legionSlug;
                 @endif
             @endforeach
 
-        <?php dump($legion); ?>
+        <?php if (config('app.debug')) dump($legion); ?>
     </main>
 @endsection
 
