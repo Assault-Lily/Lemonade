@@ -129,30 +129,12 @@ WHERE {
 }
 SPARQL
 );
-            foreach ($triples_sparql->results->bindings as $triple){
-                if(!empty($triple->object->{'xml:lang'}) && $triple->object->{'xml:lang'} !== 'ja'){
-                    // 日本語以外の目的語については述語に言語サフィックスをつける
-                    $triples[$triple->subject->value][$triple->predicate->value.'@'.$triple->object->{'xml:lang'}][] =
-                        $triple->object->value;
-                }else{
-                    $triples[$triple->subject->value][$triple->predicate->value][] = $triple->object->value;
-                }
-            }
+            $triples = sparqlToArray($triples_sparql);
         }catch (ConnectionException | RequestException $e){
             $rdf_error = $e;
         }
 
-        /*foreach ($triples as $t_sub_key => $t_sub){
-            foreach ($t_sub as $t_pre_key => $t_pre){
-                foreach ($t_pre as $t_obj => $value){
-                    if (str_starts_with($value, 'lilyrdf:')){
-                        $triples[$t_sub_key][$t_pre_key][$t_obj] = $triples[$value]['schema:name'][0];
-                    }
-                }
-            }
-        }*/
-
-        return view('lily.show', compact('lily', 'triples', 'rdf_error'));
+        return view('lily.show', compact('triples', 'slug', 'rdf_error'));
     }
 
     /**

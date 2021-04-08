@@ -1,15 +1,10 @@
-@extends('app.layout',[
-    'title' => 'リリィプロフィール', 'titlebar' => $lily->name,
-    'pagetype' => 'back-triangle', 'previous' => route('lily.index')])
-
 <?php
     /**
-     * @var $lily Lily
+     * @var $slug string
+     * @var $triples array
      */
 
-use App\Models\Lily;
-
-$ts = 'lilyrdf:'.$lily->slug;
+$ts = 'lilyrdf:'.$slug;
 
 $color_rgb = str_replace('#','',$triples[$ts]['lily:color'][0] ?? '');
 if(strlen($color_rgb) !== 6) $color_rgba = 'rgba(0,0,0,0.1)';
@@ -20,6 +15,10 @@ else {
     $color_rgba = 'rgba('.$r.','.$g.','.$b.',0.6)';
 }
 ?>
+
+@extends('app.layout',[
+    'title' => 'リリィプロフィール', 'titlebar' => $triples[$ts]['schema:name'][0] ,
+    'pagetype' => 'back-triangle', 'previous' => route('lily.index')])
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/lilyprofile.css') }}">
@@ -60,18 +59,18 @@ else {
                 <div class="name-plate">
                     <div class="pic"></div>
                     <div class="profile">
-                        @if(empty($lily->name_y))
+                        @if(empty($triples[$ts]['lily:nameKana'][0]))
                             <div class="name-ruby" style="color: gray">読みデータなし</div>
-                            <div class="name">{{ $lily->name }}</div>
-                        @elseif(mb_strlen($lily->name) < 16)
-                            <div class="name-ruby">{{ $lily->name_y }} - {{ $lily->name_a }}</div>
-                            <div class="name">{{ $lily->name }}</div>
+                            <div class="name">{{ $triples[$ts]['schema:name'][0] }}</div>
+                        @elseif(mb_strlen($triples[$ts]['lily:nameKana'][0]) < 16)
+                            <div class="name-ruby">{{ $triples[$ts]['lily:nameKana'][0] }} - {{ $triples[$ts]['schema:name@en'][0] }}</div>
+                            <div class="name">{{ $triples[$ts]['schema:name'][0] }}</div>
                         @else
                             <div class="name-ruby flip">
-                                <span class="name-y">{{ $lily->name_y }}</span>
-                                <span class="name-a">{{ $lily->name_a }}</span>
+                                <span class="name-y">{{ $triples[$ts]['lily:nameKana'][0] }}</span>
+                                <span class="name-a">{{ $triples[$ts]['schema:name@en'][0] }}</span>
                             </div>
-                            <div class="name" style="font-size: 24px">{{ $lily->name }}</div>
+                            <div class="name" style="font-size: 24px">{{  $triples[$ts]['schema:name'][0]  }}</div>
                         @endif
                         <div class="summary">
                             <div>誕生日 : {{ !empty($triples[$ts]['schema:birthDate'][0]) ?
@@ -224,8 +223,10 @@ else {
                     </tbody>
                 </table>
                 <div style="font-size: smaller">
-                    <a href="{{ route('admin.lily.show',['lily' => $lily->id]) }}" class="button smaller">管理</a>
-                    トリプル数 : {{ count($triples[$ts] ?? array(), 1) - count($triples[$ts] ?? array()) }}
+                    トリプル数 : {{ count($triples[$ts] ?? array(), 1) - count($triples[$ts] ?? array()) }} ,
+                    <?php $triple_count = 0; foreach ($triples as $sub_triples)
+                        $triple_count += (count($sub_triples, 1) - count($sub_triples)); ?>
+                    総参照トリプル数 : {{ $triple_count }}
                 </div>
             </div>
             <div class="right" style="width: 100%;position: relative">
@@ -241,7 +242,7 @@ else {
                     $slug = strtolower($triples[$ts]['schema:givenName@en'][0] ?? '');
 
                     $tweet_search = 'https://twitter.com/search?q=from%3A'.config('lemonade.fumi.twitter').'%20';
-                    $tweet_search .= urlencode($triples[$ts]['schema:givenName'][0] ?? $lily->name);
+                    $tweet_search .= urlencode($triples[$ts]['schema:givenName'][0] ?? '');
 
                     if (!empty($triples[$ts]['officialUrls.acus'][0]) && !str_starts_with($triples[$ts]['officialUrls.acus'][0],'http')){
                         $official_urls['acus'] = str_replace('{no}', $triples[$ts]['officialUrls.acus'][0], config('lemonade.officialUrls.acus'));
