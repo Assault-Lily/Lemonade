@@ -72,13 +72,8 @@ SPARQL
 
         $legion = sparqlToArray($legion_sparql);
 
-        $lilies = array();
-        foreach (Lily::all() as $lily){
-            $lilies[$lily->slug] = $lily;
-        }
-
         if (empty($legion)) abort(404, "指定されたレギオンのデータは現時点で存在しません");
 
-        return view('legion.show', compact('legion', 'lilies', 'legionSlug'));
+        return view('legion.show', compact('legion', 'legionSlug'));
     }
 }

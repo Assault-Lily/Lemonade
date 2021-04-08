@@ -49,8 +49,9 @@ $ls /* LegionSubject */ = 'lilyrdf:'.$legionSlug;
                         @foreach($legion[$ls][$key] as $member)
                             <?php
                             /** @var string $member */
-                            $memberSlug = str_replace('lilyrdf:','',$member) ?>
-                            <a class="list-item-a" href="{{ route('lily.show',['lily' => $memberSlug]) }}" title="{{ $lilies[$memberSlug]->name }}">
+                            $memberSlug = str_replace('lilyrdf:','',$member);
+                            ?>
+                            <a class="list-item-a" href="{{ route('lily.show',['lily' => $memberSlug]) }}" title="{{ $legion[$member]['schema:name'][0] }}">
                                 <div class="list-item-image">
                                     @if(!empty($legion[$member]['lily:legionJobTitle'][0]))
                                         <div class="jobTitle">{{ $legion[$member]['lily:legionJobTitle'][0] }}</div>
@@ -59,8 +60,8 @@ $ls /* LegionSubject */ = 'lilyrdf:'.$legionSlug;
                                         font-weight: bold; text-align: right;font-size: 13px;">{{ $legion[$member]['lily:color'][0] ?? '' }}</div>
                                 </div>
                                 <div class="list-item-data">
-                                    <div class="title-ruby">{!! e($lilies[$memberSlug]->name_y) ?: "<i style=\"color:gray\">読みデータなし</i>" !!}</div>
-                                    <div class="title">{{ $lilies[$memberSlug]->name }}</div>
+                                    <div class="title-ruby">{!! e($legion[$member]['lily:nameKana'][0]) ?: "<i style=\"color:gray\">読みデータなし</i>" !!}</div>
+                                    <div class="title">{{ $legion[$member]['schema:name'][0] }}</div>
                                     <div>
                                         {{ $legion[$member]['lily:garden'][0] ?? 'ガーデン情報なし' }}
                                         {{ !empty($legion[$member]['lily:grade']) ? $legion[$member]['lily:grade'][0].'年' : '' }}
