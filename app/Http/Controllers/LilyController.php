@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lily;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Http\Client\RequestException;
+use App\Models\Triple;
 
 class LilyController extends Controller
 {
@@ -16,45 +13,48 @@ class LilyController extends Controller
      */
     public function index()
     {
-        $lilies = Lily::orderBy('name_y')->get();
-        $triples = array();
-        $rdf_error = null;
-        try {
-            $triples_sparql = sparqlQuery(<<<SPQRQL
-PREFIX schema: <http://schema.org/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+        $triples_sparql = sparqlQueryOrDie(<<<SPQRQL
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX schema: <http://schema.org/>
 
-SELECT DISTINCT ?subject ?garden ?grade ?legion ?legionAlternate ?rareSkill ?color
+SELECT ?subject ?predicate ?object
 WHERE {
-  ?subject rdf:type lily:Lily;
-           lily:garden ?garden.
-  OPTIONAL{?subject lily:grade ?grade}
-  OPTIONAL{?subject lily:rareSkill ?rareSkill}
-  OPTIONAL{?subject lily:legion/schema:name ?legion}
-  OPTIONAL{?subject lily:legion/schema:alternateName ?legionAlternate}
-  OPTIONAL{?subject lily:color ?color}
-  FILTER(LANG(?legion) = 'ja' || !bound(?legion))
-  FILTER(LANG(?legionAlternate) = 'ja' || !bound(?legionAlternate))
+  {
+    ?subject a lily:Lily;
+             ?predicate ?object.
+  }
+  UNION
+  {
+    ?subject a lily:Legion;
+             ?predicate ?object.
+  }
 }
 SPQRQL
 );
-            foreach ($triples_sparql->results->bindings as $triple){
-                $triples[str_replace('lilyrdf:','', $triple->subject->value)] = [
-                    'garden' => $triple->garden->value,
-                    'grade'  => $triple->grade->value ?? null,
-                    'legion' => $triple->legion->value ?? null,
-                    'legionAlternate' => $triple->legionAlternate->value ?? null,
-                    'rareSkill' => $triple->rareSkill->value ?? null,
-                    'color' => $triple->color->value ?? null,
-                ];
+        $triples = sparqlToArray($triples_sparql);
+
+        $lilies = array();
+        $legions = array();
+
+        // レギオンとリリィの振り分け
+        foreach ($triples as $key => $triple){
+            if($triple['rdf:type'][0] === 'lily:Lily'){
+                $lilies[$key] = $triple;
+            }else{
+                $legions[$key] = $triple;
             }
-        }catch (ConnectionException | RequestException $e){
-            $rdf_error = $e;
         }
 
-        return response()->view('lily.index', compact('lilies','triples', 'rdf_error'));
+        // リリィソート用キー配列の作成
+        $lily_sortKey = array();
+        foreach ($lilies as $lily){
+            $lily_sortKey[] = $lily['lily:nameKana'][0] ?? '-';
+        }
+        // リリィのソート
+        array_multisort($lily_sortKey, SORT_ASC, SORT_STRING, $lilies);
+
+        return response()->view('lily.index', compact('lilies', 'legions'));
     }
 
     /**

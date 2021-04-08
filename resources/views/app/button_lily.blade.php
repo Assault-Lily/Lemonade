@@ -1,20 +1,22 @@
 <?php
 /**
- * @var $lily \App\Models\Lily
+ * @var $lily array
+ * @var $key string
+ * @var $legion array
  */
-?><a class="list-item-a" href="{{ route('lily.show',['lily' => $lily->slug]) }}" title="{{ $lily->name }}">
+?><a class="list-item-a" href="{{ route('lily.show',['lily' => str_replace('lilyrdf:','',$key)]) }}" title="{{ $lily['schema:name'][0] }}">
     <div class="list-item-image">
-        <div style="color: {{ empty($triple['color']) ? 'transparent' : '#'.$triple['color'] }}; font-weight: bold; text-align: right;font-size: 13px;">{{ $triple['color'] ?? '' }}</div>
+        <div style="color: {{ empty($lily['lily:color'][0]) ? 'transparent' : '#'.$lily['lily:color'][0] }}; font-weight: bold; text-align: right;font-size: 13px;">{{ $lily['lily:color'][0] ?? '' }}</div>
     </div>
     <div class="list-item-data">
-        <div class="title-ruby">{!! e($lily->name_y) ?: "<i style=\"color:gray\">読みデータなし</i>" !!}</div>
-        <div class="title">{{ $lily->name }}</div>
+        <div class="title-ruby">{!! e($lily['lily:nameKana'][0] ?? '') ?: "<i style=\"color:gray\">読みデータなし</i>" !!}</div>
+        <div class="title">{{ $lily['schema:name'][0] }}</div>
         <div>
-            {{ $triple['garden'] ?? 'ガーデン情報なし' }}
-            {{ !empty($triple['grade']) ? $triple['grade'].'年' : '' }}
-            | {{ $triple['legion'] ?? 'レギオン情報なし' }}
-            {{ !empty($triple['legionAlternate']) ? '('.$triple['legionAlternate'].')' : '' }}
+            {{ $lily['lily:garden'][0] ?? 'ガーデン情報なし' }}
+            {{ !empty($lily['lily:grade'][0]) ? $lily['lily:grade'][0].'年' : '' }}
+            | {{ $legion['schema:name'][0] ?? 'レギオン情報なし' }}
+            {{ !empty($legion['schema:alternateName'][0]) ? '('.$legion['schema:alternateName'][0].')' : '' }}
         </div>
-        <div>レアスキル : {!! e($triple['rareSkill'] ?? '') ?: "<span style=\"color:gray\">N/A</span>" !!}</div>
+        <div>レアスキル : {!! e($lily['lily:rareSkill'][0] ?? '') ?: "<span style=\"color:gray\">N/A</span>" !!}</div>
     </div>
 </a>
