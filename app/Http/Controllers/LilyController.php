@@ -86,22 +86,9 @@ SPQRQL
      */
     public function show($slug)
     {
-        try {
-            $lily = Lily::whereSlug($slug)->with('triples')->firstOrFail();
-            $triples = array();
-            // $triples['_last_update'] = $lily->updated_at;
-            foreach ($lily->triples as $triple){
-                $triples['lilyrdf:'.$slug][$triple->predicate][] = $triple->object;
-                // if($triple->updated_at->gte($triples['_last_update'])) $triples['_last_update'] = $triple->updated_at;
-            }
-        }catch (ModelNotFoundException $e){
-            abort(404, '該当するデータが存在しません');
-        }
-
         $rdf_error = null;
 
-        try {
-            $triples_sparql = sparqlQuery(<<<SPARQL
+        $triples_sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 
@@ -129,9 +116,13 @@ WHERE {
 }
 SPARQL
 );
-            $triples = sparqlToArray($triples_sparql);
-        }catch (ConnectionException | RequestException $e){
-            $rdf_error = $e;
+        $triples = sparqlToArray($triples_sparql);
+
+        if(empty($triples)) abort(404, '該当するリリィのデータが存在しません');
+
+        $triples_model = Triple::whereLilySlug($slug)->get();
+        foreach ($triples_model as $triple){
+            $triples['lilyrdf:'.$slug][$triple->predicate] = $triple->object;
         }
 
         return view('lily.show', compact('triples', 'slug', 'rdf_error'));
