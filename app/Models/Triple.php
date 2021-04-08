@@ -10,14 +10,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * App\Models\Triple
  *
  * @property int $id
- * @property int $lily_id
  * @property string $predicate
  * @property string $object
- * @property int $spoiler
+ * @property int $synced
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Lily $lily
+ * @property string $lily_slug
  * @method static \Illuminate\Database\Eloquent\Builder|Triple newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Triple newQuery()
  * @method static \Illuminate\Database\Query\Builder|Triple onlyTrashed()
@@ -25,18 +24,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Triple whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Triple whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Triple whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereLilyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereLilySlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Triple whereObject($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Triple wherePredicate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereSpoiler($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Triple whereSynced($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Triple whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Triple withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Triple withoutTrashed()
  * @mixin \Eloquent
- * @property int $synced
- * @property string $lily_slug
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereLilySlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereSynced($value)
  */
 class Triple extends Model
 {
@@ -46,8 +41,4 @@ class Triple extends Model
     protected $table = 'triples';
 
     protected $guarded = ['id'];
-
-    public function lily(){
-        return $this->belongsTo(Lily::class,'lily_slug','slug');
-    }
 }

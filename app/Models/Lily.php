@@ -10,18 +10,14 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $slug
- * @property string $name
- * @property string $name_a
- * @property string $name_y
- * @property string|null $color
+ * @property string|null $name
+ * @property string|null $name_a
+ * @property string|null $name_y
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Triple[] $triples
- * @property-read int|null $triples_count
  * @method static \Illuminate\Database\Eloquent\Builder|Lily newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Lily newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Lily query()
- * @method static \Illuminate\Database\Eloquent\Builder|Lily whereColor($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lily whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lily whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lily whereName($value)
@@ -38,8 +34,4 @@ class Lily extends Model
     protected $table = 'lilies';
 
     protected $guarded = ['id'];
-
-    public function triples(){
-        return $this->hasMany(Triple::class,'lily_slug', 'slug');
-    }
 }
