@@ -60,7 +60,7 @@ $ls /* LegionSubject */ = 'lilyrdf:'.$legionSlug;
                                         font-weight: bold; text-align: right;font-size: 13px;">{{ $legion[$member]['lily:color'][0] ?? '' }}</div>
                                 </div>
                                 <div class="list-item-data">
-                                    <div class="title-ruby">{!! e($legion[$member]['lily:nameKana'][0]) ?: "<i style=\"color:gray\">読みデータなし</i>" !!}</div>
+                                    <div class="title-ruby">{!! e($legion[$member]['lily:nameKana'][0] ?? '') ?: "<i style=\"color:gray\">読みデータなし</i>" !!}</div>
                                     <div class="title">{{ $legion[$member]['schema:name'][0] }}</div>
                                     <div>
                                         {{ $legion[$member]['lily:garden'][0] ?? 'ガーデン情報なし' }}
