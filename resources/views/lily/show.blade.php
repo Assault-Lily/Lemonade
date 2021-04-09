@@ -272,6 +272,26 @@ else {
                         @endif
                     </div>
                 </div>
+                @if(!empty($triples[$ts]['lily:relationship']))
+                    <div>
+                        <h3 title="左記以外(シュッツエンゲル、ルームメイトなど以外)で関連するリリィについて列挙しています">
+                            関係のある人物</h3>
+                        <div class="list" >
+                            @foreach($triples[$ts]['lily:relationship'] as $rel)
+                                <?php /** @var $rel string */ $key = $triples[$rel]['lily:resource'][0]; ?>
+                                <a href="{{ route('lily.show', ['lily' => str_replace('lilyrdf:','',$triples[$rel]['lily:resource'][0])]) }}"
+                                   class="list-item-a" style="width: 48%">
+                                    <div class="list-item-data">
+                                        <div class="title" style="font-size: 17px">{{ $triples[$key]['schema:name'][0] ?? '' }}</div>
+                                        <div>{{ $triples[$rel]['lily:additionalInformation'][0] ?? '' }}</div>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+
+                    </div>
+                @endif
+
             </div>
         </div>
         <?php if (config('app.debug')) dump($triples) ?>

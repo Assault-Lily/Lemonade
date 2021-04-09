@@ -195,7 +195,7 @@ main{
 
 main h1, h2, h3{
     position: relative;
-    margin: .6em auto .6em 15px;
+    margin: .6em auto;
     padding-left: 15px;
     border-left: ridge 6px cornflowerblue;
 }
