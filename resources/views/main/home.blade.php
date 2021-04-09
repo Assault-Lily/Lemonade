@@ -37,6 +37,13 @@
             font-size: 4em;
             margin-bottom: 5px;
         }
+        .white-box.big-buttons > hr{
+            display: inline-block;
+            border: none;
+            width: 1px;
+            height: 70px;
+            background: #99A1C3;
+        }
     </style>
 @endsection
 
@@ -60,6 +67,11 @@
             <a href="{{ route('lily.index') }}" >
                 <i class="fas fa-address-book"></i>
                 <span>リリィ一覧</span>
+            </a>
+            <hr>
+            <a href="{{ route('legion.index') }}" >
+                <i class="fas fa-users"></i>
+                <span>レギオン一覧</span>
             </a>
         </div>
     </main>
