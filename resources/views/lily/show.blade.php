@@ -260,7 +260,8 @@ else {
                         $official_urls['acus'] = str_replace('{no}', $triples[$ts]['officialUrls.acus'][0], config('lemonade.officialUrls.acus'));
                     }
                     // リリィが特定のレギオンに所属する場合、公式サイトへのリンクを生成
-                    if (!empty($triples[$ts]['lily:legion'][0]) && in_array($triples[$ts]['lily:legion'][0], config('lemonade.specialLegion.anime'))){
+                    if (!empty($triples[$ts]['lily:legion'][0]) && in_array($triples[$ts]['lily:legion'][0], config('lemonade.specialLegion.anime')) ||
+                        !empty($triples[$ts]['lily:pastLegion'][0]) && in_array($triples[$ts]['lily:pastLegion'][0], config('lemonade.specialLegion.anime'))){
                         $official_urls['anime'] = str_replace('{slug}', $slug, config('lemonade.officialUrls.anime'));
                     }
                     if (!empty($triples[$ts]['lily:legion'][0]) && in_array($triples[$ts]['lily:legion'][0], config('lemonade.specialLegion.lb'))){
