@@ -234,7 +234,19 @@ else {
                     <div class="KIA">{{ $triples[$ts]['lily:killedIn'][0] }}<br>戦死・殉職者</div>
                 @endif
                 <div id="pics">
-                    <div style="text-align: center; padding-top: 130px; color: gray; font-size: large;">Image Unavailable</div>
+                    <div style="text-align: center; padding-top: 130px; color: gray;">
+                        <div style="margin-bottom: .4em">Image Unavailable</div>
+                        <div class="buttons" style="font-size: smaller">
+                            <a href="https://www.google.com/search?q={{ urlencode($triples[$ts]['schema:name'][0]) }}&tbm=isch"
+                               target="_blank" class="button smaller">
+                                Google 画像検索
+                            </a>
+                            <a href="https://www.pixiv.net/tags/{{ urlencode($triples[$ts]['schema:name'][0]) }}/illustrations"
+                               target="_blank" class="button smaller">
+                                pixiv イラストタグ検索
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div id="links">
                     <h3>公式リンク</h3>
