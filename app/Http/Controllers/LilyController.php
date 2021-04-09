@@ -107,6 +107,14 @@ WHERE {
     BIND(?cp as ?predicate)
     BIND(?co as ?object)
   }
+  UNION
+  {
+    lilyrdf:$slug lily:relationship/lily:resource ?rel.
+    ?rel ?relp ?relo.
+    BIND(?rel as ?subject)
+    BIND(?relp as ?predicate)
+    BIND(?relo as ?object)
+  }
 }
 SPARQL
 );
