@@ -44,6 +44,14 @@
             height: 70px;
             background: #99A1C3;
         }
+
+        #rdf-updates th{
+            border-bottom: solid 1px #99A1C3;
+            padding-bottom: 3px;
+        }
+        #rdf-updates td{
+            border-bottom: dashed 1px lightgray;
+        }
     </style>
 @endsection
 
@@ -73,6 +81,34 @@
                 <i class="fas fa-users"></i>
                 <span>レギオン一覧</span>
             </a>
+        </div>
+        <h2>assaultlily-rdf 更新情報</h2>
+        <div class="white-box" id="rdf-updates">
+            <table style="width: 100%; text-align: center">
+                <thead>
+                <tr>
+                    <th>日時</th>
+                    <th colspan="2">概要</th>
+                </tr>
+                </thead>
+                <tbody>
+                @if(!empty($rdf_feed))
+                    @foreach($rdf_feed->entry as $entry)
+                        <tr>
+                            <td>{{ date('Y/m/d H:i', strtotime($entry->updated)) }}</td>
+                            <td><a href="{{ $entry->link->attributes()->href }}" target="_blank" class="button smaller"
+                                   title="GitHubのコミットログ詳細を開きます">GitHub</a></td>
+                            <td style="text-align: left">{{ $entry->title }}</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="3" style="color: darkred">GitHubから情報を取得できませんでした</td>
+                    </tr>
+                @endif
+                </tbody>
+            </table>
+
         </div>
     </main>
 @endsection

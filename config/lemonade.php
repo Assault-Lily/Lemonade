@@ -19,6 +19,10 @@ return [
     ],
     'repository' => 'https://github.com/miyacorata/lemonade',
 
+    'rdf' => [
+        'repository' => 'https://github.com/fvh-P/assaultlily-rdf',
+    ],
+
     'officialUrls' => [
         'acus' => 'https://www.assaultlily.com/character/{no}.html/',
         'anime' => 'https://anime.assaultlily-pj.com/character/{slug}',
