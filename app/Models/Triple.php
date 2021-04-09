@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Triple
@@ -13,25 +16,25 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $predicate
  * @property string $object
  * @property int $synced
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string $lily_slug
- * @method static \Illuminate\Database\Eloquent\Builder|Triple newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Triple newQuery()
+ * @method static Builder|Triple newModelQuery()
+ * @method static Builder|Triple newQuery()
  * @method static \Illuminate\Database\Query\Builder|Triple onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Triple query()
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereLilySlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereObject($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Triple wherePredicate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereSynced($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Triple whereUpdatedAt($value)
+ * @method static Builder|Triple query()
+ * @method static Builder|Triple whereCreatedAt($value)
+ * @method static Builder|Triple whereDeletedAt($value)
+ * @method static Builder|Triple whereId($value)
+ * @method static Builder|Triple whereLilySlug($value)
+ * @method static Builder|Triple whereObject($value)
+ * @method static Builder|Triple wherePredicate($value)
+ * @method static Builder|Triple whereSynced($value)
+ * @method static Builder|Triple whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Triple withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Triple withoutTrashed()
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Triple extends Model
 {

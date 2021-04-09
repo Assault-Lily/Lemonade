@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Lily
@@ -13,19 +16,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $name
  * @property string|null $name_a
  * @property string|null $name_y
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Lily newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Lily newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Lily query()
- * @method static \Illuminate\Database\Eloquent\Builder|Lily whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Lily whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Lily whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Lily whereNameA($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Lily whereNameY($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Lily whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Lily whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|Lily newModelQuery()
+ * @method static Builder|Lily newQuery()
+ * @method static Builder|Lily query()
+ * @method static Builder|Lily whereCreatedAt($value)
+ * @method static Builder|Lily whereId($value)
+ * @method static Builder|Lily whereName($value)
+ * @method static Builder|Lily whereNameA($value)
+ * @method static Builder|Lily whereNameY($value)
+ * @method static Builder|Lily whereSlug($value)
+ * @method static Builder|Lily whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class Lily extends Model
 {
