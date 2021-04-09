@@ -20,15 +20,9 @@ PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?predicate ?object
 WHERE {
-  {
-    ?subject a lily:Lily;
-             ?predicate ?object.
-  }
-  UNION
-  {
-    ?subject a lily:Legion;
-             ?predicate ?object.
-  }
+  ?subject a ?type;
+           ?predicate ?object.
+  FILTER(?type IN(lily:Lily, lily:Legion))
 }
 SPQRQL
 );
@@ -84,7 +78,7 @@ SPQRQL
      * @param  string $slug
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(string $slug)
     {
         $rdf_error = null;
 
