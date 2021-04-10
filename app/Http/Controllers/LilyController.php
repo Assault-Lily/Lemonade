@@ -40,15 +40,57 @@ SPQRQL
             }
         }
 
+        // ソート判別
+        $sortKey = request()->get('sort', 'name');
+        switch ($sortKey){
+            case 'name':
+                $sort = 'lily:nameKana';
+                break;
+            case 'givenName':
+                $sort = 'lily:givenNameKana';
+                break;
+            case 'rareSkill':
+                $sort = 'lily:rareSkill';
+                break;
+            case 'age':
+                $sort = 'foaf:age';
+                break;
+            case 'position':
+                $sort = 'lily:position';
+                break;
+            case 'legion':
+                $sort = 'lily:legion';
+                break;
+            default:
+                abort(400, '指定されたキーではソートできません');
+        }
+        $orderGet = request()->get('order', 'asc');
+        switch ($orderGet){
+            case 'asc':
+                $order = SORT_ASC;
+                break;
+            case 'desc':
+                $order = SORT_DESC;
+                break;
+            default:
+                abort(400, '昇順降順指定に誤りがあります');
+        }
+
         // リリィソート用キー配列の作成
         $lily_sortKey = array();
         foreach ($lilies as $lily){
-            $lily_sortKey[] = $lily['lily:nameKana'][0] ?? '-';
+            $lily_sortKey[] = $lily[$sort][0] ?? '-';
+        }
+        unset($lily);
+        $lily_sortKeyKana = array();
+        foreach ($lilies as $lily){
+            $lily_sortKeyKana[] = $lily['lily:nameKana'][0] ?? '-';
         }
         // リリィのソート
-        array_multisort($lily_sortKey, SORT_ASC, SORT_STRING, $lilies);
+        array_multisort($lily_sortKey, $order, SORT_STRING,
+            $lily_sortKeyKana, $order, SORT_STRING , $lilies);
 
-        return response()->view('lily.index', compact('lilies', 'legions'));
+        return response()->view('lily.index', compact('lilies', 'legions', 'sortKey'));
     }
 
     /**
@@ -80,8 +122,6 @@ SPQRQL
      */
     public function show(string $slug)
     {
-        $rdf_error = null;
-
         $triples_sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
@@ -127,7 +167,7 @@ SPARQL
             $triples['lilyrdf:'.$slug][$triple->predicate] = $triple->object;
         }
 
-        return view('lily.show', compact('triples', 'slug', 'rdf_error'));
+        return view('lily.show', compact('triples', 'slug'));
     }
 
     /**

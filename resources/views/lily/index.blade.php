@@ -18,7 +18,23 @@
     <main>
         <div class="top-options">
             <div>
-                ならべかえ : 読み順
+                <label>
+                    ならべかえ :
+                    <select>
+                        <option>フルネーム 昇順</option>
+                        <option>フルネーム 降順</option>
+                        <option>名前 昇順</option>
+                        <option>名前 降順</option>
+                        <option>レアスキル 昇順</option>
+                        <option>レアスキル 降順</option>
+                        <option>年齢 昇順</option>
+                        <option>年齢 降順</option>
+                        <option>ポジション 昇順</option>
+                        <option>ポジション 降順</option>
+                        <option>レギオン 昇順</option>
+                        <option>レギオン 降順</option>
+                    </select>
+                </label>
             </div>
             <div>
                 <span class="info">リリィ登録数 : {{ count($lilies) }}</span>
