@@ -35,25 +35,6 @@ else {
 
 @section('main')
     <main>
-        @if(!empty($rdf_error))
-            <div class="window-a" style="margin-top: 15px">
-                <div class="header">RDF連携エラー</div>
-                <div class="body">
-                    <p>
-                        SPARQL問い合わせが正常に完了しませんでした。管理者までご連絡ください。
-                        現在表示されている情報は大部分が欠落しています。
-                    </p>
-                    <p style="color: darkred">
-                        @if($rdf_error instanceof \Illuminate\Http\Client\RequestException)
-                            {!! nl2br(strip_tags($rdf_error->getMessage())) !!}
-                        @endif
-                        @if($rdf_error instanceof \Illuminate\Http\Client\ConnectionException)
-                            {!! nl2br(strip_tags($rdf_error->getPrevious()->getHandlerContext()['error'] ?? '')) !!}
-                        @endif
-                    </p>
-                </div>
-            </div>
-        @endif
         <div id="profile">
             <div class="left">
                 <div class="name-plate">
@@ -87,11 +68,14 @@ else {
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:anotherName'], 'th' => '異名・二つ名', 'prefix' => '「', 'suffix' => '」'])
                     @endif
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:garden'] ?? null, 'th' => '所属ガーデン'])
+                    @if(!empty($triples[$ts]['lily:gardenJobTitle']))
+                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:gardenJobTitle'], 'th' => 'ガーデン役職'])
+                    @endif
+                    @if(!empty($triples[$ts]['lily:rank']))
+                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:rank'][0], 'th' => '序列', 'suffix' => '位'])
+                    @endif
                     @if(!empty($triples[$ts]['lily:gardenDepartment']))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:gardenDepartment'], 'th' => '学科'])
-                    @endif
-                    @if(!empty($triples[$ts]['lily:gardenPosition']))
-                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:gardenPosition'], 'th' => 'ガーデン役職'])
                     @endif
                     <?php
                         $legion_name = $triples[$triples[$ts]['lily:legion'][0] ?? 0]['schema:name'][0] ?? null;
