@@ -60,6 +60,25 @@
         <img src="{{ asset('image/home-pic/background.jpg') }}" alt="Background" id="home-pic">
     </div>
     <main>
+        @if(count($birthday) !== 0)
+            <div class="window-a" style="margin-top: 15px;">
+                <div class="header">Happy Birthday!</div>
+                <div class="body">
+                    <p style="text-align: center">
+                        本日
+                        <span style="font-size: large">{{ \Carbon\Carbon::now()->format('n月j日') }}</span>
+                        がお誕生日のリリィがいます！
+                    </p>
+                    <div class="list" style="justify-content: space-around">
+                        @forelse($birthday as $key => $lily)
+                            @include('app.button_lily',['key' => $key, 'lily' => $lily, 'legion' => $legions[$lily['lily:legion'][0]] ?? array()])
+                        @empty
+                            <p style="text-align: center; color: darkred; margin: 3em auto">該当するデータがありません</p>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        @endif
         <h1>Welcome to {{ config('app.name') }}</h1>
         <p>
             {{ config('app.name') }}へようこそ。
