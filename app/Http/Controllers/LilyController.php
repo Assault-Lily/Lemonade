@@ -90,6 +90,8 @@ SPQRQL
         array_multisort($lily_sortKey, $order, SORT_STRING,
             $lily_sortKeyKana, $order, SORT_STRING , $lilies);
 
+        $sortKey = substr(request()->get('order', 'asc'), 0, 1).'-'.$sortKey;
+
         return response()->view('lily.index', compact('lilies', 'legions', 'sortKey'));
     }
 

@@ -351,6 +351,20 @@ button.smaller, .button.smaller{
     margin: 0 5px;
 }
 
+select{
+    outline: none;
+    font-size: inherit;
+    padding: 0 6px;
+    background: whitesmoke;
+    box-shadow: 0 0 3px lightgray, inset 0 0 5px white;
+    border: none;
+    border-radius: 3px;
+    font-family: inherit;
+}
+select > option{
+    text-align: right;
+}
+
 .top-options{
     display: flex;
     justify-content: space-between;
