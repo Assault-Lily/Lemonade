@@ -194,10 +194,28 @@ if(!empty($triples[$triples[$ts]['lily:legion'][0]]['schema:name'][0]))
                         </tr>
                     @endif
                     @if(!empty($triples[$ts]['schema:height'][0]))
-                        @include('app.lilyprofiletable.record',['object' => !empty($triples[$ts]['schema:height'][0]) ? floatval($triples[$ts]['schema:height'][0]) : null, 'th' => '身長', 'suffix' => 'cm'])
+                        <?php
+                        $height = $triples[$ts]['schema:height'][0];
+                        if(floatval($height) === (float)0){
+                            $height_suffix = '';
+                        }else{
+                            $height = floatval($height);
+                            $height_suffix = 'cm';
+                        }
+                        ?>
+                        @include('app.lilyprofiletable.record',['object' => $height, 'th' => '身長', 'suffix' => $height_suffix])
                     @endif
                     @if(!empty($triples[$ts]['schema:weight'][0]))
-                        @include('app.lilyprofiletable.record',['object' => !empty($triples[$ts]['schema:weight'][0]) ? floatval($triples[$ts]['schema:weight'][0]) : null, 'th' => '体重', 'suffix' => 'kg'])
+                        <?php
+                        $weight = $triples[$ts]['schema:weight'][0];
+                        if(floatval($weight) === (float)0){
+                            $weight_suffix = '';
+                        }else{
+                            $weight = floatval($weight);
+                            $weight_suffix = 'cm';
+                        }
+                        ?>
+                        @include('app.lilyprofiletable.record',['object' => $weight, 'th' => '体重', 'suffix' => $weight_suffix])
                     @endif
                     @if(!empty($triples[$ts]['schema:birthPlace'][0]))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['schema:birthPlace'][0] ?? null, 'th' => '出身地'])
