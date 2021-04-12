@@ -4,8 +4,11 @@
     <main>
         <h1>データ一覧</h1>
         <div class="white-box">
+            <p style="color: darkred;text-align: center">
+                現状すべてのリリィのデータはassaultlily-rdfより取得されており、リリィデータをこちらで管理する必要はありません。
+            </p>
             <div class="buttons three">
-                <a href="{{ route('admin.lily.create') }}" class="button primary">新規登録</a>
+                <a href="{{ route('admin.lily.create') }}" class="button">新規登録</a>
             </div>
             <hr>
             <table style="width: 100%; text-align: center;">
