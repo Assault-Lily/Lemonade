@@ -37,7 +37,7 @@
             text-align: center;
         }
         #infos > h1{
-            font-family: 'Noto Serif', serif;
+            font-family: 'Noto Serif JP', serif;
             font-weight: 900;
             font-size: 120px;
             line-height: 125px;
@@ -46,7 +46,7 @@
             color: #261616;
         }
         #infos > #subline{
-            font-family: 'Noto Serif', serif;
+            font-family: 'Noto Serif JP', serif;
             font-size: 25px;
             letter-spacing: .2em;
             margin-bottom: 30px;
