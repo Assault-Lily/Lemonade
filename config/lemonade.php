@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '5.1.0 Shonan-kaigan-koen',
+    'version' => '5.2.0 Shonan-kaigan-koen',
 
 
     'mastodon' => [
