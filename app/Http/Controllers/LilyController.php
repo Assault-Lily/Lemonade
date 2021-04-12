@@ -127,6 +127,7 @@ SPQRQL
         $triples_sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?predicate ?object
 WHERE {
@@ -156,6 +157,14 @@ WHERE {
     BIND(?rel as ?subject)
     BIND(?relp as ?predicate)
     BIND(?relo as ?object)
+  }
+  UNION
+  {
+    lilyrdf:$slug schema:sibling/lily:resource ?sib.
+    ?sib ?sibp ?sibo.
+    BIND(?sib as ?subject)
+    BIND(?sibp as ?predicate)
+    BIND(?sibo as ?object)
   }
 }
 SPARQL
