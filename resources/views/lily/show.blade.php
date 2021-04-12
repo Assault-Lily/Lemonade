@@ -196,7 +196,7 @@ if(!empty($triples[$triples[$ts]['lily:legion'][0]]['schema:name'][0]))
                     @if(!empty($triples[$ts]['schema:height'][0]))
                         <?php
                         $height = $triples[$ts]['schema:height'][0];
-                        if(floatval($height) === (float)0){
+                        if(is_numeric($height) === (float)0){
                             $height_suffix = '';
                         }else{
                             $height = floatval($height);
@@ -208,7 +208,7 @@ if(!empty($triples[$triples[$ts]['lily:legion'][0]]['schema:name'][0]))
                     @if(!empty($triples[$ts]['schema:weight'][0]))
                         <?php
                         $weight = $triples[$ts]['schema:weight'][0];
-                        if(floatval($weight) === (float)0){
+                        if(is_numeric($weight) === (float)0){
                             $weight_suffix = '';
                         }else{
                             $weight = floatval($weight);
