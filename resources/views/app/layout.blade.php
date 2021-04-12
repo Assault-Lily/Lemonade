@@ -1,8 +1,12 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
+<?php
+    $title_long = (!empty($titlebar) ? $titlebar.' - ' : (!empty($title) ? $title.' - ' : '')).config('app.name');
+    $desc_default = 'Lemonadeへようこそ。Lemonadeはアサルトリリィ関連情報を取り扱う非公式のファンサイトです。'
+?>
 <head>
     <meta charset="utf-8">
-    <title>{{ (!empty($titlebar) ? $titlebar.' - ' : (!empty($title) ? $title.' - ' : '')).config('app.name') }}</title>
+    <title>{{ $title_long }}</title>
     <link rel="stylesheet" href="{{ asset('css/lemonade.css') }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -10,6 +14,13 @@
     <script src="{{ asset('js/clock.js') }}"></script>
     <script src="{{ asset('js/lemonade.js') }}" defer></script>
     <meta name="viewport" content="width=1340">
+    <meta name="description" content="{{ $ogp['description'] ?? $desc_default }}">
+    <meta property="og:title" content="{{ $title_long }}">
+    <meta property="og:description" content="{{ $ogp['description'] ?? $desc_default }}">
+    <meta property="og:url" content="{{ url()->full() }}">
+    <meta name="twitter:card" content="summary">
+    @if(!empty($ogp['image']))<meta property="og:image" content="{{ $ogp['image'] }}">@endif
+
     @yield('head')
 </head>
 <body {{ !empty($pagetype) ? 'data-pagetype='.$pagetype : '' }}>
