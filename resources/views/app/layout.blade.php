@@ -69,7 +69,7 @@
         @endif
     </div>
     @if(config('app.debug'))
-        <div class="indicator">Debug Mode</div>
+        <div class="indicator">Debug</div>
     @endif
     <hr>
     <nav>
