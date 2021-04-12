@@ -4,6 +4,12 @@
  * @var $legionSlug string
  */
 $ls /* LegionSubject */ = 'lilyrdf:'.$legionSlug;
+
+$ogp['description'] = "レギオン「{$legion[$ls]['schema:name'][0]}".
+    (!empty($legion[$ls]['schema:alternateName'][0]) ?
+        '('.$legion[$ls]['schema:alternateName'][0].')' : '')
+    ."」の情報を閲覧できます。";
+if(!empty($legion[$ls]['lily:numberOfMembers'][0])) $ogp['description'] .= " {$legion[$ls]['lily:numberOfMembers'][0]}人のリリィが所属しています。"
 ?>
 
 @extends('app.layout', [

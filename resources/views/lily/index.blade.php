@@ -1,12 +1,12 @@
-@extends('app.layout', ['page-type' => 'back-triangle', 'title' => 'リリィ一覧'])
-
 <?php
     /**
      * @var $lilies array
      * @var $legions array
      * @var $lily array
      */
+    $ogp['description'] = "リリィの一覧を表示します。現在".count($lilies)."のリリィが登録されています。";
 ?>
+@extends('app.layout', ['page-type' => 'back-triangle', 'title' => 'リリィ一覧', 'ogp' => $ogp])
 
 @section('head')
     <script type="application/javascript">
