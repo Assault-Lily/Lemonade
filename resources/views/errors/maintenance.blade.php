@@ -38,7 +38,7 @@
         }
         #infos > h1{
             font-family: 'Noto Serif JP', serif;
-            font-weight: 900;
+            font-weight: 700;
             font-size: 120px;
             line-height: 125px;
             margin: 0;
@@ -87,7 +87,7 @@
 <div id="infos-wrap">
     <div id="infos">
         <h1>{{ config('app.name', 'Lemonade') }}</h1>
-        <div id="subline">AssaultLily Unofficial Database</div>
+        <div id="subline">AssaultLily Unofficial FanSite</div>
         <p>
             ただいまメンテナンス中です。メンテナンスの詳細はMastodonか開発者からのお知らせをご確認ください。
         </p>
