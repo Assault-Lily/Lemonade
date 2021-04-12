@@ -126,21 +126,6 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                     @if(!empty($triples[$ts]['lily:position']))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:position'], 'th' => 'ポジション'])
                     @endif
-                    @if(!empty($triples[$ts]['lily:schutzengel'][0]))
-                        @include('app.lilyprofiletable.partner', ['partner' => $triples[$ts]['lily:schutzengel'][0], 'partner_data' => $triples[$triples[$ts]['lily:schutzengel'][0]], 'th' => 'シュッツエンゲル'])
-                    @endif
-                    @if(!empty($triples[$ts]['lily:pastSchutzengel'][0]))
-                        @include('app.lilyprofiletable.partner', ['partner' => $triples[$ts]['lily:pastSchutzengel'][0], 'partner_data' => $triples[$triples[$ts]['lily:pastSchutzengel'][0]], 'th' => '過去のシュッツエンゲル'])
-                    @endif
-                    @if(!empty($triples[$ts]['lily:schild'][0]))
-                        @include('app.lilyprofiletable.partner', ['partner' => $triples[$ts]['lily:schild'][0], 'partner_data' => $triples[$triples[$ts]['lily:schild'][0]], 'th' => 'シルト'])
-                    @endif
-                    @if(!empty($triples[$ts]['lily:pastSchild'][0]))
-                        @include('app.lilyprofiletable.partner', ['partner' => $triples[$ts]['lily:pastSchild'][0], 'partner_data' => $triples[$triples[$ts]['lily:pastSchild'][0]], 'th' => '過去のシルト'])
-                    @endif
-                    @if(!empty($triples[$ts]['lily:roomMate'][0]))
-                        @include('app.lilyprofiletable.partner', ['partner' => $triples[$ts]['lily:roomMate'][0], 'partner_data' => $triples[$triples[$ts]['lily:roomMate'][0]], 'th' => 'ルームメイト'])
-                    @endif
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:favorite'] ?? null, 'th' => '好きなもの'])
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:notGood'] ?? null, 'th' => '苦手なもの'])
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:hobby_talent'] ?? null, 'th' => '特技・趣味', 'multiline' => true])
@@ -296,18 +281,52 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                         @endif
                     </div>
                 </div>
-                @if(!empty($triples[$ts]['lily:relationship']))
+                    <?php
+                    $relationship = array();
+                    $directRel = [ // 中間ノードのない関係
+                        'lily:schutzengel' => 'シュッツエンゲル',
+                        'lily:pastSchutzengel' => '過去のシュッツエンゲル',
+                        'lily:olderSchwester' => 'シュベスター(姉)',
+                        'lily:youngerSchwester' => 'シュベスター(妹)',
+                        'lily:schild' => 'シルト',
+                        'lily:pastSchild' => '過去のシルト',
+                        'lily:roomMate' => 'ルームメイト',
+                    ];
+                    $IntermediateRel = [ // 中間ノードのある関係
+                        'schema:sibling',
+                        'lily:relationship',
+                    ];
+                    // 疑似中間ノードの生成とキー配列への追加
+                    foreach ($directRel as $key => $psr){
+                        $count = 0;
+                        foreach ($triples[$ts][$key] ?? array() as $psrLily){
+                            $triples[$key.'-'.$count] = [
+                                'lily:resource' => [ $psrLily ],
+                                'lily:additionalInformation' => [ $psr ],
+                            ];
+                            $relationship[] = $key.'-'.$count;
+                            $count++;
+                        }
+                    }
+                    // キー配列のマージ
+                    foreach ($IntermediateRel as $predicate){
+                        if(!empty($triples[$ts][$predicate]))
+                            $relationship = array_merge_recursive($relationship, $triples[$ts][$predicate]);
+                    }
+                    ?>
+                @if(!empty($relationship))
                     <div>
-                        <h3 title="左記以外(シュッツエンゲル、ルームメイトなど以外)で関連するリリィについて列挙しています">
-                            関係のある人物</h3>
+                        <h3>関連する人物</h3>
                         <div class="list" >
-                            @foreach($triples[$ts]['lily:relationship'] as $rel)
+                            @foreach($relationship as $rel)
                                 <?php /** @var $rel string */ $key = $triples[$rel]['lily:resource'][0]; ?>
                                 <a href="{{ route('lily.show', ['lily' => str_replace('lilyrdf:','',$triples[$rel]['lily:resource'][0])]) }}"
                                    class="list-item-a" style="width: 48%">
                                     <div class="list-item-data">
                                         <div class="title" style="font-size: 17px">{{ $triples[$key]['schema:name'][0] ?? '' }}</div>
-                                        <div>{{ $triples[$rel]['lily:additionalInformation'][0] ?? '' }}</div>
+                                        @foreach($triples[$rel]['lily:additionalInformation'] ?? array() as $info)
+                                        <div>{{ $info ?? '' }}</div>
+                                        @endforeach
                                     </div>
                                 </a>
                             @endforeach
