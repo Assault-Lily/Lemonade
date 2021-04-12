@@ -16,9 +16,13 @@ else {
 }
 
 $ogp['description'] = "リリィ「{$triples[$ts]['schema:name'][0]}」のプロフィールを閲覧できます。";
-if(!empty($triples[$ts]['lily:garden'][0])) $ogp['description'] .= $triples[$ts]['lily:garden'][0].' '.
-    ($triples[$ts]['lily:gardenDepartment'][0] ?? '');
-if(!empty($triples[$ts]['lily:grade'][0]))  $ogp['description'] .= $triples[$ts]['lily:grade'][0].'年生 ';
+if(!empty($triples[$ts]['lily:garden'][0])){
+    $ogp['description'] .= $triples[$ts]['lily:garden'][0].
+        ($triples[$ts]['lily:gardenDepartment'][0] ?? '');
+    if(!empty($triples[$ts]['lily:grade'][0])) $ogp['description'] .= $triples[$ts]['lily:grade'][0].'年生です。';
+    else $ogp['description'] .= 'のリリィです。';
+}
+
 if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lily:legion'][0]]['schema:name'][0]))
     $ogp['description'] .= "レギオン「{$triples[$triples[$ts]['lily:legion'][0]]['schema:name'][0]}".
         (!empty($triples[$triples[$ts]['lily:legion'][0]]['schema:alternateName'][0]) ?
