@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lily;
 use App\Models\Triple;
 use Auth;
-use DateTime;
 use Http;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request;
 use Log;
 use Sarhan\Flatten\Flatten;
@@ -19,12 +19,10 @@ class TripleDataController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(Request $request)
     {
-        $triples = null;
-
         if($request->get('trashed')){
             switch ($request->get('trashed')){
                 case 'contain':
@@ -40,16 +38,12 @@ class TripleDataController extends Controller
             $from = Triple::select();
         }
 
-        if(!empty($request->get('lily_id'))){
-            try {
-                $lily = Lily::findOrFail($request->get('lily_id'));
-                $triples = $from->where('lily_id','=',$lily->id)->with('lily')->get();
-            }catch (ModelNotFoundException $e){
-                abort(400, '指定されたリリィのレコードが存在しません');
-            }
+        if(!empty($request->get('lily_slug'))){
+            $lily = $request->get('lily_slug');
+            $triples = $from->where('lily_slug','=',$lily)->get();
         }else{
-            $triples = $from->with('lily')->get();
             $lily = null;
+            $triples = $from->get();
         }
 
         return view('admin.triple.index', compact('triples', 'lily'));
@@ -59,25 +53,40 @@ class TripleDataController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create(Request $request)
     {
-        if(!empty($request->get('lily_id'))){
-            try {
-                $args = [
-                    'lily' => Lily::findOrFail($request->get('lily_id'))
-                ];
-                $lilies = [];
-            }catch (ModelNotFoundException $e){
-                abort(404, '指定されたリリィのレコードが存在しません');
-            }
+        if(!empty($request->get('lily_slug'))){
+            $args = [
+                'lily' => $request->get('lily_slug')
+            ];
         }else{
             $args = [
                 'predicate' => $request->get('predicate'),
                 'object'    => $request->get('object')
             ];
-            $lilies = Lily::orderBy('id')->get();
+        }
+
+        try {
+            $lilies_sparql = sparqlQuery(<<<SPARQL
+PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?subject ?name
+WHERE {
+  ?subject a lily:Lily;
+           schema:name ?name.
+  FILTER(lang(?name) = 'ja')
+}
+SPARQL
+            );
+            $lilies = array();
+            foreach ($lilies_sparql->results->bindings as $record){
+                $lilies[str_replace('lilyrdf:','',$record->subject->value)] = $record->name->value;
+            }
+        } catch (ConnectionException | RequestException $e) {
+            $lilies = array();
         }
 
         $flatten = new Flatten();
@@ -188,7 +197,7 @@ class TripleDataController extends Controller
         }catch(ModelNotFoundException $e){
             abort(404, '指定されたトリプルが存在しません');
         }
-        if ($triple->lily_id != $request->lily_id){
+        if ($triple->lily_slug != $request->lily_slug){
             abort(400, '紐付けるリリィが異なります');
         }
 
@@ -220,8 +229,9 @@ class TripleDataController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function destroy($id)
     {
@@ -253,11 +263,11 @@ class TripleDataController extends Controller
             'footer' => [
                 'text' => config('app.name').' Ver'.config('lemonade.version')
             ],
-            'timestamp' => $triple->updated_at->format(DateTime::ISO8601),
+            'timestamp' => $triple->updated_at->format('Y-m-d H:i:s'),
             'fields' => [
                 [
                     'name' => '主語',
-                    'value' => $triple->lily->name,
+                    'value' => $triple->lily_slug,
                     'inline' => true
                 ],
                 [
@@ -275,9 +285,8 @@ class TripleDataController extends Controller
 
     protected function generateLogText(Triple $triple)
     {
-        return '主語　 : '.$triple->lily->name.' ('.route('admin.triple.show',['triple' => $triple->id]).')'.PHP_EOL
+        return '主語　 : '.$triple->lily_slug.' ('.route('admin.triple.show',['triple' => $triple->id]).')'.PHP_EOL
             .'述語　 : '.$triple->predicate.PHP_EOL
-            .'目的語 : '.$triple->object.PHP_EOL
-            .'スポイラーフラグ : '.($triple->spoiler ? 'True' : 'False');
+            .'目的語 : '.$triple->object.PHP_EOL;
     }
 }

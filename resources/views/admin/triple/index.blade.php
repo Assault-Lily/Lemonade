@@ -3,7 +3,6 @@
 <?php
     /**
      * @var $triple \App\Models\Triple
-     * @var $lily \App\Models\Lily
      */
 ?>
 
@@ -18,19 +17,19 @@
 
 @section('main')
     <main>
-        <h1>トリプルデータ参照</h1>
+        <h1>独自トリプル参照</h1>
         <div class="white-box">
             @if(!empty($lily))
                 <p style="text-align: center; color: darkred;">
-                    {{ $lily->name }} (ID: {{ $lily->id }}) のトリプルに絞り込まれています。
+                    主語が {{ $lily }} のトリプルに絞り込まれています。
                     <a href="{{ url()->current() }}" class="button smaller">全件表示</a>
                 </p>
                 <div class="buttons three">
-                    <a href="{{ route('admin.triple.create',['lily_id' => $lily->id]) }}" class="button">
-                        トリプル新規登録 ({{ $lily->name }})
+                    <a href="{{ route('admin.triple.create',['lily_slug' => $lily]) }}" class="button">
+                        トリプル新規登録 ({{ $lily }})
                     </a>
-                    <a href="{{ route('admin.triple.index',['lily_id' => $lily->id, 'trashed' => 'contain']) }}" class="button">削除済みトリプルも表示</a>
-                    <a href="{{ route('admin.triple.index',['lily_id' => $lily->id, 'trashed' => 'only']) }}" class="button">削除済みトリプルのみ表示</a>
+                    <a href="{{ route('admin.triple.index',['lily_slug' => $lily, 'trashed' => 'contain']) }}" class="button">削除済みトリプルも表示</a>
+                    <a href="{{ route('admin.triple.index',['lily_slug' => $lily, 'trashed' => 'only']) }}" class="button">削除済みトリプルのみ表示</a>
                 </div>
             @else
                 <div class="buttons three">
@@ -58,7 +57,7 @@
                     ?>
                     <tr @if($triple->trashed()) style="font-style: italic;" @endif>
                         <td>{{ $triple->id }}</td>
-                        <td>{{ $triple->lily->name }}</td>
+                        <td>{{ $triple->lily_slug }}</td>
                         <td>{{ !empty($predicate) ? $predicate.' ('.$triple->predicate.')' : $triple->predicate }}</td>
                         <td>{{ $triple->object }}</td>
                         <td>{{ $triple->updated_at }}@if($triple->trashed()) (削除済み)@endif</td>

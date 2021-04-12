@@ -22,14 +22,13 @@
             @if(!empty($args['lily']))
                 <p>
                     リリィIDが既に指定されています。
-                    このトリプルは <span style="font-size: large; font-weight: bold">{{ $args['lily']->name }}</span> に紐付けられます。
+                    このトリプルは <span style="font-size: large; font-weight: bold">{{ $args['lily'] }}</span> に紐付けられます。
                 </p>
             @else
-                <p>トリプルはリリィ基本データに紐付けられます。先にリリィ基本データがデータベースに存在する必要があります。</p>
+                <p>
+                    トリプルは指定されたスラッグを基に紐付けられます。<br>
+                    先にリリィのデータがassaultlily-rdf上に存在するか、あるいは独自リリィとして存在するか確認してください。</p>
             @endif
-            <div class="buttons three">
-                <a href="{{ route('admin.lily.index') }}" class="button">リリィ一覧</a>
-            </div>
             <hr>
             <form action="{{ route('admin.triple.store') }}" method="post">
                 @csrf
@@ -37,15 +36,10 @@
                     <label>
                         主語(リリィスラッグ)
                         <input type="text" name="lily" list="lilies" required
-                               @if(!empty($args['lily']))value="{{ $args['lily']->slug }}" readonly @else value="{{ old('lily') }}" @endif>
+                               @if(!empty($args['lily']))value="{{ $args['lily'] }}" readonly @else value="{{ old('lily') }}" @endif>
                         <datalist id="lilies">
-                            <?php
-                            /**
-                             * @var $lily \App\Models\Lily
-                             */
-                            ?>
-                            @foreach($lilies as $lily)
-                                <option value="{{ $lily->slug }}">{{ $lily->name }}</option>
+                            @foreach($lilies as $key => $lily)
+                                <option value="{{ $key }}">{{ $lily }}</option>
                             @endforeach
                         </datalist>
                     </label>

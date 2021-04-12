@@ -27,15 +27,14 @@
             <h1>トリプル参照・編集</h1>
             <div class="white-box" style="text-align: center">
                 <p>
-                    このトリプルは 主語 <span style="font-size: large; font-weight: bold">{{ $triple->lily->name }}</span> に
+                    このトリプルは 主語 <span style="font-size: large; font-weight: bold">{{ $triple->lily_slug }}</span> に
                     述語 <span style="font-size: large; font-weight: bold">{{ config('triplePredicate.'.$triple->predicate) }}</span>
                     として紐付けられています。
                 </p>
                 <p>作成 : {{ $triple->created_at }}<br>更新 : {{ $triple->updated_at }}</p>
                 <div class="buttons three">
-                    <a href="{{ route('admin.lily.show',['lily' => $triple->lily->id]) }}" class="button">リリィデータ参照</a>
-                    <a href="{{ route('admin.triple.index',['lily_id' => $triple->lily->id]) }}" class="button">トリプル絞り込み参照</a>
-                    <a href="{{ route('admin.triple.create',['lily_id' => $triple->lily->id]) }}" class="button">編集ではなく新規作成する</a>
+                    <a href="{{ route('admin.triple.index',['lily_slug' => $triple->lily_slug]) }}" class="button">トリプル絞り込み参照</a>
+                    <a href="{{ route('admin.triple.create',['lily_slug' => $triple->lily_slug]) }}" class="button">編集ではなく新規作成する</a>
                     <a href="{{ route('admin.triple.create',['predicate' => $triple->predicate, 'object' => $triple->object]) }}" class="button">このトリプルを別のリリィにコピーする</a>
                 </div>
                 <hr>
@@ -45,7 +44,7 @@
                     <div id="triple">
                         <label>
                             主語(リリィID)
-                            <input type="text" name="lily_slug" required value="{{ $triple->lily->slug }}" readonly>
+                            <input type="text" name="lily_slug" required value="{{ $triple->lily_slug }}" readonly>
                         </label>
                         <label>
                             述語
@@ -81,7 +80,7 @@
                     </p>
                     <hr>
                     <div class="buttons">
-                        <a href="{{ route('admin.triple.index',['lily_id' => $triple->lily->id]) }}" class="button">一覧に戻る</a>
+                        <a href="{{ route('admin.triple.index',['lily_slug' => $triple->lily_slug]) }}" class="button">一覧に戻る</a>
                         <a href="{{ route('admin.triple.index') }}" class="button">全一覧に戻る</a>
                         <input type="reset" class="button" value="初期化">
                         <input type="submit" class="button primary" value="更新実行">
