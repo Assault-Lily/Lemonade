@@ -1,0 +1,24 @@
+version: '3'
+services:
+    app:
+        build: .
+        links:
+          - mysql
+        depends_on:
+          - mysql
+        volumes:
+          - .:/var/www/html
+        ports:
+          - "8000:8000"
+    mysql:
+        image: mysql:5.7
+        environment:
+          MYSQL_DATABASE: lemonade-docker
+          MYSQL_USER: user
+          MYSQL_PASSWORD: lemonade-user
+          MYSQL_ROOT_PASSWORD: lemonade-root
+        volumes:
+          - mysql-data:/var/lib/mysql
+volumes:
+  mysql-data:
+    driver: local
