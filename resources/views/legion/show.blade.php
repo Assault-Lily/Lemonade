@@ -59,7 +59,7 @@ if(!empty($legion[$ls]['lily:numberOfMembers'][0])) $ogp['description'] .= " {$l
                             ?>
                             <a class="list-item-a" href="{{ route('lily.show',['lily' => $memberSlug]) }}" title="{{ $legion[$member]['schema:name'][0] }}">
                                 <div class="list-item-image">
-                                    @if(!empty($legion[$member]['lily:legionJobTitle'][0]))
+                                    @if(!empty($legion[$member]['lily:legionJobTitle'][0]) and ($legion[$ls]['lily:disbanded'][0] ?? 'false') !== 'true')
                                         <div class="jobTitle">{{ $legion[$member]['lily:legionJobTitle'][0] }}</div>
                                     @endif
                                     <div style="color: {{ empty($legion[$member]['lily:color'][0]) ? 'transparent' : '#'.$legion[$member]['lily:color'][0] }};
