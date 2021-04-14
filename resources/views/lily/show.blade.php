@@ -200,7 +200,7 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                             $weight_suffix = '';
                         }else{
                             $weight = floatval($weight);
-                            $weight_suffix = 'cm';
+                            $weight_suffix = 'kg';
                         }
                         ?>
                         @include('app.lilyprofiletable.record',['object' => $weight, 'th' => '体重', 'suffix' => $weight_suffix])
