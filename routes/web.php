@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [InfoController::class, 'index']);
 
+Route::get('/menu', [InfoController::class, 'menu']);
+
 Route::resource('/lily', LilyController::class, ['only' => ['index','show']]);
 Route::resource('/legion', LegionController::class, ['only' => ['index', 'show']]);
 

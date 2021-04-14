@@ -47,14 +47,15 @@
 
         <hr>
         <div id="system-info">
-            {{ config('app.name').' Ver'.config('lemonade.version','') }}
+            {{ config('app.name').' Ver'.explode(' ',config('lemonade.version',''))[0] }}
+            <div style="font-size: 12px">{{ explode(' ',config('lemonade.version',''), 2)[1] }}</div>
         </div>
         <hr>
         @if(Auth::check())
             <a href="{{ route('admin.dashboard') }}" id="user-auth">
                 <i class="fas fa-user-check"></i>
                 <div style="display: inline-block">
-                    {{ Auth::user()->name ?? 'Authed' }}
+                    Admin : {{ Auth::user()->name ?? 'Authed' }}
                     <div style="font-size: 12px">{{ Auth::user()->email }}</div>
                 </div>
             </a>
@@ -76,6 +77,7 @@
         <a href="{{ url('/') }}"><i class="fas fa-home"></i>Top</a>
         <a href="{{ url('/lily') }}"><i class="fas fa-address-book"></i>Lily</a>
         <a href="{{ url('/legion') }}"><i class="fas fa-users"></i>Legion</a>
+        <a href="{{ url('/menu') }}"><i class="fas fa-bars"></i>Menu</a>
     </nav>
 </header>
 

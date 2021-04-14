@@ -58,6 +58,10 @@ SPARQL
         return view('main.home', compact('rdf_feed', 'birthday', 'legions'));
     }
 
+    public function menu(){
+        return view('main.menu');
+    }
+
     public function ed403(){
         abort(403);
     }
