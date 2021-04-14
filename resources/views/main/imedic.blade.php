@@ -11,7 +11,7 @@
             <div class="buttons three">
                 <a href="{{ url()->current().'?format=txt' }}" download="assaultlily-dic.txt"
                    class="button primary" target="_self">ダウンロード</a>
-                <a href="{{ url()->current().'?format=zip' }}" download="assaultlily-dic.txt"
+                <a href="{{ url()->current().'?format=zip' }}" download="assaultlily-dic.zip"
                    class="button" target="_self">ダウンロード (Gboard向けZIP)</a>
             </div>
             <hr>
