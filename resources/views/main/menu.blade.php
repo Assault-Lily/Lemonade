@@ -16,6 +16,11 @@
             <a href="{{ route('legion.index') }}" class="button">レギオン一覧</a>
         </div>
 
+        <h2>プチ機能</h2>
+        <div class="buttons three">
+            <a href="{{ '/imedic' }}" class="button">アサルトリリィIME辞書生成</a>
+        </div>
+
         <h2>このウェブサイトについて</h2>
         <div class="buttons three">
             <a href="{{ config('lemonade.mastodon.server').'/'.config('lemonade.mastodon.account') }}" class="button" target="_blank">

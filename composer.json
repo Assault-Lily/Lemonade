@@ -16,7 +16,8 @@
         "sarhan/php-flatten": "^4.0",
         "ext-simplexml": "*",
         "ext-libxml": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+      "ext-zip": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

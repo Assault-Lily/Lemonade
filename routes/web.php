@@ -24,6 +24,8 @@ Route::get('/', [InfoController::class, 'index']);
 
 Route::get('/menu', [InfoController::class, 'menu']);
 
+Route::get('/imedic', [InfoController::class, 'generateImeDic']);
+
 Route::resource('/lily', LilyController::class, ['only' => ['index','show']]);
 Route::resource('/legion', LegionController::class, ['only' => ['index', 'show']]);
 
