@@ -111,6 +111,12 @@ SPARQL
             ]);
         }
 
+        if(request()->get('format','') === 'txt-sjis'){
+            return response(mb_convert_encoding($dicString, 'SJIS'))->withHeaders([
+                'Content-Type' => 'text/plain;charset=shift_jis'
+            ]);
+        }
+
         if(request()->get('format','') === 'zip'){
             $name = tempnam(sys_get_temp_dir(), 'AL_');
             $zip = new ZipArchive();
