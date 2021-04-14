@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '5.4.0-RC1 Maso is NOT Kame',
+    'version' => '5.4.0 Shonan-kaigan-koen',
 
 
     'mastodon' => [
