@@ -146,8 +146,8 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                             <?php
                             foreach ($triples[$ts]['lily:charm'] ?? array() as $charm){
                                 // CHARM情報が取得できない場合のスキップ
-                                if(empty($triples[$triples[$charm]['lily:resource'][0]]))continue;
-                                $charm_resource = $triples[$triples[$charm]['lily:resource'][0]] ?? array();
+                                if(empty($triples[$charm]['lily:resource'][0]) or empty($triples[$triples[$charm]['lily:resource'][0]]))continue;
+                                $charm_resource = $triples[$triples[$charm]['lily:resource'][0]];
 
                                 // CHARM名の取得と追加情報の付加
                                 $charm_name = ($charm_resource['schema:productID'][0] ?? '').' '.$charm_resource['schema:name'][0];
@@ -167,6 +167,8 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                                         $charm_used_in .= $used_in.', ';
                                     }
                                     $charm_used_in = mb_substr($charm_used_in, 0, mb_strlen($charm_used_in) - 2);
+                                }else{
+                                    $charm_used_in = '';
                                 }
                                 ?><div {!! !empty($charm_used_in) ? 'title="'.$charm_used_in.'"' : '' !!}>{{ $charm_name }}</div><?php
                             }
