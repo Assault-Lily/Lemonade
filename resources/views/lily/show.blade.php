@@ -232,9 +232,18 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                 </div>
             </div>
             <div class="right" style="width: 100%;position: relative">
-                @if(!empty($triples[$ts]['lily:killedIn'][0]))
-                    <div class="KIA">{{ $triples[$ts]['lily:killedIn'][0] }}<br>戦死・殉職者</div>
-                @endif
+                <div id="right-tag">
+                    @if(!empty($triples[$ts]['lily:lifeStatus']) and $triples[$ts]['lily:lifeStatus'][0] === 'dead')
+                        <div class="KIA">故人</div>
+                    @endif
+                    @if(!empty($triples[$ts]['lily:killedIn'][0]))
+                        <div class="KIA">{{ $triples[$ts]['lily:killedIn'][0] }}<br>戦死・殉職者</div>
+                    @endif
+                    @if(!empty($triples[$ts]['lily:isBoosted']) and $triples[$ts]['lily:isBoosted'][0] === 'true')
+                        <div class="boosted">強化リリィ</div>
+                    @endif
+                </div>
+
                 <div id="pics">
                     <div style="text-align: center; padding-top: 130px; color: gray;">
                         <div style="margin-bottom: .4em">Image Unavailable</div>

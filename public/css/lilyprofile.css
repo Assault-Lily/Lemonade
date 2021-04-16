@@ -129,17 +129,28 @@ table#profile-table td.spacer{
     /*height: 100%;*/
 }
 
-.KIA{
+#right-tag{
     position: absolute;
     top: -15px;
     right: -32px;
-    background: linear-gradient(45deg ,#1a202c, #22242b);
-    color: lightgray;
+    min-width: 170px;
+}
+#right-tag > div{
+    margin-bottom: 5px;
+    background: gray;
+    color: white;
     padding: 5px 13px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     text-align: center;
     box-shadow: 2px 0 3px lightgray;
+}
+#right-tag .boosted{
+    background: darkred;
+}
+#right-tag .KIA{
+    background: linear-gradient(45deg ,#1a202c, #22242b);
+    color: lightgray;
 }
 
 #pics{
