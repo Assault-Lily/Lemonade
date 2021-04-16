@@ -175,7 +175,7 @@ SPARQL
 
         $triples_model = Triple::whereLilySlug($slug)->get();
         foreach ($triples_model as $triple){
-            $triples['lilyrdf:'.$slug][$triple->predicate] = $triple->object;
+            $triples['lilyrdf:'.$slug][$triple->predicate][] = $triple->object;
         }
 
         return view('lily.show', compact('triples', 'slug'));
