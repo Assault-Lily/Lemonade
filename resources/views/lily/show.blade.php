@@ -256,7 +256,7 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                     $slug = strtolower($triples[$ts]['schema:givenName@en'][0] ?? '');
 
                     $tweet_search = 'https://twitter.com/search?q=from%3A'.config('lemonade.fumi.twitter').'%20';
-                    $tweet_search .= urlencode($triples[$ts]['schema:givenName'][0] ?? '');
+                    $tweet_search .= urlencode($triples[$ts]['schema:givenName'][0] ?? '').'&f=live';
 
                     if (!empty($triples[$ts]['officialUrls.acus'][0]) && !str_starts_with($triples[$ts]['officialUrls.acus'][0],'http')){
                         $official_urls['acus'] = str_replace('{no}', $triples[$ts]['officialUrls.acus'][0], config('lemonade.officialUrls.acus'));
