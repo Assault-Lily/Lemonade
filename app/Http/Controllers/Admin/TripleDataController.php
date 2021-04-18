@@ -104,7 +104,7 @@ SPARQL
     public function store(Request $request)
     {
         $request->validate([
-            'lily' => ['required', 'exists:lilies,slug'],
+            'lily' => ['required', 'string'],
             'predicate' => ['required', 'string'],
             'object' => ['required', 'string']
         ]);
