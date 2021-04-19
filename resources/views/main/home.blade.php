@@ -101,6 +101,11 @@
                 <span>レギオン一覧</span>
             </a>
             <hr>
+            <a href="{{ route('book.index') }}" >
+                <i class="fas fa-book"></i>
+                <span>書籍一覧</span>
+            </a>
+            <hr>
             <a href="{{ route('imedic') }}" >
                 <i class="fas fa-spell-check"></i>
                 <span>IME辞書生成</span>
