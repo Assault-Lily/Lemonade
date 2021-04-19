@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LilyDataController;
 use App\Http\Controllers\Admin\LilyRdfController;
 use App\Http\Controllers\Admin\TripleDataController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LegionController;
 use App\Http\Controllers\LilyController;
@@ -28,6 +29,7 @@ Route::get('/imedic', [InfoController::class, 'generateImeDic'])->name('imedic')
 
 Route::resource('/lily', LilyController::class, ['only' => ['index','show']]);
 Route::resource('/legion', LegionController::class, ['only' => ['index', 'show']]);
+Route::resource('/book', BookController::class, ['only' => ['index', 'show']]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
     Route::get('/', [AdminController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
