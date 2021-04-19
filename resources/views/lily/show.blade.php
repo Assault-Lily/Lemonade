@@ -75,7 +75,7 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                         </div>
                     </div>
                 </div>
-                <table id="profile-table">
+                <table id="profile-table" class="table">
                     <tbody>
                     @if(!empty($triples[$ts]['lily:anotherName']))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:anotherName'], 'th' => '異名・二つ名', 'prefix' => '「', 'suffix' => '」'])
