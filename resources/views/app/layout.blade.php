@@ -29,7 +29,7 @@
         @if(!empty($previous))
             <a href="{{ url($previous['route'] ?? $previous) }}"><i class="fas fa-chevron-left"></i></a>
         @else
-            <a href="{{ url('/') }}" title="Top"><i class="fas fa-home"></i></a>
+            <a href="javascript:history.back()" title="Top"><i class="fas fa-chevron-left"></i></a>
         @endif
         <h1>
             {{ $title ?? 'Lemonade' }}

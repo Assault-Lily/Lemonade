@@ -1,4 +1,4 @@
-@extends('app.layout', ['pagetype' => 'back-triangle'])
+@extends('app.layout', ['pagetype' => 'back-triangle', 'previous' => url('/')])
 
 @section('head')
     <style>

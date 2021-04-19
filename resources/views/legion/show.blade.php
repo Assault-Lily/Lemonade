@@ -14,8 +14,7 @@ if(!empty($legion[$ls]['lily:numberOfMembers'][0])) $ogp['description'] .= " {$l
 
 @extends('app.layout', [
     'title' => 'レギオン詳細',
-    'titlebar' => $legion[$ls]['schema:name'][0],
-    'previous' => route('legion.index')])
+    'titlebar' => $legion[$ls]['schema:name'][0]])
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/legion.css') }}">

@@ -31,7 +31,7 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
 
 @extends('app.layout',[
     'title' => 'リリィプロフィール', 'titlebar' => $triples[$ts]['schema:name'][0] ,
-    'pagetype' => 'back-triangle', 'previous' => route('lily.index')])
+    'pagetype' => 'back-triangle'])
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/lilyprofile.css') }}">
