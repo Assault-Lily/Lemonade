@@ -472,6 +472,44 @@ select > option{
     text-overflow: ellipsis;
 }
 
+table.table{
+    width: calc(100% + 30px);
+    margin: 10px -15px;
+    font-size: 16px;
+    border-spacing: 15px 6px;
+}
+table.table th{
+    background: linear-gradient(90deg, #70738d, #A7AFC9);
+    color: white;
+    font-weight: normal;
+    padding: 2px 10px 2px 13px;
+    text-align: left;
+    box-shadow: 0 1px 1px #5d6381;
+    position: relative;
+    width: 170px;
+    height: 28px;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+table.table th::before{
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    top: 3px;
+    left: 3px;
+    background: whitesmoke;
+}
+table.table td{
+    border-bottom: dashed 1px gray;
+    padding: 2px 0;
+    vertical-align: top;
+}
+table.table td.spacer{
+    opacity: 0;
+    /*height: 100%;*/
+}
+
 .flash-message{
     position: fixed;
     top: 40vh;
