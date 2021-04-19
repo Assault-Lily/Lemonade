@@ -100,6 +100,11 @@
                 <i class="fas fa-users"></i>
                 <span>レギオン一覧</span>
             </a>
+            <hr>
+            <a href="{{ route('imedic') }}" >
+                <i class="fas fa-spell-check"></i>
+                <span>IME辞書生成</span>
+            </a>
         </div>
         <h2>assaultlily-rdf 更新情報</h2>
         <div class="white-box" id="rdf-updates">
