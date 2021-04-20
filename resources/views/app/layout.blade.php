@@ -23,8 +23,8 @@
 
     @yield('head')
 </head>
-<body {{ !empty($pagetype) ? 'data-pagetype='.$pagetype : '' }}>
-<header>
+<body class="fade-in" {{ !empty($pagetype) ? 'data-pagetype='.$pagetype : '' }}>
+<header class="float-in">
     <div id="title">
         @if(!empty($previous))
             <a href="{{ url($previous['route'] ?? $previous) }}"><i class="fas fa-chevron-left"></i></a>

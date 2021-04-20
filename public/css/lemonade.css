@@ -11,12 +11,14 @@ body{
                       linear-gradient(90deg, rgba(0,0,0,0.05), rgba(0,0,0,0), rgba(0,0,0,0.05));
     background-attachment: fixed;
     background-position: top center;
-    animation: 1s ease fade-in;
 }
 body[data-pagetype="back-triangle"]{
     background-image: repeating-linear-gradient(0deg,  #DEE0EC, #DEE0EC 1px, transparent 2px, transparent 100px),
                       repeating-linear-gradient(90deg, #DEE0EC, #DEE0EC 1px, transparent 2px, transparent 100px),
                       linear-gradient(115deg, #E4E7EE, #E4E7EE 30%, transparent 30%, transparent);
+}
+body.fade-in {
+    animation: 1s ease fade-in;
 }
 body.hide{
     animation: .3s ease-in fade-out forwards;
@@ -52,8 +54,10 @@ header{
     overflow: hidden;
     box-shadow: 0 0 3px darkgray;
     cursor: default;
-    animation: .8s ease-out header-float-in;
     z-index: 100;
+}
+header.float-in{
+    animation: .8s ease-out header-float-in;
 }
 header > div#title{
     font-size: 25px;
