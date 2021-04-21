@@ -1,4 +1,5 @@
 <?php
+$ogp['title'] = "IME辞書生成";
 $ogp['description'] = "アサルトリリィのIME辞書を生成します。Google日本語入力他様々なIMEでご利用いただけます。";
 ?>
 

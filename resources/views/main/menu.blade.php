@@ -1,3 +1,7 @@
+<?php
+$ogp['title'] = "サイトメニュー";
+?>
+
 @extends('app.layout', ['title' => 'メニュー'])
 
 @section('head')

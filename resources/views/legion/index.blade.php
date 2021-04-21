@@ -3,6 +3,7 @@
  * @var $legions array
  */
 
+$ogp['title'] = "レギオン一覧";
 $ogp['description'] = "レギオンの一覧を表示します。現在".count($legions)."のレギオンが登録されています。";
 ?>
 @extends('app.layout', ['title' => 'レギオン一覧'])

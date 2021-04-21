@@ -15,6 +15,7 @@ else {
     $color_rgba = 'rgba('.$r.','.$g.','.$b.',0.6)';
 }
 
+$ogp['title'] = $triples[$ts]['schema:name'][0];
 $ogp['description'] = "リリィ「{$triples[$ts]['schema:name'][0]}」のプロフィールを閲覧できます。";
 if(!empty($triples[$ts]['lily:garden'][0])){
     $ogp['description'] .= $triples[$ts]['lily:garden'][0].
