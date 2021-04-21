@@ -26,9 +26,10 @@
                         order = false;
                 }
                 let sort = e.target.value.substr(2);
-                let next = '{{ route('lily.index') }}?sort='+sort;
-                if(order !== false) next = next.concat('&order='+order);
-                location.href = next;
+                let url = new URL(location.href);
+                url.searchParams.set('sort',sort);
+                if(order !== false) url.searchParams.set('order',order);
+                location.href = url.toString();
             });
         });
     </script>
