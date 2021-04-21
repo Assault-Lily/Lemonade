@@ -1,4 +1,4 @@
-@extends('app.layout', ['pagetype' => 'back-triangle', 'previous' => url('/')])
+@extends('app.layout', ['pagetype' => 'back-triangle', 'previous' => ['route' => url('/'), 'fa' => 'fas fa-home']])
 
 @section('head')
     <style>

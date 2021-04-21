@@ -27,7 +27,7 @@
 <header class="float-in">
     <div id="title">
         @if(!empty($previous))
-            <a href="{{ url($previous['route'] ?? $previous) }}"><i class="fas fa-chevron-left"></i></a>
+            <a href="{{ url($previous['route'] ?? $previous) }}"><i class="{{ $previous['fa'] ?? 'fas fa-chevron-left' }}"></i></a>
         @else
             <a href="javascript:history.back()" title="Top"><i class="fas fa-chevron-left"></i></a>
         @endif
