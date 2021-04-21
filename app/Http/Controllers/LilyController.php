@@ -40,6 +40,44 @@ SPQRQL
             }
         }
 
+        // フィルタ判別
+        $filterBy = request()->get('filterBy','');
+        $filterInfo = array();
+        if(!empty($filterBy)){
+            switch ($filterBy){
+                case 'rareSkill':
+                    $filterKey = 'lily:rareSkill';
+                    $filterInfo['key'] = 'レアスキル';
+                    break;
+                case 'age':
+                    $filterKey = 'foaf:age';
+                    $filterInfo['key'] = '年齢';
+                    break;
+                case 'position':
+                    $filterKey = 'lily:position';
+                    $filterInfo['key'] = 'ポジション';
+                    break;
+                case 'garden':
+                    $filterKey = 'lily:garden';
+                    $filterInfo['key'] = 'ガーデン';
+                    break;
+                default:
+                    abort(400, '指定されたキーではフィルタできません');
+            }
+            $filterValue = (string) request()->get('filterValue','');
+            if(empty($filterValue)){
+                abort(400, 'フィルタ値が空です');
+            }else{
+                $filterInfo['value'] = $filterValue;
+                foreach ($lilies as $lilyKey => $lily){
+                    if(empty($lily[$filterKey][0]) || $lily[$filterKey][0] !== $filterValue){
+                        unset($lilies[$lilyKey]);
+                    }
+                }
+                unset($lily);
+            }
+        }
+
         // ソート判別
         $sortKey = request()->get('sort', 'name');
         switch ($sortKey){
@@ -60,6 +98,9 @@ SPQRQL
                 break;
             case 'legion':
                 $sort = 'lily:legion';
+                break;
+            case 'garden':
+                $sort = 'lily:garden';
                 break;
             default:
                 abort(400, '指定されたキーではソートできません');
@@ -92,7 +133,7 @@ SPQRQL
 
         $sortKey = substr(request()->get('order', 'asc'), 0, 1).'-'.$sortKey;
 
-        return response()->view('lily.index', compact('lilies', 'legions', 'sortKey'));
+        return response()->view('lily.index', compact('lilies', 'legions', 'sortKey', 'filterInfo'));
     }
 
     /**
