@@ -16,6 +16,7 @@ else {
 }
 
 $ogp['title'] = $triples[$ts]['schema:name'][0];
+$ogp['type'] = 'lily';
 $ogp['description'] = "リリィ「{$triples[$ts]['schema:name'][0]}」のプロフィールを閲覧できます。";
 if(!empty($triples[$ts]['lily:garden'][0])){
     $ogp['description'] .= $triples[$ts]['lily:garden'][0].
