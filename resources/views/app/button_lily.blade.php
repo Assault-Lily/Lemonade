@@ -6,6 +6,9 @@
  */
 ?><a class="list-item-a" href="{{ route('lily.show',['lily' => str_replace('lilyrdf:','',$key)]) }}" title="{{ $lily['schema:name'][0] }}">
     <div class="list-item-image">
+        @if(!empty($additional['key']) && !empty($lily[$additional['key']]))
+            <div class="additional">{{ implode(',',$lily[$additional['key']]).($additional['suffix'] ?? '') }}</div>
+        @endif
         <div style="color: {{ empty($lily['lily:color'][0]) ? 'transparent' : '#'.$lily['lily:color'][0] }}; font-weight: bold; text-align: right;font-size: 13px;">{{ $lily['lily:color'][0] ?? '' }}</div>
     </div>
     <div class="list-item-data">

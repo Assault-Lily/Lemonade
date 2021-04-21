@@ -31,6 +31,7 @@
                 url.searchParams.set('sort',sort);
                 if(order !== false) url.searchParams.set('order',order);
                 location.href = url.toString();
+                document.getElementsByTagName('body')[0].classList.add('hide');
             });
         });
     </script>
@@ -76,7 +77,7 @@
         <div class="list three">
             @forelse($lilies as $key => $lily)
                 <?php $legion = $legions[$lily['lily:legion'][0] ?? ''] ?? array(); ?>
-                @include('app.button_lily',['key' => $key, 'lily' => $lily, 'legion' => $legion])
+                @include('app.button_lily',['key' => $key, 'lily' => $lily, 'legion' => $legion, 'additional' => $additional])
             @empty
                 <p style="text-align: center; color: darkred; margin: 3em auto">該当するデータがありません</p>
             @endforelse

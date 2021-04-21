@@ -40,6 +40,9 @@ SPQRQL
             }
         }
 
+        // 特殊表示変数初期化
+        $additional = array();
+
         // フィルタ判別
         $filterBy = request()->get('filterBy','');
         $filterInfo = array();
@@ -52,10 +55,17 @@ SPQRQL
                 case 'age':
                     $filterKey = 'foaf:age';
                     $filterInfo['key'] = '年齢';
+                    $additional = [
+                        'key' => $filterKey,
+                        'suffix' => '歳'
+                    ];
                     break;
                 case 'position':
                     $filterKey = 'lily:position';
                     $filterInfo['key'] = 'ポジション';
+                    $additional = [
+                        'key' => $filterKey
+                    ];
                     break;
                 case 'garden':
                     $filterKey = 'lily:garden';
@@ -92,9 +102,16 @@ SPQRQL
                 break;
             case 'age':
                 $sort = 'foaf:age';
+                $additional = [
+                    'key' => $sort,
+                    'suffix' => '歳'
+                ];
                 break;
             case 'position':
                 $sort = 'lily:position';
+                $additional = [
+                    'key' => $sort
+                ];
                 break;
             case 'legion':
                 $sort = 'lily:legion';
@@ -120,7 +137,7 @@ SPQRQL
         // リリィソート用キー配列の作成
         $lily_sortKey = array();
         foreach ($lilies as $lily){
-            $lily_sortKey[] = $lily[$sort][0] ?? '-';
+            $lily_sortKey[] = implode(',' ,$lily[$sort] ?? ['-']);
         }
         unset($lily);
         $lily_sortKeyKana = array();
@@ -133,7 +150,7 @@ SPQRQL
 
         $sortKey = substr(request()->get('order', 'asc'), 0, 1).'-'.$sortKey;
 
-        return response()->view('lily.index', compact('lilies', 'legions', 'sortKey', 'filterInfo'));
+        return response()->view('lily.index', compact('lilies', 'legions', 'sortKey', 'filterInfo', 'additional'));
     }
 
     /**

@@ -475,6 +475,12 @@ select > option{
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.list-item-a > .list-item-image > .additional{
+    background: #4e4e4e;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+}
 
 .list-item-b{
     display: block;
