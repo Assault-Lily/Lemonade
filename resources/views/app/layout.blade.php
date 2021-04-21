@@ -18,8 +18,12 @@
     <meta property="og:title" content="{{ $title_long }}">
     <meta property="og:description" content="{{ $ogp['description'] ?? $desc_default }}">
     <meta property="og:url" content="{{ url()->full() }}">
-    <meta name="twitter:card" content="summary">
-    @if(!empty($ogp['image']))<meta property="og:image" content="{{ $ogp['image'] }}">@endif
+    <meta name="twitter:card" content="summary_large_image">
+    @if(!empty($ogp['image']))
+        <meta property="og:image" content="{{ $ogp['image'] }}">
+    @elseif(!empty($ogp['title']))
+        <meta property="og:image" content="{{ route('ogp',['type' => $ogp['type'] ?? 'other', 'title' => $ogp['title']]) }}">
+    @endif
 
     @yield('head')
 </head>

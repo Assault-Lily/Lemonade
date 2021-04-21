@@ -5,6 +5,7 @@
      * @var $lily array
      */
     $ogp['description'] = "リリィの一覧を表示します。現在".count($lilies)."のリリィが登録されています。";
+    $ogp['title'] = 'リリィ一覧';
 ?>
 @extends('app.layout', ['page-type' => 'back-triangle', 'title' => 'リリィ一覧', 'ogp' => $ogp])
 

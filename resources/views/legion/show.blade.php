@@ -5,6 +5,7 @@
  */
 $ls /* LegionSubject */ = 'lilyrdf:'.$legionSlug;
 
+$ogp['title'] = $legion[$ls]['schema:name'][0];
 $ogp['description'] = "レギオン「{$legion[$ls]['schema:name'][0]}".
     (!empty($legion[$ls]['schema:alternateName'][0]) ?
         '('.$legion[$ls]['schema:alternateName'][0].')' : '')

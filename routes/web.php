@@ -8,6 +8,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LegionController;
 use App\Http\Controllers\LilyController;
+use App\Http\Controllers\OGPController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,10 @@ Route::get('/', [InfoController::class, 'index']);
 Route::get('/menu', [InfoController::class, 'menu'])->name('menu');
 
 Route::get('/imedic', [InfoController::class, 'generateImeDic'])->name('imedic');
+
+Route::middleware('throttle:30,1')->group(function (){
+    Route::get('/ogp/{type}/{title}.jpg', [OGPController::class, 'generate'])->name('ogp');
+});
 
 Route::resource('/lily', LilyController::class, ['only' => ['index','show']]);
 Route::resource('/legion', LegionController::class, ['only' => ['index', 'show']]);

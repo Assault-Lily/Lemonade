@@ -8,16 +8,17 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-simplexml": "*",
+        "ext-zip": "*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "intervention/image": "^2.5",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "sarhan/php-flatten": "^4.0",
-        "ext-simplexml": "*",
-        "ext-libxml": "*",
-        "ext-json": "*",
-      "ext-zip": "*"
+        "sarhan/php-flatten": "^4.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

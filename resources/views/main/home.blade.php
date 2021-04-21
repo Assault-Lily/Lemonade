@@ -1,4 +1,8 @@
-@extends('app.layout', ['pagetype' => 'back-triangle', 'previous' => ['route' => url('/'), 'fa' => 'fas fa-home']])
+<?php
+$ogp['title'] = "アサルトリリィ非公式ファンサイト";
+?>
+
+@extends('app.layout', ['pagetype' => 'back-triangle', 'previous' => ['route' => url('/'), 'fa' => 'fas fa-home'], 'ogp' => $ogp])
 
 @section('head')
     <style>
