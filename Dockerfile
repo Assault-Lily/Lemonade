@@ -8,8 +8,12 @@ apt update \
 git \
 zip \
 unzip \
+libzip-dev \
+libmagickwand-dev \
 vim \
-nano \ 
-&& docker-php-ext-install pdo_mysql
+nano \
+&& pecl install imagick \
+&& docker-php-ext-enable imagick \
+&& docker-php-ext-install pdo_mysql zip
 
 WORKDIR /var/www/html
