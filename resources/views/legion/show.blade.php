@@ -42,6 +42,10 @@ if(!empty($legion[$ls]['lily:numberOfMembers'][0])) $ogp['description'] .= " {$l
         @else
             <div class="more-info">所属数 : 不明</div>
         @endif
+        <div style="margin-left: 20px">
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="ja" data-show-count="false">Tweet</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
     </div>
     <main>
         <?php

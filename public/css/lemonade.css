@@ -541,6 +541,10 @@ table.table td.spacer{
     /*height: 100%;*/
 }
 
+.twitter-share-button{
+    color: transparent;
+}
+
 .flash-message{
     position: fixed;
     top: 40vh;
