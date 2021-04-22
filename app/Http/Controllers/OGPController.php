@@ -24,6 +24,9 @@ class OGPController extends Controller
             case 'legion':
                 $subLine = 'レギオン詳細';
                 break;
+            case 'book':
+                $subLine = '書籍詳細';
+                break;
             case 'other':
                 $subLine = config('app.name');
                 break;

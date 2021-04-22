@@ -1,4 +1,11 @@
-<?php ?>
+<?php
+/**
+ * @var $books array
+ */
+
+$ogp['title'] = '書籍一覧';
+$ogp['description'] = '書籍の一覧を表示します。現在'.count($books).'の書籍が登録されています。'
+?>
 @extends('app.layout', ['title' => '書籍一覧'])
 
 @section('head')

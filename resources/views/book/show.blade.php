@@ -3,6 +3,10 @@
  * @var $book array
  * @var $lilies array
  */
+
+$ogp['title'] = $book['schema:name'][0];
+$ogp['type'] = 'book';
+$ogp['description'] = '書籍「'.$book['schema:name'][0].'」の情報です。';
 ?>
 
 @extends('app.layout', ['title' => '書籍詳細', 'titlebar' => $book['schema:name'][0]])
