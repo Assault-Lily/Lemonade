@@ -33,7 +33,7 @@
         @if(!empty($previous))
             <a href="{{ url($previous['route'] ?? $previous) }}"><i class="{{ $previous['fa'] ?? 'fas fa-chevron-left' }}"></i></a>
         @else
-            <a href="javascript:history.back()" title="Top"><i class="fas fa-chevron-left"></i></a>
+            <a href="javascript:void(0)" title="戻る" id="pageBackButton" target="_self"><i class="fas fa-chevron-left"></i></a>
         @endif
         <h1>
             {{ $title ?? 'Lemonade' }}
