@@ -1,7 +1,7 @@
 // 読み込み中に画面を隠すやつ
 document.querySelectorAll('a:not([target]):not(.sf-dump-toggle)').forEach((el)=>{
     el.addEventListener('click', (e)=>{
-        if(!e.ctrlKey && !e.shiftKey) document.getElementsByTagName('body')[0].classList.add('hide');
+        if(!e.ctrlKey && !e.shiftKey) document.body.classList.add('hide');
     });
 });
 
@@ -41,21 +41,26 @@ const showMessage = (message) => {
     document.body.appendChild(notice);
 }
 
-let pbb = document.getElementById('pageBackButton');
+const getParentDir = (pathname, n) => {
+    return pathname.replace(new RegExp("(?:\\\/+[^\\\/]*){0," + (n || 0) + "}$"), "");
+};
+
+const pbb = document.getElementById('pageBackButton');
 if(pbb !== null){
     document.getElementById('pageBackButton').addEventListener('click',(event)=>{
         event.preventDefault();
         let backed = false;
         window.onbeforeunload = function (){
-            document.getElementsByTagName('body')[0].classList.add('hide');
+            document.body.classList.add('hide');
+            backed = true;
         };
-        if(document.referrer.startsWith(location.protocol+'//'+location.hostname)){ // リファラが自ドメイン
+        if(document.referrer.startsWith(location.origin)){
             history.back();
             setTimeout(()=>{
-                showMessage("これ以上戻れません。上部メニューから別ページに移動できます。");
+                if(!backed) location.href = location.origin + getParentDir(location.pathname, 1);
             }, 200);
         }else{
-            showMessage("戻り先が別オリジンです。このボタンからは戻れません。\n上部メニューから別ページに移動できます。");
+            location.href = location.origin + getParentDir(location.pathname, 1);
         }
     });
 }
