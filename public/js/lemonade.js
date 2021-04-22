@@ -31,27 +31,32 @@ window.addEventListener("pageshow", function(event){
     }
 });
 
-document.getElementById('pageBackButton').addEventListener('click',(event)=>{
-    event.preventDefault();
-    let backed = false;
-    window.onbeforeunload = function (){
-        document.getElementsByTagName('body')[0].classList.add('hide');
-        backed = true;
-    };
-    if(document.referrer.startsWith(location.protocol+'//'+location.hostname)){ // リファラが自ドメイン
-        history.back(); // Void関数だけど試行
-        if(!backed && window.confirm("戻り先がないようです。代わりにトップページに移動しますか？")){
-            location.href = location.protocol+'//'+location.hostname;
+const showMessage = (message) => {
+    document.querySelectorAll('.flash-message').forEach((el) => {
+        el.remove();
+    });
+    let notice = document.createElement('div');
+    notice.classList.add('flash-message');
+    notice.innerText = message;
+    document.body.appendChild(notice);
+}
+
+let pbb = document.getElementById('pageBackButton');
+if(pbb !== null){
+    document.getElementById('pageBackButton').addEventListener('click',(event)=>{
+        event.preventDefault();
+        let backed = false;
+        window.onbeforeunload = function (){
+            document.getElementsByTagName('body')[0].classList.add('hide');
+        };
+        if(document.referrer.startsWith(location.protocol+'//'+location.hostname)){ // リファラが自ドメイン
+            history.back();
+            setTimeout(()=>{
+                showMessage("これ以上戻れません。上部メニューから別ページに移動できます。");
+            }, 200);
+        }else{
+            showMessage("戻り先が別オリジンです。このボタンからは戻れません。\n上部メニューから別ページに移動できます。");
         }
-    }else{
-        document.querySelectorAll('.flash-message').forEach((el) => {
-            el.remove();
-        });
-        let notice = document.createElement('div');
-        notice.classList.add('flash-message');
-        notice.innerText = "戻り先が別オリジンです。戻るにはブラウザの戻るボタンを使用してください。";
-        notice.innerText += "\nページ上部のメニューからトップページなどに移動できます。";
-        document.body.appendChild(notice);
-        console.log('Notice!');
-    }
-});
+    });
+}
+
