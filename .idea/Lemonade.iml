@@ -132,5 +132,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="all" level="application" />
+    <orderEntry type="library" name="dialog-polyfill" level="application" />
   </component>
 </module>
