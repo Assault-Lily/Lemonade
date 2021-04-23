@@ -82,7 +82,7 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                     @if(!empty($triples[$ts]['lily:anotherName']))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:anotherName'], 'th' => '異名・二つ名', 'prefix' => '「', 'suffix' => '」'])
                     @endif
-                    @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:garden'] ?? null, 'th' => '所属ガーデン'])
+                    @include('app.lilyprofiletable.filterRecord',['object' => $triples[$ts]['lily:garden'] ?? null, 'th' => '所属ガーデン', 'key' => 'garden'])
                     @if(!empty($triples[$ts]['lily:gardenJobTitle']))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:gardenJobTitle'], 'th' => 'ガーデン役職'])
                     @endif
@@ -130,17 +130,17 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                         </tr>
                     @endif
                     @if(!empty($triples[$ts]['lily:position']))
-                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:position'], 'th' => 'ポジション'])
+                        @include('app.lilyprofiletable.filterRecord',['object' => $triples[$ts]['lily:position'], 'th' => 'ポジション', 'key' => 'position'])
                     @endif
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:favorite'] ?? null, 'th' => '好きなもの'])
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:notGood'] ?? null, 'th' => '苦手なもの'])
                     @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:hobby_talent'] ?? null, 'th' => '特技・趣味', 'multiline' => true])
-                    @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:rareSkill'] ?? null, 'th' => '所持レアスキル'])
+                    @include('app.lilyprofiletable.filterRecord',['object' => $triples[$ts]['lily:rareSkill'] ?? null, 'th' => '所持レアスキル', 'key' => 'rareSkill'])
                     @if(!empty($triples[$ts]['lily:subSkill']))
-                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:subSkill'] ?? null, 'th' => '所持サブスキル'])
+                        @include('app.lilyprofiletable.filterRecord',['object' => $triples[$ts]['lily:subSkill'] ?? null, 'th' => '所持サブスキル', 'key' => 'subSkill'])
                     @endif
                     @if(!empty($triples[$ts]['lily:boostedSkill']))
-                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:boostedSkill'] ?? null, 'th' => 'ブーステッドスキル'])
+                        @include('app.lilyprofiletable.filterRecord',['object' => $triples[$ts]['lily:boostedSkill'] ?? null, 'th' => 'ブーステッドスキル', 'key' => 'boostedSkill'])
                     @endif
                     <tr>
                         <th>主な使用CHARM</th>
@@ -172,7 +172,7 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                                 }else{
                                     $charm_used_in = '';
                                 }
-                                ?><div {!! !empty($charm_used_in) ? 'title="'.$charm_used_in.'"' : '' !!}>{{ $charm_name }}</div><?php
+                                ?><div {!! !empty($charm_used_in) ? 'title="'.e($charm_used_in).'"' : '' !!}>{{ $charm_name }}</div><?php
                             }
                             ?>
                             @if(count($triples[$ts]['lily:charm'] ?? array()) < 1)
