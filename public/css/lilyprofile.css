@@ -37,6 +37,9 @@
     box-sizing: border-box;
     margin-bottom: 3px;
 }
+.name-plate > .profile > .name.name-long{
+    font-size: 24px;
+}
 .name-plate > .profile > .name::before{
     position: absolute;
     bottom: 4px;

@@ -63,7 +63,7 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                                 <span class="name-y">{{ $triples[$ts]['lily:nameKana'][0] }}</span>
                                 <span class="name-a">{{ $triples[$ts]['schema:name@en'][0] }}</span>
                             </div>
-                            <div class="name" style="font-size: 24px">{{  $triples[$ts]['schema:name'][0]  }}</div>
+                            <div class="name name-long">{{  $triples[$ts]['schema:name'][0]  }}</div>
                         @endif
                         <div class="summary">
                             <div>誕生日 : {{ !empty($triples[$ts]['schema:birthDate'][0]) ?

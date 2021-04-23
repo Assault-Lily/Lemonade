@@ -11,6 +11,9 @@
 .name-plate > .profile > .summary{
     font-size: 15px;
 }
+.name-plate > .profile > .name.name-long{
+    font-size: 22px;
+}
 #profile > .right{
     margin-top: 10px;
 }
