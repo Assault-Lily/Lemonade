@@ -20,6 +20,17 @@ if(!empty($legion[$ls]['lily:numberOfMembers'][0])) $ogp['description'] .= " {$l
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/legion.css') }}">
+    <style>
+        @media screen and (max-width: 500px) and (orientation: portrait){
+            #legion-summary{
+                padding-left: 15px;
+                flex-wrap: wrap;
+            }
+            #legion-other-info{
+                margin-top: 10px;
+            }
+        }
+    </style>
 @endsection
 
 @section('main')
@@ -34,18 +45,21 @@ if(!empty($legion[$ls]['lily:numberOfMembers'][0])) $ogp['description'] .= " {$l
                 @endif
             </div>
         </div>
-        @if(!empty($legion[$ls]['lily:disbanded']) and $legion[$ls]['lily:disbanded'][0] == 'true')
-            <div class="more-info">解散済み</div>
-        @endif
-        @if(!empty($legion[$ls]['lily:numberOfMembers'][0]))
-            <div class="more-info">所属数 : {{ $legion[$ls]['lily:numberOfMembers'][0] }}</div>
-        @else
-            <div class="more-info">所属数 : 不明</div>
-        @endif
-        <div style="margin-left: 20px">
-            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="ja" data-show-count="false">Tweet</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <div id="legion-other-info">
+            @if(!empty($legion[$ls]['lily:disbanded']) and $legion[$ls]['lily:disbanded'][0] == 'true')
+                <div class="more-info">解散済み</div>
+            @endif
+            @if(!empty($legion[$ls]['lily:numberOfMembers'][0]))
+                <div class="more-info">所属数 : {{ $legion[$ls]['lily:numberOfMembers'][0] }}</div>
+            @else
+                <div class="more-info">所属数 : 不明</div>
+            @endif
+            <div style="margin-left: 20px">
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="ja" data-show-count="false">Tweet</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
         </div>
+
     </div>
     <main>
         <?php
