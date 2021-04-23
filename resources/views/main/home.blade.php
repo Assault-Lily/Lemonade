@@ -26,6 +26,10 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
             opacity: 1;
         }
 
+        #rdf-updates{
+            text-align: center
+        }
+
         @media screen and (max-width:500px) and (orientation:portrait){
             #home-pic{
                 max-width: 500px;
@@ -35,6 +39,12 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                 display: none;
             }
 
+            #rdf-updates > table{
+                width: 1200px;
+            }
+            #rdf-updates{
+                overflow-x: scroll;
+            }
             #rdf-updates td{
                 word-break: break-all;
             }
@@ -131,7 +141,7 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
         </div>
         <h2>assaultlily-rdf 更新情報</h2>
         <div class="white-box" id="rdf-updates">
-            <table style="width: 100%; text-align: center">
+            <table>
                 <thead>
                 <tr>
                     <th>日時</th>
