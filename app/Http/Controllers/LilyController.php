@@ -52,6 +52,14 @@ SPQRQL
                     $filterKey = 'lily:rareSkill';
                     $filterInfo['key'] = 'レアスキル';
                     break;
+                case 'subSkill':
+                    $filterKey = 'lily:subSkill';
+                    $filterInfo['key'] = 'サブスキル';
+                    break;
+                case 'boostedSkill':
+                    $filterKey = 'lily:boostedSkill';
+                    $filterInfo['key'] = 'ブーステッドスキル';
+                    break;
                 case 'age':
                     $filterKey = 'foaf:age';
                     $filterInfo['key'] = '年齢';
@@ -80,7 +88,7 @@ SPQRQL
             }else{
                 $filterInfo['value'] = $filterValue;
                 foreach ($lilies as $lilyKey => $lily){
-                    if(empty($lily[$filterKey][0]) || $lily[$filterKey][0] !== $filterValue){
+                    if(empty($lily[$filterKey]) || array_search($filterValue, $lily[$filterKey]) === false){
                         unset($lilies[$lilyKey]);
                     }
                 }
