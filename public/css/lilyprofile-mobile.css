@@ -1,0 +1,27 @@
+#profile{
+    display: block;
+    margin: 5px 0;
+}
+#profile > .left{
+    width: 100%;
+}
+.name-plate > .pic{
+    display: none;
+}
+.name-plate > .profile > .summary{
+    font-size: 15px;
+}
+#profile > .right{
+    margin-top: 10px;
+}
+
+.buttons.two > .button{
+    width: 90%;
+}
+
+#relationship.list{
+    display: block;
+}
+#relationship.list > .list-item-a{
+    width: calc(100% - 6px);
+}

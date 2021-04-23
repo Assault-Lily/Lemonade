@@ -37,13 +37,10 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/lilyprofile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lilyprofile-mobile.css') }}" media="screen and (max-width:500px) and (orientation:portrait)">
     <style>
         #profile{
             background-image: radial-gradient(circle farthest-corner at 90% 100%, {{ $color_rgba }}, transparent 50%, transparent);
-        }
-        .buttons.two > .button{
-            margin: 5px 10px;
-            width: 45%;
         }
     </style>
 @endsection
@@ -344,11 +341,11 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                 @if(!empty($relationship))
                     <div>
                         <h3>関連する人物</h3>
-                        <div class="list" >
+                        <div class="list" id="relationship">
                             @foreach($relationship as $rel)
                                 <?php /** @var $rel string */ $key = $triples[$rel]['lily:resource'][0]; ?>
                                 <a href="{{ route('lily.show', ['lily' => str_replace('lilyrdf:','',$triples[$rel]['lily:resource'][0])]) }}"
-                                   class="list-item-a" style="width: 48%">
+                                   class="list-item-a">
                                     <div class="list-item-data">
                                         <div class="title" style="font-size: 17px">{{ $triples[$key]['schema:name'][0] ?? '' }}</div>
                                         @foreach($triples[$rel]['lily:additionalInformation'] ?? array() as $info)

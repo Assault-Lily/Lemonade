@@ -120,3 +120,12 @@
     background: rgba(0,0,0,0.1);
     margin-bottom: 20px;
 }
+
+.buttons.two > .button{
+    margin: 5px 10px;
+    width: 45%;
+}
+
+#relationship.list > .list-item-a{
+    width: 48%;
+}
