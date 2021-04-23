@@ -69,7 +69,7 @@ $ogp['description'] = '書籍「'.$book['schema:name'][0].'」の情報です。
                      id="thumbnail">
             @else
                 <div id="thumbnail">
-                    <div style="margin-top: 50%">Image Unavailable</div>
+                    <div style="padding-top: 40%">Image Unavailable</div>
                 </div>
             @endif
             <div style="width: 100%">
