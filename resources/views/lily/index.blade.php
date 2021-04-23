@@ -31,10 +31,21 @@
                 url.searchParams.set('sort',sort);
                 if(order !== false) url.searchParams.set('order',order);
                 location.href = url.toString();
-                document.getElementsByTagName('body')[0].classList.add('hide');
+                document.body.classList.add('hide');
             });
             const filterDialog = document.getElementById('filter-setting');
             dialogPolyfill.registerDialog(filterDialog);
+            filterDialog.querySelectorAll('a.button').forEach((el)=>{
+                el.addEventListener('click', ()=>{
+                    filterDialog.close();
+                });
+            });
+            filterDialog.querySelectorAll('form').forEach((el)=>{
+                el.addEventListener('submit', ()=>{
+                    filterDialog.close();
+                    document.body.classList.add('hide');
+                });
+            });
             document.getElementById('filter-setting-open').addEventListener('click',()=>{
                 filterDialog.showModal();
             });
@@ -102,6 +113,9 @@
     <dialog id="filter-setting" class="window-a">
         <div class="header">フィルタ設定</div>
         <div class="body">
+            <p class="center">
+                フィルタ設定を変更するとソートは一旦解除されます。
+            </p>
             <h3>ガーデン</h3>
             <form action="{{ route('lily.index') }}" method="get">
                 <input type="hidden" name="filterBy" value="garden">
