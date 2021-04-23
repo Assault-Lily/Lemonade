@@ -90,6 +90,10 @@
     margin-left: 5px;
     font-size: smaller;
 }
+#legion-other-info{
+    display: flex;
+    align-items: center;
+}
 .more-info{
     background: #8D9FCB;
     box-shadow: 0 3px 0 #C1D1F6;

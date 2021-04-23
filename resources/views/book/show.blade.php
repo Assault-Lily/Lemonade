@@ -13,6 +13,10 @@ $ogp['description'] = '書籍「'.$book['schema:name'][0].'」の情報です。
 
 @section('head')
     <style>
+        #book-summary{
+            display: flex;
+            flex-direction: row-reverse;
+        }
         #thumbnail{
             display: block;
             object-fit: scale-down;
@@ -35,40 +39,72 @@ $ogp['description'] = '書籍「'.$book['schema:name'][0].'」の情報です。
         .list.four > .list-item-a:nth-child(4n){
             margin-right: 0;
         }
+
+        @media screen and (max-width: 500px) and (orientation: portrait) {
+            #book-summary{
+                display: block;
+            }
+            #thumbnail{
+                width: 100%;
+                height: 350px;
+                margin: 10px 0;
+            }
+            .list.four > .list-item-a{
+                width: calc(100% - 6px);
+                margin-right: 0;
+            }
+            th{
+                width: 150px;
+            }
+        }
     </style>
 @endsection
 
 @section('main')
     <main>
         <h1>{{ $book['schema:name'][0] }}</h1>
-        <div id="book-summary" class="white-box" style="display: flex;">
+        <div id="book-summary" class="white-box">
+            @if(!empty($book['book.thumbnail'][0]))
+                <img src="{{ $book['book.thumbnail'][0] }}" alt="{{ $book['book.thumbnail'][0] }}"
+                     id="thumbnail">
+            @else
+                <div id="thumbnail">
+                    <div style="padding-top: 40%">Image Unavailable</div>
+                </div>
+            @endif
             <div style="width: 100%">
                 <table class="table">
                     <tbody>
                     <tr>
                         <th>ジャンル</th><td>{{ $book['lily:genre'][0] }}</td>
-                        <th>発行年月日</th><td>{{ convertDateString($book['schema:datePublished'][0] ?? '')->format('Y年n月j日') ?: 'N/A' }}</td>
                     </tr>
                     <tr>
                         <th>著者</th><td>{{ implode(', ',$book['schema:author'] ?? array()) ?? 'データなし' }}</td>
-                        <th>ページ数</th><td style="width: 130px">{{ $book['schema:numberOfPages'][0] ?? 'N/A' }}</td>
                     </tr>
                     @if(!empty($book['lily:originalAuthor']))
                         <tr>
                             <th>原作者</th>
-                            <td colspan="3">{{ implode(', ',$book['lily:originalAuthor'] ?? array()) }}</td>
+                            <td>{{ implode(', ',$book['lily:originalAuthor'] ?? array()) }}</td>
                         </tr>
                     @endif
                     @if(!empty($book['schema:illustrator']))
                         <tr>
                             <th>イラストレーター</th>
-                            <td colspan="3">{{ implode(', ',$book['schema:illustrator'] ?? array()) }}</td>
+                            <td>{{ implode(', ',$book['schema:illustrator'] ?? array()) }}</td>
                         </tr>
                     @endif
                     @if(!empty($book['schema:publisher']))
                         <tr>
                             <th>出版者</th>
-                            <td colspan="3">{{ implode(', ',$book['schema:publisher'] ?? array()) }}</td>
+                            <td>{{ implode(', ',$book['schema:publisher'] ?? array()) }}</td>
+                        </tr>
+                    @endif
+                    <tr>
+                        <th>発行年月日</th><td>{{ convertDateString($book['schema:datePublished'][0] ?? '')->format('Y年n月j日') ?: 'N/A' }}</td>
+                    </tr>
+                    @if(!empty($book['schema:numberOfPages'][0]))
+                        <tr>
+                            <th>ページ数</th><td style="width: 130px">{{ $book['schema:numberOfPages'][0] ?? 'N/A' }}</td>
                         </tr>
                     @endif
                     @if(!empty($book['schema:isbn']))
@@ -98,14 +134,6 @@ $ogp['description'] = '書籍「'.$book['schema:name'][0].'」の情報です。
                     <p>{!! nl2br(trim($book['schema:abstract'][0] ?? '')) ?: "<span style='color:gray'>あらすじが登録されていません</span>" !!}</p>
                 </div>
             </div>
-            @if(!empty($book['book.thumbnail'][0]))
-                <img src="{{ $book['book.thumbnail'][0] }}" alt="{{ $book['book.thumbnail'][0] }}"
-                     id="thumbnail">
-            @else
-                <div id="thumbnail">
-                    <div style="margin-top: 50%">Image Unavailable</div>
-                </div>
-            @endif
         </div>
         <h2>登場するリリィ</h2>
         <div class="list four">

@@ -10,6 +10,16 @@ $ogp['description'] = "レギオンの一覧を表示します。現在".count($
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/legion.css') }}">
+    <style>
+        @media screen and (max-width: 500px) and (orientation: portrait){
+            #legions{
+                display: block;
+            }
+            .legion{
+                width: 100%;
+            }
+        }
+    </style>
 @endsection
 
 @section('main')

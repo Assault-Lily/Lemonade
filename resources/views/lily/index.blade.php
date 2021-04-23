@@ -57,6 +57,22 @@
             });
         });
     </script>
+    <style>
+        @media screen and (max-width: 500px) and (orientation: portrait) {
+            #position-selector{
+                text-align: center;
+            }
+            #position-selector > .button {
+                min-width: calc((100% / 3) - 25px);
+            }
+            #filter-setting form{
+                text-align: center;
+            }
+            #filter-setting input{
+                margin: 5px;
+            }
+        }
+    </style>
 @endsection
 
 @section('main')
@@ -130,7 +146,7 @@
                 <input type="submit" value="フィルタ" class="button primary">
             </form>
             <h3>ポジション</h3>
-            <div>
+            <div id="position-selector">
                 <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'AZ']) }}" class="button">AZ</a>
                 <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'TZ']) }}" class="button">TZ</a>
                 <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'BZ']) }}" class="button">BZ</a>

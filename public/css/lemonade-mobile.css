@@ -1,0 +1,42 @@
+body, header{
+    width: 500px;
+    min-width: 500px;
+}
+main, footer{
+    width: 480px;
+    min-width: 480px;
+}
+header > #info{
+    display: none;
+    min-width: 480px;
+}
+header > div#title{
+    padding-left: 0;
+    width: 400px;
+}
+header > .indicator{
+    display: none;
+}
+header > nav > a, header > hr{
+    display: none;
+}
+header > nav > a:last-child{
+    display: inline-block;
+}
+
+.top-options{
+    display: block;
+}
+.top-options > div:last-child{
+    margin-top: 10px;
+    text-align: right;
+}
+
+.buttons.three > .button{
+    width: 80%;
+}
+
+.list-item-a{
+    width: calc(100% - 6px);
+    margin-bottom: 10px;
+}

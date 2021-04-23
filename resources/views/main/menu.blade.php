@@ -5,6 +5,16 @@ $ogp['title'] = "サイトメニュー";
 @extends('app.layout', ['title' => 'メニュー'])
 
 @section('head')
+    <style>
+        #top-link{
+            display: none;
+        }
+        @media screen and (max-width: 500px) and (orientation: portrait){
+            #top-link{
+                display: block;
+            }
+        }
+    </style>
 @endsection
 
 @section('main')
@@ -14,6 +24,9 @@ $ogp['title'] = "サイトメニュー";
             <a href="{{ config('lemonade.rdf.repository') }}" target="_blank">assaultlily-rdf</a> と
             {{ config('app.name') }} がお手伝いします。
         </p>
+        <div class="buttons three" id="top-link">
+            <a href="{{ url('/') }}" class="button">トップページ</a>
+        </div>
         <h2>リリィ・レギオンを探す</h2>
         <div class="buttons three">
             <a href="{{ route('lily.index') }}" class="button">リリィ一覧</a>
