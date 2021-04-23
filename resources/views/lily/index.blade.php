@@ -33,6 +33,17 @@
                 location.href = url.toString();
                 document.getElementsByTagName('body')[0].classList.add('hide');
             });
+            const filterDialog = document.getElementById('filter-setting');
+            dialogPolyfill.registerDialog(filterDialog);
+            document.getElementById('filter-setting-open').addEventListener('click',()=>{
+                filterDialog.showModal();
+            });
+            document.getElementById('filter-setting-close').addEventListener('click',()=>{
+                filterDialog.close();
+            });
+            document.getElementById('skill-type').addEventListener('change',(e)=>{
+                document.getElementById('skillName').setAttribute('list', e.target.value);
+            });
         });
     </script>
 @endsection
@@ -61,6 +72,7 @@
                         <option value="d-garden">ガーデン | 降順</option>
                     </select>
                 </label>
+                <button class="button smaller" id="filter-setting-open">フィルタ設定</button>
             </div>
             <div>
                 <span class="info">リリィ登録数{{ !empty($filterInfo) ? '(フィルタ)' : '(全数)' }} : {{ count($lilies) }}人</span>
@@ -86,4 +98,62 @@
             @endif
         </div>
     </main>
+
+    <dialog id="filter-setting" class="window-a">
+        <div class="header">フィルタ設定</div>
+        <div class="body">
+            <h3>ガーデン</h3>
+            <form action="{{ route('lily.index') }}" method="get">
+                <input type="hidden" name="filterBy" value="garden">
+                <label>
+                    <input type="text" name="filterValue" placeholder="ガーデン名" list="gardenList" required>
+                </label>
+                <datalist id="gardenList">
+                    @foreach($datalist['garden'] as $garden)
+                        <option value="{{ $garden }}"></option>
+                    @endforeach
+                </datalist>
+                <input type="submit" value="フィルタ" class="button primary">
+            </form>
+            <h3>ポジション</h3>
+            <div>
+                <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'AZ']) }}" class="button">AZ</a>
+                <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'TZ']) }}" class="button">TZ</a>
+                <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'BZ']) }}" class="button">BZ</a>
+            </div>
+            <h3>スキル</h3>
+            <form action="{{ route('lily.index') }}" method="get">
+                <label>
+                    <select name="filterBy" id="skill-type">
+                        <option value="rareSkill" selected>レアスキル</option>
+                        <option value="subSkill">サブスキル</option>
+                        <option value="boostedSkill">ブーステッドスキル</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="text" name="filterValue" placeholder="スキル名" list="rareSkill" id="skillName" required>
+                </label>
+                <datalist id="rareSkill">
+                    @foreach($datalist['rareSkill'] as $rareSkill)
+                        <option value="{{ $rareSkill }}"></option>
+                    @endforeach
+                </datalist>
+                <datalist id="subSkill">
+                    @foreach($datalist['subSkill'] as $subSkill)
+                        <option value="{{ $subSkill }}"></option>
+                    @endforeach
+                </datalist>
+                <datalist id="boostedSkill">
+                    @foreach($datalist['boostedSkill'] as $boostedSkill)
+                        <option value="{{ $boostedSkill }}"></option>
+                    @endforeach
+                </datalist>
+                <input type="submit" value="フィルタ" class="button primary">
+            </form>
+            <div class="buttons">
+                <a href="{{ route('lily.index') }}" class="button">リセット</a>
+                <button id="filter-setting-close" class="button">閉じる</button>
+            </div>
+        </div>
+    </dialog>
 @endsection

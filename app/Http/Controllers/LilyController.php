@@ -31,14 +31,37 @@ SPQRQL
         $lilies = array();
         $legions = array();
 
+        // フィルタ用データリスト変数初期化
+        $datalist = array();
+
         // レギオンとリリィの振り分け
         foreach ($triples as $key => $triple){
             if($triple['rdf:type'][0] === 'lily:Lily'){
                 $lilies[$key] = $triple;
+
+                // スキルデータリスト生成
+                if(!empty($triple['lily:rareSkill'][0])){
+                    $datalist['rareSkill'][] = $triple['lily:rareSkill'][0];
+                }
+                if(!empty($triple['lily:subSkill'])){
+                    foreach ($triple['lily:subSkill'] as $subSkill)
+                        $datalist['subSkill'][] = $subSkill;
+                }
+                if(!empty($triple['lily:boostedSkill'])){
+                    foreach ($triple['lily:boostedSkill'] as $boostedSkill)
+                        $datalist['boostedSkill'][] = $boostedSkill;
+                }
+                if(!empty($triple['lily:garden'][0])){
+                    $datalist['garden'][] = $triple['lily:garden'][0];
+                }
             }else{
                 $legions[$key] = $triple;
             }
         }
+        $datalist['rareSkill'] = array_unique($datalist['rareSkill']);
+        $datalist['subSkill'] = array_unique($datalist['subSkill']);
+        $datalist['boostedSkill'] = array_unique($datalist['boostedSkill']);
+        $datalist['garden'] = array_unique($datalist['garden']);
 
         // 特殊表示変数初期化
         $additional = array();
@@ -88,6 +111,7 @@ SPQRQL
             }else{
                 $filterInfo['value'] = $filterValue;
                 foreach ($lilies as $lilyKey => $lily){
+                    // フィルタドロップ処理
                     if(empty($lily[$filterKey]) || array_search($filterValue, $lily[$filterKey]) === false){
                         unset($lilies[$lilyKey]);
                     }
@@ -142,23 +166,22 @@ SPQRQL
                 abort(400, '昇順降順指定に誤りがあります');
         }
 
-        // リリィソート用キー配列の作成
         $lily_sortKey = array();
-        foreach ($lilies as $lily){
-            $lily_sortKey[] = implode(',' ,$lily[$sort] ?? ['-']);
-        }
-        unset($lily);
         $lily_sortKeyKana = array();
         foreach ($lilies as $lily){
+            // ソート用キー配列生成
+            $lily_sortKey[] = implode(',' ,$lily[$sort] ?? ['-']);
             $lily_sortKeyKana[] = $lily['lily:nameKana'][0] ?? '-';
         }
+        unset($lily);
         // リリィのソート
         array_multisort($lily_sortKey, $order, SORT_STRING,
             $lily_sortKeyKana, $order, SORT_STRING , $lilies);
 
         $sortKey = substr(request()->get('order', 'asc'), 0, 1).'-'.$sortKey;
 
-        return response()->view('lily.index', compact('lilies', 'legions', 'sortKey', 'filterInfo', 'additional'));
+        return response()->view('lily.index',
+            compact('lilies', 'legions', 'sortKey', 'filterInfo', 'additional', 'datalist'));
     }
 
     /**

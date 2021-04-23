@@ -52,6 +52,19 @@ a[target=_blank]:not(.button):after{
     line-height: 1;
 }
 
+dialog{
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+dialog::backdrop, dialog + .backdrop{
+    background: rgba(255,255,255,.4);
+    backdrop-filter: blur(3px);
+}
+
 template{
     display: none;
 }
@@ -326,6 +339,7 @@ textarea{
     box-shadow: inset 0 0 2px lightgray;
     padding: 5px;
     box-sizing: border-box;
+    font-size: 15px;
 }
 input[type="email"]:focus,
 input[type="password"]:focus,
