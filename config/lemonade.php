@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '6-alpha Branch-Responsive',
+    'version' => '5.10.0 Shonan-kaigan-koen',
 
 
     'mastodon' => [
