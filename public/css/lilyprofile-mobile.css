@@ -22,6 +22,11 @@
     width: 90%;
 }
 
+#right-tag{
+    top: 0;
+    right: -32px;
+}
+
 #relationship.list{
     display: block;
 }
