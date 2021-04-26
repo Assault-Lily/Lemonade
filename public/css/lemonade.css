@@ -485,6 +485,22 @@ select > option{
     margin-right: 10px;
     flex-shrink: 0;
 }
+.list-item-a > .list-item-image > img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: solid 1px #BACBE7;
+    box-sizing: border-box;
+}
+.list-item-a > .list-item-image > div.no-image{
+    height: 60px;
+    background: #87878e;
+    color: lightgray;
+    font-size: 12px;
+    border: solid 1px gray;
+    text-align: center;
+    line-height: 60px;
+}
 .list-item-data{
     width: 100%;
     font-size: 13px;

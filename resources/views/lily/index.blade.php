@@ -3,6 +3,7 @@
      * @var $lilies array
      * @var $legions array
      * @var $lily array
+     * @var $icons array
      */
     $ogp['description'] = "リリィの一覧を表示します。現在".count($lilies)."のリリィが登録されています。";
     $ogp['title'] = 'リリィ一覧';
@@ -115,8 +116,11 @@
         @endif
         <div class="list three">
             @forelse($lilies as $key => $lily)
-                <?php $legion = $legions[$lily['lily:legion'][0] ?? ''] ?? array(); ?>
-                @include('app.button_lily',['key' => $key, 'lily' => $lily, 'legion' => $legion, 'additional' => $additional])
+                <?php /** @var $key string */
+                $legion = $legions[$lily['lily:legion'][0] ?? ''] ?? array();
+                $icon = $icons[$key] ?? array();
+                ?>
+                @include('app.button_lily',['key' => $key, 'lily' => $lily, 'legion' => $legion, 'additional' => $additional, 'icons' => $icon])
             @empty
                 <p style="text-align: center; color: darkred; margin: 3em auto">該当するデータがありません</p>
             @endforelse

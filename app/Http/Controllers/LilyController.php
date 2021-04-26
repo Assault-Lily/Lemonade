@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Triple;
 
 class LilyController extends Controller
@@ -180,8 +181,15 @@ SPQRQL
 
         $sortKey = substr(request()->get('order', 'asc'), 0, 1).'-'.$sortKey;
 
+        // アイコンデータ取得
+        $icons = array();
+        foreach (Image::whereType('icon')->get() as $icon){
+            $icons['lilyrdf:'.$icon->for][] = $icon;
+        }
+
         return response()->view('lily.index',
-            compact('lilies', 'legions', 'sortKey', 'filterInfo', 'additional', 'datalist'));
+            compact('lilies', 'legions', 'sortKey', 'filterInfo', 'additional',
+                'datalist', 'icons'));
     }
 
     /**

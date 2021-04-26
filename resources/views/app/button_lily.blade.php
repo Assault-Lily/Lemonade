@@ -3,11 +3,19 @@
  * @var $lily array
  * @var $key string
  * @var $legion array
+ * @var $icons array
+ * @var $icon App\Models\Image
  */
+$icon = !empty($icons) ? $icons[array_rand($icons)] : null;
 ?><a class="list-item-a" href="{{ route('lily.show',['lily' => str_replace('lilyrdf:','',$key)]) }}" title="{{ $lily['schema:name'][0] }}">
     <div class="list-item-image">
         @if(!empty($additional['key']) && !empty($lily[$additional['key']]))
             <div class="additional">{{ implode(',',$lily[$additional['key']]).($additional['suffix'] ?? '') }}</div>
+        @endif
+        @if(!empty($icon))
+            <img src="{{ $icon->image_url }}" alt="icon">
+            @else
+            <div class="no-image">NoImage</div>
         @endif
         <div style="color: {{ empty($lily['lily:color'][0]) ? 'transparent' : '#'.$lily['lily:color'][0] }}; font-weight: bold; text-align: right;font-size: 13px;">{{ $lily['lily:color'][0] ?? '' }}</div>
     </div>
