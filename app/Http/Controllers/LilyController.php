@@ -275,7 +275,9 @@ SPARQL
             $triples['lilyrdf:'.$slug][$triple->predicate][] = $triple->object;
         }
 
-        return view('lily.show', compact('triples', 'slug'));
+        $icons = Image::whereFor($slug)->where('type','=','icon')->get();
+
+        return view('lily.show', compact('triples', 'slug', 'icons'));
     }
 
     /**

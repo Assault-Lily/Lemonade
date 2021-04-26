@@ -2,6 +2,8 @@
     /**
      * @var $slug string
      * @var $triples array
+     * @var $icons \Illuminate\Database\Eloquent\Collection
+     * @var $icon \App\Models\Image | null
      */
 
 $ts = 'lilyrdf:'.$slug;
@@ -29,6 +31,8 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
     $ogp['description'] .= "レギオン「{$triples[$triples[$ts]['lily:legion'][0]]['schema:name'][0]}".
         (!empty($triples[$triples[$ts]['lily:legion'][0]]['schema:alternateName'][0]) ?
             '('.$triples[$triples[$ts]['lily:legion'][0]]['schema:alternateName'][0].')' : ''). "」に所属しています。";
+
+$icon = !$icons->isEmpty() ? $icons->random() : null;
 ?>
 
 @extends('app.layout',[
@@ -50,7 +54,12 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
         <div id="profile">
             <div class="left">
                 <div class="name-plate">
-                    <div class="pic"></div>
+                    @if(!empty($icon))
+                        <img src="{{ $icon->image_url }}" class="pic" alt="icon"
+                             title="アイコン作者 : {{ $icon->author }} さん">
+                    @else
+                        <div class="pic">NoImage</div>
+                    @endif
                     <div class="profile">
                         @if(empty($triples[$ts]['lily:nameKana'][0]))
                             <div class="name-ruby" style="color: gray">読みデータなし</div>
@@ -235,10 +244,11 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
                         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
                 </div>
-
-                <div>
-
-                </div>
+                @if(!empty($icon))
+                    <div style="font-size: smaller;">
+                        アイコン作者 : {{ $icon->author }} さん
+                    </div>
+                @endif
             </div>
             <div class="right" style="width: 100%;position: relative">
                 <div id="right-tag">

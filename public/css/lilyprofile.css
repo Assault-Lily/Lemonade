@@ -21,9 +21,21 @@
 .name-plate > .pic{
     width: 90px;
     height: 90px;
-    background: gray;
     margin-right: 20px;
     flex-shrink: 0;
+    border: solid 1px #BACBE7;
+}
+.name-plate > div.pic{
+    background: #87878e;
+    color: lightgray;
+    font-size: 12px;
+    text-align: center;
+    line-height: 90px;
+}
+.name-plate > img.pic{
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
 }
 .name-plate > .profile{
     width: 100%;
