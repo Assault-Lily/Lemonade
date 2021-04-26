@@ -67,5 +67,10 @@
             <a href="{{ route('admin.triple.create') }}" class="button">新規登録</a>
 {{--            <a href="javascript:void(0)" class="button">データ整合チェック</a>--}}
         </div>
+        <h2>画像データ管理</h2>
+        <div class="buttons three">
+            <a href="{{ route('admin.image.index') }}" class="button">データ一覧</a>
+            <a href="{{ route('admin.image.create') }}" class="button">新規登録</a>
+        </div>
     </main>
 @endsection
