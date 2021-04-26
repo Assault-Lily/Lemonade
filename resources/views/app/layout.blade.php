@@ -97,7 +97,9 @@
 <footer>
     <p>{{ config('app.name') }}<span style="font-size: smaller;margin-left: 1em">{{ 'Ver'.config('lemonade.version') }}</span></p>
     <p style="font-size: smaller; color: gray;line-height: 2em">
-        Dataset powered by AssaultLily unofficial database "assaultlily-rdf"
+        Dataset powered by AssaultLily unofficial database "assaultlily-rdf"<br>
+        アイコン等の画像の一部は製作者から提供を受けたものを掲載しています。
+        これらの画像の権利の一切は製作者に帰属します。
     </p>
     <div class="buttons" style="font-size: smaller">
         <a href="{{ config('lemonade.repository') }}" class="button smaller" target="_blank">GitHub Repository</a>
