@@ -484,6 +484,7 @@ select > option{
     background: #E8EBF4;
     margin-right: 10px;
     flex-shrink: 0;
+    box-sizing: border-box;
 }
 .list-item-a > .list-item-image > img{
     width: 60px;
@@ -500,6 +501,7 @@ select > option{
     border: solid 1px gray;
     text-align: center;
     line-height: 60px;
+    box-sizing: border-box;
 }
 .list-item-data{
     width: 100%;

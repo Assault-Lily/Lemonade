@@ -11,7 +11,14 @@ $ogp['description'] = "レギオン「{$legion[$ls]['schema:name'][0]}".
     (!empty($legion[$ls]['schema:alternateName'][0]) ?
         '('.$legion[$ls]['schema:alternateName'][0].')' : '')
     ."」の情報を閲覧できます。";
-if(!empty($legion[$ls]['lily:numberOfMembers'][0])) $ogp['description'] .= " {$legion[$ls]['lily:numberOfMembers'][0]}人のリリィが所属しています。"
+if(!empty($legion[$ls]['lily:numberOfMembers'][0])) $ogp['description'] .= " {$legion[$ls]['lily:numberOfMembers'][0]}人のリリィが所属しています。";
+
+if(empty($legion[$ls]['lily:disbanded'][0]) || $legion[$ls]['lily:disbanded'][0] === 'true'){
+    $additional = null;
+}else{
+    $additional = ['key' => 'lily:legionJobTitle'];
+}
+
 ?>
 
 @extends('app.layout', [
@@ -76,26 +83,8 @@ if(!empty($legion[$ls]['lily:numberOfMembers'][0])) $ogp['description'] .= " {$l
                         @foreach($legion[$ls][$key] as $member)
                             <?php
                             /** @var string $member */
-                            $memberSlug = str_replace('lilyrdf:','',$member);
                             ?>
-                            <a class="list-item-a" href="{{ route('lily.show',['lily' => $memberSlug]) }}" title="{{ $legion[$member]['schema:name'][0] }}">
-                                <div class="list-item-image">
-                                    @if(!empty($legion[$member]['lily:legionJobTitle'][0]) and ($legion[$ls]['lily:disbanded'][0] ?? 'false') !== 'true')
-                                        <div class="jobTitle">{{ $legion[$member]['lily:legionJobTitle'][0] }}</div>
-                                    @endif
-                                    <div style="color: {{ empty($legion[$member]['lily:color'][0]) ? 'transparent' : '#'.$legion[$member]['lily:color'][0] }};
-                                        font-weight: bold; text-align: right;font-size: 13px;">{{ $legion[$member]['lily:color'][0] ?? '' }}</div>
-                                </div>
-                                <div class="list-item-data">
-                                    <div class="title-ruby">{!! e($legion[$member]['lily:nameKana'][0] ?? '') ?: "<i style=\"color:gray\">読みデータなし</i>" !!}</div>
-                                    <div class="title">{{ $legion[$member]['schema:name'][0] }}</div>
-                                    <div>
-                                        {{ $legion[$member]['lily:garden'][0] ?? 'ガーデン情報なし' }}
-                                        {{ !empty($legion[$member]['lily:grade']) ? $legion[$member]['lily:grade'][0].'年' : '' }}
-                                    </div>
-                                    <div>レアスキル : {!! e($legion[$member]['lily:rareSkill'][0] ?? '') ?: "<span style=\"color:gray\">N/A</span>" !!}</div>
-                                </div>
-                            </a>
+                            @include('app.button_lily',['key' => $member, 'lily' => $legion[$member], 'legion' => $legion[$ls], 'additional' => $additional, 'icons' => $icons[$member] ?? array()])
                         @endforeach
                         @if((count($legion[$ls][$key]) % 3) != 0)
                             <div style="width: 32%; margin-left: 6px"></div>

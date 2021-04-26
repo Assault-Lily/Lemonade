@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lily;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class LegionController extends Controller
@@ -23,16 +23,11 @@ WHERE {
 SPARQL
 );
 
-        $lilies = array();
-        foreach (Lily::all() as $lily){
-            $lilies[$lily->slug] = $lily;
-        }
-
         $legions = sparqlToArray($legions_sparql);
 
         ksort($legions);
 
-        return view('legion.index', compact('legions', 'lilies'));
+        return view('legion.index', compact('legions'));
     }
 
     public function show($legionSlug){
@@ -74,6 +69,11 @@ SPARQL
 
         if (empty($legion)) abort(404, "指定されたレギオンのデータは現時点で存在しません");
 
-        return view('legion.show', compact('legion', 'legionSlug'));
+        $icons = array();
+        foreach (Image::whereType('icon')->get() as $icon){
+            $icons['lilyrdf:'.$icon->for][] = $icon;
+        }
+
+        return view('legion.show', compact('legion', 'legionSlug', 'icons'));
     }
 }
