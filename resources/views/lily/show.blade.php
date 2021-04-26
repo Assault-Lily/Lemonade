@@ -372,5 +372,43 @@ $icon = !$icons->isEmpty() ? $icons->random() : null;
             </div>
         </div>
         <?php if (config('app.debug')) dump($triples) ?>
+
+        @if($icons->isNotEmpty())
+            <h2>アイコン一覧</h2>
+            <div class="white-box">
+                <p class="center">以下の方々からアイコン画像をご提供いただいています。深く御礼申し上げます。</p>
+                <hr>
+                <div class="list">
+                    @foreach($icons as $icon)
+                        <?php
+                        $infos = array();
+                        foreach (explode("\n", str_replace(array("\r\n", "\r", "\n"), "\n", $icon->author_info)) as $line){
+                            $title = e(explode(',', $line)[0]);
+                            $value = e(explode(',', $line)[1]);
+                            switch ($title){
+                                case 'twitter':
+                                    $infos[] = "Twitter : <a href='https://twitter.com/$value' target='_blank'>@$value</a>";
+                                    break;
+                                case 'pixiv':
+                                    $infos[] = "pixiv : <a href='https://pixiv.net/$value' target='_blank'>$value</a>";
+                                    break;
+                                default:
+                                    $infos[] = "$title : <a href='$value' target='_blank'>$value</a>";
+                            }
+                        }
+                        ?>
+                        <div class="list-item-a">
+                            <div class="list-item-image">
+                                <img class="pic" src="{{ $icon->image_url }}" alt="icon">
+                            </div>
+                            <div class="list-item-data">
+                                <div class="title">{{ $icon->author }}<span style="font-size: small">さん</span></div>
+                                @foreach($infos as $info)<div>{!! $info !!}</div>@endforeach
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
     </main>
 @endsection
