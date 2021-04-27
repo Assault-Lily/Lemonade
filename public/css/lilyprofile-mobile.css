@@ -5,8 +5,15 @@
 #profile > .left{
     width: 100%;
 }
-.name-plate > .pic{
-    display: none;
+.name-plate{
+    display: block;
+}
+.name-plate > img.pic, .name-plate > div.pic{
+    display: block;
+    margin: 0 auto 15px;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
 }
 .name-plate > .profile > .summary{
     font-size: 15px;
