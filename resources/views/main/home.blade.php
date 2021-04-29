@@ -29,6 +29,9 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
         #rdf-updates{
             text-align: center
         }
+        #rdf-updates > table{
+            width: 100%;
+        }
 
         @media screen and (max-width:500px) and (orientation:portrait){
             #home-pic{
