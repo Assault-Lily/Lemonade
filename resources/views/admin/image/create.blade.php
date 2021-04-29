@@ -14,6 +14,12 @@
     </style>
 @endsection
 
+<?php
+    /**
+     * @var $default array
+     */
+?>
+
 @section('main')
     <main>
         <h1>新規登録</h1>
@@ -27,27 +33,27 @@
                 <div id="main">
                     <label>
                         対象リソース<br>
-                        <input type="text" name="for" required placeholder="Hitotsuyanagi_Riri" value="{{ old('for') }}">
+                        <input type="text" name="for" required placeholder="Hitotsuyanagi_Riri" value="{{ old('for', $default['for']) }}">
                     </label>
                     <label>
                         画像の種別<br>
-                        <input type="text" name="type" required placeholder="icon" value="{{ old('type') }}">
+                        <input type="text" name="type" required placeholder="icon" value="{{ old('type', $default['type']) }}">
                     </label>
                     <label>
                         作者<br>
-                        <input type="text" name="author" required placeholder="K Miyano" value="{{ old('author') }}">
+                        <input type="text" name="author" required placeholder="K Miyano" value="{{ old('author', $default['author']) }}">
                     </label>
                 </div>
                 <div id="more">
                     <label>
                         画像URL<br>
                         <input type="text" name="image_url" required placeholder="https://image.of.lily/path/to/image.jpg"
-                               value="{{ old('image_url') }}" style="width: 600px">
+                               value="{{ old('image_url', $default['image_url']) }}" style="width: 600px">
                     </label><hr>
                     <label>
                         追加情報<br>
                         <textarea style="width: 600px; height: 300px" name="author_info"
-                                  placeholder="pixiv,miyacorata&#x0A;twitter,miyacorata&#x0A;(CSV形式)">{{ old('image_url') }}</textarea>
+                                  placeholder="pixiv,miyacorata&#x0A;twitter,miyacorata&#x0A;(CSV形式)">{{ old('image_url', $default['author_info']) }}</textarea>
                     </label>
                 </div>
                 @if($errors->any())

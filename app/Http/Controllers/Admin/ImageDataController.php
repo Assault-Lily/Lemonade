@@ -30,9 +30,17 @@ class ImageDataController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.image.create');
+        $default = [
+            'for' => $request->input('for'),
+            'type' => $request->input('type'),
+            'author' => $request->input('author'),
+            'image_url' => $request->input('image_url'),
+            'author_info' => $request->input('author_info'),
+        ];
+
+        return view('admin.image.create', compact('default'));
     }
 
     /**
@@ -59,7 +67,7 @@ class ImageDataController extends Controller
 
         $image->save();
 
-        return redirect(route('admin.image.index'))->with('message','画像レコードを追加しました');
+        return redirect(route('admin.image.edit', ['image' => $image->id]))->with('message','画像レコードを追加しました');
     }
 
     /**

@@ -79,6 +79,16 @@
                 <hr>
                 <div class="buttons">
                     <a href="{{ route('admin.image.index') }}" class="button">一覧に戻る</a>
+                    <?php
+                    $parameter = [
+                        'for' => $image->for,
+                        'type' => $image->type,
+                        'author' => $image->author,
+                        'image_url' => $image->image_url,
+                        'author_info' => $image->author_info
+                    ]
+                    ?>
+                    <a href="{{ route('admin.image.create', $parameter) }}" class="button">複製</a>
                     <input type="reset" class="button" value="初期化">
                     <input type="submit" class="button primary" value="更新実行">
                 </div>
