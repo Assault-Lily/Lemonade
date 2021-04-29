@@ -104,7 +104,7 @@ $ogp['description'] = '書籍「'.$book['schema:name'][0].'」の情報です。
                     </tr>
                     @if(!empty($book['schema:numberOfPages'][0]))
                         <tr>
-                            <th>ページ数</th><td style="width: 130px">{{ $book['schema:numberOfPages'][0] ?? 'N/A' }}</td>
+                            <th>ページ数</th><td>{{ $book['schema:numberOfPages'][0] ?? 'N/A' }}</td>
                         </tr>
                     @endif
                     @if(!empty($book['schema:isbn']))
