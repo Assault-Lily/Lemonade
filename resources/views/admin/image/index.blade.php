@@ -1,4 +1,4 @@
-@extends('app.layout', ['title' => '画像データ管理'])
+@extends('app.layout', ['title' => '画像データ管理', 'previous' => route('admin.dashboard')])
 
 @section('main')
     <main>

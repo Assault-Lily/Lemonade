@@ -1,4 +1,4 @@
-@extends('app.layout',['title' => '画像データ参照・編集'])
+@extends('app.layout',['title' => '画像データ参照・編集', 'previous' => route('admin.image.index')])
 
 <?php
     /**
