@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use Carbon\Carbon;
 use Exception;
 use ZipArchive;
@@ -54,9 +55,19 @@ SPARQL
             }
         }
 
-        $birthday = $lilies;
+        $image_pull_list = array();
+        $images = array();
+        foreach ($lilies as $key => $lily){
+            $image_pull_list[] = str_replace('lilyrdf:','',$key);
+        }
+        foreach (Image::whereType('icon')->whereIn('for',$image_pull_list)->get() as $image){
+            $images['lilyrdf:'.$image->for][] = $image;
+        }
 
-        return view('main.home', compact('rdf_feed', 'birthday', 'legions'));
+        $birthday = $lilies;
+        //dd($images);
+
+        return view('main.home', compact('rdf_feed', 'birthday', 'legions', 'images'));
     }
 
     public function menu(){
