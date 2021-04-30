@@ -53,6 +53,9 @@ if(empty($legion[$ls]['lily:disbanded'][0]) || $legion[$ls]['lily:disbanded'][0]
             </div>
         </div>
         <div id="legion-other-info">
+            @if(!empty($legion[$ls]['rdf:type'][0]) and $legion[$ls]['rdf:type'][0] == 'lily:Taskforce')
+                <div class="more-info">臨時・特別部隊</div>
+            @endif
             @if(!empty($legion[$ls]['lily:disbanded']) and $legion[$ls]['lily:disbanded'][0] == 'true')
                 <div class="more-info">解散済み</div>
             @endif

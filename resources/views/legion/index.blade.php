@@ -18,6 +18,9 @@ $ogp['description'] = "レギオンの一覧を表示します。現在".count($
             .legion{
                 width: 100%;
             }
+            .more-info{
+
+            }
         }
     </style>
 @endsection
@@ -44,12 +47,15 @@ $ogp['description'] = "レギオンの一覧を表示します。現在".count($
                                 {{ !empty($legion['schema:alternateName']) ? ' ('.$legion['schema:alternateName'][0].')' : '' }}
                             </div>
                         </div>
-                        @if(!empty($legion['lily:disbanded']) and $legion['lily:disbanded'][0] == 'true')
-                            <div class="more-info">解散済み</div>
-                        @endif
                     </div>
                     <div>
                         所属数 : {!! e($legion['lily:numberOfMembers'][0] ?? '') ?: '<span style="color:gray;">N/A</span>' !!}
+                        @if(!empty($legion['rdf:type'][0]) and $legion['rdf:type'][0] == 'lily:Taskforce')
+                            <span class="more-info">臨時・特別部隊</span>
+                        @endif
+                        @if(!empty($legion['lily:disbanded']) and $legion['lily:disbanded'][0] == 'true')
+                            <span class="more-info">解散済み</span>
+                        @endif
                     </div>
                 </a>
             @empty
