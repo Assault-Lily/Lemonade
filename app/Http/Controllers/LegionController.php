@@ -16,8 +16,9 @@ PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 SELECT ?subject ?predicate ?object
 WHERE {
   {
-    ?subject a lily:Legion;
-             ?predicate ?object
+    ?subject a ?type;
+             ?predicate ?object.
+    FILTER(?type IN(lily:Legion, lily:Taskforce))
   }
 }
 SPARQL
@@ -40,7 +41,9 @@ PREFIX schema: <http://schema.org/>
 SELECT ?subject ?predicate ?object
 WHERE {
   {
-    lilyrdf:$legionSlug ?predicate ?object.
+    lilyrdf:$legionSlug a ?type;
+                        ?predicate ?object.
+    FILTER(?type IN(lily:Legion, lily:Taskforce))
     BIND(lilyrdf:$legionSlug as ?subject)
   }
   UNION
