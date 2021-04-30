@@ -45,27 +45,25 @@ SPARQL
 
         $lilies = array();
         $legions = array();
+        $image_pull_list = array();
 
         // レギオンとリリィの振り分け
         foreach ($birthday as $key => $triple){
             if($triple['rdf:type'][0] === 'lily:Lily'){
                 $lilies[$key] = $triple;
+                // アイコンを取得するリリィのリスト
+                $image_pull_list[] = str_replace('lilyrdf:','',$key);
             }else{
                 $legions[$key] = $triple;
             }
         }
 
-        $image_pull_list = array();
-        $images = array();
-        foreach ($lilies as $key => $lily){
-            $image_pull_list[] = str_replace('lilyrdf:','',$key);
-        }
+        // アイコン取得
         foreach (Image::whereType('icon')->whereIn('for',$image_pull_list)->get() as $image){
             $images['lilyrdf:'.$image->for][] = $image;
         }
 
         $birthday = $lilies;
-        //dd($images);
 
         return view('main.home', compact('rdf_feed', 'birthday', 'legions', 'images'));
     }
