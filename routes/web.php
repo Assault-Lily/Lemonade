@@ -52,3 +52,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
 
 
 });
+
+Route::get('/ed/403', [InfoController::class, 'ed403']);
