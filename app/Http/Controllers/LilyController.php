@@ -229,7 +229,8 @@ PREFIX schema: <http://schema.org/>
 SELECT ?subject ?predicate ?object
 WHERE {
   {
-    lilyrdf:$slug ?predicate ?object.
+    lilyrdf:$slug a lily:Lily;
+                  ?predicate ?object.
     BIND(lilyrdf:$slug AS ?subject)
   }
   UNION
@@ -268,7 +269,7 @@ SPARQL
 );
         $triples = sparqlToArray($triples_sparql);
 
-        if(empty($triples)) abort(404, '該当するリリィのデータが存在しません');
+        if(empty($triples) || empty($triples['lilyrdf:'.$slug])) abort(404, '該当するリリィのデータが存在しません');
 
         $triples_model = Triple::whereLilySlug($slug)->get();
         foreach ($triples_model as $triple){

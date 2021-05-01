@@ -70,7 +70,7 @@ SPARQL
 
         $legion = sparqlToArray($legion_sparql);
 
-        if (empty($legion)) abort(404, "指定されたレギオンのデータは現時点で存在しません");
+        if (empty($legion) || empty($legion['lilyrdf:'.$legionSlug])) abort(404, "指定されたレギオンのデータは現時点で存在しません");
 
         $icons = array();
         foreach (Image::whereType('icon')->get() as $icon){

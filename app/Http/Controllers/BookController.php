@@ -60,7 +60,7 @@ SPARQL
 );
         $sparqlArray = sparqlToArray($sparql);
 
-        if(count($sparqlArray) === 0) abort(404, '該当する書籍のデータが存在しません');
+        if(empty($sparqlArray) || empty($sparqlArray['lilyrdf:'.$bookSlug])) abort(404, '該当する書籍のデータが存在しません');
 
         $book = array();
         $lilies = array();
