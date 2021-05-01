@@ -46,6 +46,7 @@ SPARQL
         $lilies = array();
         $legions = array();
         $image_pull_list = array();
+        $images = array();
 
         // レギオンとリリィの振り分け
         foreach ($birthday as $key => $triple){
