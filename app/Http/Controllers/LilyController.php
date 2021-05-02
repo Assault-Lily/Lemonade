@@ -168,16 +168,22 @@ SPQRQL
         }
 
         $lily_sortKey = array();
+        $lily_sortKeyForKeyUnknown = array();
         $lily_sortKeyKana = array();
+        $lily_sortKeyForKanaUnknown = array();
         foreach ($lilies as $lily){
             // ソート用キー配列生成
             $lily_sortKey[] = implode(',' ,$lily[$sort] ?? ['-']);
+            $lily_sortKeyForKeyUnknown[] = isset($lily[$sort][0]) ? 0 : 1;
             $lily_sortKeyKana[] = $lily['lily:nameKana'][0] ?? '-';
+            $lily_sortKeyForKanaUnknown[] = isset($lily['lily:nameKana'][0]) ? 0 : 1;
         }
         unset($lily);
         // リリィのソート
-        array_multisort($lily_sortKey, $order, SORT_STRING,
-            $lily_sortKeyKana, $order, SORT_STRING , $lilies);
+        array_multisort($lily_sortKeyForKeyUnknown, SORT_ASC, SORT_NUMERIC,
+            $lily_sortKey, $order, SORT_STRING,
+            $lily_sortKeyForKanaUnknown, SORT_ASC, SORT_NUMERIC,
+            $lily_sortKeyKana, $order, SORT_STRING, $lilies);
 
         $sortKey = substr(request()->get('order', 'asc'), 0, 1).'-'.$sortKey;
 
