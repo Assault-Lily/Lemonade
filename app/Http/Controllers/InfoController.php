@@ -16,9 +16,6 @@ class InfoController extends Controller
             $rdf_feed = null;
         }
 
-        $birthday = array();
-        $rdf_error = null;
-
         $today = Carbon::now()->format('--m-d');
         $birthday_rdf = sparqlQueryOrDie(<<<SPARQL
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
@@ -106,6 +103,41 @@ SPARQL
             ];
         }
         unset($line);
+
+        if(request()->get('format','') === 'plist'){
+            $plist = <<<PLIST
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+
+PLIST;
+            foreach ($sparqlArray as $line){
+                $plist .= <<<PLIST
+    <dict>
+        <key>phrase</key>
+        <string>{$line['name']}</string>
+        <key>shortcut</key>
+        <string>{$line['nameKana']}</string>
+    </dict>
+    <dict>
+        <key>phrase</key>
+        <string>{$line['givenName']}</string>
+        <key>shortcut</key>
+        <string>{$line['givenNameKana']}</string>
+    </dict>
+
+PLIST;
+            }
+            $plist .= <<<PLIST
+</array>
+</plist>
+PLIST;
+
+            return response($plist)->withHeaders([
+                'Content-Type' => 'text/xml'
+            ]);
+        }
 
         $dicString = "";
         foreach ($sparqlArray as $line){
