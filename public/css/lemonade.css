@@ -492,6 +492,7 @@ select > option{
     object-fit: cover;
     border: solid 1px #BACBE7;
     box-sizing: border-box;
+    display: block;
 }
 .list-item-a > .list-item-image > div.no-image{
     height: 60px;
