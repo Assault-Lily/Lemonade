@@ -224,8 +224,32 @@ $icon = !$icons->isEmpty() ? $icons->random() : null;
                             <td style="font-weight: bold; color: {{ '#'.$triples[$ts]['lily:color'][0] }}">{{ '#'.$triples[$ts]['lily:color'][0] }}</td>
                         </tr>
                     @endif
-                    @if(!empty($triples[$ts]['lily:castName']))
-                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:castName'] ?? null, 'th' => 'キャスト'])
+                    @if(!empty($triples[$ts]['lily:cast']))
+                        <tr>
+                            <th>キャスト</th>
+                            <td rowspan="2" style="height: 4em;">
+                                <?php
+                                foreach ($triples[$ts]['lily:cast'] ?? array() as $cast){
+                                // キャスト名がない場合のスキップ
+                                if(empty($triples[$cast]['schema:name'][0])) continue;
+                                ?>
+                                    <details>
+                                        <summary>{{ $triples[$cast]['schema:name'][0] }}</summary>
+                                <?php
+                                foreach ($triples[$cast]['lily:performIn'] ?? array() as $play){
+                                    ?><div style="font-size: smaller; padding-left: .5em">
+                                            <span class="indicator">{{ $triples[$play]['lily:genre'][0] ?? '不明' }}</span>
+                                            {{ $triples[$play]['schema:name'][0] }}
+                                        </div><?php
+                                }
+                                ?></details><?php
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="spacer"></td>
+                        </tr>
                     @endif
                     @if(!empty($triples['remarks']))
                         @include('app.lilyprofiletable.record',['object' => $triples['remarks'] ?? null, 'th' => '特記事項'])

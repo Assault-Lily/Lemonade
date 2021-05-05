@@ -270,6 +270,14 @@ WHERE {
     BIND(?sibp as ?predicate)
     BIND(?sibo as ?object)
   }
+  UNION
+  {
+    lilyrdf:$slug lily:cast/lily:performIn ?play.
+    ?play ?playp ?playo.
+    BIND(?play as ?subject)
+    BIND(?playp as ?predicate)
+    BIND(?playo as ?object)
+  }
 }
 SPARQL
 );
