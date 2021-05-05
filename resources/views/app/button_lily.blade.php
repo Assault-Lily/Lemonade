@@ -10,7 +10,7 @@ $icon = !empty($icons) ? $icons[array_rand($icons)] : null;
 ?><a class="list-item-a" href="{{ route('lily.show',['lily' => str_replace('lilyrdf:','',$key)]) }}" title="{{ $lily['schema:name'][0] }}">
     <div class="list-item-image">
         @if(!empty($additional['key']) && !empty($lily[$additional['key']]))
-            <div class="additional">{{ implode(',',$lily[$additional['key']]).($additional['suffix'] ?? '') }}</div>
+            <div class="additional">{{ implode(', ',$lily[$additional['key']]).($additional['suffix'] ?? '') }}</div>
         @endif
         @if(!empty($icon))
             <img src="{{ $icon->image_url }}" alt="icon">
