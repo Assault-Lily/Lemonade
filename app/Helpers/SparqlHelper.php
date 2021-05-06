@@ -7,10 +7,10 @@
  * @throws \Illuminate\Http\Client\RequestException
  * @throws \Illuminate\Http\Client\ConnectionException
  */
-function sparqlQuery(string $query, bool $predicateReplace = true): object
+function sparqlQuery(string $query, int $timeout = 5, bool $predicateReplace = true): object
 {
 
-    $res = Http::timeout(3)->get(config('lemonade.sparqlEndpoint'), [
+    $res = Http::timeout($timeout)->get(config('lemonade.sparqlEndpoint'), [
         'format' => 'json',
         'query' => $query
     ])->throw()->body();
@@ -30,10 +30,10 @@ function sparqlQuery(string $query, bool $predicateReplace = true): object
  * @param $predicateReplace bool Replace predicate to prefixed string
  * @return object
  */
-function sparqlQueryOrDie(string $query, bool $predicateReplace = true): object
+function sparqlQueryOrDie(string $query, int $timeout = 5, bool $predicateReplace = true): object
 {
     try {
-        $res = sparqlQuery($query, $predicateReplace);
+        $res = sparqlQuery($query, $timeout, $predicateReplace);
     }catch (\Illuminate\Http\Client\ConnectionException $e){
         $message = "SPARQLエンドポイントに接続できませんでした。\n\n";
         abort(502, $message);
