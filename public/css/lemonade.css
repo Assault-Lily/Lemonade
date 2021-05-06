@@ -606,6 +606,7 @@ table.table td.spacer{
     transform: translateY(-50%);
     box-sizing: border-box;
     animation: 3s linear flash-message forwards;
+    z-index: 99;
 }
 @keyframes flash-message {
     0%, 5%{

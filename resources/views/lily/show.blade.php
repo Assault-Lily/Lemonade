@@ -427,7 +427,7 @@ $icon = !$icons->isEmpty() ? $icons->random() : null;
                             </div>
                             <div class="list-item-data">
                                 <div class="title">{{ $icon->author }}<span style="font-size: small">さん</span></div>
-                                @foreach($infos as $info)<div>{!! $info !!}</div>@endforeach
+                                @foreach($infos as $info)<div style="margin: .5em 0">{!! $info !!}</div>@endforeach
                             </div>
                         </div>
                     @endforeach
