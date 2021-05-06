@@ -40,3 +40,7 @@
 #relationship.list > .list-item-a{
     width: calc(100% - 6px);
 }
+
+#icon-list > .list-item-b{
+    width: 100%;
+}

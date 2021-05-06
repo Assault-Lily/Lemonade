@@ -144,3 +144,15 @@
 #relationship.list > .list-item-a{
     width: 48%;
 }
+
+#icon-list > .list-item-b{
+    width: calc(50% - 5px);
+    display: flex;
+}
+#icon-list > .list-item-b > .list-item-image > img.pic{
+    width: 100px;
+    height: 100px;
+    object-fit: scale-down;
+    border: solid 1px lightgray;
+    margin-right: 15px;
+}

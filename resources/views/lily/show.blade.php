@@ -402,7 +402,7 @@ $icon = !$icons->isEmpty() ? $icons->random() : null;
             <div class="white-box">
                 <p class="center">以下の方々からアイコン画像をご提供いただいています。深く御礼申し上げます。</p>
                 <hr>
-                <div class="list">
+                <div class="list" id="icon-list">
                     @foreach($icons as $icon)
                         <?php
                         $infos = array();
@@ -421,7 +421,7 @@ $icon = !$icons->isEmpty() ? $icons->random() : null;
                             }
                         }
                         ?>
-                        <div class="list-item-a">
+                        <div class="list-item-b">
                             <div class="list-item-image">
                                 <img class="pic" src="{{ $icon->image_url }}" alt="icon">
                             </div>
