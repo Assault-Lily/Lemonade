@@ -5,6 +5,7 @@
  */
 
 $ps = 'lilyrdf:'.$playSlug;
+$ogp['type'] = 'play';
 $ogp['title'] = "舞台 ".(mb_strlen($play[$ps]['schema:name'][0]) > 30 and !empty($play[$ps]['schema:alternateName'][0]))
     ? $play[$ps]['schema:alternateName'][0]
     : $play[$ps]['schema:name'][0];
