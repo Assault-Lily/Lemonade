@@ -56,6 +56,23 @@
             document.getElementById('skill-type').addEventListener('change',(e)=>{
                 document.getElementById('skillName').setAttribute('list', e.target.value);
             });
+
+            const randomDialog = document.getElementById('random');
+            dialogPolyfill.registerDialog(randomDialog);
+            document.getElementById('random-open').addEventListener('click',()=>{
+                const lilies = document.querySelectorAll('#lily-list > .list-item-a');
+                const lily = document.getElementById('random-lily');
+                if(lily.firstChild) lily.removeChild(lily.firstChild);
+                if(lilies.length === 0){
+                    showMessage("該当するリリィがいないためランダム選択できません。");
+                }else{
+                    lily.appendChild(lilies[Math.floor(Math.random() * lilies.length)].cloneNode(true));
+                    randomDialog.showModal();
+                }
+            });
+            document.getElementById('random-close').addEventListener('click',()=>{
+                randomDialog.close();
+            });
         });
     </script>
     <style>
@@ -72,6 +89,14 @@
             #filter-setting input{
                 margin: 5px;
             }
+        }
+
+        #random-lily{
+            display: flex;
+            justify-content: space-around;
+        }
+        #random-lily > .list-item-a{
+            width: 420px;
         }
     </style>
 @endsection
@@ -101,6 +126,7 @@
                     </select>
                 </label>
                 <button class="button smaller" id="filter-setting-open">フィルタ設定</button>
+                <button class="button smaller" id="random-open">ランダム</button>
             </div>
             <div>
                 <span class="info">リリィ登録数{{ !empty($filterInfo) ? '(フィルタ)' : '(全数)' }} : {{ count($lilies) }}人</span>
@@ -114,7 +140,7 @@
                 <a href="{{ route('lily.index') }}" class="button smaller">フィルタ解除</a>
             </p>
         @endif
-        <div class="list three">
+        <div class="list three" id="lily-list">
             @forelse($lilies as $key => $lily)
                 <?php /** @var $key string */
                 $legion = $legions[$lily['lily:legion'][0] ?? ''] ?? array();
@@ -187,6 +213,27 @@
             <div class="buttons">
                 <a href="{{ route('lily.index') }}" class="button">リセット</a>
                 <button id="filter-setting-close" class="button">閉じる</button>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="random" class="window-a">
+        <div class="header">ランダム選択</div>
+        <div class="body">
+            @if(!empty($filterInfo))
+                <p class="center">
+                    <strong>{{ $filterInfo['key'] }}</strong> が
+                    <strong>"{{ $filterInfo['value'] }}"</strong>
+                    のリリィからランダムで選んでいます。
+                </p>
+            @else
+                <p class="center">
+                    すべてのリリィからランダムで選んでいます。
+                </p>
+            @endif
+            <div id="random-lily"></div>
+            <div class="buttons">
+                <button id="random-close" class="button">閉じる</button>
             </div>
         </div>
     </dialog>
