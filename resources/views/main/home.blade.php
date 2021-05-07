@@ -138,6 +138,11 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                 <span>書籍一覧</span>
             </a>
             <hr>
+            <a href="{{ route('play.index') }}" >
+                <i class="fas fa-street-view"></i>
+                <span>舞台公演一覧</span>
+            </a>
+            <hr>
             <a href="{{ route('imedic') }}" >
                 <i class="fas fa-spell-check"></i>
                 <span>IME辞書生成</span>

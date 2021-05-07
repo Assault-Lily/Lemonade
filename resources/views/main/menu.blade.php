@@ -33,9 +33,10 @@ $ogp['title'] = "サイトメニュー";
             <a href="{{ route('legion.index') }}" class="button">レギオン一覧</a>
         </div>
 
-        <h2>出版物を探す</h2>
+        <h2>メディアを探す</h2>
         <div class="buttons three">
             <a href="{{ route('book.index') }}" class="button">書籍一覧</a>
+            <a href="{{ route('play.index') }}" class="button">舞台一覧</a>
         </div>
 
         <h2>プチ機能</h2>
