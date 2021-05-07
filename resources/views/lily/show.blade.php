@@ -33,6 +33,8 @@ if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lil
             '('.$triples[$triples[$ts]['lily:legion'][0]]['schema:alternateName'][0].')' : ''). "」に所属しています。";
 
 $icon = !$icons->isEmpty() ? $icons->random() : null;
+
+$resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
 ?>
 
 @extends('app.layout',[
@@ -40,8 +42,8 @@ $icon = !$icons->isEmpty() ? $icons->random() : null;
     'pagetype' => 'back-triangle'])
 
 @section('head')
-    <link rel="stylesheet" href="{{ asset('css/lilyprofile.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/lilyprofile-mobile.css') }}" media="screen and (max-width:500px) and (orientation:portrait)">
+    <link rel="stylesheet" href="{{ asset('css/lilyprofile.css').$resource_qs }}">
+    <link rel="stylesheet" href="{{ asset('css/lilyprofile-mobile.css').$resource_qs }}" media="screen and (max-width:500px) and (orientation:portrait)">
     <style>
         #profile{
             background-image: radial-gradient(circle farthest-corner at 90% 100%, {{ $color_rgba }}, transparent 50%, transparent);
