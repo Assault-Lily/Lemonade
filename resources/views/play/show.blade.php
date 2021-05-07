@@ -6,9 +6,9 @@
 
 $ps = 'lilyrdf:'.$playSlug;
 $ogp['type'] = 'play';
-$ogp['title'] = "舞台 ".(mb_strlen($play[$ps]['schema:name'][0]) > 30 and !empty($play[$ps]['schema:alternateName'][0]))
+$ogp['title'] = "舞台 ".((mb_strlen($play[$ps]['schema:name'][0]) > 30 and !empty($play[$ps]['schema:alternateName'][0]))
     ? $play[$ps]['schema:alternateName'][0]
-    : $play[$ps]['schema:name'][0];
+    : $play[$ps]['schema:name'][0]);
 $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です。"
 ?>
 
@@ -151,6 +151,6 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
             </div>
 
         </div>
-        @dump($play)
+        @if(config('app.debug')) @dump($play) @endif
     </main>
 @endsection
