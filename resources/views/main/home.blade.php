@@ -102,7 +102,8 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                     </p>
                     <div class="list" style="justify-content: space-around">
                         @forelse($birthday as $key => $lily)
-                            @include('app.button_lily',['key' => $key, 'lily' => $lily, 'legion' => $legions[$lily['lily:legion'][0]] ?? array(), 'icons' => $images[$key] ?? array()])
+                            <?php $legion = !empty($lily['lily:legion'][0]) ? $legions[$lily['lily:legion'][0]] ?? array() : array() ?>
+                            @include('app.button_lily',['key' => $key, 'lily' => $lily, 'legion' => $legion, 'icons' => $images[$key] ?? array()])
                         @empty
                             <p style="text-align: center; color: darkred; margin: 3em auto">該当するデータがありません</p>
                         @endforelse
