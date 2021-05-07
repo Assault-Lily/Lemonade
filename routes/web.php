@@ -10,6 +10,7 @@ use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LegionController;
 use App\Http\Controllers\LilyController;
 use App\Http\Controllers\OGPController;
+use App\Http\Controllers\PlayController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,7 @@ Route::middleware('throttle:30,1')->group(function (){
 Route::resource('/lily', LilyController::class, ['only' => ['index','show']]);
 Route::resource('/legion', LegionController::class, ['only' => ['index', 'show']]);
 Route::resource('/book', BookController::class, ['only' => ['index', 'show']]);
+Route::resource('/play', PlayController::class, ['only' => ['index', 'show']]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
     Route::get('/', [AdminController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
