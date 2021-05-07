@@ -239,9 +239,9 @@ $icon = !$icons->isEmpty() ? $icons->random() : null;
                                 foreach ($triples[$cast]['lily:performIn'] ?? array() as $play){
                                     ?><div style="font-size: smaller; padding-left: .5em">
                                             <span class="indicator">{{ $triples[$play]['lily:genre'][0] ?? '不明' }}</span>
-                                            {{ mb_strlen($triples[$play]['schema:name'][0]) < 30
-                                                    ? $triples[$play]['schema:name'][0]
-                                                    : $triples[$play]['schema:alternateName'][0] }}
+                                            {{ (mb_strlen($triples[$play]['schema:name'][0]) > 30 and !empty($triples[$play]['schema:alternateName'][0]))
+                                                    ? $triples[$play]['schema:alternateName'][0]
+                                                    : $triples[$play]['schema:name'][0] }}
                                         </div><?php
                                 }
                                 ?></details><?php
