@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Log;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 
@@ -47,5 +48,17 @@ class Handler extends ExceptionHandler
         }else{
             return response()->view('errors.error',['exception' => $e],$status);
         }
+    }
+
+    public function render($request, Throwable $e)
+    {
+        $response = parent::render($request, $e);
+
+        if (($response->getStatusCode() / 100) === 5 and !config('app.debug')){
+            $message = 'サーバエラーが発生しました'.PHP_EOL.$e->getMessage().PHP_EOL.$request->fullUrl();
+            Log::channel('slack')->error($message);
+        }
+
+        return $response;
     }
 }
