@@ -26,14 +26,12 @@ WHERE {
   {
     ?subject a lily:Lily;
              ?predicate ?object;
-             schema:birthDate ?birthDate.
-    FILTER(?birthDate = "$today"^^<http://www.w3.org/2001/XMLSchema#gMonthDay>)
+             schema:birthDate "$today"^^<http://www.w3.org/2001/XMLSchema#gMonthDay>
   }
   UNION
   {
-    ?legion a lily:Legion;
+    ?subject a lily:Legion;
             ?predicate ?object.
-    BIND(?legion as ?subject)
   }
 }
 SPARQL

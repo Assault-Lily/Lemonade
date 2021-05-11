@@ -15,15 +15,28 @@ class LilyController extends Controller
     public function index()
     {
         $triples_sparql = sparqlQueryOrDie(<<<SPQRQL
-PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?subject ?predicate ?object
 WHERE {
-  ?subject a ?type;
-           ?predicate ?object.
-  FILTER(?type IN(lily:Lily, lily:Legion))
+    {
+        VALUES ?predicate {
+            schema:name lily:nameKana schema:familyNameKana foaf:age
+            lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
+            lily:garden lily:grade lily:legion lily:position rdf:type
+        }
+        ?subject a lily:Lily;
+                 ?predicate ?object.
+    }
+    UNION
+    {
+        VALUES ?predicate { schema:name schema:alternameName rdf:type }
+        ?subject a lily:Legion;
+                 ?predicate ?object.
+    }
 }
 SPQRQL
 );
@@ -230,54 +243,45 @@ SPQRQL
         $triples_sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?predicate ?object
 WHERE {
-  {
-    lilyrdf:$slug a lily:Lily;
-                  ?predicate ?object.
-    BIND(lilyrdf:$slug AS ?subject)
-  }
-  UNION
-  {
-    lilyrdf:$slug ?rp ?ro.
-    FILTER(!isLiteral(?ro)).
-    ?ro ?predicate ?object.
-    BIND(?ro as ?subject)
-  }
-  UNION
-  {
-    lilyrdf:$slug lily:charm/lily:resource ?charm.
-    ?charm ?cp ?co.
-    BIND(?charm as ?subject)
-    BIND(?cp as ?predicate)
-    BIND(?co as ?object)
-  }
-  UNION
-  {
-    lilyrdf:$slug lily:relationship/lily:resource ?rel.
-    ?rel ?relp ?relo.
-    BIND(?rel as ?subject)
-    BIND(?relp as ?predicate)
-    BIND(?relo as ?object)
-  }
-  UNION
-  {
-    lilyrdf:$slug schema:sibling/lily:resource ?sib.
-    ?sib ?sibp ?sibo.
-    BIND(?sib as ?subject)
-    BIND(?sibp as ?predicate)
-    BIND(?sibo as ?object)
-  }
-  UNION
-  {
-    lilyrdf:$slug lily:cast/lily:performIn ?play.
-    ?play ?playp ?playo.
-    BIND(?play as ?subject)
-    BIND(?playp as ?predicate)
-    BIND(?playo as ?object)
-  }
+    {
+        VALUES ?subject { lilyrdf:$slug }
+        ?subject ?predicate ?object.
+    }
+    UNION
+    {
+        VALUES ?predicate { schema:name lily:resource lily:usedIn lily:performIn lily:additionalInformation }
+        lilyrdf:$slug ?rp ?subject.
+        ?subject ?predicate ?object.
+    }
+    UNION
+    {
+        VALUES ?predicate { schema:productID schema:name rdf:type }
+        lilyrdf:$slug lily:charm/lily:resource ?subject.
+        ?subject ?predicate ?object.
+    }
+    UNION
+    {
+        VALUES ?predicate { schema:name rdf:type }
+        lilyrdf:$slug lily:relationship/lily:resource ?subject.
+        ?subject ?predicate ?object.
+    }
+    UNION
+    {
+        VALUES ?predicate { schema:name rdf:type }
+        lilyrdf:$slug schema:sibling/lily:resource ?subject.
+        ?subject ?predicate ?object.
+    }
+    UNION
+    {
+        VALUES ?predicate { lily:genre schema:name schema:alternateName rdf:type }
+        lilyrdf:$slug lily:cast/lily:performIn ?subject.
+        ?subject ?predicate ?object.
+    }
 }
 SPARQL
 );
