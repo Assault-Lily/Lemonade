@@ -106,6 +106,9 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         <div class="title">{{ $charm[$user]['schema:name'][0] }}</div>
                         @foreach($charm[$user]['lily:charm'] as $charmUserData)
                             @continue(empty($charm[$charmUserData]['lily:resource'][0]) or $charm[$charmUserData]['lily:resource'][0] !== $cs)
+                            @if(!empty($charm[$charmUserData]['lily:additionalInformation']))
+                                <div>{{ implode(' ', $charm[$charmUserData]['lily:additionalInformation']) }}</div>
+                            @endif
                             @if(!empty($charm[$charmUserData]['lily:usedIn']))
                                 <div>登場媒体 : {{ implode(', ', $charm[$charmUserData]['lily:usedIn']) }}</div>
                             @endif
