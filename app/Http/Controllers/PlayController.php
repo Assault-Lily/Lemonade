@@ -38,26 +38,26 @@ SPARQL
         $sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?predicate ?object
 WHERE{
   {
-    lilyrdf:$playSlug a lily:Play;
-                      ?predicate ?object.
-    BIND(lilyrdf:$playSlug as ?subject)
+    VALUES ?subject { lilyrdf:$playSlug }
+    ?subject a lily:Play;
+             ?predicate ?object.
   }
   UNION
   {
-    lilyrdf:$playSlug lily:cast ?cast.
-    ?cast ?predicate ?object.
-    BIND(?cast as ?subject)
+    lilyrdf:$playSlug lily:cast ?subject.
+    ?subject ?predicate ?object.
   }
   UNION
   {
-    lilyrdf:$playSlug lily:cast/lily:performAs ?performAs.
-    ?performAs ?predicate ?object.
-    BIND(?performAs as ?subject)
+    VALUES ?predicate { schema:name rdf:type }
+    lilyrdf:$playSlug lily:cast/lily:performAs ?subject.
+    ?subject ?predicate ?object.
   }
 }
 

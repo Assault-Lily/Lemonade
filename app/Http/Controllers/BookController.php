@@ -13,47 +13,34 @@ PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 SELECT ?subject ?predicate ?object
 WHERE {
   {
-    ?subject a ?type;
+    ?subject a lily:Book;
              ?predicate ?object.
-    FILTER(?type IN(lily:Lily, lily:Book)).
   }
 }
 SPARQL
 );
-        $sparqlArray = sparqlToArray($sparql);
-
-        $books = array();
-        $lilies = array();
-
-        foreach ($sparqlArray as $key => $item){
-            if($item['rdf:type'][0] === 'lily:Lily'){
-                $lilies[$key] = $item;
-            }elseif($item['rdf:type'][0] === 'lily:Book'){
-                $books[$key] = $item;
-            }
-        }
-
-        return view('book.index', compact('books', 'lilies'));
+        $books = sparqlToArray($sparql);
+        return view('book.index', compact('books'));
     }
 
     public function show($bookSlug){
         $sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?predicate ?object
 WHERE {
   {
-    lilyrdf:$bookSlug a lily:Book;
-                  ?predicate ?object.
-    BIND(lilyrdf:$bookSlug as ?subject)
+    VALUES ?subject { lilyrdf:$bookSlug }
+    ?subject ?predicate ?object.
   }
   UNION
   {
-    lilyrdf:$bookSlug schema:character ?lily.
-    ?lily ?predicate ?object.
-    BIND(?lily as ?subject)
+    VALUES ?predicate { schema:name lily:legion lily:garden lily:grade rdf:type }
+    lilyrdf:$bookSlug schema:character ?subject.
+    ?subject ?predicate ?object.
   }
 }
 SPARQL

@@ -10,13 +10,21 @@ class CharmController extends Controller
         $sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
 
-SELECT DISTINCT ?subject ?predicate ?object
+SELECT ?subject ?predicate ?object
 WHERE{
   {
-    ?subject a ?type;
+    VALUES ?predicate { schema:name schema:manufacturer schema:productID rdf:type }
+    ?subject a lily:Charm;
              ?predicate ?object.
-    FILTER(?type IN(lily:Charm, lily:Corporation))
+  }
+  UNION
+  {
+    VALUES ?predicate { schema:name rdf:type } 
+    ?subject a lily:Corporation;
+             ?predicate ?object.
   }
 }
 SPARQL
@@ -40,27 +48,27 @@ SPARQL
         $sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX schema: <http://schema.org/>
 
-SELECT DISTINCT ?subject ?predicate ?object
+SELECT ?subject ?predicate ?object
 WHERE{
   {
-    lilyrdf:$slug a lily:Charm;
-                  ?predicate ?object.
-    BIND(lilyrdf:$slug as ?subject)
+    VALUES ?subject { lilyrdf:$slug }
+    ?subject ?predicate ?object.
   }
   UNION
   {
-    lilyrdf:$slug ?rp ?ro.
-    FILTER(!isLiteral(?ro)).
-    ?ro ?predicate ?object.
-    BIND(?ro as ?subject)
+    VALUES ?rp { lily:user schema:manufacturer }
+    VALUES ?predicate { schema:name lily:charm }
+    lilyrdf:$slug ?rp ?subject.
+    ?subject ?predicate ?object.
   }
   UNION
   {
-    lilyrdf:$slug a lily:Charm;
-                  lily:user/lily:charm ?userData.
-    ?userData ?predicate ?object.
-    BIND(?userData as ?subject)
+    VALUES ?predicate { lily:resource lily:usedIn lily:additionalInformation }
+    lilyrdf:$slug lily:user/lily:charm ?subject.
+    ?subject lily:resource lilyrdf:$slug;
+             ?predicate ?object.
   }
 }
 
