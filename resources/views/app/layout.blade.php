@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/lemonade-mobile.css').$resource_qs }}" media="screen and (max-width:500px) and (orientation:portrait)">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <script src="{{ asset('js/clock.js').$resource_qs }}"></script>
     <script src="{{ asset('js/lemonade.js').$resource_qs }}" defer></script>
