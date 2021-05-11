@@ -12,13 +12,16 @@ class LegionController extends Controller
         $legions_sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?predicate ?object
 WHERE {
   {
+    VALUES ?type { lily:Legion lily:Taskforce }
+    VALUES ?predicate { schema:name schema:alternateName lily:legionGrade lily:numberOfMembers lily:disbanded rdf:type }
     ?subject a ?type;
              ?predicate ?object.
-    FILTER(?type IN(lily:Legion, lily:Taskforce))
   }
 }
 SPARQL
@@ -41,28 +44,14 @@ PREFIX schema: <http://schema.org/>
 SELECT ?subject ?predicate ?object
 WHERE {
   {
-    lilyrdf:$legionSlug a ?type;
-                        ?predicate ?object.
-    FILTER(?type IN(lily:Legion, lily:Taskforce))
-    BIND(lilyrdf:$legionSlug as ?subject)
+    VALUES ?subject { lilyrdf:$legionSlug }
+    ?subject ?predicate ?object.
   }
   UNION
   {
-    lilyrdf:$legionSlug schema:member ?member.
-    ?member ?predicate ?object.
-    BIND(?member as ?subject)
-  }
-  UNION
-  {
-    lilyrdf:$legionSlug schema:alumni ?alumni.
-    ?alumni ?predicate ?object.
-    BIND(?alumni as ?subject)
-  }
-  UNION
-  {
-    lilyrdf:$legionSlug lily:submember ?submember.
-    ?submember ?predicate ?object.
-    BIND(?submember as ?subject)
+    VALUES ?predicate { schema:name lily:nameKana lily:garden lily:grade lily:legionJobTitle lily:rareSkill }
+    lilyrdf:$legionSlug schema:member|schema:alumni|lily:submember ?subject.
+    ?subject ?predicate ?object.
   }
 }
 SPARQL
