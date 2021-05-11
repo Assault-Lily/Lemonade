@@ -31,6 +31,8 @@ SPARQL
             if($item['rdf:type'][0] === 'lily:Corporation') $corporation[$key] = $item;
         }
 
+        ksort($charms);
+
         return view('charm.index', compact('charms', 'corporation'));
     }
 
