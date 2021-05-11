@@ -180,7 +180,8 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                                 }else{
                                     $charm_used_in = '';
                                 }
-                                ?><div {!! !empty($charm_used_in) ? 'title="'.e($charm_used_in).'"' : '' !!}>{{ $charm_name }}</div><?php
+                                ?><a href="{{ route('charm.show', ['charm' => removePrefix($triples[$charm]['lily:resource'][0])]) }}" style="display: block"
+                                    {!! !empty($charm_used_in) ? 'title="'.e($charm_used_in).'"' : '' !!}>{{ $charm_name }}</a><?php
                             }
                             ?>
                             @if(count($triples[$ts]['lily:charm'] ?? array()) < 1)
