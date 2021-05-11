@@ -15,3 +15,11 @@ function convertDateString(string $string){
     }
 }
 
+/**
+ * @param string $key Prefix included string
+ * @return string
+ */
+function removePrefix(string $key): string
+{
+    return explode(':', $key, 2)[1] ?? $key;
+}
