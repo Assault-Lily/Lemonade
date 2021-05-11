@@ -31,6 +31,7 @@ $ogp['title'] = "サイトメニュー";
         <div class="buttons three">
             <a href="{{ route('lily.index') }}" class="button">リリィ一覧</a>
             <a href="{{ route('legion.index') }}" class="button">レギオン一覧</a>
+            <a href="{{ route('charm.index') }}" class="button">CHARM一覧</a>
         </div>
 
         <h2>メディアを探す</h2>
