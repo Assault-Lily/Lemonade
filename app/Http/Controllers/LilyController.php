@@ -243,6 +243,7 @@ SPQRQL
         $triples_sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?predicate ?object
@@ -253,31 +254,31 @@ WHERE {
     }
     UNION
     {
-        VALUES ?predicate { schema:name lily:resource lily:additionalInformation }
+        VALUES ?predicate { schema:name lily:resource lily:performIn lily:additionalInformation }
         lilyrdf:$slug ?rp ?subject.
         ?subject ?predicate ?object.
     }
     UNION
     {
-        VALUES ?predicate { schema:productID schema:name }
+        VALUES ?predicate { schema:productID schema:name rdf:type }
         lilyrdf:$slug lily:charm/lily:resource ?subject.
         ?subject ?predicate ?object.
     }
     UNION
     {
-        VALUES ?predicate { schema:name }
+        VALUES ?predicate { schema:name rdf:type }
         lilyrdf:$slug lily:relationship/lily:resource ?subject.
         ?subject ?predicate ?object.
     }
     UNION
     {
-        VALUES ?predicate { schema:name }
+        VALUES ?predicate { schema:name rdf:type }
         lilyrdf:$slug schema:sibling/lily:resource ?subject.
         ?subject ?predicate ?object.
     }
     UNION
     {
-        VALUES ?predicate { schema:name }
+        VALUES ?predicate { lily:genre schema:name schema:alternateName rdf:type }
         lilyrdf:$slug lily:cast/lily:performIn ?subject.
         ?subject ?predicate ?object.
     }
