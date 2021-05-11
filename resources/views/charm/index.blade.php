@@ -5,6 +5,12 @@
         .list-item-b{
             width: calc(50% - 5px);
         }
+
+        @media screen and (max-width:500px) and (orientation:portrait){
+            .list-item-b{
+                width: 100%;
+            }
+        }
     </style>
 @endsection
 

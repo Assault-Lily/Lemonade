@@ -11,6 +11,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/charm.css').$resource_qs }}">
+    <link rel="stylesheet" href="{{ asset('css/charm-mobile.css').$resource_qs }}"  media="screen and (max-width:500px) and (orientation:portrait)">
 @endsection
 
 @section('main')

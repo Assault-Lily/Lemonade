@@ -1,0 +1,21 @@
+
+
+#charm-data{
+    display: block;
+}
+#charm-data > #summary{
+    width: 95%;
+    margin: 0 auto;
+}
+#charm-data > table{
+    width: 100%;
+}
+
+.list.four{
+    display: block;
+    box-sizing: border-box;
+}
+.list.four > .list-item-a{
+    width: calc(100% - 6px);
+    margin-right: 0;
+}
