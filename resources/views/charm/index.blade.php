@@ -18,7 +18,7 @@
             @forelse($charms as $charmKey => $charm)
                 <a href="{{ route('charm.show', ['charm' => removePrefix($charmKey)]) }}" class="list-item-b">
                     <div class="title">
-                        <div style="font-size: small">{{ ($charm['schema:productID'][0] ?? '').' '.$charm['schema:name@en'][0] }}</div>
+                        <div style="font-size: small" class="lang-en">{{ ($charm['schema:productID'][0] ?? '').' '.$charm['schema:name@en'][0] }}</div>
                         {{ $charm['schema:name'][0] }}
                     </div>
                     <div>{!! e($corporation[$charm['schema:manufacturer'][0] ?? '-']['schema:name'][0] ?? '') ?: '<span style="color:gray">メーカー情報なし</span>' !!}</div>

@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    font-family: 'Noto Sans', 'Noto Sans JP', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     padding-top: 60px;
     min-height: calc(100vh - 60px);
     min-width: 1320px;
@@ -33,6 +33,9 @@ p.center{
 }
 p.notice{
     color: darkred;
+}
+.lang-en{
+    font-family: 'Noto Sans', 'Noto Sans JP', sans-serif;
 }
 
 a{

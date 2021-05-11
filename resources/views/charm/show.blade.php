@@ -4,77 +4,13 @@
  * @var $slug string
  */
 $cs = 'lilyrdf:'.$slug;
+$resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
 ?>
 
 @extends('app.layout', ['title' => 'CHARM詳細', 'titlebar' => ($charm[$cs]['schema:productID'][0] ?? '').' '.$charm[$cs]['schema:name'][0]])
 
 @section('head')
-    <style>
-        #charm-data{
-            display: flex;
-            margin: 10px 0;
-            justify-content: space-between;
-        }
-        #charm-data > #summary{
-            width: 50%;
-        }
-        #summary > #name-plate{
-            display: flex;
-            align-items: flex-end;
-        }
-        #charm-data > table{
-            width: 50%;
-            margin: 0;
-        }
-
-        #name-plate{
-            font-weight: bold;
-        }
-        #product-id{
-            font-size: 30px;
-            margin-right: 7px;
-        }
-        #charm-name > #name-ja{
-            font-size: 30px;
-        }
-        #charm-name > #name-en{
-            font-size: 18px;
-            line-height: 18px;
-            padding-left: 2px;
-        }
-        #charm-name > #name-ja > #name-zh{
-            font-size: smaller;
-            margin-left: 5px;
-        }
-
-        #additionalInfos{
-            margin-top: 5px;
-        }
-
-        #charm-visual{
-            margin: 0 auto 15px;
-            height: 130px;
-            line-height: 120px;
-            text-align: center;
-            color: gray;
-            background: rgba(100,100,100,.2);
-            border-bottom-right-radius: 5px;
-            border-bottom-left-radius: 5px;
-        }
-
-        .list.four{
-            display: flex;
-            justify-content: left;
-            box-sizing: border-box;
-        }
-        .list.four > .list-item-a{
-            width: calc(25% - 15px);
-            margin-right: 12px;
-        }
-        .list.four > .list-item-a:nth-child(4n){
-            margin-right: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/charm.css').$resource_qs }}">
 @endsection
 
 @section('main')
