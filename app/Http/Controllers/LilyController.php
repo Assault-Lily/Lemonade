@@ -254,7 +254,7 @@ WHERE {
     }
     UNION
     {
-        VALUES ?predicate { schema:name lily:resource lily:performIn lily:additionalInformation }
+        VALUES ?predicate { schema:name lily:resource lily:usedIn lily:performIn lily:additionalInformation }
         lilyrdf:$slug ?rp ?subject.
         ?subject ?predicate ?object.
     }
