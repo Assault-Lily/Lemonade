@@ -129,6 +129,9 @@
     background: linear-gradient(45deg ,#1a202c, #22242b);
     color: lightgray;
 }
+#right-tag .teacher{
+    background: darkblue;
+}
 
 #pics{
     height: 300px;

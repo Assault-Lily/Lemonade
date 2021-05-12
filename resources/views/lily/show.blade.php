@@ -297,6 +297,9 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @if(!empty($triples[$ts]['lily:isBoosted']) and $triples[$ts]['lily:isBoosted'][0] === 'true')
                         <div class="boosted">強化リリィ</div>
                     @endif
+                    @if(!empty($triples[$ts]['rdf:type']) and $triples[$ts]['rdf:type'][0] === 'lily:Teacher')
+                        <div class=teacher>教導官</div>
+                    @endif
                 </div>
 
                 <div id="pics">
