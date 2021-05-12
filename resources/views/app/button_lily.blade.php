@@ -17,7 +17,16 @@ $icon = !empty($icons) ? $icons[array_rand($icons)] : null;
             @else
             <div class="no-image">NoImage</div>
         @endif
-        <div style="color: {{ empty($lily['lily:color'][0]) ? 'transparent' : '#'.$lily['lily:color'][0] }}; font-weight: bold; text-align: right;font-size: 13px;">{{ $lily['lily:color'][0] ?? '' }}</div>
+        @if(!empty($lily['lily:color'][0]))
+            <div style="color: {{ '#'.$lily['lily:color'][0] }}; font-weight: bold; text-align: right;font-size: 13px;">
+                {{ $lily['lily:color'][0] }}
+            </div>
+        @endif
+        @if(!empty($lily['rdf:type'][0]) and $lily['rdf:type'][0] === 'lily:Teacher')
+            <div style="color: darkblue; font-weight: bold; text-align: center;font-size: 13px;">
+                教導官
+            </div>
+        @endif
     </div>
     <div class="list-item-data">
         <div class="title-ruby">{!! e($lily['lily:nameKana'][0] ?? '') ?: "<i style=\"color:gray\">読みデータなし</i>" !!}</div>
