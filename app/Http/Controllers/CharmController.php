@@ -22,7 +22,7 @@ WHERE{
   }
   UNION
   {
-    VALUES ?predicate { schema:name rdf:type } 
+    VALUES ?predicate { schema:name rdf:type }
     ?subject a lily:Corporation;
              ?predicate ?object.
   }
@@ -58,7 +58,7 @@ WHERE{
   }
   UNION
   {
-    VALUES ?rp { lily:user schema:manufacturer }
+    VALUES ?rp { lily:user schema:manufacturer lily:isVariantOf lily:hasVariant }
     VALUES ?predicate { schema:name lily:charm }
     lilyrdf:$slug ?rp ?subject.
     ?subject ?predicate ?object.
