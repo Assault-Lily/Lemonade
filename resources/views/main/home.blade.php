@@ -133,6 +133,17 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                 <span>レギオン一覧</span>
             </a>
             <hr>
+            <a href="{{ route('legion.index') }}" >
+                <i class="fas fa-pencil-ruler"></i>
+                <span>CHARM一覧</span>
+                <!-- TODO: https://github.com/miyacorata/Lemonade/issues/63 -->
+            </a>
+            <hr>
+            <a href="{{ route('imedic') }}" >
+                <i class="fas fa-spell-check"></i>
+                <span>IME辞書生成</span>
+            </a>
+            <hr>
             <a href="{{ route('book.index') }}" >
                 <i class="fas fa-book"></i>
                 <span>書籍一覧</span>
@@ -141,11 +152,6 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
             <a href="{{ route('play.index') }}" >
                 <i class="fas fa-street-view"></i>
                 <span>舞台公演一覧</span>
-            </a>
-            <hr>
-            <a href="{{ route('imedic') }}" >
-                <i class="fas fa-spell-check"></i>
-                <span>IME辞書生成</span>
             </a>
         </div>
         <h2>assaultlily-rdf 更新情報</h2>
