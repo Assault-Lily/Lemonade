@@ -133,7 +133,7 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                 <span>レギオン一覧</span>
             </a>
             <hr>
-            <a href="{{ route('legion.index') }}" >
+            <a href="{{ route('charm.index') }}" >
                 <i class="fas fa-pencil-ruler"></i>
                 <span>CHARM一覧</span>
                 <!-- TODO: https://github.com/miyacorata/Lemonade/issues/63 -->
