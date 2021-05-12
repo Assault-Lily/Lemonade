@@ -100,6 +100,9 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @if(!empty($triples[$ts]['lily:gardenDepartment']))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:gardenDepartment'], 'th' => '学科'])
                     @endif
+                    @if(!empty($triples[$ts]['lily:class'][0]))
+                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:class'][0], 'th' => 'クラス'])
+                    @endif
                     <?php
                         $legion_name = $triples[$triples[$ts]['lily:legion'][0] ?? 0]['schema:name'][0] ?? null;
                         if(!empty($legion_name) and !empty($triples[$triples[$ts]['lily:legion'][0]]['schema:alternateName'][0])){
