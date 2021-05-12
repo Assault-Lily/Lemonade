@@ -49,6 +49,7 @@ SPARQL
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?subject ?predicate ?object
 WHERE{
@@ -59,7 +60,7 @@ WHERE{
   UNION
   {
     VALUES ?rp { lily:user schema:manufacturer lily:isVariantOf lily:hasVariant }
-    VALUES ?predicate { schema:name lily:charm }
+    VALUES ?predicate { schema:name lily:charm rdf:type }
     lilyrdf:$slug ?rp ?subject.
     ?subject ?predicate ?object.
   }
