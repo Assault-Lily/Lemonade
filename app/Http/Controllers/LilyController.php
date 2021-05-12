@@ -33,6 +33,16 @@ WHERE {
     }
     UNION
     {
+        VALUES ?predicate {
+            schema:name lily:nameKana schema:familyNameKana foaf:age
+            lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
+            lily:garden lily:grade lily:legion lily:position rdf:type
+        }
+        ?subject a lily:Teacher;
+                 ?predicate ?object.
+    }
+    UNION
+    {
         VALUES ?predicate { schema:name schema:alternameName rdf:type }
         ?subject a lily:Legion;
                  ?predicate ?object.
@@ -50,7 +60,7 @@ SPQRQL
 
         // レギオンとリリィの振り分け
         foreach ($triples as $key => $triple){
-            if($triple['rdf:type'][0] === 'lily:Lily'){
+            if($triple['rdf:type'][0] === 'lily:Lily' or ($triple['rdf:type'][0] === 'lily:Teacher' and request()->get('containTeacher','') === 'true')){
                 $lilies[$key] = $triple;
 
                 // スキルデータリスト生成
