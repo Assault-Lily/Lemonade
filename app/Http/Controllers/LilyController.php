@@ -27,6 +27,7 @@ WHERE {
             schema:name lily:nameKana schema:familyNameKana foaf:age
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
             lily:garden lily:grade lily:legion lily:position rdf:type
+            schema:height schema:weight lily:bloodType
         }
         ?subject a lily:Lily;
                  ?predicate ?object.
@@ -37,6 +38,7 @@ WHERE {
             schema:name lily:nameKana schema:familyNameKana foaf:age
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
             lily:garden lily:grade lily:legion lily:position rdf:type
+            schema:height schema:weight lily:bloodType
         }
         ?subject a lily:Teacher;
                  ?predicate ?object.
@@ -126,6 +128,14 @@ SPQRQL
                     $filterKey = 'lily:garden';
                     $filterInfo['key'] = 'ガーデン';
                     break;
+                case 'bloodType':
+                    $filterKey = 'lily:bloodType';
+                    $filterInfo['key'] = '血液型';
+                    $additional = [
+                        'key' => $filterKey,
+                        'suffix' => '型'
+                    ];
+                    break;
                 default:
                     abort(400, '指定されたキーではフィルタできません');
             }
@@ -174,6 +184,27 @@ SPQRQL
                 break;
             case 'garden':
                 $sort = 'lily:garden';
+                break;
+            case 'height':
+                $sort = 'schema:height';
+                $additional = [
+                    'key' => $sort,
+                    'suffix' => 'cm'
+                ];
+                break;
+            case 'weight':
+                $sort = 'schema:weight';
+                $additional = [
+                    'key' => $sort,
+                    'suffix' => 'kg'
+                ];
+                break;
+            case 'bloodType':
+                $sort = 'lily:bloodType';
+                $additional = [
+                    'key' => $sort,
+                    'suffix' => '型'
+                ];
                 break;
             default:
                 abort(400, '指定されたキーではソートできません');

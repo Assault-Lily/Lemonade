@@ -115,6 +115,12 @@
                         <option value="d-givenName">名前 | 降順</option>
                         <option value="a-age">年齢 | 昇順</option>
                         <option value="d-age">年齢 | 降順</option>
+                        <option value="a-height">身長 | 昇順</option>
+                        <option value="d-height">身長 | 降順</option>
+                        <option value="a-weight">体重 | 昇順</option>
+                        <option value="d-weight">体重 | 降順</option>
+                        <option value="a-bloodType">血液型 | 昇順</option>
+                        <option value="d-bloodType">血液型 | 降順</option>
                         <option value="a-position">ポジション | 昇順</option>
                         <option value="d-position">ポジション | 降順</option>
                         <option value="a-rareSkill">レアスキル | 昇順</option>
@@ -135,7 +141,7 @@
         @if(!empty($filterInfo))
             <p class="center">
                 <strong>{{ $filterInfo['key'] }}</strong> が
-                <strong>"{{ $filterInfo['value'] }}"</strong>
+                <strong>"{{ $filterInfo['value'].($additional['suffix'] ?? '') }}"</strong>
                 のリリィでフィルタしています
                 <a href="{{ route('lily.index') }}" class="button smaller">フィルタ解除</a>
             </p>
@@ -180,6 +186,13 @@
                 <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'AZ']) }}" class="button">AZ</a>
                 <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'TZ']) }}" class="button">TZ</a>
                 <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'BZ']) }}" class="button">BZ</a>
+            </div>
+            <h3>血液型</h3>
+            <div id="position-selector">
+                <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'A']) }}" class="button">A</a>
+                <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'B']) }}" class="button">B</a>
+                <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'O']) }}" class="button">O</a>
+                <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'AB']) }}" class="button">AB</a>
             </div>
             <h3>スキル</h3>
             <form action="{{ route('lily.index') }}" method="get">
