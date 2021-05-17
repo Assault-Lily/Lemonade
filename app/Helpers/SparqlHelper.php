@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @param $query string SPARQL Query
- * @param $predicateReplace bool Replace predicate to prefixed string
+ * @param string $query SPARQL Query
+ * @param int $timeout
+ * @param bool $predicateReplace Replace predicate to prefixed string
  * @return object
  * @throws \Illuminate\Http\Client\RequestException
- * @throws \Illuminate\Http\Client\ConnectionException
  */
 function sparqlQuery(string $query, int $timeout = 5, bool $predicateReplace = true): object
 {
@@ -26,8 +26,8 @@ function sparqlQuery(string $query, int $timeout = 5, bool $predicateReplace = t
 }
 
 /**
- * @param $query string SPARQL Query
- * @param $predicateReplace bool Replace predicate to prefixed string
+ * @param string $query SPARQL Query
+ * @param bool $predicateReplace Replace predicate to prefixed string
  * @return object
  */
 function sparqlQueryOrDie(string $query, int $timeout = 5, bool $predicateReplace = true): object
@@ -35,10 +35,12 @@ function sparqlQueryOrDie(string $query, int $timeout = 5, bool $predicateReplac
     try {
         $res = sparqlQuery($query, $timeout, $predicateReplace);
     }catch (\Illuminate\Http\Client\ConnectionException $e){
-        $message = "SPARQLエンドポイントに接続できませんでした。\n\n";
+        $message = "SPARQLエンドポイントに接続できませんでした。\n管理者までご連絡ください。";
         abort(502, $message);
     }catch (\Illuminate\Http\Client\RequestException $e){
-        $message = "SPARQLエンドポイントから無効な応答が返されました。\n\n";
+        $message = "SPARQLエンドポイントから無効な応答が返されました。\n";
+        $message .= "SPARQLエンドポイントがメンテナンス中の可能性があります。1分ほど待って再度お試しください。\n";
+        $message .= "改善されない場合は管理者までご連絡ください。\n\n";
         $message .= 'SPARQL endpoint returned '.$e->getCode();
         abort(502, $message);
     }
