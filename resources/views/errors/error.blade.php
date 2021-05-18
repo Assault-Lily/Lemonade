@@ -25,5 +25,11 @@ $message = $exception->getMessage() && $sc !== 500 ? $exception->getMessage() : 
     <div style="margin: 25vh auto;width: fit-content">
         <h1 style="font-size: 40px; color: #2d3748">{{ 'Error '.$sc }}</h1>
         <p>{!! nl2br($message) !!}</p>
+        @if((int)($sc / 100) === 5)
+            <div class="buttons" style="margin-top: 30px;">
+                <a href="javascript:location.reload()" class="button primary">リロード</a>
+                <a href="https://twitter.com/{{ config('lemonade.developer.twitter') }}" class="button" target="_blank">管理者に連絡</a>
+            </div>
+        @endif
     </div>
 @endsection
