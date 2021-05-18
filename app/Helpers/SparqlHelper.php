@@ -6,6 +6,7 @@
  * @param bool $predicateReplace Replace predicate to prefixed string
  * @return object
  * @throws \Illuminate\Http\Client\RequestException
+ * @throws \Illuminate\Http\Client\ConnectionException
  */
 function sparqlQuery(string $query, int $timeout = 5, bool $predicateReplace = true): object
 {
@@ -27,6 +28,7 @@ function sparqlQuery(string $query, int $timeout = 5, bool $predicateReplace = t
 
 /**
  * @param string $query SPARQL Query
+ * @param int $timeout
  * @param bool $predicateReplace Replace predicate to prefixed string
  * @return object
  */
@@ -37,12 +39,17 @@ function sparqlQueryOrDie(string $query, int $timeout = 5, bool $predicateReplac
     }catch (\Illuminate\Http\Client\ConnectionException $e){
         $message = "SPARQLエンドポイントに接続できませんでした。\n管理者までご連絡ください。";
         abort(502, $message);
+        exit();
     }catch (\Illuminate\Http\Client\RequestException $e){
         $message = "SPARQLエンドポイントから無効な応答が返されました。\n";
-        $message .= "SPARQLエンドポイントがメンテナンス中の可能性があります。1分ほど待って再度お試しください。\n";
-        $message .= "改善されない場合は管理者までご連絡ください。\n\n";
-        $message .= 'SPARQL endpoint returned '.$e->getCode();
+        if (($e->response->status() ?? 500) === 503){
+            $message .= "SPARQLエンドポイントがメンテナンス中か混雑しています。2分ほど待って再度お試しください。\n";
+        }else{
+            $message .= "通常と異なるエラーです。管理者までご連絡ください。\n";
+        }
+        $message .= PHP_EOL.'SPARQL endpoint returned '.$e->getCode();
         abort(502, $message);
+        exit();
     }
     return $res;
 }
