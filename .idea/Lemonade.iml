@@ -133,5 +133,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="all" level="application" />
     <orderEntry type="library" name="dialog-polyfill" level="application" />
+    <orderEntry type="library" name="codemirror" level="application" />
+    <orderEntry type="library" name="xml" level="application" />
+    <orderEntry type="library" name="turtle" level="application" />
   </component>
 </module>

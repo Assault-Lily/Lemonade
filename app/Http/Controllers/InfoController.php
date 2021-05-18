@@ -6,6 +6,7 @@ use App\Models\Image;
 use Carbon\Carbon;
 use Exception;
 use ZipArchive;
+use Illuminate\Support\Facades\Http;
 
 class InfoController extends Controller
 {
@@ -170,6 +171,25 @@ PLIST;
         }
 
         return view('main.imedic', compact('dicString'));
+    }
+
+    public function rdfDescribe(string $resource = null){
+        if (is_null($resource)) abort(400, "リソースが指定されていません");
+
+        $turtle = http::get(config('lemonade.sparqlEndpoint'), [
+            'format' => 'turtle',
+            'query' => <<<SPARQL
+PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+DESCRIBE lilyrdf:$resource
+SPARQL
+        ])->throw(function ($response, $e){
+            abort(502, "SPARQLエンドポイントが正しく応答しませんでした。");
+        })->body();
+
+        if(mb_strlen(trim(preg_replace('/^@prefix.+$/im','',$turtle))) === 0)
+            abort(404, "該当するリソースが存在しません");
+
+        return view('main.rdfDescribe', compact('turtle', 'resource'));
     }
 
     public function ed403(){

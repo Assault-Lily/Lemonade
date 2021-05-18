@@ -31,6 +31,8 @@ Route::get('/menu', [InfoController::class, 'menu'])->name('menu');
 
 Route::get('/imedic', [InfoController::class, 'generateImeDic'])->name('imedic');
 
+Route::get('/rdfDescribe/{resource}', [InfoController::class, 'rdfDescribe'])->name('rdfDescribe');
+
 Route::middleware('throttle:30,1')->group(function (){
     Route::get('/ogp/{type}/{title}.jpg', [OGPController::class, 'generate'])->name('ogp');
 });
