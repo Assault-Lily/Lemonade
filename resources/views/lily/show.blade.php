@@ -309,7 +309,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     <div style="text-align: center; padding-top: 130px; color: gray;">
                         <div style="margin-bottom: .4em">Image Unavailable</div>
                         <div class="buttons" style="font-size: smaller">
-                            <a href="https://twitter.com/search?q={{ urlencode('#アサルトリリィ_FA '.$triples[$ts]['schema:givenName'][0]) }}&f=live"
+                            <a href="https://twitter.com/search?q={{ urlencode('#アサルトリリィ_FA '.($triples[$ts]['schema:givenName'][0] ?? $triples[$ts]['schema:name'][0])) }}&f=live"
                                target="_blank" class="button smaller">
                                 #アサルトリリィ_FA
                             </a>
