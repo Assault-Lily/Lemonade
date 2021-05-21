@@ -23,3 +23,24 @@ function removePrefix(string $key): string
 {
     return explode(':', $key, 2)[1] ?? $key;
 }
+
+/**
+ * @param string $grade Grade
+ * @param string $prefix Grade prefix (ex: '中等部')
+ * @param int|null $offset Grade manually offset
+ * @param string $suffix Grade suffix (default: '年')
+ * @return string
+ */
+function convertGradeString(string $grade, string $prefix = '', int $offset = null, string $suffix = '年'): string
+{
+    if(is_null($offset)){ // オフセット未セット時
+        if(7 <= $grade && $grade <= 9){ // 中等部
+            $prefix = $prefix ?: '中等部';
+            $grade -= 6;
+        }
+        elseif(10 <= $grade && $grade <= 12){ // 高等部
+            $grade -= 9;
+        }
+    }
+    return $prefix.($grade + $offset).$suffix;
+}
