@@ -144,7 +144,7 @@ $ogp['description'] = '書籍「'.$book['schema:name'][0].'」の情報です。
                         <div class="title">{{ $lilies[$lily]['schema:name'][0] }}</div>
                         <div>
                             {{ $lilies[$lily]['lily:garden'][0] ?? 'ガーデン情報なし' }}
-                            {{ !empty($lilies[$lily]['lily:grade'][0]) ? $lilies[$lily]['lily:grade'][0].'年' : '' }}
+                            {{ !empty($lilies[$lily]['lily:grade'][0]) ? convertGradeString($lilies[$lily]['lily:grade'][0]) : '' }}
                         </div>
                     </div>
                 </a>

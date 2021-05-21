@@ -33,8 +33,9 @@ $icon = !empty($icons) ? $icons[array_rand($icons)] : null;
         <div class="title">{{ $lily['schema:name'][0] }}</div>
         <div>
             {{ $lily['lily:garden'][0] ?? 'ガーデン情報なし' }}
-            {{ !empty($lily['lily:grade'][0]) ? $lily['lily:grade'][0].'年' : '' }}
-            | {{ $legion['schema:name'][0] ?? 'レギオン情報なし' }}
+            {{ !empty($lily['lily:grade'][0]) ? convertGradeString($lily['lily:grade'][0]) : '' }}<br>
+            {{ !empty($legion['schema:name'][0]) ? 'LG '.$legion['schema:name'][0] : 'レギオン情報なし' }}
+            {{ ($lily['lily:legionJobTitle'][0]) ?? '' }}
             {{ !empty($legion['schema:alternateName'][0]) ? '('.$legion['schema:alternateName'][0].')' : '' }}
         </div>
         <div>レアスキル : {!! e($lily['lily:rareSkill'][0] ?? '') ?: "<span style=\"color:gray\">N/A</span>" !!}</div>

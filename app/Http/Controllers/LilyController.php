@@ -26,7 +26,7 @@ WHERE {
         VALUES ?predicate {
             schema:name lily:nameKana schema:familyNameKana foaf:age
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
-            lily:garden lily:grade lily:legion lily:position rdf:type
+            lily:garden lily:grade lily:legion lily:legionJobTitle lily:position rdf:type
             schema:height schema:weight lily:bloodType
         }
         ?subject a lily:Lily;
