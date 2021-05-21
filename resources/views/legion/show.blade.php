@@ -73,8 +73,9 @@ if(empty($legion[$ls]['lily:disbanded'][0]) || $legion[$ls]['lily:disbanded'][0]
     </div>
     <main>
         <?php
+        $disbanded = !empty($legion[$ls]['lily:disbanded'][0]) && $legion[$ls]['lily:disbanded'][0] === 'true';
         $membersArray = [
-            'schema:member' => '所属リリィ',
+            'schema:member' => ($disbanded ? '解散時点での' : '').'所属リリィ',
             'lily:submember' => 'サブメンバー',
             'schema:alumni' => '過去所属していたリリィ'
         ]

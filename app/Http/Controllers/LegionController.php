@@ -57,7 +57,7 @@ WHERE {
   UNION
   {
     VALUES ?predicate { schema:name }
-    lilyrdf:$legionSlug schema:alumni/lily:legion ?subject.
+    lilyrdf:$legionSlug schema:member/lily:legion|schema:alumni/lily:legion ?subject.
     ?subject ?predicate ?object.
   }
 }
