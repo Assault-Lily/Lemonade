@@ -129,6 +129,10 @@ $ogp['description'] = '書籍「'.$book['schema:name'][0].'」の情報です。
                     @endif
                     </tbody>
                 </table>
+                <div>
+                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="ja" data-show-count="false">Tweet</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
                 <div id="abstract">
                     <h3>あらすじ</h3>
                     <p>{!! nl2br(trim($book['schema:abstract'][0] ?? '')) ?: "<span style='color:gray'>あらすじが登録されていません</span>" !!}</p>
