@@ -376,35 +376,32 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         'schema:sibling',
                         'lily:relationship',
                     ];
-                    // 疑似中間ノードの生成とキー配列への追加
+                    // 中間ノードのない関係
                     foreach ($directRel as $key => $psr){
-                        $count = 0;
                         foreach ($triples[$ts][$key] ?? array() as $psrLily){
-                            $triples[$key.'-'.$count] = [
-                                'lily:resource' => [ $psrLily ],
-                                'lily:additionalInformation' => [ $psr ],
-                            ];
-                            $relationship[] = $key.'-'.$count;
-                            $count++;
+                            $relationship[$psrLily][] = $psr;
                         }
                     }
-                    // キー配列のマージ
+                    // 中間ノードのある関係
                     foreach ($IntermediateRel as $predicate){
-                        if(!empty($triples[$ts][$predicate]))
-                            $relationship = array_merge_recursive($relationship, $triples[$ts][$predicate]);
+                        foreach ($triples[$ts][$predicate] ?? array() as $imRel){
+                            if (empty($relationship[$triples[$imRel]['lily:resource'][0]]))
+                                $relationship[$triples[$imRel]['lily:resource'][0]] = array();
+                            $relationship[$triples[$imRel]['lily:resource'][0]] =
+                                array_merge($relationship[$triples[$imRel]['lily:resource'][0]], $triples[$imRel]['lily:additionalInformation'] ?? array());
+                        }
                     }
                     ?>
                 @if(!empty($relationship))
                     <div>
                         <h3>関連する人物</h3>
                         <div class="list" id="relationship">
-                            @foreach($relationship as $rel)
-                                <?php /** @var $rel string */ $key = $triples[$rel]['lily:resource'][0]; ?>
-                                <a href="{{ route('lily.show', ['lily' => str_replace('lilyrdf:','',$triples[$rel]['lily:resource'][0])]) }}"
+                            @foreach($relationship as $lilyrdf => $relation)
+                                <a href="{{ route('lily.show', ['lily' => removePrefix($lilyrdf)]) }}"
                                    class="list-item-a">
                                     <div class="list-item-data">
-                                        <div class="title" style="font-size: 17px">{{ $triples[$key]['schema:name'][0] ?? '' }}</div>
-                                        @foreach($triples[$rel]['lily:additionalInformation'] ?? array() as $info)
+                                        <div class="title" style="font-size: 17px">{{ $triples[$lilyrdf]['schema:name'][0] ?? '' }}</div>
+                                        @foreach($relation ?? array() as $info)
                                         <div>{{ $info ?? '' }}</div>
                                         @endforeach
                                     </div>
