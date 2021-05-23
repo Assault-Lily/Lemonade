@@ -49,7 +49,11 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
                 <h3>あらすじ</h3>
                 <p class="center" style="line-height: 2em">{!! nl2br($play[$ps]['schema:abstract'][0]) ?: "<span style='color:gray;'>N/A</span>" !!}</p>
             @endif
-            <h3>公演概要</h3>
+            <h3 style="display: flex; justify-content: flex-start; align-items: flex-end">
+                <span style="margin-right: 10px">公演概要</span>
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="ja" data-show-count="false">Tweet</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </h3>
             @if(\Carbon\Carbon::now()->lt(convertDateString($play[$ps]['schema:startDate'][0])))
                 <p class="center notice">
                     <strong>この公演はまだ初演前です。</strong><br>
