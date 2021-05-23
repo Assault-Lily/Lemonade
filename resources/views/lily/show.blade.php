@@ -23,7 +23,7 @@ $ogp['description'] = "リリィ「{$triples[$ts]['schema:name'][0]}」のプロ
 if(!empty($triples[$ts]['lily:garden'][0])){
     $ogp['description'] .= $triples[$ts]['lily:garden'][0].
         ($triples[$ts]['lily:gardenDepartment'][0] ?? '');
-    if(!empty($triples[$ts]['lily:grade'][0])) $ogp['description'] .= $triples[$ts]['lily:grade'][0].'年生です。';
+    if(!empty($triples[$ts]['lily:grade'][0])) $ogp['description'] .= convertGradeString($triples[$ts]['lily:grade'][0]).'です。';
     else $ogp['description'] .= 'のリリィです。';
 }
 
