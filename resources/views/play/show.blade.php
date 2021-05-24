@@ -133,8 +133,16 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
                                                 @endif
                                             @endif
                                         </td>
-
                                     </tr>
+                                    @if(!empty($play[$cast]['lily:additionalInformation']))
+                                        <tr>
+                                            <td colspan="2" style="font-size: small; padding-left: 2em">
+                                                @foreach($play[$cast]['lily:additionalInformation'] as $castInfo)
+                                                    <div>{{ $castInfo }}</div>
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </table>
 
