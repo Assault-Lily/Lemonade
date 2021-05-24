@@ -83,7 +83,7 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
                         <th>主催</th><td colspan="3">{{ implode(', ' ,$play[$ps]['lily:organizer'] ?? array()) }}</td>
                     </tr>
                     <tr>
-                        <th>プロデューサー</th><td colspan="3">{{ implode(', ' ,$play[$ps]['lily:producer'] ?? array()) }}</td>
+                        <th>プロデューサー</th><td colspan="3">{!! e(implode(', ' ,$play[$ps]['lily:producer'] ?? array())) ?: '<span style="color:gray">N/A</span>' !!}</td>
                     </tr>
                     <tr>
                         <th>脚本</th><td>{{ implode(', ' ,$play[$ps]['lily:scenarioWriter'] ?? array()) }}</td>
@@ -116,7 +116,14 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
                     @endif
                     @if(!empty($play[$ps]['lily:additionalInformation']))
                         <tr>
-                            <th>特記事項</th><td colspan="3">{{ implode(', ' ,$play[$ps]['lily:additionalInformation'] ?? array()) }}</td>
+                            <th>特記事項</th><td colspan="3" rowspan="2">
+                                @foreach($play[$ps]['lily:additionalInformation'] as $playInfo)
+                                    <div>{{ $playInfo }}</div>
+                                @endforeach
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="spacer"></td>
                         </tr>
                     @endif
                     <tr>
