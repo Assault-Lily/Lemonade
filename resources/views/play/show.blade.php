@@ -114,6 +114,11 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
                             <th>スーパーバイザー</th><td colspan="3">{{ implode(', ' ,$play[$ps]['lily:supervisor'] ?? array()) }}</td>
                         </tr>
                     @endif
+                    @if(!empty($play[$ps]['lily:additionalInformation']))
+                        <tr>
+                            <th>特記事項</th><td colspan="3">{{ implode(', ' ,$play[$ps]['lily:additionalInformation'] ?? array()) }}</td>
+                        </tr>
+                    @endif
                     <tr>
                         <th>キャスト</th>
                         <td rowspan="2">
