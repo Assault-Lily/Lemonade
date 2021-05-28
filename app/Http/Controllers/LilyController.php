@@ -95,10 +95,10 @@ SPQRQL
                 $legions[$key] = $triple;
             }
         }
-        $datalist['rareSkill'] = array_unique($datalist['rareSkill']);
-        $datalist['subSkill'] = array_unique($datalist['subSkill']);
-        $datalist['boostedSkill'] = array_unique($datalist['boostedSkill']);
-        $datalist['garden'] = array_unique($datalist['garden']);
+        $datalist['rareSkill'] = array_unique($datalist['rareSkill'] ?? array());
+        $datalist['subSkill'] = array_unique($datalist['subSkill'] ?? array());
+        $datalist['boostedSkill'] = array_unique($datalist['boostedSkill'] ?? array());
+        $datalist['garden'] = array_unique($datalist['garden'] ?? array());
 
         // 特殊表示変数初期化
         $additional = array();
