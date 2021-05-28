@@ -135,11 +135,9 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
                                         <td>{{ $play[$cast]['schema:name'][0] }}</td>
                                         <td>
                                             @if(!empty($play[$cast]['lily:performAs'][0]))
-                                                @if(!empty($play[$play[$cast]['lily:performAs'][0]]) and $play[$play[$cast]['lily:performAs'][0]]['rdf:type'][0] === 'lily:Lily')
+                                                @if(!empty($play[$play[$cast]['lily:performAs'][0]]))
                                                     {{ '(' }} <a href="{{ route('lily.show', ['lily' => str_replace('lilyrdf:', '', $play[$cast]['lily:performAs'][0])]) }}">
                                                         {{ $play[$play[$cast]['lily:performAs'][0]]['schema:name'][0] }}</a> 役 )
-                                                @elseif(!empty($play[$play[$cast]['lily:performAs'][0]]) and !empty($play[$play[$cast]['lily:performAs'][0]]['schema:name'][0]))
-                                                    {{ '( '.$play[$play[$cast]['lily:performAs'][0]]['schema:name'][0] }} 役 )
                                                 @else
                                                     {{ '( '.$play[$cast]['lily:performAs'][0] }} 役 )
                                                 @endif

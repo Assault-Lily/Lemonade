@@ -105,7 +105,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
         <h2>ユーザー</h2>
         <div id="users" class="list four">
             @forelse($charm[$cs]['lily:user'] ?? array() as $user)
-                @continue(empty($charm[$user]) or $charm[$user]['rdf:type'][0] !== 'lily:Lily')
+                @continue(empty($charm[$user]))
                 <a href="{{ route('lily.show',['lily' => removePrefix($user)]) }}" class="list-item-a">
                     <div class="list-item-data">
                         <div class="title">{{ $charm[$user]['schema:name'][0] }}</div>
