@@ -240,9 +240,9 @@ SPQRQL
         foreach ($lilies as $lily){
             // ソート用キー配列生成
             $lily_sortKey[] = implode(',' ,$lily[$sort] ?? ['-']);
-            $lily_sortKeyForKeyUnknown[] = isset($lily[$sort][0]) ? 0 : 1;
+            $lily_sortKeyForKeyUnknown[] = !empty($lily[$sort][0]) ? 0 : 1;
             $lily_sortKeyKana[] = $lily['lily:nameKana'][0] ?? '-';
-            $lily_sortKeyForKanaUnknown[] = isset($lily['lily:nameKana'][0]) ? 0 : 1;
+            $lily_sortKeyForKanaUnknown[] = !empty($lily['lily:nameKana'][0]) ? 0 : 1;
         }
         unset($lily);
         // リリィのソート
