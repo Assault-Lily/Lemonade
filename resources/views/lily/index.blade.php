@@ -163,11 +163,15 @@
     </main>
 
     <dialog id="filter-setting" class="window-a">
-        <div class="header">フィルタ設定</div>
+        <div class="header">表示・フィルタ設定</div>
         <div class="body">
-            <p class="center">
-                フィルタ設定を変更するとソートは一旦解除されます。
-            </p>
+
+            <h3>表示設定</h3>
+            <div id="viewMode-selector">
+                <a href="javascript:changeGetAttribute('teacher', null)" class="button">リリィのみ</a>
+                <a href="javascript:changeGetAttribute('teacher', 'contain')" class="button">教導官を含む</a>
+                <a href="javascript:changeGetAttribute('teacher', 'only')" class="button">教導官のみ</a>
+            </div>
             <h3>ガーデン</h3>
             <form action="{{ route('lily.index') }}" method="get">
                 <input type="hidden" name="filterBy" value="garden">
@@ -188,7 +192,7 @@
                 <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'BZ']) }}" class="button">BZ</a>
             </div>
             <h3>血液型</h3>
-            <div id="position-selector">
+            <div id="bloodType-selector">
                 <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'A']) }}" class="button">A</a>
                 <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'B']) }}" class="button">B</a>
                 <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'O']) }}" class="button">O</a>

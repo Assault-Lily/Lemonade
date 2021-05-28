@@ -61,8 +61,19 @@ SPQRQL
         $datalist = array();
 
         // レギオンとリリィの振り分け
+        switch (request()->get('teacher','exclude')){
+            case 'exclude':
+                $approveType = ['lily:Lily']; break;
+            case 'contain':
+                $approveType = ['lily:Lily', 'lily:Teacher']; break;
+            case 'only':
+                $approveType = ['lily:Teacher']; break;
+            default:
+                abort(400, '教導官表示設定に誤りがあります');
+                exit();
+        }
         foreach ($triples as $key => $triple){
-            if($triple['rdf:type'][0] === 'lily:Lily' or ($triple['rdf:type'][0] === 'lily:Teacher' and request()->get('containTeacher','') === 'true')){
+            if(in_array($triple['rdf:type'][0], $approveType)){
                 $lilies[$key] = $triple;
 
                 // スキルデータリスト生成
@@ -138,6 +149,7 @@ SPQRQL
                     break;
                 default:
                     abort(400, '指定されたキーではフィルタできません');
+                    exit();
             }
             $filterValue = (string) request()->get('filterValue','');
             if(empty($filterValue)){

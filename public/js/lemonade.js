@@ -65,3 +65,18 @@ if(pbb !== null){
     });
 }
 
+const changeGetAttribute = (attribute, value) => {
+    const params = (new URL(document.location)).searchParams;
+    if(params.has(attribute)){
+        params.delete(attribute);
+    }
+    if(value !== null){
+        params.append(attribute, value);
+    }
+    if(params.toString().length !== 0){
+        location.href = location.pathname+'?'+params.toString();
+    }else{
+        location.href = location.pathname;
+    }
+};
+
