@@ -75,7 +75,6 @@
             });
 
             document.querySelectorAll('form[id$="-selector"]').forEach((el)=>{
-                console.dir(el);
                 el.addEventListener('submit', (e)=>{
                     e.preventDefault();
                     let filterValue = el.querySelector('*[name=filterValue]').value;
