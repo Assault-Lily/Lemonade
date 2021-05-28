@@ -65,18 +65,20 @@ if(pbb !== null){
     });
 }
 
-const changeGetAttribute = (attribute, value) => {
-    const params = (new URL(document.location)).searchParams;
+const changeGetParam = (attribute, value, chainUrl = null) => {
+    const params = (chainUrl === null) ? (new URL(document.location)).searchParams : (new URL(chainUrl).searchParams);
     if(params.has(attribute)){
         params.delete(attribute);
     }
     if(value !== null){
         params.append(attribute, value);
     }
+
+    let retVal = location.href.split('?')[0];
     if(params.toString().length !== 0){
-        location.href = location.pathname+'?'+params.toString();
-    }else{
-        location.href = location.pathname;
+        retVal = retVal+'?'+params.toString();
     }
+
+    return retVal;
 };
 

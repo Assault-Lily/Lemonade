@@ -73,6 +73,16 @@
             document.getElementById('random-close').addEventListener('click',()=>{
                 randomDialog.close();
             });
+
+            document.querySelectorAll('form[id$="-selector"]').forEach((el)=>{
+                console.dir(el);
+                el.addEventListener('submit', (e)=>{
+                    e.preventDefault();
+                    let filterValue = el.querySelector('*[name=filterValue]').value;
+                    let filterBy = el.querySelector('*[name=filterBy]').value;
+                    location.href = changeGetParam('filterValue', filterValue, changeGetParam('filterBy', filterBy));
+                });
+            });
         });
     </script>
     <style>
@@ -131,7 +141,7 @@
                         <option value="d-garden">ガーデン | 降順</option>
                     </select>
                 </label>
-                <button class="button smaller" id="filter-setting-open">フィルタ設定</button>
+                <button class="button smaller" id="filter-setting-open">表示・フィルタ設定</button>
                 <button class="button smaller" id="random-open">ランダム</button>
             </div>
             <div>
@@ -165,15 +175,15 @@
     <dialog id="filter-setting" class="window-a">
         <div class="header">表示・フィルタ設定</div>
         <div class="body">
-
             <h3>表示設定</h3>
             <div id="viewMode-selector">
-                <a href="javascript:changeGetAttribute('teacher', null)" class="button">リリィのみ</a>
-                <a href="javascript:changeGetAttribute('teacher', 'contain')" class="button">教導官を含む</a>
-                <a href="javascript:changeGetAttribute('teacher', 'only')" class="button">教導官のみ</a>
+                <a href="javascript:location.href = changeGetParam('teacher', null)" class="button">リリィのみ</a>
+                <a href="javascript:location.href = changeGetParam('teacher', 'contain')" class="button">教導官を含む</a>
+                <a href="javascript:location.href = changeGetParam('teacher', 'only')" class="button">教導官のみ</a>
             </div>
+
             <h3>ガーデン</h3>
-            <form action="{{ route('lily.index') }}" method="get">
+            <form action="{{ route('lily.index') }}" method="get" id="garden-selector" name="garden">
                 <input type="hidden" name="filterBy" value="garden">
                 <label>
                     <input type="text" name="filterValue" placeholder="ガーデン名" list="gardenList" required>
@@ -187,19 +197,19 @@
             </form>
             <h3>ポジション</h3>
             <div id="position-selector">
-                <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'AZ']) }}" class="button">AZ</a>
-                <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'TZ']) }}" class="button">TZ</a>
-                <a href="{{ route('lily.index', ['filterBy' => 'position', 'filterValue' => 'BZ']) }}" class="button">BZ</a>
+                <a href="javascript:location.href = changeGetParam('filterValue', 'AZ', changeGetParam('filterBy', 'position'))" class="button">AZ</a>
+                <a href="javascript:location.href = changeGetParam('filterValue', 'TZ', changeGetParam('filterBy', 'position'))" class="button">TZ</a>
+                <a href="javascript:location.href = changeGetParam('filterValue', 'BZ', changeGetParam('filterBy', 'position'))" class="button">BZ</a>
             </div>
             <h3>血液型</h3>
             <div id="bloodType-selector">
-                <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'A']) }}" class="button">A</a>
-                <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'B']) }}" class="button">B</a>
-                <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'O']) }}" class="button">O</a>
-                <a href="{{ route('lily.index', ['filterBy' => 'bloodType', 'filterValue' => 'AB']) }}" class="button">AB</a>
+                <a href="javascript:location.href = changeGetParam('filterValue', 'A',  changeGetParam('filterBy', 'bloodType'))" class="button">A</a>
+                <a href="javascript:location.href = changeGetParam('filterValue', 'B',  changeGetParam('filterBy', 'bloodType'))" class="button">B</a>
+                <a href="javascript:location.href = changeGetParam('filterValue', 'O',  changeGetParam('filterBy', 'bloodType'))" class="button">O</a>
+                <a href="javascript:location.href = changeGetParam('filterValue', 'AB', changeGetParam('filterBy', 'bloodType'))" class="button">AB</a>
             </div>
             <h3>スキル</h3>
-            <form action="{{ route('lily.index') }}" method="get">
+            <form action="{{ route('lily.index') }}" method="get" id="skill-selector" name="skill">
                 <label>
                     <select name="filterBy" id="skill-type">
                         <option value="rareSkill" selected>レアスキル</option>
@@ -227,6 +237,7 @@
                 </datalist>
                 <input type="submit" value="フィルタ" class="button primary">
             </form>
+            <hr>
             <div class="buttons">
                 <a href="{{ route('lily.index') }}" class="button">リセット</a>
                 <button id="filter-setting-close" class="button">閉じる</button>
