@@ -123,6 +123,7 @@ SPQRQL
                 case 'age':
                     $filterKey = 'foaf:age';
                     $filterInfo['key'] = '年齢';
+                    $filterInfo['suffix'] = '歳';
                     $additional = [
                         'key' => $filterKey,
                         'suffix' => '歳'
@@ -142,6 +143,7 @@ SPQRQL
                 case 'bloodType':
                     $filterKey = 'lily:bloodType';
                     $filterInfo['key'] = '血液型';
+                    $filterInfo['suffix'] = '型';
                     $additional = [
                         'key' => $filterKey,
                         'suffix' => '型'

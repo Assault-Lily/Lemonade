@@ -150,7 +150,7 @@
         @if(!empty($filterInfo))
             <p class="center">
                 <strong>{{ $filterInfo['key'] }}</strong> が
-                <strong>"{{ $filterInfo['value'].($additional['suffix'] ?? '') }}"</strong>
+                <strong>"{{ $filterInfo['value'].($filterInfo['suffix'] ?? '') }}"</strong>
                 のリリィでフィルタしています
                 <a href="{{ route('lily.index') }}" class="button smaller">フィルタ解除</a>
             </p>
