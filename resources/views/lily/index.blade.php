@@ -7,6 +7,7 @@
      */
     $ogp['description'] = "リリィの一覧を表示します。現在".count($lilies)."のリリィが登録されています。";
     $ogp['title'] = 'リリィ一覧';
+    $teacherSetting = request()->get('teacher', 'exclude');
 ?>
 @extends('app.layout', ['page-type' => 'back-triangle', 'title' => 'リリィ一覧', 'ogp' => $ogp])
 
@@ -144,7 +145,7 @@
                 <button class="button smaller" id="random-open">ランダム</button>
             </div>
             <div>
-                <span class="info">リリィ登録数{{ !empty($filterInfo) ? '(フィルタ)' : '(全数)' }} : {{ count($lilies) }}人</span>
+                <span class="info">登録数{{ (!empty($filterInfo) || $teacherSetting !== 'exclude') ? '(フィルタ)' : '(全数)' }} : {{ count($lilies) }}人</span>
             </div>
         </div>
         @if(!empty($filterInfo))
@@ -153,6 +154,11 @@
                 <strong>"{{ $filterInfo['value'].($filterInfo['suffix'] ?? '') }}"</strong>
                 のリリィでフィルタしています
                 <a href="{{ route('lily.index') }}" class="button smaller">フィルタ解除</a>
+            </p>
+        @endif
+        @if($teacherSetting !== 'exclude')
+            <p class="center">
+                表示設定 : <strong>教導官{{ ($teacherSetting === 'contain') ? 'とリリィの両方を' : 'のみ' }}表示</strong>
             </p>
         @endif
         <div class="list three" id="lily-list">
