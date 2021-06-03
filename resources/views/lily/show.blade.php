@@ -271,16 +271,13 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @endif
                     </tbody>
                 </table>
-                <div style="display: flex">
-                    <div style="font-size: smaller;">
-                        トリプル数 : {{ count($triples[$ts] ?? array(), 1) - count($triples[$ts] ?? array()) }} ,
-                        <?php $triple_count = 0; foreach ($triples as $sub_triples)
-                            $triple_count += (count($sub_triples, 1) - count($sub_triples)); ?>
-                        総参照トリプル数 : {{ $triple_count }}
-                    </div>
-                    <div style="margin-left: 10px">
+                <div style="display: flex; justify-content: space-between">
+                    <div>
                         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="ja" data-show-count="false">Tweet</a>
                         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                    <div style="font-size: smaller;">
+                        <a href="{{ route('rdfDescribe', ['resource' => removePrefix($ts)]) }}" class="button smaller">RDF生データ参照</a>
                     </div>
                 </div>
                 @if(!empty($icon))
@@ -288,6 +285,18 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         アイコン作者 : {{ $icon->author }} さん
                     </div>
                 @endif
+                @auth
+                    <div>
+                        <h3>管理用</h3>
+                        <div class="buttons two">
+                            <a href="{{ route('admin.image.create', ['for' => removePrefix($ts)]) }}" class="button">画像を追加</a>
+                            <a href="{{ route('admin.triple.create', ['lily_slug' => removePrefix($ts)]) }}" class="button" target="_blank">独自トリプルを追加</a>
+                        </div>
+                        <!--<div>
+                            <img src="{{ route('qr',['data' => removePrefix($ts), 'label' => removePrefix($ts), 'size' => 150]) }}" alt="Name">
+                        </div>-->
+                    </div>
+                @endauth
             </div>
             <div class="right" style="width: 100%;position: relative">
                 <div id="right-tag">
