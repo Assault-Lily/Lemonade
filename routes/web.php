@@ -12,6 +12,7 @@ use App\Http\Controllers\LegionController;
 use App\Http\Controllers\LilyController;
 use App\Http\Controllers\OGPController;
 use App\Http\Controllers\PlayController;
+use App\Http\Controllers\QRController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,8 @@ Route::get('/rdfDescribe/{resource}', [InfoController::class, 'rdfDescribe'])->n
 Route::middleware('throttle:30,1')->group(function (){
     Route::get('/ogp/{type}/{title}.jpg', [OGPController::class, 'generate'])->name('ogp');
 });
+
+Route::get('/qr', [QRController::class, 'generate'])->name('qr');
 
 Route::resource('/lily', LilyController::class, ['only' => ['index','show']]);
 Route::resource('/legion', LegionController::class, ['only' => ['index', 'show']]);
