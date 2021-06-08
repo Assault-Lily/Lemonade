@@ -291,10 +291,9 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         <div class="buttons two">
                             <a href="{{ route('admin.image.create', ['for' => removePrefix($ts)]) }}" class="button">画像を追加</a>
                             <a href="{{ route('admin.triple.create', ['lily_slug' => removePrefix($ts)]) }}" class="button" target="_blank">独自トリプルを追加</a>
+                            <a href="javascript:copyString('{{ removePrefix($ts) }}')" class="button" target="_self">リソース名をコピー</a>
+                            <a href="javascript:window.open('{{ route('qr',['data' => removePrefix($ts), 'label' => removePrefix($ts)]) }}', '_blank', 'width=300,height=300')" class="button" target="_self">QRコード</a>
                         </div>
-                        <!--<div>
-                            <img src="{{ route('qr',['data' => removePrefix($ts), 'label' => removePrefix($ts), 'size' => 150]) }}" alt="Name">
-                        </div>-->
                     </div>
                 @endauth
             </div>

@@ -82,3 +82,15 @@ const changeGetParam = (attribute, value, chainUrl = null) => {
     return retVal;
 };
 
+const copyString = (string) => {
+    if(window.isSecureContext === false)
+        showMessage('安全でないコンテキストのため、クリップボードにコピーできませんでした。');
+
+    navigator.clipboard.writeText(string).then(()=>{
+        console.info('Text copied : ' + string);
+        showMessage('クリップボードにコピーしました。');
+    }, (err)=>{
+        console.error('Failed to copy text. : ' + err);
+        showMessage("クリップボードにコピーできませんでした。\n開発者ツールから詳細を確認できます。");
+    })
+};
