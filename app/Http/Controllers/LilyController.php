@@ -24,7 +24,7 @@ SELECT ?subject ?predicate ?object
 WHERE {
     {
         VALUES ?predicate {
-            schema:name lily:nameKana schema:familyNameKana foaf:age
+            schema:name lily:nameKana lily:givenNameKana foaf:age
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
             lily:garden lily:grade lily:legion lily:legionJobTitle lily:position rdf:type
             schema:height schema:weight lily:bloodType
@@ -35,7 +35,7 @@ WHERE {
     UNION
     {
         VALUES ?predicate {
-            schema:name lily:nameKana schema:familyNameKana foaf:age
+            schema:name lily:nameKana lily:givenNameKana foaf:age
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
             lily:garden lily:grade lily:legion lily:position rdf:type
             schema:height schema:weight lily:bloodType
