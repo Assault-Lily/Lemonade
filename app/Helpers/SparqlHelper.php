@@ -42,13 +42,12 @@ function sparqlQueryOrDie(string $query, int $timeout = 5, bool $predicateReplac
         exit();
     }catch (\Illuminate\Http\Client\RequestException $e){
         $message = "SPARQLエンドポイントから無効な応答が返されました。\n";
-        //if (($e->response->status() ?? 500) === 503){
-        //    $message .= "SPARQLエンドポイントがメンテナンス中か混雑しています。2分ほど待って再度お試しください。\n";
-        //}else{
-        //    $message .= "通常と異なるエラーです。管理者までご連絡ください。\n";
-        //}
-        $message .= "SPARQLエンドポイントの更新作業中の可能性があります。2分ほど待って再度お試しください。\n";
-        $message .= "しばらく待っても改善しない場合、管理者までご連絡ください。";
+        if (($e->response->status() ?? 500) === 503){
+            $message .= "SPARQLエンドポイントがメンテナンス中か混雑しています。2分ほど待って再度お試しください。\n";
+            $message .= "解消されない場合は管理者までご連絡ください。\n";
+        }else{
+            $message .= "通常と異なるエラーです。至急管理者までご連絡ください。\n";
+        }
         $message .= PHP_EOL.'SPARQL endpoint returned '.$e->getCode();
         abort(502, $message);
         exit();
