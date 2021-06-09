@@ -91,9 +91,9 @@
         <p>
             ただいまメンテナンス中です。メンテナンスの詳細はMastodonか開発者からのお知らせをご確認ください。
         </p>
-        @if(!empty($exception->getMessage()))
+        @if(!empty($exception->getMessage()) or !empty($message))
             <p style="color: #FA0A00">
-                {{ $exception->getMessage() }}
+                {{ $message ?? $exception->getMessage() }}
             </p>
         @endif
         <div class="buttons" style="margin-top: 40px">
