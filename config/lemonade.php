@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '6.17.0 Enoshima',
+    'version' => '6.18.0 Enoshima',
 
 
     'mastodon' => [
