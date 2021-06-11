@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
     {
         $response = parent::render($request, $e);
 
-        if (((int)($response->getStatusCode() / 100) === 5) and !config('app.debug')){
+        if (((int)($response->getStatusCode() / 100) === 5) and !config('app.debug') and !app()->isDownForMaintenance()){
             $message = 'サーバエラーが発生しました'.PHP_EOL.$e->getMessage().PHP_EOL.$request->fullUrl();
             Log::channel('slack')->error($message);
         }
