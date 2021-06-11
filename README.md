@@ -2,16 +2,20 @@
 
 ## About Lemonade
 
-**Lemonade** is the Triple-based information system for AssaultLily series.
+**Lemonade** は、SPARQLを用いたアサルトリリィ非公式ファンサイト用情報システムです。  
+アサルトリリィ非公式RDFデータベース [assaultlily-rdf](https://github.com/fvh-P/assaultlily-rdf) と連携し、様々な情報を提供するシステムとして設計されています。
 
-The name "Lemonade" comes from Riri's favorite drink, "Ramune".  
-To begin with, Ramune is a transliteration of the English lemonade.
+一柳梨璃さんがラムネ好きであることから "Lemonade" と名付けられました。  
+(ラムネは英語のレモネードが転訛したものと言われています。)
 
-The Lemonade is built with the PHP framework [Laravel](https://laravel.com/)
+Lemonade は PHPのフレームワーク [Laravel](https://laravel.com/) をベースに構築されています。
 
-Lemonade uses data from [assaultlily-rdf](https://github.com/fvh-P/assaultlily-rdf).
+## Notice
+Lemonadeは個人による非公式なプロジェクトであり、原作者等の許諾を得て開発・提供されているソフトウェアまたはサービスではありません。
 
 ## License
+
+Lemonadeは[MITライセンス](https://opensource.org/licenses/MIT)です。
 
 The Lemonade is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
