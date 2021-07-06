@@ -34,6 +34,9 @@ function removePrefix(string $key): string
 function convertGradeString(string $grade, string $prefix = '', int $offset = null, string $suffix = '年'): string
 {
     if(is_null($offset)){ // オフセット未セット時
+        if($grade <= 6){
+            $prefix = $prefix ?: '初等部';
+        }
         if(7 <= $grade && $grade <= 9){ // 中等部
             $prefix = $prefix ?: '中等部';
             $grade -= 6;
