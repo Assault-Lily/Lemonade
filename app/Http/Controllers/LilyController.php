@@ -350,7 +350,7 @@ SPARQL
 );
         $triples = sparqlToArray($triples_sparql);
 
-        $approve_type = ['lily:Lily', 'lily:Teacher'];
+        $approve_type = ['lily:Lily', 'lily:Teacher', 'lily:Character'];
         if(empty($triples['lilyrdf:'.$slug]['rdf:type'][0]) or !in_array($triples['lilyrdf:'.$slug]['rdf:type'][0], $approve_type) ) abort(404, '該当するリリィのデータが存在しません');
 
         $triples_model = Triple::whereLilySlug($slug)->get();
