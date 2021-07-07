@@ -7,7 +7,7 @@
      */
     $ogp['description'] = "リリィの一覧を表示します。現在".count($lilies)."のリリィが登録されています。";
     $ogp['title'] = 'リリィ一覧';
-    $teacherSetting = request()->get('teacher', 'exclude');
+    $typeInfo = explode(',', request()->get('type','lily'));
 ?>
 @extends('app.layout', ['page-type' => 'back-triangle', 'title' => 'リリィ一覧', 'ogp' => $ogp])
 
@@ -65,7 +65,7 @@
                 const lily = document.getElementById('random-lily');
                 if(lily.firstChild) lily.removeChild(lily.firstChild);
                 if(lilies.length === 0){
-                    showMessage("該当するリリィがいないためランダム選択できません。");
+                    showMessage("該当するデータがないためランダム選択できません。");
                 }else{
                     lily.appendChild(lilies[Math.floor(Math.random() * lilies.length)].cloneNode(true));
                     randomDialog.showModal();
@@ -145,7 +145,7 @@
                 <button class="button smaller" id="random-open">ランダム</button>
             </div>
             <div>
-                <span class="info">登録数{{ (!empty($filterInfo) || $teacherSetting !== 'exclude') ? '(フィルタ)' : '(全数)' }} : {{ count($lilies) }}人</span>
+                <span class="info">登録数{{ (!empty($filterInfo) || $typeInfo !== array('lily')) ? '(フィルタ)' : '(全数)' }} : {{ count($lilies) }}人</span>
             </div>
         </div>
         @if(!empty($filterInfo))
@@ -156,9 +156,23 @@
                 <a href="{{ route('lily.index') }}" class="button smaller">フィルタ解除</a>
             </p>
         @endif
-        @if($teacherSetting !== 'exclude')
+        @if($typeInfo !== array('lily'))
+            <?php
+            $typeInfoJa = array_map(function ($value){
+                switch ($value){
+                    case 'lily':
+                        return 'リリィ';
+                    case 'character':
+                        return 'その他';
+                    case 'teacher':
+                        return '教導官';
+                    default:
+                        return $value;
+                }
+            }, $typeInfo);
+            ?>
             <p class="center">
-                表示設定 : <strong>教導官{{ ($teacherSetting === 'contain') ? 'とリリィの両方を' : 'のみ' }}表示</strong>
+                表示設定 : <strong>{{ implode(' , ', $typeInfoJa) }}</strong> の一覧を表示しています。
             </p>
         @endif
         <div class="list three" id="lily-list">
@@ -182,9 +196,12 @@
         <div class="body">
             <h3>表示設定</h3>
             <div id="viewMode-selector">
-                <a href="javascript:location.href = changeGetParam('teacher', null)" class="button">リリィのみ</a>
-                <a href="javascript:location.href = changeGetParam('teacher', 'contain')" class="button">教導官を含む</a>
-                <a href="javascript:location.href = changeGetParam('teacher', 'only')" class="button">教導官のみ</a>
+                <a href="javascript:location.href = changeGetParam('type', null)" class="button">リリィのみ</a>
+                <a href="javascript:location.href = changeGetParam('type', 'lily,teacher')" class="button">教導官を含む</a>
+                <a href="javascript:location.href = changeGetParam('type', 'teacher')" class="button">教導官のみ</a>
+                <a href="javascript:location.href = changeGetParam('type', 'lily,character')" class="button">その他を含む</a>
+                <a href="javascript:location.href = changeGetParam('type', 'character')" class="button">その他のみ</a>
+                <a href="javascript:location.href = changeGetParam('type', 'lily,teacher,character')" class="button">すべて</a>
             </div>
 
             <h3>ガーデン</h3>
