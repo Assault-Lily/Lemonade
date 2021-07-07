@@ -45,6 +45,17 @@ WHERE {
     }
     UNION
     {
+        VALUES ?predicate {
+            schema:name lily:nameKana lily:givenNameKana foaf:age
+            lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
+            lily:garden lily:grade lily:legion lily:position rdf:type
+            schema:height schema:weight lily:bloodType
+        }
+        ?subject a lily:Character;
+                 ?predicate ?object.
+    }
+    UNION
+    {
         VALUES ?predicate { schema:name schema:alternameName rdf:type }
         ?subject a lily:Legion;
                  ?predicate ?object.
@@ -57,21 +68,18 @@ SPQRQL
         $lilies = array();
         $legions = array();
 
+        // 表示設定
+        $approvalType = ['character', 'lily', 'teacher'];
+        $approveType = explode(',',request()->get('type', 'lily'));
+        if(!empty(array_diff($approveType, $approvalType))) // 許容されないタイプの検出
+            abort(400 ,'表示設定の値に誤りがあります。');
+        $approveType = array_map(function ($value){
+            return 'lily:'.ucfirst($value);
+        }, $approveType);
+
         // フィルタ用データリスト変数初期化
         $datalist = array();
 
-        // レギオンとリリィの振り分け
-        switch (request()->get('teacher','exclude')){
-            case 'exclude':
-                $approveType = ['lily:Lily']; break;
-            case 'contain':
-                $approveType = ['lily:Lily', 'lily:Teacher']; break;
-            case 'only':
-                $approveType = ['lily:Teacher']; break;
-            default:
-                abort(400, '教導官表示設定に誤りがあります');
-                exit();
-        }
         foreach ($triples as $key => $triple){
             if(in_array($triple['rdf:type'][0], $approveType)){
                 $lilies[$key] = $triple;
@@ -291,7 +299,7 @@ SPQRQL
      * Display the specified resource.
      *
      * @param  string $slug
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(string $slug)
     {
