@@ -19,7 +19,7 @@
         <h1>新規作成</h1>
         <div class="white-box" style="text-align: center">
             <p>
-                スラッグ以外は必須入力です。スラッグはUniqueです。本文はHTMLを使用できます。
+                スラッグはUniqueです。本文はHTMLを使用できます。
             </p>
             <p>
                 重要度を100にするとトップページに固定されます。ウェルカムメッセージやメンテナンス告知向けです。<br>
@@ -31,7 +31,7 @@
                 <div id="main">
                     <label>
                         スラッグ<br>
-                        <input type="text" name="slug" placeholder="TitleSlug" value="{{ old('slug') }}">
+                        <input type="text" name="slug" placeholder="TitleSlug" value="{{ old('slug', Str::uuid()) }}">
                     </label>
                     <label>
                         タイトル<br>
@@ -45,9 +45,17 @@
                 <div>
                     <label>
                         本文
-                        <textarea name="body" required style="width: 100%; height: 200px; text-align: left"></textarea>
+                        <textarea name="body" required style="width: 100%; height: 200px; text-align: left">{{ old('body') }}</textarea>
                     </label>
                 </div>
+                @if($errors->any())
+                    <hr>
+                    <div style="color: darkred">
+                        @foreach($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                @endif
                 <hr>
                 <div class="buttons">
                     <button type="reset" class="button">初期化</button>
