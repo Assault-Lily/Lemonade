@@ -128,7 +128,7 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                 @forelse($notices as $notice) <?php /** @var $notice \App\Models\Notice */ ?>
                     <article>
                         <h3>{{ $notice->title }}</h3>
-                        <div>{{ base64_decode($notice->body) }}</div>
+                        <div>{!! base64_decode($notice->body) !!}</div>
                         <p style="font-size: smaller">
                             {{ $notice->updated_at->format('Y/m/d H:i:s') }}
                         </p>
@@ -138,8 +138,8 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                     <p class="center notice">現在、重要なお知らせはありません。</p>
                 @endforelse
                     <p class="center">
-                        お知らせは <a href="{{ config('lemonade.developer.twitter') }}" target="_blank">開発者Twitter</a>
-                        や <a href="{{ config('lemonade.mastodon.account') }}" target="_blank">Mastodon</a> でも配信しています。</p>
+                        お知らせは <a href="https://twitter.com/{{ config('lemonade.developer.twitter') }}" target="_blank">開発者Twitter</a>
+                        や <a href="{{ config('lemonade.mastodon.server').'/'.config('lemonade.mastodon.account') }}" target="_blank">Mastodon</a> でも配信しています。</p>
             </div>
         </div>
         @endif
