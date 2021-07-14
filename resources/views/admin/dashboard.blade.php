@@ -51,10 +51,10 @@
         <form action="{{ route('admin.logout') }}" method="post" style="display: none" id="logout">
             @csrf
         </form>
-        <h2>RDF同期管理</h2>
-        <div class="buttons three">
-            <a href="{{ route('admin.rdf.index') }}" class="button">RDF同期管理</a>
-        </div>
+{{--        <h2>RDF同期管理</h2>--}}
+{{--        <div class="buttons three">--}}
+{{--            <a href="{{ route('admin.rdf.index') }}" class="button">RDF同期管理</a>--}}
+{{--        </div>--}}
         <h2>リリィデータ管理</h2>
         <div class="buttons three">
             <a href="{{ route('admin.lily.index') }}" class="button">データ一覧</a>
@@ -71,6 +71,11 @@
         <div class="buttons three">
             <a href="{{ route('admin.image.index') }}" class="button">データ一覧</a>
             <a href="{{ route('admin.image.create') }}" class="button">新規登録</a>
+        </div>
+        <h2>お知らせ管理</h2>
+        <div class="buttons three">
+            <a href="{{ route('admin.notice.index') }}" class="button">データ一覧</a>
+            <a href="{{ route('admin.notice.create') }}" class="button">新規作戦</a>
         </div>
     </main>
 @endsection

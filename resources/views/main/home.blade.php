@@ -111,16 +111,38 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                 </div>
             </div>
         @endif
-        <h1>Welcome to {{ config('app.name') }}</h1>
+        <h1>Welcome to {{ config('app.name', 'Lemonade') }}</h1>
         <p>
-            {{ config('app.name') }}へようこそ。
-            {{ config('app.name') }}はアサルトリリィ関連情報を取り扱う非公式ファンサイトです。
+            {{ config('app.name', 'Lemonade') }}へようこそ。
+            {{ config('app.name', 'Lemonade') }}はアサルトリリィ関連情報を取り扱う非公式ファンサイトです。
         </p>
         <p>
-            {{ config('app.name') }}はデータソースとしてアサルトリリィ非公式データベース
+            {{ config('app.name', 'Lemonade') }}はデータソースとしてアサルトリリィ非公式データベース
             <a href="https://github.com/fvh-P/assaultlily-rdf" style="font-weight: bold" target="_blank">assaultlily-rdf</a>
             の情報を基にサービスを提供しています。
         </p>
+        @if(!$notices->isEmpty()) {{-- TODO: お知らせ一覧ページ実装でき次第IFを撤去 --}}
+        <div class="window-a" style="margin-top: 15px;">
+            <div class="header">{{ config('app.name', 'Lemonade') }}からのお知らせ</div>
+            <div class="body">
+                @forelse($notices as $notice) <?php /** @var $notice \App\Models\Notice */ ?>
+                    <article>
+                        <h3>{{ $notice->title }}</h3>
+                        <div>{{ base64_decode($notice->body) }}</div>
+                        <p style="font-size: smaller">
+                            {{ $notice->updated_at->format('Y/m/d H:i:s') }}
+                        </p>
+                    </article>
+                    <hr>
+                @empty
+                    <p class="center notice">現在、重要なお知らせはありません。</p>
+                @endforelse
+                    <p class="center">
+                        お知らせは <a href="{{ config('lemonade.developer.twitter') }}" target="_blank">開発者Twitter</a>
+                        や <a href="{{ config('lemonade.mastodon.account') }}" target="_blank">Mastodon</a> でも配信しています。</p>
+            </div>
+        </div>
+        @endif
         <h2>Start</h2>
         <div class="white-box big-buttons" style="text-align: center">
             <a href="{{ route('lily.index') }}" >

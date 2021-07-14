@@ -8,31 +8,6 @@ $ogp['description'] = '公演の一覧を表示します。現在'.count($plays)
 ?>
 @extends('app.layout', ['title' => '舞台公演一覧'])
 
-@section('head')
-    <style>
-        .tag{
-            position: relative;
-            display: inline-block;
-            font-size: smaller;
-            color: white;
-            box-shadow: inset 0 0 3px mediumpurple;
-            background: #bca3ef;
-            padding: 1px 10px;
-            margin: 0 5px;
-            border-bottom-right-radius: 5px;
-        }
-        .tag:before{
-            position: absolute;
-            top: 0;
-            left: 0;
-            content: '';
-            width: 10px;
-            height: 4px;
-            background: mediumpurple;
-        }
-    </style>
-@endsection
-
 @section('main')
     <main>
         <div class="top-options">

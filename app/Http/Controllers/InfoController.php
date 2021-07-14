@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Notice;
 use Carbon\Carbon;
 use Exception;
 use ZipArchive;
@@ -60,9 +61,12 @@ SPARQL
             $images['lilyrdf:'.$image->for][] = $image;
         }
 
+        // お知らせ取得
+        $notices = Notice::whereImportance('100')->orderBy('updated_at')->get();
+
         $birthday = $lilies;
 
-        return view('main.home', compact('rdf_feed', 'birthday', 'legions', 'images'));
+        return view('main.home', compact('rdf_feed', 'birthday', 'legions', 'images', 'notices'));
     }
 
     public function menu(){
