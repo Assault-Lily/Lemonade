@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '7.0.0 Koshigoe',
+    'version' => '7.1.0 Koshigoe',
 
 
     'mastodon' => [
