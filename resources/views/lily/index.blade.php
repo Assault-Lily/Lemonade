@@ -234,7 +234,8 @@
             <form action="{{ route('lily.index') }}" method="get" id="skill-selector" name="skill">
                 <label>
                     <select name="filterBy" id="skill-type">
-                        <option value="rareSkill" selected>レアスキル</option>
+                        <option value="skill" selected>スキル(全種)</option>
+                        <option value="rareSkill">レアスキル</option>
                         <option value="subSkill">サブスキル</option>
                         <option value="boostedSkill">ブーステッドスキル</option>
                     </select>
@@ -255,6 +256,11 @@
                 <datalist id="boostedSkill">
                     @foreach($datalist['boostedSkill'] as $boostedSkill)
                         <option value="{{ $boostedSkill }}"></option>
+                    @endforeach
+                </datalist>
+                <datalist id="skill">
+                    @foreach($datalist['skill'] as $skill)
+                        <option value="{{ $skill }}"></option>
                     @endforeach
                 </datalist>
                 <input type="submit" value="フィルタ" class="button primary">

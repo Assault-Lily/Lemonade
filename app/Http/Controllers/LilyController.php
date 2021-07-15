@@ -106,6 +106,10 @@ SPQRQL
         $datalist['rareSkill'] = array_unique($datalist['rareSkill'] ?? array());
         $datalist['subSkill'] = array_unique($datalist['subSkill'] ?? array());
         $datalist['boostedSkill'] = array_unique($datalist['boostedSkill'] ?? array());
+        $datalist['skill'] = array_merge(
+            $datalist['rareSkill'] ?? array(),
+            $datalist['subSkill'] ?? array(),
+            $datalist['boostedSkill'] ?? array());
         $datalist['garden'] = array_unique($datalist['garden'] ?? array());
 
         // 特殊表示変数初期化
@@ -116,6 +120,16 @@ SPQRQL
         $filterInfo = array();
         if(!empty($filterBy)){
             switch ($filterBy){
+                case 'skill':
+                    $filterKey = 'lemonade:skill';
+                    $filterInfo['key'] = 'スキル';
+                    $lilies = array_map(function ($lily){ // レア・サブ・ブーステッドのマージ
+                        return $lily + array('lemonade:skill' => array_merge(
+                            $lily['lily:rareSkill'] ?? array(),
+                            $lily['lily:subSkill'] ?? array(),
+                            $lily['lily:boostedSkill'] ?? array()));
+                    }, $lilies);
+                    break;
                 case 'rareSkill':
                     $filterKey = 'lily:rareSkill';
                     $filterInfo['key'] = 'レアスキル';
