@@ -56,7 +56,7 @@ WHERE {
     }
     UNION
     {
-        VALUES ?predicate { schema:name schema:alternameName rdf:type }
+        VALUES ?predicate { schema:name schema:alternateName rdf:type }
         ?subject a lily:Legion;
                  ?predicate ?object.
     }
