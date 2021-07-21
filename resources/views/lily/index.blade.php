@@ -125,6 +125,8 @@
                         <option value="d-givenName">名前 | 降順</option>
                         <option value="a-age">年齢 | 昇順</option>
                         <option value="d-age">年齢 | 降順</option>
+                        <option value="a-birthdate">誕生日 | 昇順</option>
+                        <option value="d-birthdate">誕生日 | 降順</option>
                         <option value="a-height">身長 | 昇順</option>
                         <option value="d-height">身長 | 降順</option>
                         <option value="a-weight">体重 | 昇順</option>
