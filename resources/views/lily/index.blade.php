@@ -58,21 +58,50 @@
                 document.getElementById('skillName').setAttribute('list', e.target.value);
             });
 
+            const lilies = document.querySelectorAll('#lily-list > .list-item-a');
+
             const randomDialog = document.getElementById('random');
             dialogPolyfill.registerDialog(randomDialog);
             document.getElementById('random-open').addEventListener('click',()=>{
-                const lilies = document.querySelectorAll('#lily-list > .list-item-a');
                 const lily = document.getElementById('random-lily');
                 if(lily.firstChild) lily.removeChild(lily.firstChild);
                 if(lilies.length === 0){
                     showMessage("該当するデータがないためランダム選択できません。");
                 }else{
-                    lily.appendChild(lilies[Math.floor(Math.random() * lilies.length)].cloneNode(true));
+                    let filteredLilies = Array.from(lilies).filter((lily) => lily.classList.length === 1);
+                    lily.appendChild(filteredLilies[Math.floor(Math.random() * filteredLilies.length)].cloneNode(true));
                     randomDialog.showModal();
                 }
             });
             document.getElementById('random-close').addEventListener('click',()=>{
                 randomDialog.close();
+            });
+
+            const nameFilter = document.getElementById('name-filter');
+            nameFilter.addEventListener('input', ()=>{
+                if(lilies.length === 0) return;
+                const search = nameFilter.value;
+                let count = 0;
+                const emptyNotice = document.createElement('p');
+                emptyNotice.id = 'emptyNotice';
+                emptyNotice.classList.add('center', 'notice');
+                emptyNotice.style = 'margin:3em auto;';
+                emptyNotice.innerText = '該当するデータがありません';
+                lilies.forEach((lily)=>{
+                    if(search.length === 0 ||
+                        lily.querySelector('.title').innerText.indexOf(search) !== -1 ||
+                        lily.querySelector('.title-ruby').innerText.indexOf(search) !== -1){
+                        lily.classList.remove('hidden');
+                        count++;
+                    }else{
+                        lily.classList.add('hidden');
+                    }
+                });
+                if(!document.getElementById('emptyNotice') && count === 0){
+                    document.getElementById('lily-list').parentNode.appendChild(emptyNotice);
+                }else if(document.getElementById('emptyNotice')){
+                    document.getElementById('emptyNotice').remove();
+                }
             });
 
             document.querySelectorAll('form[id$="-selector"]').forEach((el)=>{
@@ -108,6 +137,9 @@
         #random-lily > .list-item-a{
             width: 420px;
         }
+        .list-item-a.hidden{
+            display: none;
+        }
     </style>
 @endsection
 
@@ -117,7 +149,6 @@
         <div class="top-options">
             <div>
                 <label>
-                    ならべかえ :
                     <select id="sort-select">
                         <option value="a-name">フルネーム | 昇順</option>
                         <option value="d-name">フルネーム | 降順</option>
@@ -147,6 +178,7 @@
                 <button class="button smaller" id="random-open">ランダム</button>
             </div>
             <div>
+                <label><input type="text" id="name-filter" placeholder="絞り込む" style="margin-right: 5px; width: 200px"></label>
                 <span class="info">登録数{{ (!empty($filterInfo) || $typeInfo !== array('lily')) ? '(フィルタ)' : '(全数)' }} : {{ count($lilies) }}人</span>
             </div>
         </div>
@@ -187,9 +219,6 @@
             @empty
                 <p style="text-align: center; color: darkred; margin: 3em auto">該当するデータがありません</p>
             @endforelse
-            @if((count($lilies) % 3) != 0)
-                <div style="width: 32%; margin-left: 6px"></div>
-            @endif
         </div>
     </main>
 
