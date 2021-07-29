@@ -178,7 +178,7 @@
                 <button class="button smaller" id="random-open">ランダム</button>
             </div>
             <div>
-                <label><input type="text" id="name-filter" placeholder="絞り込む" style="margin-right: 5px; width: 200px"></label>
+                <label><input type="search" id="name-filter" placeholder="絞り込む" style="margin-right: 5px; width: 200px"></label>
                 <span class="info">登録数{{ (!empty($filterInfo) || $typeInfo !== array('lily')) ? '(フィルタ)' : '(全数)' }} : {{ count($lilies) }}人</span>
             </div>
         </div>

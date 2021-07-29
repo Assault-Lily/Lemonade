@@ -337,6 +337,7 @@ input{
 input[type="email"],
 input[type="password"],
 input[type="text"],
+input[type="search"],
 input[type="number"],
 textarea{
     background: #ececec;
@@ -351,6 +352,7 @@ textarea{
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="text"]:focus,
+input[type="search"]:focus,
 input[type="number"]:focus,
 textarea{
     background: #E5E7EC;
@@ -434,12 +436,12 @@ select > option{
 
 .list{
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     flex-wrap: wrap;
 }
 .list-item-a{
     display: inline-flex; /* default */
-    width: 32%;
+    width: 417px;
     flex-shrink: 0;
     background: linear-gradient(#F6F7FB, #E1E5EF);
     box-shadow: 1px 2px 1px #9DA6BA, inset 0 0 1px gray;
@@ -453,6 +455,12 @@ select > option{
     color: black;
     text-decoration: none;
     transition: transform .1s;
+}
+.list.three{
+    margin-right: -15px;
+}
+.list.three > .list-item-a{
+    margin-right: 15px;
 }
 .list-item-a:active{
     transform: scale(0.95);

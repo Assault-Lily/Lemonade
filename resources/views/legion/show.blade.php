@@ -93,9 +93,6 @@ if(empty($legion[$ls]['lily:disbanded'][0]) || $legion[$ls]['lily:disbanded'][0]
                             ?>
                             @include('app.button_lily',['key' => $member, 'lily' => $legion[$member], 'legion' => $legion[$legion[$member]['lily:legion'][0] ?? '-'] ?? array(), 'additional' => $additional, 'icons' => $icons[$member] ?? array()])
                         @endforeach
-                        @if((count($legion[$ls][$key]) % 3) != 0)
-                            <div style="width: 32%; margin-left: 6px"></div>
-                        @endif
                     </div>
                 @endif
             @endforeach
