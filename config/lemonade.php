@@ -38,6 +38,8 @@ return [
         'twitter' => 'assault_lily',
     ],
 
+    'statusPageUrl' => env('STATUS_PAGE_URL'),
+
     'sparqlEndpoint' => env('SPARQL_ENDPOINT','http://localhost:3030'),
 
     'rdfPrefix' => [
