@@ -36,6 +36,7 @@
 
 #relationship.list{
     display: block;
+    margin-right: 0;
 }
 #relationship.list > .list-item-a{
     width: calc(100% - 6px);

@@ -144,8 +144,13 @@
     width: 45%;
 }
 
+#relationship.list{
+    margin-right: -10px;
+    box-sizing: border-box;
+}
 #relationship.list > .list-item-a{
-    width: 48%;
+    width: calc(49% - 10px);
+    margin-right: 10px;
 }
 
 #icon-list > .list-item-b{
