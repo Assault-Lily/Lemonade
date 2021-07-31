@@ -35,7 +35,7 @@ $ogp['description'] = "レギオンの一覧を表示します。現在".count($
                 <span class="info">レギオン登録数 : {{ count($legions) }}</span>
             </div>
         </div>
-        <div id="legions" class="list">
+        <div id="legions" class="list two">
             @forelse($legions as $legion_key => $legion)
                 <a href="{{ route('legion.show', ['legion' => str_replace('lilyrdf:','',$legion_key)]) }}" class="legion">
                     <div class="legion-info">

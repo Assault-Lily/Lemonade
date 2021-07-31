@@ -20,7 +20,7 @@
             <div>ならべかえ : リソースキー順</div>
             <div><span class="info">登録機種数 : {{ count($charms) }}機種</span></div>
         </div>
-        <div class="list">
+        <div class="list two">
             @forelse($charms as $charmKey => $charm)
                 <a href="{{ route('charm.show', ['charm' => removePrefix($charmKey)]) }}" class="list-item-b">
                     <div class="title">

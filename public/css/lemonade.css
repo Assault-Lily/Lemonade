@@ -439,6 +439,9 @@ select > option{
     /*justify-content: space-between;*/
     flex-wrap: wrap;
 }
+.list.two{
+    justify-content: space-between;
+}
 .list-item-a{
     display: inline-flex; /* default */
     width: 417px;
