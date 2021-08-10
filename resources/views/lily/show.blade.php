@@ -429,7 +429,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
             <div class="white-box">
                 <p class="center">以下の方々からアイコン画像をご提供いただいています。深く御礼申し上げます。</p>
                 <hr>
-                <div class="list" id="icon-list">
+                <div class="list two" id="icon-list">
                     @foreach($icons as $icon)
                         <?php
                         $infos = array();
