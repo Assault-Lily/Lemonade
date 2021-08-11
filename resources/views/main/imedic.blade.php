@@ -13,8 +13,8 @@ $ogp['description'] = "アサルトリリィのIME辞書を生成します。Goo
                 この辞書はGoogle日本語入力、及びGoogle日本語入力のフォーマットを受け入れるIME、MacOS日本語入力プログラムで利用可能です。
             </p>
             <p class="center">
-                Google日本語入力、
-                MicrosoftIMEをご利用の場合はShift-JIS版を、MacOSの日本語入力プログラムをご利用の場合はPropertyList版をご利用ください。<br>
+                Google日本語入力はそのままダウンロードを、<br>MicrosoftIMEをご利用の場合はShift-JIS版を、<br>
+                MacOSの日本語入力プログラムをご利用の場合はPropertyList版をご利用ください。<br>
                 インポートの方法は各IMEのヘルプをご確認ください。
             </p>
             <div class="buttons three">

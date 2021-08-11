@@ -85,11 +85,12 @@ WHERE {
              lily:nameKana ?nameKana;
              schema:givenName ?givenName;
              lily:givenNameKana ?givenNameKana;
-             a lily:Lily.
+             a ?type.
     OPTIONAL{ ?subject lily:garden ?garden. }
     OPTIONAL{ ?subject lily:legion/schema:name ?legion. FILTER(LANG(?legion) = 'ja') }
     FILTER(LANG(?name) = 'ja')
     FILTER(LANG(?givenName) = 'ja')
+    FILTER(?type IN(lily:Lily, lily:Teacher, lily:Character))
   }
 }
 SPARQL
