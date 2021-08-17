@@ -75,7 +75,7 @@
         <h2>お知らせ管理</h2>
         <div class="buttons three">
             <a href="{{ route('admin.notice.index') }}" class="button">データ一覧</a>
-            <a href="{{ route('admin.notice.create') }}" class="button">新規作戦</a>
+            <a href="{{ route('admin.notice.create') }}" class="button">新規登録</a>
         </div>
     </main>
 @endsection
