@@ -27,7 +27,7 @@ WHERE {
             schema:name lily:nameKana lily:givenNameKana foaf:age schema:birthDate
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
             lily:garden lily:grade lily:legion lily:legionJobTitle lily:position rdf:type
-            schema:height schema:weight lily:bloodType
+            schema:height schema:weight lily:bloodType lily:isBoosted
         }
         ?subject a lily:Lily;
                  ?predicate ?object.
@@ -38,7 +38,7 @@ WHERE {
             schema:name lily:nameKana lily:givenNameKana foaf:age schema:birthDate
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
             lily:garden lily:grade lily:legion lily:position rdf:type
-            schema:height schema:weight lily:bloodType
+            schema:height schema:weight lily:bloodType lily:isBoosted
         }
         ?subject a lily:Teacher;
                  ?predicate ?object.
@@ -49,7 +49,7 @@ WHERE {
             schema:name lily:nameKana lily:givenNameKana foaf:age schema:birthDate
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
             lily:garden lily:grade lily:legion lily:position rdf:type
-            schema:height schema:weight lily:bloodType
+            schema:height schema:weight lily:bloodType lily:isBoosted
         }
         ?subject a lily:Character;
                  ?predicate ?object.
@@ -170,6 +170,10 @@ SPQRQL
                         'key' => $filterKey,
                         'suffix' => '型'
                     ];
+                    break;
+                case 'isBoosted':
+                    $filterKey = 'lily:isBoosted';
+                    $filterInfo['key'] = '強化リリィであるか';
                     break;
                 default:
                     abort(400, '指定されたキーではフィルタできません');
