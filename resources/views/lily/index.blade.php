@@ -272,7 +272,7 @@
                     </select>
                 </label>
                 <label>
-                    <input type="text" name="filterValue" placeholder="スキル名" list="rareSkill" id="skillName" required>
+                    <input type="text" name="filterValue" placeholder="スキル名" list="skill" id="skillName" required>
                 </label>
                 <datalist id="rareSkill">
                     @foreach($datalist['rareSkill'] as $rareSkill)
