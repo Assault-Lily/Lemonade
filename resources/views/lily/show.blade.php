@@ -302,6 +302,9 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @if(!empty($triples[$ts]['lily:lifeStatus']) and $triples[$ts]['lily:lifeStatus'][0] === 'dead')
                         <div class="KIA">故人</div>
                     @endif
+                    @if(!empty($triples[$ts]['lily:lifeStatus']) and $triples[$ts]['lily:lifeStatus'][0] === 'unknown')
+                        <div class="KIA">生死不明</div>
+                    @endif
                     @if(!empty($triples[$ts]['lily:killedIn'][0]))
                         <div class="KIA">{{ $triples[$ts]['lily:killedIn'][0] }}<br>戦死・殉職者</div>
                     @endif
@@ -309,7 +312,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         <div class="boosted">強化リリィ</div>
                     @endif
                     @if(!empty($triples[$ts]['rdf:type']) and $triples[$ts]['rdf:type'][0] === 'lily:Teacher')
-                        <div class=teacher>教導官</div>
+                        <div class="teacher">教導官</div>
                     @endif
                 </div>
 
