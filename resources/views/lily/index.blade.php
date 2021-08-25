@@ -184,9 +184,15 @@
         </div>
         @if(!empty($filterInfo))
             <p class="center">
-                <strong>{{ $filterInfo['key'] }}</strong> が
-                <strong>"{{ $filterInfo['value'].($filterInfo['suffix'] ?? '') }}"</strong>
-                のリリィでフィルタしています
+                @if(!empty($filterInfo['SP']))
+                    <strong>{{ implode(' , ', $filterInfo['SP']) }}</strong>
+                @endif
+                @if(!empty($filterInfo['SP']) && !empty($filterInfo['key']) && !empty($filterInfo['value'])) かつ @endif
+                @if(!empty($filterInfo['key']) && !empty($filterInfo['value']))
+                    <strong>{{ $filterInfo['key'] }}</strong> が
+                    <strong>"{{ $filterInfo['value'].($filterInfo['suffix'] ?? '') }}"</strong>である
+                @endif
+                リリィでフィルタしています
                 <a href="{{ route('lily.index') }}" class="button smaller">フィルタ解除</a>
             </p>
         @endif
@@ -234,6 +240,22 @@
                 <a href="javascript:location.href = changeGetParam('type', 'character')" class="button">その他のみ</a>
                 <a href="javascript:location.href = changeGetParam('type', 'lily,teacher,character')" class="button">すべて</a>
             </div>
+
+            <h3>生命状態</h3>
+            <div id="boosted-selector">
+                <a href="javascript:location.href = changeGetParam('lifeStatus', null)" class="button">考慮しない</a>
+                <a href="javascript:location.href = changeGetParam('lifeStatus', 'alive')" class="button">存命</a>
+                <a href="javascript:location.href = changeGetParam('lifeStatus', 'dead')" class="button">殉職・故人</a>
+                <a href="javascript:location.href = changeGetParam('lifeStatus', 'unknown')" class="button">生死不明</a>
+            </div>
+            <h3>強化リリィ</h3>
+            <div id="boosted-selector">
+                <a href="javascript:location.href = changeGetParam('isBoosted', null)" class="button">考慮しない</a>
+                <a href="javascript:location.href = changeGetParam('isBoosted', 'true')" class="button">強化リリィ</a>
+                <a href="javascript:location.href = changeGetParam('isBoosted', 'false')" class="button">強化済でない</a>
+            </div>
+
+            <hr>
 
             <h3>ガーデン</h3>
             <form action="{{ route('lily.index') }}" method="get" id="garden-selector" name="garden">
@@ -309,8 +331,13 @@
         <div class="body">
             @if(!empty($filterInfo))
                 <p class="center">
-                    <strong>{{ $filterInfo['key'] }}</strong> が
-                    <strong>"{{ $filterInfo['value'] }}"</strong>
+                    @if(!empty($filterInfo['SP']))
+                        {{ implode(', ', $filterInfo['SP']) }}
+                    @endif
+                    @if(!empty($filterInfo['key']) && !empty($filterInfo['value']))
+                        <strong>{{ $filterInfo['key'] }}</strong> が
+                        <strong>"{{ $filterInfo['value'].($filterInfo['suffix'] ?? '') }}"</strong>
+                    @endif
                     のリリィからランダムで選んでいます。
                 </p>
             @else

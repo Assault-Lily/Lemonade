@@ -27,7 +27,7 @@ WHERE {
             schema:name lily:nameKana lily:givenNameKana foaf:age schema:birthDate
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
             lily:garden lily:grade lily:legion lily:legionJobTitle lily:position rdf:type
-            schema:height schema:weight lily:bloodType lily:isBoosted
+            schema:height schema:weight lily:bloodType lily:isBoosted lily:lifeStatus
         }
         ?subject a lily:Lily;
                  ?predicate ?object.
@@ -38,7 +38,7 @@ WHERE {
             schema:name lily:nameKana lily:givenNameKana foaf:age schema:birthDate
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
             lily:garden lily:grade lily:legion lily:position rdf:type
-            schema:height schema:weight lily:bloodType lily:isBoosted
+            schema:height schema:weight lily:bloodType lily:isBoosted lily:lifeStatus
         }
         ?subject a lily:Teacher;
                  ?predicate ?object.
@@ -49,7 +49,7 @@ WHERE {
             schema:name lily:nameKana lily:givenNameKana foaf:age schema:birthDate
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
             lily:garden lily:grade lily:legion lily:position rdf:type
-            schema:height schema:weight lily:bloodType lily:isBoosted
+            schema:height schema:weight lily:bloodType lily:isBoosted lily:lifeStatus
         }
         ?subject a lily:Character;
                  ?predicate ?object.
@@ -171,28 +171,56 @@ SPQRQL
                         'suffix' => '型'
                     ];
                     break;
-                case 'isBoosted':
-                    $filterKey = 'lily:isBoosted';
-                    $filterInfo['key'] = '強化リリィであるか';
-                    break;
                 default:
                     abort(400, '指定されたキーではフィルタできません');
                     exit();
             }
             $filterValue = (string) request()->get('filterValue','');
-            if(empty($filterValue)){
-                abort(400, 'フィルタ値が空です');
-            }else{
-                $filterInfo['value'] = $filterValue;
-                foreach ($lilies as $lilyKey => $lily){
-                    // フィルタドロップ処理
-                    if(empty($lily[$filterKey]) || array_search($filterValue, $lily[$filterKey]) === false){
-                        unset($lilies[$lilyKey]);
-                    }
-                }
-                unset($lily);
+            if(empty($filterValue)) abort(400, 'フィルタ値が空です');
+            $filterInfo['value'] = $filterValue;
+        }
+        // 特殊フィルタ初期化
+        $filterSP['lifeStatus'] = request()->get('lifeStatus', null);
+        if(!is_null($filterSP['lifeStatus'])){
+            switch ($filterSP['lifeStatus']){
+                case 'alive':
+                    $filterInfo['SP'][] = '生存している'; break;
+                case 'dead':
+                    $filterInfo['SP'][] = '殉職者・故人である'; break;
+                case 'unknown':
+                    $filterInfo['SP'][] = '生死不明である'; break;
+                default:
+                    abort(400, 'lifeStatusフィルタの値が不正です'); break;
             }
         }
+        $filterSP['isBoosted']  = request()->get('isBoosted', null);
+        if(!is_null($filterSP['isBoosted'])){
+            switch ($filterSP['isBoosted']){
+                case 'true':
+                    $filterInfo['SP'][] = '強化されている'; break;
+                case 'false':
+                    $filterInfo['SP'][] = '強化されていない(と思われる)'; break;
+                default:
+                    abort(400, 'isBoostedフィルタの値が不正です'); break;
+            }
+        }
+
+        // フィルタドロップ処理
+        foreach ($lilies as $lilyKey => $lily){
+            // キーフィルタ
+            if(!empty($filterKey) && !empty($filterValue)
+                && (empty($lily[$filterKey]) || array_search($filterValue, $lily[$filterKey]) === false)){
+                unset($lilies[$lilyKey]);
+            }
+            // 特殊フィルタ
+            if(!is_null($filterSP['lifeStatus']) && (empty($lily['lily:lifeStatus']) || $lily['lily:lifeStatus'][0] !== $filterSP['lifeStatus'])){
+                unset($lilies[$lilyKey]);
+            }
+            if(!is_null($filterSP['isBoosted']) && (empty($lily['lily:isBoosted']) || $lily['lily:isBoosted'][0] !== $filterSP['isBoosted'])){
+                unset($lilies[$lilyKey]);
+            }
+        }
+        unset($lily);
 
         // ソート判別
         $sortKey = request()->get('sort', 'name');
