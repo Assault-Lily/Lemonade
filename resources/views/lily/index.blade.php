@@ -231,93 +231,96 @@
     <dialog id="filter-setting" class="window-a">
         <div class="header">表示・フィルタ設定</div>
         <div class="body">
-            <h3>表示設定</h3>
-            <div id="viewMode-selector">
-                <a href="javascript:location.href = changeGetParam('type', null)" class="button">リリィのみ</a>
-                <a href="javascript:location.href = changeGetParam('type', 'lily,teacher')" class="button">教導官を含む</a>
-                <a href="javascript:location.href = changeGetParam('type', 'teacher')" class="button">教導官のみ</a>
-                <a href="javascript:location.href = changeGetParam('type', 'lily,character')" class="button">その他を含む</a>
-                <a href="javascript:location.href = changeGetParam('type', 'character')" class="button">その他のみ</a>
-                <a href="javascript:location.href = changeGetParam('type', 'lily,teacher,character')" class="button">すべて</a>
+            <div style="max-height: 450px; overflow-y: scroll; margin: 0 -20px; padding: 0 20px 5px">
+                <h3>表示設定</h3>
+                <div id="viewMode-selector">
+                    <a href="javascript:location.href = changeGetParam('type', null)" class="button">リリィのみ</a>
+                    <a href="javascript:location.href = changeGetParam('type', 'lily,teacher')" class="button">教導官を含む</a>
+                    <a href="javascript:location.href = changeGetParam('type', 'teacher')" class="button">教導官のみ</a>
+                    <a href="javascript:location.href = changeGetParam('type', 'lily,character')" class="button">その他を含む</a>
+                    <a href="javascript:location.href = changeGetParam('type', 'character')" class="button">その他のみ</a>
+                    <a href="javascript:location.href = changeGetParam('type', 'lily,teacher,character')" class="button">すべて</a>
+                </div>
+
+                <h3>生命状態</h3>
+                <div id="boosted-selector">
+                    <a href="javascript:location.href = changeGetParam('lifeStatus', null)" class="button">考慮しない</a>
+                    <a href="javascript:location.href = changeGetParam('lifeStatus', 'alive')" class="button">存命</a>
+                    <a href="javascript:location.href = changeGetParam('lifeStatus', 'dead')" class="button">殉職・故人</a>
+                    <a href="javascript:location.href = changeGetParam('lifeStatus', 'unknown')" class="button">生死不明</a>
+                </div>
+                <h3>強化リリィ</h3>
+                <div id="boosted-selector">
+                    <a href="javascript:location.href = changeGetParam('isBoosted', null)" class="button">考慮しない</a>
+                    <a href="javascript:location.href = changeGetParam('isBoosted', 'true')" class="button">強化リリィ</a>
+                    <a href="javascript:location.href = changeGetParam('isBoosted', 'false')" class="button">強化済でない</a>
+                </div>
+
+                <hr>
+
+                <h3>ガーデン</h3>
+                <form action="{{ route('lily.index') }}" method="get" id="garden-selector" name="garden">
+                    <input type="hidden" name="filterBy" value="garden">
+                    <label>
+                        <input type="text" name="filterValue" placeholder="ガーデン名" list="gardenList" required>
+                    </label>
+                    <datalist id="gardenList">
+                        @foreach($datalist['garden'] as $garden)
+                            <option value="{{ $garden }}"></option>
+                        @endforeach
+                    </datalist>
+                    <input type="submit" value="フィルタ" class="button primary">
+                </form>
+                <h3>ポジション</h3>
+                <div id="position-selector">
+                    <a href="javascript:location.href = changeGetParam('filterValue', 'AZ', changeGetParam('filterBy', 'position'))" class="button">AZ</a>
+                    <a href="javascript:location.href = changeGetParam('filterValue', 'TZ', changeGetParam('filterBy', 'position'))" class="button">TZ</a>
+                    <a href="javascript:location.href = changeGetParam('filterValue', 'BZ', changeGetParam('filterBy', 'position'))" class="button">BZ</a>
+                </div>
+                <h3>血液型</h3>
+                <div id="bloodType-selector">
+                    <a href="javascript:location.href = changeGetParam('filterValue', 'A',  changeGetParam('filterBy', 'bloodType'))" class="button">A</a>
+                    <a href="javascript:location.href = changeGetParam('filterValue', 'B',  changeGetParam('filterBy', 'bloodType'))" class="button">B</a>
+                    <a href="javascript:location.href = changeGetParam('filterValue', 'O',  changeGetParam('filterBy', 'bloodType'))" class="button">O</a>
+                    <a href="javascript:location.href = changeGetParam('filterValue', 'AB', changeGetParam('filterBy', 'bloodType'))" class="button">AB</a>
+                </div>
+                <h3>スキル</h3>
+                <form action="{{ route('lily.index') }}" method="get" id="skill-selector" name="skill">
+                    <label>
+                        <select name="filterBy" id="skill-type">
+                            <option value="skill" selected>スキル(全種)</option>
+                            <option value="rareSkill">レアスキル</option>
+                            <option value="subSkill">サブスキル</option>
+                            <option value="boostedSkill">ブーステッドスキル</option>
+                        </select>
+                    </label>
+                    <label>
+                        <input type="text" name="filterValue" placeholder="スキル名" list="skill" id="skillName" required>
+                    </label>
+                    <datalist id="rareSkill">
+                        @foreach($datalist['rareSkill'] as $rareSkill)
+                            <option value="{{ $rareSkill }}"></option>
+                        @endforeach
+                    </datalist>
+                    <datalist id="subSkill">
+                        @foreach($datalist['subSkill'] as $subSkill)
+                            <option value="{{ $subSkill }}"></option>
+                        @endforeach
+                    </datalist>
+                    <datalist id="boostedSkill">
+                        @foreach($datalist['boostedSkill'] as $boostedSkill)
+                            <option value="{{ $boostedSkill }}"></option>
+                        @endforeach
+                    </datalist>
+                    <datalist id="skill">
+                        @foreach($datalist['skill'] as $skill)
+                            <option value="{{ $skill }}"></option>
+                        @endforeach
+                    </datalist>
+                    <input type="submit" value="フィルタ" class="button primary">
+                </form>
             </div>
 
-            <h3>生命状態</h3>
-            <div id="boosted-selector">
-                <a href="javascript:location.href = changeGetParam('lifeStatus', null)" class="button">考慮しない</a>
-                <a href="javascript:location.href = changeGetParam('lifeStatus', 'alive')" class="button">存命</a>
-                <a href="javascript:location.href = changeGetParam('lifeStatus', 'dead')" class="button">殉職・故人</a>
-                <a href="javascript:location.href = changeGetParam('lifeStatus', 'unknown')" class="button">生死不明</a>
-            </div>
-            <h3>強化リリィ</h3>
-            <div id="boosted-selector">
-                <a href="javascript:location.href = changeGetParam('isBoosted', null)" class="button">考慮しない</a>
-                <a href="javascript:location.href = changeGetParam('isBoosted', 'true')" class="button">強化リリィ</a>
-                <a href="javascript:location.href = changeGetParam('isBoosted', 'false')" class="button">強化済でない</a>
-            </div>
-
-            <hr>
-
-            <h3>ガーデン</h3>
-            <form action="{{ route('lily.index') }}" method="get" id="garden-selector" name="garden">
-                <input type="hidden" name="filterBy" value="garden">
-                <label>
-                    <input type="text" name="filterValue" placeholder="ガーデン名" list="gardenList" required>
-                </label>
-                <datalist id="gardenList">
-                    @foreach($datalist['garden'] as $garden)
-                        <option value="{{ $garden }}"></option>
-                    @endforeach
-                </datalist>
-                <input type="submit" value="フィルタ" class="button primary">
-            </form>
-            <h3>ポジション</h3>
-            <div id="position-selector">
-                <a href="javascript:location.href = changeGetParam('filterValue', 'AZ', changeGetParam('filterBy', 'position'))" class="button">AZ</a>
-                <a href="javascript:location.href = changeGetParam('filterValue', 'TZ', changeGetParam('filterBy', 'position'))" class="button">TZ</a>
-                <a href="javascript:location.href = changeGetParam('filterValue', 'BZ', changeGetParam('filterBy', 'position'))" class="button">BZ</a>
-            </div>
-            <h3>血液型</h3>
-            <div id="bloodType-selector">
-                <a href="javascript:location.href = changeGetParam('filterValue', 'A',  changeGetParam('filterBy', 'bloodType'))" class="button">A</a>
-                <a href="javascript:location.href = changeGetParam('filterValue', 'B',  changeGetParam('filterBy', 'bloodType'))" class="button">B</a>
-                <a href="javascript:location.href = changeGetParam('filterValue', 'O',  changeGetParam('filterBy', 'bloodType'))" class="button">O</a>
-                <a href="javascript:location.href = changeGetParam('filterValue', 'AB', changeGetParam('filterBy', 'bloodType'))" class="button">AB</a>
-            </div>
-            <h3>スキル</h3>
-            <form action="{{ route('lily.index') }}" method="get" id="skill-selector" name="skill">
-                <label>
-                    <select name="filterBy" id="skill-type">
-                        <option value="skill" selected>スキル(全種)</option>
-                        <option value="rareSkill">レアスキル</option>
-                        <option value="subSkill">サブスキル</option>
-                        <option value="boostedSkill">ブーステッドスキル</option>
-                    </select>
-                </label>
-                <label>
-                    <input type="text" name="filterValue" placeholder="スキル名" list="skill" id="skillName" required>
-                </label>
-                <datalist id="rareSkill">
-                    @foreach($datalist['rareSkill'] as $rareSkill)
-                        <option value="{{ $rareSkill }}"></option>
-                    @endforeach
-                </datalist>
-                <datalist id="subSkill">
-                    @foreach($datalist['subSkill'] as $subSkill)
-                        <option value="{{ $subSkill }}"></option>
-                    @endforeach
-                </datalist>
-                <datalist id="boostedSkill">
-                    @foreach($datalist['boostedSkill'] as $boostedSkill)
-                        <option value="{{ $boostedSkill }}"></option>
-                    @endforeach
-                </datalist>
-                <datalist id="skill">
-                    @foreach($datalist['skill'] as $skill)
-                        <option value="{{ $skill }}"></option>
-                    @endforeach
-                </datalist>
-                <input type="submit" value="フィルタ" class="button primary">
-            </form>
             <hr>
             <div class="buttons">
                 <a href="{{ route('lily.index') }}" class="button">リセット</a>
