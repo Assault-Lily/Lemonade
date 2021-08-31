@@ -565,16 +565,16 @@
         },
         {
             "name": "endroid/qr-code",
-            "version": "4.2.2",
+            "version": "4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/endroid/qr-code.git",
-                "reference": "53bfce79da95bf082484301fecbc1d77a3907f78"
+                "reference": "98f6d4024289ad3a8d7f3e63cab947ef6929dcdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/endroid/qr-code/zipball/53bfce79da95bf082484301fecbc1d77a3907f78",
-                "reference": "53bfce79da95bf082484301fecbc1d77a3907f78",
+                "url": "https://api.github.com/repos/endroid/qr-code/zipball/98f6d4024289ad3a8d7f3e63cab947ef6929dcdb",
+                "reference": "98f6d4024289ad3a8d7f3e63cab947ef6929dcdb",
                 "shasum": ""
             },
             "require": {
@@ -625,7 +625,7 @@
             ],
             "support": {
                 "issues": "https://github.com/endroid/qr-code/issues",
-                "source": "https://github.com/endroid/qr-code/tree/4.2.2"
+                "source": "https://github.com/endroid/qr-code/tree/4.3.0"
             },
             "funding": [
                 {
@@ -633,7 +633,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-16T22:08:35+00:00"
+            "time": "2021-08-28T12:29:40+00:00"
         },
         {
             "name": "fideloper/proxy",
