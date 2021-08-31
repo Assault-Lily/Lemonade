@@ -58,13 +58,12 @@
                 document.getElementById('skillName').setAttribute('list', e.target.value);
             });
 
-            const lilies = document.querySelectorAll('#lily-list > .list-item-a');
-
             const randomDialog = document.getElementById('random');
             dialogPolyfill.registerDialog(randomDialog);
             document.getElementById('random-open').addEventListener('click',()=>{
                 const lily = document.getElementById('random-lily');
                 if(lily.firstChild) lily.removeChild(lily.firstChild);
+                const lilies = document.querySelectorAll('#lily-list > .list-item-a:not(.hidden)');
                 if(lilies.length === 0){
                     showMessage("該当するデータがないためランダム選択できません。");
                 }else{
@@ -78,15 +77,16 @@
             });
 
             const nameFilter = document.getElementById('name-filter');
+            const emptyNotice = document.createElement('p');
+            emptyNotice.id = 'emptyNotice';
+            emptyNotice.classList.add('center', 'notice');
+            emptyNotice.style = 'margin:3em auto;';
+            emptyNotice.innerText = '該当するデータがありません';
             nameFilter.addEventListener('input', ()=>{
+                const lilies = document.querySelectorAll('#lily-list > .list-item-a');
                 if(lilies.length === 0) return;
                 const search = nameFilter.value;
                 let count = 0;
-                const emptyNotice = document.createElement('p');
-                emptyNotice.id = 'emptyNotice';
-                emptyNotice.classList.add('center', 'notice');
-                emptyNotice.style = 'margin:3em auto;';
-                emptyNotice.innerText = '該当するデータがありません';
                 lilies.forEach((lily)=>{
                     if(search.length === 0 ||
                         lily.querySelector('.title').innerText.indexOf(search) !== -1 ||
@@ -97,8 +97,9 @@
                         lily.classList.add('hidden');
                     }
                 });
-                if(!document.getElementById('emptyNotice') && count === 0){
-                    document.getElementById('lily-list').parentNode.appendChild(emptyNotice);
+                if(count === 0){
+                    if(!document.getElementById('emptyNotice'))
+                        document.getElementById('lily-list').parentNode.appendChild(emptyNotice);
                 }else if(document.getElementById('emptyNotice')){
                     document.getElementById('emptyNotice').remove();
                 }
