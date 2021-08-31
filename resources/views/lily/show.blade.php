@@ -266,8 +266,8 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                             <td class="spacer"></td>
                         </tr>
                     @endif
-                    @if(!empty($triples['remarks']))
-                        @include('app.lilyprofiletable.record',['object' => $triples['remarks'] ?? null, 'th' => '特記事項'])
+                    @if(!empty($triples[$ts]['lily:additionalInformation']))
+                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:additionalInformation'] ?? null, 'th' => '特記事項'])
                     @endif
                     </tbody>
                 </table>
