@@ -4,6 +4,7 @@
 /public/favicon.ico
 /storage/*.key
 /vendor
+/docker
 .env
 .env.backup
 .phpunit.result.cache

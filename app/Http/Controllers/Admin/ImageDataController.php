@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Image;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ImageDataController extends Controller
 {
@@ -21,7 +22,7 @@ class ImageDataController extends Controller
      */
     public function index()
     {
-        $images = Image::all();
+        $images = Image::all()->sortBy('id')->values();
         return view('admin.image.index', compact('images'));
     }
 
@@ -59,6 +60,8 @@ class ImageDataController extends Controller
         ]);
 
         $image = new Image();
+        
+        $image->id = Str::orderedUuid()->toString();
         $image->for = $request->for;
         $image->type = $request->type;
         $image->author = $request->author;
