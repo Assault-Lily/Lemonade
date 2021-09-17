@@ -13,7 +13,7 @@ class CreateDynamodbLocalImageTable extends Migration
     public function up()
     {
         // ローカル以外の時には実行しない
-        if (!app()->environment('local')) {
+        if (!(env('DYNAMODB_CONNECTION') === 'local')) {
             return;
         }
         $dynamoDbClientService = resolve(DynamoDbClientService::class);
@@ -50,7 +50,7 @@ class CreateDynamodbLocalImageTable extends Migration
     public function down()
     {
         // ローカル以外の時には実行しない
-        if (!app()->environment('local')) {
+        if (!(env('DYNAMODB_CONNECTION') === 'local')) {
             return;
         }
         $dynamoDbClientService = resolve(DynamoDbClientService::class);
