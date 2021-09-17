@@ -13,7 +13,6 @@
         "ext-libxml": "*",
         "ext-simplexml": "*",
         "ext-zip": "*",
-        "baopham/dynamodb": "^6.1",
         "endroid/qr-code": "^4.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",

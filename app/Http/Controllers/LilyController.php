@@ -318,7 +318,7 @@ SPQRQL
 
         // アイコンデータ取得
         $icons = array();
-        foreach (Image::where('type', 'icon')->get() as $icon){
+        foreach (Image::whereType('icon')->get() as $icon){
             $icons['lilyrdf:'.$icon->for][] = $icon;
         }
 
@@ -411,7 +411,7 @@ SPARQL
             $triples['lilyrdf:'.$slug][$triple->predicate][] = $triple->object;
         }
 
-        $icons = Image::where('for', $slug)->where('type', 'icon')->get();
+        $icons = Image::whereFor($slug)->where('type','=','icon')->get();
 
         return view('lily.show', compact('triples', 'slug', 'icons'));
     }
