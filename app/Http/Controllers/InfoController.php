@@ -57,7 +57,7 @@ SPARQL
         }
 
         // アイコン取得
-        foreach (Image::where('type', 'icon')->whereIn('for', $image_pull_list)->get() as $image){
+        foreach (Image::whereType('icon')->whereIn('for',$image_pull_list)->get() as $image){
             $images['lilyrdf:'.$image->for][] = $image;
         }
 
