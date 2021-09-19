@@ -90,6 +90,11 @@
     </nav>
 </header>
 
+@if(session('headError'))
+    <div style="color: darkred; background: #ffe0e0; border-bottom: solid 1px red; padding: 5px; text-align: center; position: relative; z-index: 99">
+        {!! nl2br(session('headError')) !!}
+    </div>
+@endif
 @if(session('message'))
     <div class="flash-message">{{ session('message') }}</div>
 @endif
@@ -98,8 +103,9 @@
 
 <footer>
     <p>{{ config('app.name') }}<span style="font-size: smaller;margin-left: 1em">{{ 'Ver'.config('lemonade.version') }}</span></p>
-    <p style="font-size: smaller; color: gray;line-height: 2em">
-        Dataset powered by AssaultLily unofficial database "assaultlily-rdf"<br>
+    <p style="font-size: smaller; color: dimgray;line-height: 2em">
+        Dataset powered by AssaultLily unofficial database
+        <a href="{{ config('lemonade.rdf.repository') }}" target="_blank">"assaultlily-rdf"</a><br>
         アイコン等の画像の一部は製作者から提供を受けたものを掲載しています。
         これらの画像の権利の一切は製作者に帰属します。
     </p>
