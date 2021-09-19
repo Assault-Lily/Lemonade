@@ -412,7 +412,7 @@ SPARQL
             $triples['lilyrdf:'.$slug][$triple->predicate][] = $triple->object;
         }
 
-        $icons = getImage('icon');
+        $icons = getImage('icon', $slug);
 
         return view('lily.show', compact('triples', 'slug', 'icons'));
     }
