@@ -56,8 +56,8 @@
 
         <hr>
         <div id="system-info">
-            {{ config('app.name').' Ver'.explode(' ',config('lemonade.version',''))[0] }}
-            <div style="font-size: 12px">{{ explode(' ',config('lemonade.version',''), 2)[1] }}</div>
+            {{ config('app.name').' '.(App::environment('production') ? ('Ver'.explode(' ',config('lemonade.version',''))[0]) : 'Rev.'.exec('git rev-parse --short HEAD')) }}
+            <div style="font-size: 12px">{{ explode(' ',config('lemonade.version',''), 2)[1].(!App::environment('production') ? ' - '.App::environment() : '') }}</div>
         </div>
         <hr>
         @if(Auth::check())
