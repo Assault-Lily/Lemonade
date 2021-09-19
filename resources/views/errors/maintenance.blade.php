@@ -114,7 +114,7 @@
         </a>
     </div>
     <div>
-        {{ 'Ver : '.config('lemonade.version') }}
+        {{ 'Ver'.config('lemonade.version','').(App::environment('production') ? '' : ' - Rev.'.exec('git rev-parse --short HEAD')) }}
     </div>
 </footer>
 </body>
