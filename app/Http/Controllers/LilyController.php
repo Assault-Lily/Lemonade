@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use App\Models\Triple;
+use Aws\DynamoDb\Exception\DynamoDbException;
 
 class LilyController extends Controller
 {
@@ -318,7 +319,7 @@ SPQRQL
 
         // アイコンデータ取得
         $icons = array();
-        foreach (Image::where('type', 'icon')->get() as $icon){
+        foreach (getImage('icon') as $icon){
             $icons['lilyrdf:'.$icon->for][] = $icon;
         }
 
@@ -411,7 +412,7 @@ SPARQL
             $triples['lilyrdf:'.$slug][$triple->predicate][] = $triple->object;
         }
 
-        $icons = Image::where('for', $slug)->where('type', 'icon')->get();
+        $icons = getImage('icon');
 
         return view('lily.show', compact('triples', 'slug', 'icons'));
     }

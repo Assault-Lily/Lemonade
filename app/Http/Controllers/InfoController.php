@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use App\Models\Notice;
+use Aws\DynamoDb\Exception\DynamoDbException;
 use Carbon\Carbon;
 use Exception;
 use ZipArchive;
@@ -50,7 +51,7 @@ SPARQL
             if($triple['rdf:type'][0] === 'lily:Lily'){
                 $lilies[$key] = $triple;
                 // アイコンを取得するリリィのリスト
-                $image_pull_list[] = str_replace('lilyrdf:','',$key);
+                $image_pull_list[] = removePrefix($key);
             }else{
                 $legions[$key] = $triple;
             }
@@ -58,7 +59,7 @@ SPARQL
 
         // アイコン取得
         if(!empty($image_pull_list)){
-            foreach (Image::where('type', 'icon')->whereIn('for', $image_pull_list)->get() as $image){
+            foreach (getImage('icon', $image_pull_list) as $image){
                 $images['lilyrdf:'.$image->for][] = $image;
             }
         }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
 use Illuminate\Http\Request;
 
 class LegionController extends Controller
@@ -70,7 +69,7 @@ SPARQL
         if (empty($legion['lilyrdf:'.$legionSlug]) or !in_array($legion['lilyrdf:'.$legionSlug]['rdf:type'][0], $approve_type)) abort(404, "指定されたレギオンのデータは現時点で存在しません");
 
         $icons = array();
-        foreach (Image::where('type', 'icon')->get() as $icon){
+        foreach (getImage('icon') as $icon){
             $icons['lilyrdf:'.$icon->for][] = $icon;
         }
 
