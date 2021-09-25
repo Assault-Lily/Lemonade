@@ -13,7 +13,8 @@ $ogp['description'] = "アサルトリリィのIME辞書を生成します。Goo
                 この辞書はGoogle日本語入力、及びGoogle日本語入力のフォーマットを受け入れるIME、MacOS日本語入力プログラムで利用可能です。
             </p>
             <p class="center">
-                Google日本語入力はそのままダウンロードを、<br>MicrosoftIMEをご利用の場合はShift-JIS版を、<br>
+                Google日本語入力はそのままダウンロードを、<br>
+                MicrosoftIMEをご利用の場合はオープン拡張辞書版を、<br>
                 Android版Gboardをご利用の場合はZIP版を、<br>
                 MacOSの日本語入力プログラムをご利用の場合はPropertyList版をご利用ください。<br>
                 インポートの方法は各IMEのヘルプをご確認ください。
@@ -21,8 +22,8 @@ $ogp['description'] = "アサルトリリィのIME辞書を生成します。Goo
             <div class="buttons three">
                 <a href="{{ url()->current().'?format=txt' }}" download="assaultlily-dic.txt"
                    class="button primary" target="_self">ダウンロード (UTF-8版)</a><br>
-                <a href="{{ url()->current().'?format=txt-sjis' }}" download="assaultlily-dic.txt"
-                   class="button" target="_self">ダウンロード (Shift-JIS版)</a>
+                <a href="{{ url()->current().'?format=dctx' }}" download="assaultlily-dic.dctx"
+                   class="button" target="_self">ダウンロード (オープン拡張辞書版)</a>
                 <a href="{{ url()->current().'?format=zip' }}" download="assaultlily-dic.zip"
                    class="button" target="_self">ダウンロード (Gboard向けZIP版)</a>
                 <a href="{{ url()->current().'?format=plist' }}" download="assaultlily-dic.plist"
