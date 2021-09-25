@@ -64,4 +64,6 @@ return [
         ],
         'エレンスゲ女学園' => '楯の乙女',
     ],
+
+    'dictionaryGUID' => env('DICTIONARY_GUID'),
 ];
