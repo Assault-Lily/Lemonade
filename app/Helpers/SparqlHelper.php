@@ -37,6 +37,7 @@ function sparqlQueryOrDie(string $query, int $timeout = 5, bool $predicateReplac
     try {
         $res = sparqlQuery($query, $timeout, $predicateReplace);
     }catch (\Illuminate\Http\Client\ConnectionException $e){
+        report($e);
         Log::channel()->critical('SPARQL-EP 接続エラー'.PHP_EOL.$e->getMessage());
         $message = "SPARQLエンドポイントに接続できませんでした。\n管理者までご連絡ください。";
         abort(502, $message);
@@ -47,6 +48,7 @@ function sparqlQueryOrDie(string $query, int $timeout = 5, bool $predicateReplac
             $message .= "解消されない場合は管理者までご連絡ください。\n";
             abort(response()->view('errors.maintenance',['exception' => $e, 'message' => $message]));
         }else{
+            report($e);
             $message = "SPARQLエンドポイントから無効な応答が返されました。\n";
             $message .= "通常と異なるエラーです。至急管理者までご連絡ください。\n";
             Log::channel('slack')->critical('SPARQL-EP 無効応答'.PHP_EOL.$e->getMessage());
