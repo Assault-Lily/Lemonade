@@ -259,7 +259,7 @@ DCTX;
             }else{
                 abort(500, 'ZIPアーカイブの作成に失敗しました');
             }
-            return response()->download($name, 'assaultlily-dic.zip');
+            return response()->download($name, 'assaultlily-dic.zip')->deleteFileAfterSend(true);
         }
 
         return view('main.imedic', compact('dicString'));
