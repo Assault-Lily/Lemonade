@@ -90,7 +90,7 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
                         <th>演出</th><td>{{ implode(', ' ,$play[$ps]['lily:episodeDirection'] ?? array()) }}</td>
                     </tr>
                     <tr>
-                        <th>作曲</th><td>{{ implode(', ' ,$play[$ps]['lily:composer'] ?? array()) }}</td>
+                        <th>作曲</th><td>{!! e(implode(', ' ,$play[$ps]['lily:composer'] ?? array())) ?: '<span style="color:gray">N/A</span>' !!}</td>
                         <th>原作</th><td>{{ implode(', ' ,$play[$ps]['lily:originalAuthor'] ?? array()) }}</td>
                     </tr>
                     <tr>
