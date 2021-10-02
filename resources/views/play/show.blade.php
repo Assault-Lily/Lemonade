@@ -76,8 +76,8 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
                         <th>略称</th><td>{!! e($play[$ps]['schema:alternateName'][0] ?? '') ?: "<span style='color:gray'>N/A</span>" !!}</td>
                     </tr>
                     <tr>
-                        <th>初演</th><td>{{ convertDateString($play[$ps]['schema:startDate'][0])->format('Y年n月j日') }}</td>
-                        <th>千穐楽</th><td>{{ convertDateString($play[$ps]['schema:endDate'][0])->format('Y年n月j日') }}</td>
+                        <th>初演</th><td>{{ convertDateString($play[$ps]['schema:startDate'][0])->isoFormat('YYYY年M月D日 (ddd)') }}</td>
+                        <th>千穐楽</th><td>{{ convertDateString($play[$ps]['schema:endDate'][0])->isoFormat('YYYY年M月D日 (ddd)') }}</td>
                     </tr>
                     <tr>
                         <th>主催</th><td colspan="3">{{ implode(', ' ,$play[$ps]['lily:organizer'] ?? array()) }}</td>
@@ -161,7 +161,7 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
                         <th>公演日時</th>
                         <td rowspan="2">
                             @foreach($play[$ps]['lily:showTime'] as $showTime)
-                                <div>{{ \Carbon\Carbon::make($showTime)->format('Y年n月j日 G:i') }}</div>
+                                <div>{{ \Carbon\Carbon::make($showTime)->isoFormat('YYYY年M月D日 (ddd) HH:mm') }}</div>
                             @endforeach
                         </td>
                     </tr>

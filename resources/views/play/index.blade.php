@@ -43,7 +43,7 @@ $ogp['description'] = '公演の一覧を表示します。現在'.count($plays)
                 </div>
                 <div>
                     <span class="underline">初演 :
-                        {{ convertDateString($play['schema:startDate'][0])->format('Y年n月j日') }}</span>
+                        {{ convertDateString($play['schema:startDate'][0])->isoFormat('YYYY年M月D日 (ddd)') }}</span>
                 </div>
             </a>
         @empty
