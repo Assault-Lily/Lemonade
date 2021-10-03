@@ -85,7 +85,11 @@
             nameFilter.addEventListener('input', ()=>{
                 const lilies = document.querySelectorAll('#lily-list > .list-item-a');
                 if(lilies.length === 0) return;
-                const search = nameFilter.value;
+                let search = nameFilter.value;
+                if((new RegExp(/[ａ-ｚＡ-Ｚ]/)).test(search[search.length - 1])){
+                    // 最後の文字が全角英数であれば、その文字は考慮しない
+                    search = search.substr(0, search.length - 1);
+                }
                 let count = 0;
                 lilies.forEach((lily)=>{
                     if(search.length === 0 ||
