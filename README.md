@@ -1,5 +1,7 @@
 # Lemonade
 
+[![Join the chat at https://gitter.im/miyacorata/Lemonade](https://badges.gitter.im/miyacorata/Lemonade.svg)](https://gitter.im/miyacorata/Lemonade?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## About Lemonade
 
 **Lemonade** は、SPARQLを用いたアサルトリリィ非公式ファンサイト用情報システムです。  
