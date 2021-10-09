@@ -121,8 +121,8 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                             @endif
                         </td>
                     </tr>
-                    @if(!empty($triples[$ts]['lily:legionJobTitle'][0]))
-                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:legionJobTitle'][0], 'th' => 'レギオン役職'])
+                    @if(!empty($triples[$ts]['lily:legionJobTitle']))
+                        @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:legionJobTitle'], 'th' => 'レギオン役職'])
                     @endif
                     @if(!empty($triples[$ts]['lily:pastLegion']))
                         <?php
