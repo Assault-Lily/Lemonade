@@ -27,7 +27,7 @@ WHERE {
         VALUES ?predicate {
             schema:name lily:nameKana lily:givenNameKana foaf:age schema:birthDate
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
-            lily:garden lily:grade lily:legion lily:legionJobTitle lily:position rdf:type
+            lily:garden lily:grade lily:legion lily:legionJobTitle lily:position rdf:type lily:color
             schema:height schema:weight lily:bloodType lily:isBoosted lily:lifeStatus
         }
         ?subject a lily:Lily;
@@ -38,7 +38,7 @@ WHERE {
         VALUES ?predicate {
             schema:name lily:nameKana lily:givenNameKana foaf:age schema:birthDate
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
-            lily:garden lily:grade lily:legion lily:position rdf:type
+            lily:garden lily:grade lily:legion lily:position rdf:type lily:color
             schema:height schema:weight lily:bloodType lily:isBoosted lily:lifeStatus
         }
         ?subject a lily:Teacher;
@@ -49,7 +49,7 @@ WHERE {
         VALUES ?predicate {
             schema:name lily:nameKana lily:givenNameKana foaf:age schema:birthDate
             lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
-            lily:garden lily:grade lily:legion lily:position rdf:type
+            lily:garden lily:grade lily:legion lily:position rdf:type lily:color
             schema:height schema:weight lily:bloodType lily:isBoosted lily:lifeStatus
         }
         ?subject a lily:Character;
