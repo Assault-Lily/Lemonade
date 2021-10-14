@@ -66,8 +66,9 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         @if(empty($triples[$ts]['lily:nameKana'][0]))
                             <div class="name-ruby" style="color: gray">読みデータなし</div>
                             <div class="name">{{ $triples[$ts]['schema:name'][0] }}</div>
-                        @elseif(mb_strlen($triples[$ts]['lily:nameKana'][0]) < 16)
-                            <div class="name-ruby">{{ $triples[$ts]['lily:nameKana'][0] }} - {{ $triples[$ts]['schema:name@en'][0] }}</div>
+                        @elseif(mb_strlen($triples[$ts]['lily:nameKana'][0]) < 16 || empty($triples[$ts]['schema:name@en'][0]))
+                            <div class="name-ruby">{{ $triples[$ts]['lily:nameKana'][0] }}
+                                {{(!empty($triples[$ts]['schema:name@en'][0]) ? ' - '.$triples[$ts]['schema:name@en'][0] : '') }}</div>
                             <div class="name">{{ $triples[$ts]['schema:name'][0] }}</div>
                         @else
                             <div class="name-ruby flip">
