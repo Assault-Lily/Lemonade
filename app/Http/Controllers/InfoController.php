@@ -105,7 +105,7 @@ SPARQL
         foreach ($sparql->results->bindings as $line){
             $sparqlArray[$line->subject->value] = [
                 'name' => $line->name->value,
-                'nameKana' => $line->nameKana->value,
+                'nameKana' => str_replace('・', '', $line->nameKana->value),
                 'givenName' => $line->givenName->value,
                 'givenNameKana' => $line->givenNameKana->value,
                 'garden' => $line->garden->value ?? '',
