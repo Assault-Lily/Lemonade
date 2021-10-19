@@ -126,20 +126,24 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:legionJobTitle'], 'th' => 'レギオン役職'])
                     @endif
                     @if(!empty($triples[$ts]['lily:pastLegion']))
-                        <?php
-                        $past_legion_name = $triples[$triples[$ts]['lily:pastLegion'][0] ?? 0]['schema:name'][0] ?? null;
-                        if(!empty($past_legion_name) and !empty($triples[$triples[$ts]['lily:pastLegion'][0]]['schema:alternateName'][0])){
-                            $past_legion_name .= ' ('.$triples[$triples[$ts]['lily:pastLegion'][0]]['schema:alternateName'][0].')';
-                        }
-                        ?>
                         <tr>
                             <th>過去の所属レギオン</th>
-                            <td>
-                                <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$triples[$ts]['lily:pastLegion'][0])]) }}">
-                                    {{ $past_legion_name }}
-                                </a>
+                            <td {!! (count($triples[$ts]['lily:pastLegion']) >= 2) ? 'rowspan="2" style="height: 4em;"' : '' !!}>
+                                @foreach($triples[$ts]['lily:pastLegion'] as $past_legion)
+                                    <?php
+                                    $past_legion_name = $triples[$past_legion ?? 0]['schema:name'][0] ?? null;
+                                    if(!empty($past_legion_name) and !empty($triples[$past_legion]['schema:alternateName'][0])){
+                                        $past_legion_name .= ' ('.$triples[$past_legion]['schema:alternateName'][0].')';
+                                    }
+                                    ?>
+                                    <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$past_legion)]) }}"
+                                       style="display: block">
+                                        {{ $past_legion_name }}
+                                    </a>
+                                @endforeach
                             </td>
                         </tr>
+                        {!! (count($triples[$ts]['lily:pastLegion']) >= 2) ? '<tr><td class="spacer"></td></tr>' : '' !!}
                     @endif
                     @if(!empty($triples[$ts]['lily:position']))
                         @include('app.lilyprofiletable.filterRecord',['object' => $triples[$ts]['lily:position'], 'th' => 'ポジション', 'key' => 'position'])
