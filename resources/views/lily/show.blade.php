@@ -232,7 +232,13 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @if(!empty($triples[$ts]['lily:color'][0]))
                         <tr>
                             <th>カラーコード</th>
-                            <td style="font-weight: bold; color: {{ '#'.$triples[$ts]['lily:color'][0] }}">{{ '#'.$triples[$ts]['lily:color'][0] }}</td>
+                            <td>
+                                <span onclick="copyString('{{ '#'.$triples[$ts]['lily:color'][0] }}')"
+                                      style="font-weight: bold; color: {{ '#'.$triples[$ts]['lily:color'][0] }}; cursor: pointer;"
+                                      title="クリックしてカラーコードをコピー">
+                                    {{ '#'.$triples[$ts]['lily:color'][0] }}
+                                </span>
+                            </td>
                         </tr>
                     @endif
                     @if(!empty($triples[$ts]['lily:cast']))
