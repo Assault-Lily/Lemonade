@@ -137,6 +137,12 @@ PLIST;
         <key>shortcut</key>
         <string>{$line['givenNameKana']}</string>
     </dict>
+    <dict>
+        <key>phrase</key>
+        <string>{$line['name']}</string>
+        <key>shortcut</key>
+        <string>{$line['givenNameKana']}</string>
+    </dict>
 
 PLIST;
             }
@@ -220,6 +226,17 @@ DCTX;
 		<ns1:ReverseConversion>true</ns1:ReverseConversion>
 		<ns1:CommonWord>true</ns1:CommonWord>
 	</ns1:DictionaryEntry>
+	<ns1:DictionaryEntry>
+		<ns1:PartOfSpeech>ShortCut</ns1:PartOfSpeech>
+		<ns1:OutputString>{$line['name']}</ns1:OutputString>
+		<ns1:InputString>{$line['givenNameKana']}</ns1:InputString>
+		<ns1:CommentData1>{$line['type']}</ns1:CommentData1>
+		<ns1:CommentData2>{$lineDic['legion']}</ns1:CommentData2>
+		<ns1:CommentData3>{$lineDic['garden']}</ns1:CommentData3>
+		<ns1:Priority>0</ns1:Priority>
+		<ns1:ReverseConversion>true</ns1:ReverseConversion>
+		<ns1:CommonWord>true</ns1:CommonWord>
+	</ns1:DictionaryEntry>
 DCTX;
             }
             $dctx .= <<<DCTX
@@ -235,6 +252,7 @@ DCTX;
             $comment = $line['type'].' LG'.($line['legion'] ?: '情報なし').' '.($line['garden'] ?: 'ガーデン情報なし');
             $dicString .= str_replace('・','',$line['nameKana'])."\t".$line['name']."\t人名\t".$comment.PHP_EOL;
             $dicString .= $line['givenNameKana']."\t".$line['givenName']."\t名\t".$comment.PHP_EOL;
+            $dicString .= $line['givenNameKana']."\t".$line['name']."\t短縮よみ\t".$comment.PHP_EOL;
         }
         $dicString = trim($dicString);
 
