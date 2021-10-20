@@ -20,9 +20,14 @@ class ImageDataController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $images = Image::all()->sortBy('id')->values();
+
+        if($request->export === 'json'){
+            return response($images->toJson());
+        }
+
         return view('admin.image.index', compact('images'));
     }
 
@@ -60,7 +65,7 @@ class ImageDataController extends Controller
         ]);
 
         $image = new Image();
-        
+
         $image->id = Str::orderedUuid()->toString();
         $image->for = $request->for;
         $image->type = $request->type;
