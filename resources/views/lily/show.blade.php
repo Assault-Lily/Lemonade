@@ -88,6 +88,15 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                 </div>
                 <table id="profile-table" class="table">
                     <tbody>
+                    @if(!empty($triples[$ts]['lily:dharmaName']))
+                        <?php
+                        $dharma_name = $triples[$ts]['lily:dharmaName'][0];
+                        if(!empty($triples[$ts]['lily:dharmaNameKana'][0])){
+                            $dharma_name .= ' ('.$triples[$ts]['lily:dharmaNameKana'][0].')';
+                        }
+                        ?>
+                        @include('app.lilyprofiletable.record',['object' => $dharma_name, 'th' => '僧名'])
+                    @endif
                     @if(!empty($triples[$ts]['lily:anotherName']))
                         @include('app.lilyprofiletable.record',['object' => $triples[$ts]['lily:anotherName'], 'th' => '異名・二つ名', 'prefix' => '「', 'suffix' => '」'])
                     @endif
