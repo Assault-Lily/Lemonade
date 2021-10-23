@@ -49,6 +49,11 @@ class ImageDataController extends Controller
         return view('admin.image.create', compact('default'));
     }
 
+    public function createByJson()
+    {
+        return view('admin.image.createByJson');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
