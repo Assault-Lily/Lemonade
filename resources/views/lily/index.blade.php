@@ -54,9 +54,6 @@
             document.getElementById('filter-setting-close').addEventListener('click',()=>{
                 filterDialog.close();
             });
-            document.getElementById('skill-type').addEventListener('change',(e)=>{
-                document.getElementById('skillName').setAttribute('list', e.target.value);
-            });
 
             const randomDialog = document.getElementById('random');
             dialogPolyfill.registerDialog(randomDialog);
@@ -141,6 +138,10 @@
         }
         .list-item-a.hidden{
             display: none;
+        }
+
+        #sort-select > option{
+            text-align: right;
         }
     </style>
 @endsection
@@ -264,13 +265,12 @@
                 <form action="{{ route('lily.index') }}" method="get" id="garden-selector" name="garden">
                     <input type="hidden" name="filterBy" value="garden">
                     <label>
-                        <input type="text" name="filterValue" placeholder="ガーデン名" list="gardenList" required>
+                        <select name="filterValue" id="gardenList" required>
+                            @foreach($datalist['garden'] as $garden)
+                                <option value="{{ $garden }}">{{ $garden }}</option>
+                            @endforeach
+                        </select>
                     </label>
-                    <datalist id="gardenList">
-                        @foreach($datalist['garden'] as $garden)
-                            <option value="{{ $garden }}"></option>
-                        @endforeach
-                    </datalist>
                     <input type="submit" value="フィルタ" class="button primary">
                 </form>
                 <h3>ポジション</h3>
@@ -288,37 +288,27 @@
                 </div>
                 <h3>スキル</h3>
                 <form action="{{ route('lily.index') }}" method="get" id="skill-selector" name="skill">
+                    <input type="hidden" name="filterBy" value="skill">
                     <label>
-                        <select name="filterBy" id="skill-type">
-                            <option value="skill" selected>スキル(全種)</option>
-                            <option value="rareSkill">レアスキル</option>
-                            <option value="subSkill">サブスキル</option>
-                            <option value="boostedSkill">ブーステッドスキル</option>
+                        <select name="filterValue" id="skillName" required>
+                            <option disabled>選んでください</option>
+                            <optgroup label="レアスキル">
+                                @foreach($datalist['rareSkill'] as $rareSkill)
+                                    <option value="{{ $rareSkill }}">{{ $rareSkill }}</option>
+                                @endforeach
+                            </optgroup>
+                            <optgroup label="サブスキル">
+                                @foreach($datalist['subSkill'] as $subSkill)
+                                    <option value="{{ $subSkill }}">{{ $subSkill }}</option>
+                                @endforeach
+                            </optgroup>
+                            <optgroup label="ブーステッドスキル">
+                                @foreach($datalist['boostedSkill'] as $boostedSkill)
+                                    <option value="{{ $boostedSkill }}">{{ $boostedSkill }}</option>
+                                @endforeach
+                            </optgroup>
                         </select>
                     </label>
-                    <label>
-                        <input type="text" name="filterValue" placeholder="スキル名" list="skill" id="skillName" required>
-                    </label>
-                    <datalist id="rareSkill">
-                        @foreach($datalist['rareSkill'] as $rareSkill)
-                            <option value="{{ $rareSkill }}"></option>
-                        @endforeach
-                    </datalist>
-                    <datalist id="subSkill">
-                        @foreach($datalist['subSkill'] as $subSkill)
-                            <option value="{{ $subSkill }}"></option>
-                        @endforeach
-                    </datalist>
-                    <datalist id="boostedSkill">
-                        @foreach($datalist['boostedSkill'] as $boostedSkill)
-                            <option value="{{ $boostedSkill }}"></option>
-                        @endforeach
-                    </datalist>
-                    <datalist id="skill">
-                        @foreach($datalist['skill'] as $skill)
-                            <option value="{{ $skill }}"></option>
-                        @endforeach
-                    </datalist>
                     <input type="submit" value="フィルタ" class="button primary">
                 </form>
             </div>

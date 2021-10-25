@@ -417,9 +417,6 @@ select{
     border-radius: 3px;
     font-family: inherit;
 }
-select > option{
-    text-align: right;
-}
 
 .top-options{
     display: flex;
