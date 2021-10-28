@@ -20,9 +20,14 @@ class ImageDataController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $images = Image::all()->sortBy('id')->values();
+
+        if($request->export === 'json'){
+            return response($images->toJson());
+        }
+
         return view('admin.image.index', compact('images'));
     }
 
@@ -44,6 +49,11 @@ class ImageDataController extends Controller
         return view('admin.image.create', compact('default'));
     }
 
+    public function createByJson()
+    {
+        return view('admin.image.createByJson');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -60,7 +70,7 @@ class ImageDataController extends Controller
         ]);
 
         $image = new Image();
-        
+
         $image->id = Str::orderedUuid()->toString();
         $image->for = $request->for;
         $image->type = $request->type;
@@ -71,6 +81,32 @@ class ImageDataController extends Controller
         $image->save();
 
         return redirect(route('admin.image.edit', ['image' => $image->id]))->with('message','画像レコードを追加しました');
+    }
+
+    public function storeJson(Request $request)
+    {
+        $json = json_decode($request->post('json'));
+        if(is_null($json)) abort(400, 'JSONのパースに失敗したか、内容がありません。');
+
+        try {
+            foreach ($json as $record){
+                $image = new Image();
+
+                $image->id = $record->id ?? Str::orderedUuid()->toString();
+                $image->for = $record->for;
+                $image->type = $record->type;
+                $image->author = $record->author;
+                $image->image_url = $record->image_url;
+                $image->author_info = $record->author_info ?? null;
+
+                $image->save();
+            }
+        }catch (\Exception $e){
+            report($e);
+            abort(500, '処理に失敗しました。'.PHP_EOL.$e->getMessage());
+        }
+
+        return redirect(route('admin.image.index'))->with('message', '一括登録を完了しました。');
     }
 
     /**
