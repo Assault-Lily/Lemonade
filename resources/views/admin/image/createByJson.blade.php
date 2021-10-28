@@ -1,4 +1,4 @@
-@extends('app.layout',['title' => '画像新規登録'])
+@extends('app.layout',['title' => '画像一括登録'])
 
 <?php
 /**
@@ -10,7 +10,7 @@
     <main>
         <h1>新規一括登録</h1>
         <div class="white-box" style="text-align: center">
-            <form action="{{ route('admin.image.store') }}" method="post">
+            <form action="{{ route('admin.image.storeJson') }}" method="post">
                 @csrf
                 <p>
                     オブジェクトの配列形式のJSONを入力し登録実行をクリックしてください。
@@ -19,8 +19,7 @@
                 <div>
                     <label>
                         JSON<br>
-                        <textarea style="width: 100%; height: 300px; text-align: left; resize: vertical;" name="json"
-                                  placeholder="pixiv,miyacorata&#x0A;twitter,miyacorata&#x0A;(CSV形式)">{{ old('json') }}</textarea>
+                        <textarea style="width: 100%; height: 300px; text-align: left; resize: vertical;" name="json" placeholder="[{JSON: 'value'}]">{{ old('json') }}</textarea>
                     </label>
                 </div>
                 @if($errors->any())
@@ -33,8 +32,8 @@
                 @endif
                 <hr>
                 <p>
-                    Lemonadeは画像データそのものは管理しません。<br>
-                    その代わり、画像の作者、権利者が持つサーバへの直接リンクを登録することができます。
+                    このフォームは整合性チェックを行わず、このJSONのまま挿入されます。<br>
+                    基本的には既存環境からのインポート以外に使用するべきではありません。
                 </p>
                 <hr>
                 <div class="buttons">
@@ -43,7 +42,6 @@
                     <input type="submit" class="button primary" value="登録実行">
                 </div>
             </form>
-
         </div>
     </main>
 @endsection

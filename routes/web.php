@@ -57,6 +57,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
     Route::resource('/triple', TripleDataController::class);
 
     Route::get('/image/createByJson', [ImageDataController::class, 'createByJson'])->name('image.createByJson');
+    Route::post('/image/storeJson', [ImageDataController::class, 'storeJson'])->name('image.storeJson');
     Route::resource('/image', ImageDataController::class);
 
     Route::resource('/notice', NoticeController::class);

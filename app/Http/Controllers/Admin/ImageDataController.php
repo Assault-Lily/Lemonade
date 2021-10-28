@@ -83,6 +83,21 @@ class ImageDataController extends Controller
         return redirect(route('admin.image.edit', ['image' => $image->id]))->with('message','画像レコードを追加しました');
     }
 
+    public function storeJson(Request $request)
+    {
+        $insert = json_decode($request->post('json'), true);
+        if(is_null($insert)) abort(400, 'JSONのパースに失敗したか、内容がありません。');
+
+        try {
+            Image::insert($insert);
+        }catch (\Exception $e){
+            report($e);
+            abort(500, '処理に失敗しました。'.PHP_EOL.$e->getMessage());
+        }
+
+        return redirect(route('admin.image.index'))->with('message', '一括登録を完了しました。');
+    }
+
     /**
      * Display the specified resource.
      *
