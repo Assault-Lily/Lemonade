@@ -85,11 +85,22 @@ class ImageDataController extends Controller
 
     public function storeJson(Request $request)
     {
-        $insert = json_decode($request->post('json'), true);
-        if(is_null($insert)) abort(400, 'JSONのパースに失敗したか、内容がありません。');
+        $json = json_decode($request->post('json'));
+        if(is_null($json)) abort(400, 'JSONのパースに失敗したか、内容がありません。');
 
         try {
-            Image::insert($insert);
+            foreach ($json as $record){
+                $image = new Image();
+
+                $image->id = $record->id ?? Str::orderedUuid()->toString();
+                $image->for = $record->for;
+                $image->type = $record->type;
+                $image->author = $record->author;
+                $image->image_url = $record->image_url;
+                $image->author_info = $record->author_info ?? null;
+
+                $image->save();
+            }
         }catch (\Exception $e){
             report($e);
             abort(500, '処理に失敗しました。'.PHP_EOL.$e->getMessage());

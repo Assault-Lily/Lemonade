@@ -6,6 +6,7 @@
         <div class="white-box">
             <div class="buttons three">
                 <a href="{{ route('admin.image.create') }}" class="button primary">新規登録</a>
+                <a href="{{ route('admin.image.createByJson') }}" class="button">JSONから一括登録</a>
                 <a href="{{ route('admin.image.index', ['export' => 'json']) }}" class="button">JSONで表示</a>
             </div>
             <hr>
