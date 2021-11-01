@@ -37,6 +37,10 @@
                     <th>SPARQLエンドポイント</th>
                     <td>{{ config('lemonade.sparqlEndpoint') }}</td>
                 </tr>
+                <tr>
+                    <th>DynamoDB接続</th>
+                    <td>{{ config('dynamodb.default') }}</td>
+                </tr>
             </table>
         </div>
         <h2>アカウント操作</h2>
