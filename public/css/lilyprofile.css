@@ -147,7 +147,7 @@
     height: 340px;
     object-fit: cover;
 }
-#pics > div{
+#pics > div#memoria-info{
     position: absolute;
     bottom: 0;
     right: 0;
