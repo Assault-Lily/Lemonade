@@ -4,9 +4,13 @@
  * @param string $type
  * @param string | array $for
  */
-function getImage(string $type, $for = null){
+function getImage(string|array $type, $for = null){
     try {
-        $return = \App\Models\Image::where('type', $type);
+        if(is_array($type)){
+            $return = \App\Models\Image::whereIn('type', $type);
+        }else{
+            $return = \App\Models\Image::where('type', $type);
+        }
         if(!empty($for) && is_array($for)){
             $return = $return->whereIn('for', $for);
         }elseif(!empty($for)){
