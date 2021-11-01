@@ -15,6 +15,7 @@ class Image extends Model
     protected $fillable = [
         'id',
         'for',
+        'title',
         'type',
         'author',
         'author_info',
