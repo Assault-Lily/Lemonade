@@ -412,9 +412,18 @@ SPARQL
             $triples['lilyrdf:'.$slug][$triple->predicate][] = $triple->object;
         }
 
-        $icons = getImage('icon', $slug);
+        // アイコン・メモリアデータ取得
+        $images = getImage(['icon', 'memoria'], $slug);
+        $icons = collect();
+        $memorias = array();
+        foreach ($images as $image){
+            if($image->type === 'icon') $icons[] = $image;
+            if($image->type === 'memoria') $memorias[] = $image;
+        }
+        $icons = collect($icons);
+        $memorias = collect($memorias);
 
-        return view('lily.show', compact('triples', 'slug', 'icons'));
+        return view('lily.show', compact('triples', 'slug', 'icons', 'memorias'));
     }
 
     /**

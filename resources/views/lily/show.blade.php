@@ -336,25 +336,37 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @endif
                 </div>
 
-                <div id="pics">
-                    <div style="text-align: center; padding-top: 130px; color: gray;">
-                        <div style="margin-bottom: .4em">Image Unavailable</div>
-                        <div class="buttons" style="font-size: smaller">
-                            <a href="https://twitter.com/search?q={{ urlencode('#アサルトリリィ_FA '.($triples[$ts]['schema:givenName'][0] ?? $triples[$ts]['schema:name'][0])) }}&f=live"
-                               target="_blank" class="button smaller">
-                                #アサルトリリィ_FA
-                            </a>
-                            <a href="https://www.google.com/search?q={{ urlencode($triples[$ts]['schema:name'][0]) }}&tbm=isch"
-                               target="_blank" class="button smaller">
-                                Google 画像検索
-                            </a>
-                            <a href="https://www.pixiv.net/tags/{{ urlencode($triples[$ts]['schema:name'][0]) }}/illustrations"
-                               target="_blank" class="button smaller">
-                                pixiv イラストタグ検索
-                            </a>
+                <?php
+                /** @var \Illuminate\Support\Collection $memorias */
+                ?>
+                @if(!$memorias->isEmpty())
+                    <?php $memoria = $memorias->random(); ?>
+                    <div id="pics">
+                        <img src="{{ $memoria->image_url }}" alt="{{ $memoria->author }}">
+                        <div>メモリア寄稿 : {{ $memoria->author }}</div>
+                    </div>
+                @else
+                    <div id="pics">
+                        <div style="text-align: center; padding-top: 130px; color: gray;">
+                            <div style="margin-bottom: .4em">Image Unavailable</div>
+                            <div class="buttons" style="font-size: smaller">
+                                <a href="https://twitter.com/search?q={{ urlencode('#アサルトリリィ_FA '.($triples[$ts]['schema:givenName'][0] ?? $triples[$ts]['schema:name'][0])) }}&f=live"
+                                   target="_blank" class="button smaller">
+                                    #アサルトリリィ_FA
+                                </a>
+                                <a href="https://www.google.com/search?q={{ urlencode($triples[$ts]['schema:name'][0]) }}&tbm=isch"
+                                   target="_blank" class="button smaller">
+                                    Google 画像検索
+                                </a>
+                                <a href="https://www.pixiv.net/tags/{{ urlencode($triples[$ts]['schema:name'][0]) }}/illustrations"
+                                   target="_blank" class="button smaller">
+                                    pixiv イラストタグ検索
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
+
                 <div id="links">
                     <h3>公式リンク</h3>
                     <?php
