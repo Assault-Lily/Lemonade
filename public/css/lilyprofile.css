@@ -116,6 +116,7 @@
     top: -15px;
     right: -32px;
     min-width: 170px;
+    z-index: 3;
 }
 #right-tag > div{
     margin-bottom: 5px;
