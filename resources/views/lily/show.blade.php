@@ -317,7 +317,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     </div>
                 @endauth
             </div>
-            <div class="right" style="width: 100%;position: relative">
+            <div class="right">
                 <div id="right-tag">
                     @if(!empty($triples[$ts]['lily:lifeStatus']) and $triples[$ts]['lily:lifeStatus'][0] === 'dead')
                         <div class="KIA">故人</div>
@@ -360,7 +360,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     <div class="buttons two">
                         <a href="https://twitter.com/search?q={{ urlencode('#アサルトリリィ_FA '.($triples[$ts]['schema:givenName'][0] ?? $triples[$ts]['schema:name'][0])) }}&f=live"
                            target="_blank" class="button">
-
+                            <i class="fab fa-twitter"></i>
                             #アサルトリリィ_FA
                         </a>
                         <a href="https://www.pixiv.net/tags/{{ urlencode($triples[$ts]['schema:name'][0]) }}/illustrations"
@@ -369,7 +369,8 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         </a>
                         <a href="https://www.google.com/search?q={{ urlencode($triples[$ts]['schema:name'][0]) }}&tbm=isch"
                            target="_blank" class="button">
-                            Google 画像検索
+                            <i class="fab fa-google"></i>
+                            Google画像検索
                         </a>
                     </div>
                 </div>
