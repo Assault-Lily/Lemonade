@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Image;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class ImageDataController extends Controller
@@ -79,6 +80,11 @@ class ImageDataController extends Controller
         $image->author_info = $request->author_info ?? null;
 
         $image->save();
+
+        Http::post(env('DISCORD_URL'), [
+            'content' => '画像データが追加されました。',
+            'embeds' => [$this->generateDiscordEmbed($image)],
+        ]);
 
         return redirect(route('admin.image.edit', ['image' => $image->id]))->with('message','画像レコードを追加しました');
     }
@@ -171,6 +177,11 @@ class ImageDataController extends Controller
 
         $image->save();
 
+        Http::post(env('DISCORD_URL'), [
+            'content' => '画像データが更新されました。',
+            'embeds' => [$this->generateDiscordEmbed($image)],
+        ]);
+
         return redirect(route('admin.image.edit',['image' => $id]))->with('message', 'レコードを更新しました');
     }
 
@@ -182,12 +193,55 @@ class ImageDataController extends Controller
      */
     public function destroy($id)
     {
+
         try {
-            Image::findOrFail($id)->delete();
+            $image = Image::findOrFail($id);
+            Http::post(env('DISCORD_URL'), [
+                'content' => '画像データが削除されました。',
+                'embeds' => [$this->generateDiscordEmbed($image)],
+            ]);
+            $image->delete();
         }catch (ModelNotFoundException $e){
             abort(400, '指定された画像レコードは存在しません');
         }
 
         return redirect(route('admin.image.index'))->with('message', 'レコードを削除しました');
+    }
+
+    private function generateDiscordEmbed(Image $image)
+    {
+        $user = \Auth::user();
+        return [
+            'title' => '画像データ詳細',
+            'url' => route('admin.image.edit',['image' => $image->id]),
+            'footer' => [
+                'text' => config('app.name').' Ver'.config('lemonade.version')
+            ],
+            'timestamp' => $image->updated_at->format(\DateTime::ISO8601),
+            'fields' => [
+                [
+                    'name' => '対象リソース',
+                    'value' => $image->for,
+                    'inline' => true,
+                ],
+                [
+                    'name' => '種別',
+                    'value' => $image->type,
+                    'inline' => true,
+                ],
+                [
+                    'name' => '作者',
+                    'value' => $image->author,
+                ],
+                [
+                    'name' => '画像URL',
+                    'value' => $image->image_url,
+                ],
+                [
+                    'name' => 'データ更新実施ユーザ',
+                    'value' => $user->name.' ('.$user->email.')'
+                ]
+            ]
+        ];
     }
 }
