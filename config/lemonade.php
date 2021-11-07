@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '8.4.0 Kamakura-koko-mae',
+    'version' => '9.0.0 Shichirigahama',
 
     'webhooks' => [
         'discord-log' => env('DISCORD_URL'),
