@@ -68,7 +68,7 @@ class LilyDataController extends Controller
         $user = \Auth::user();
         $log_str = 'リリィデータが追加されました'.PHP_EOL.$this->generateLogText($lily)
             .'登録者 : '.$user->name.'('.$user->email.')';
-        Http::post(env('DISCORD_URL'), [
+        if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(config('lemonade.webhooks.discord-log'), [
             'content' => 'リリィデータが追加されました！'.PHP_EOL .'追加実施者は '.$user->name.'('.$user->email.') です',
             'embeds' => [$this->generateDiscordEmbed($lily)]
         ]);
@@ -150,7 +150,7 @@ class LilyDataController extends Controller
         $user = \Auth::user();
         $log_str = 'リリィデータが更新されました'.PHP_EOL.$this->generateLogText($lily)
             .'登録者 : '.$user->name.'('.$user->email.')';
-        Http::post(env('DISCORD_URL'), [
+        if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(config('lemonade.webhooks.discord-log'), [
             'content' => 'リリィデータが更新されました！'.PHP_EOL .'更新実施者は '.$user->name.'('.$user->email.') です',
             'embeds' => [$this->generateDiscordEmbed($lily)]
         ]);

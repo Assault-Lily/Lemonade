@@ -122,7 +122,7 @@ SPARQL
         $log_text = 'トリプルが追加されました'.PHP_EOL
             .$this->generateLogText($triple).PHP_EOL
             .'登録者：'.$user->name.'('.$user->email.')';
-        Http::post(env('DISCORD_URL'), [
+        if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(config('lemonade.webhooks.discord-log'), [
             'content' => 'トリプルが追加されました！'.PHP_EOL.'追加実施者は '.$user->name.'('.$user->email.') です',
             'embeds' => [$this->generateDiscordEmbed($triple)]
         ]);
@@ -184,7 +184,7 @@ SPARQL
             $notify = 'トリプルがレストアされました！'.PHP_EOL
                 .'トリプルID : '.$id.' ('.route('admin.triple.show',['triple' => $id]).')'.PHP_EOL
                 .'更新者 : '.$user->name.'('.$user->email.')';
-            Http::post(env('DISCORD_URL'), [
+            if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(env('DISCORD_URL'), [
                 'content' => $notify
             ]);
             Log::channel('adminlog')->info($notify);
@@ -217,7 +217,7 @@ SPARQL
         $log_text = 'トリプルが更新されました'.PHP_EOL
             .$this->generateLogText($triple).PHP_EOL
             .'登録者：'.$user->name.'('.$user->email.')';
-        Http::post(env('DISCORD_URL'), [
+        if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(config('lemonade.webhooks.discord-log'), [
             'content' => 'トリプルが更新されました！'.PHP_EOL.'更新実施者は '.$user->name.'('.$user->email.') です',
             'embeds' => [$this->generateDiscordEmbed($triple)]
         ]);
@@ -247,7 +247,7 @@ SPARQL
         $notify = 'トリプルが削除されました...'.PHP_EOL
             .'トリプルID : '.$id.' ('.route('admin.triple.show',['triple' => $id]).')'.PHP_EOL
             .'更新者 : '.$user->name.'('.$user->email.')';
-        Http::post(env('DISCORD_URL'), [
+        if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(config('lemonade.webhooks.discord-log'), [
             'content' => $notify
         ]);
         Log::channel('adminlog')->info($notify);

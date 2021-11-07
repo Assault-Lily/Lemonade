@@ -5,6 +5,9 @@ return [
     /* Application Version */
     'version' => '8.4.0 Kamakura-koko-mae',
 
+    'webhooks' => [
+        'discord-log' => env('DISCORD_URL'),
+    ],
 
     'mastodon' => [
         'server' => 'https://mstdn.miyacorata.net',
