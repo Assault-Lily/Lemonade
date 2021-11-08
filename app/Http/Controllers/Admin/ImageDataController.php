@@ -81,7 +81,7 @@ class ImageDataController extends Controller
 
         $image->save();
 
-        if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(env('DISCORD_URL'), [
+        if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(config('lemonade.webhooks.discord-log'), [
             'content' => '画像データが追加されました。',
             'embeds' => [$this->generateDiscordEmbed($image)],
         ]);
@@ -196,7 +196,7 @@ class ImageDataController extends Controller
 
         try {
             $image = Image::findOrFail($id);
-            if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(env('DISCORD_URL'), [
+            if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(config('lemonade.webhooks.discord-log'), [
                 'content' => '画像データが削除されました。',
                 'embeds' => [$this->generateDiscordEmbed($image)],
             ]);
