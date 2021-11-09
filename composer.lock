@@ -1467,16 +1467,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.69.0",
+            "version": "v8.70.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "545181da688db64fed6d8427e55f630a90ca0d32"
+                "reference": "f4b69fac9292df1a8afd5eb93e77990444ad5077"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/545181da688db64fed6d8427e55f630a90ca0d32",
-                "reference": "545181da688db64fed6d8427e55f630a90ca0d32",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f4b69fac9292df1a8afd5eb93e77990444ad5077",
+                "reference": "f4b69fac9292df1a8afd5eb93e77990444ad5077",
                 "shasum": ""
             },
             "require": {
@@ -1635,7 +1635,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-11-02T13:53:22+00:00"
+            "time": "2021-11-09T16:50:33+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -2701,20 +2701,20 @@
         },
         {
             "name": "psr/container",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf"
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/513e0666f7216c7459170d56df27dfcefe1689ea",
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.0"
+                "php": ">=7.4.0"
             },
             "type": "library",
             "autoload": {
@@ -2743,9 +2743,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/container/issues",
-                "source": "https://github.com/php-fig/container/tree/1.1.1"
+                "source": "https://github.com/php-fig/container/tree/1.1.2"
             },
-            "time": "2021-03-05T17:36:06+00:00"
+            "time": "2021-11-05T16:50:12+00:00"
         },
         {
             "name": "psr/event-dispatcher",
