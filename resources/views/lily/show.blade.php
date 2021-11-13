@@ -254,7 +254,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @if(!empty($triples[$ts]['schema:height'][0]))
                         <?php
                         $height = $triples[$ts]['schema:height'][0];
-                        if(is_numeric($height) === (float)0){
+                        if(!is_numeric($height)){
                             $height_suffix = '';
                         }else{
                             $height = floatval($height);
@@ -266,7 +266,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @if(!empty($triples[$ts]['schema:weight'][0]))
                         <?php
                         $weight = $triples[$ts]['schema:weight'][0];
-                        if(is_numeric($weight) === (float)0){
+                        if(!is_numeric($weight)){
                             $weight_suffix = '';
                         }else{
                             $weight = floatval($weight);
@@ -522,16 +522,11 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         foreach (explode("\n", str_replace(array("\r\n", "\r", "\n"), "\n", $icon->author_info)) as $line){
                             $title = e(explode(',', $line)[0]);
                             $value = e(explode(',', $line)[1]);
-                            switch ($title){
-                                case 'twitter':
-                                    $infos[] = "Twitter : <a href='https://twitter.com/$value' target='_blank'>@$value</a>";
-                                    break;
-                                case 'pixiv':
-                                    $infos[] = "pixiv : <a href='https://pixiv.net/$value' target='_blank'>$value</a>";
-                                    break;
-                                default:
-                                    $infos[] = "$title : <a href='$value' target='_blank'>$value</a>";
-                            }
+                            $infos[] = match ($title) {
+                                'twitter' => "Twitter : <a href='https://twitter.com/$value' target='_blank'>@$value</a>",
+                                'pixiv' => "pixiv : <a href='https://pixiv.net/$value' target='_blank'>$value</a>",
+                                default => "$title : <a href='$value' target='_blank'>$value</a>",
+                            };
                         }
                         ?>
                         <div class="list-item-b">
