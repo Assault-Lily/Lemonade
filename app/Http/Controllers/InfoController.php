@@ -91,7 +91,7 @@ WHERE {
     OPTIONAL{ ?subject lily:legion/schema:name ?legion. FILTER(LANG(?legion) = 'ja') }
     FILTER(LANG(?name) = 'ja')
     FILTER(LANG(?givenName) = 'ja')
-    FILTER(?type IN(lily:Lily, lily:Teacher, lily:Character))
+    FILTER(?type IN(lily:Lily, lily:Madec, lily:Teacher, lily:Character))
   }
 }
 SPARQL
@@ -99,6 +99,7 @@ SPARQL
         $sparqlArray = array();
         $types = [
             'Lily' => 'リリィ',
+            'Madec' => 'マディック',
             'Teacher' => '教導官',
             'Character' => 'その他人物',
         ];
