@@ -156,7 +156,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @endif
                     @if(!empty($triples[$ts]['lily:taskforce']))
                         <tr>
-                            <th>所属<!--している-->部隊</th><!-- TODO: 対応完了次第コメント解除 -->
+                            <th>所属部隊</th>
                             <td {!! (count($triples[$ts]['lily:taskforce']) >= 2) ? 'rowspan="2" style="height: 4em;"' : '' !!}>
                                 @foreach($triples[$ts]['lily:taskforce'] as $taskforce)
                                     <?php
