@@ -202,16 +202,13 @@
         @if($typeInfo !== array('lily'))
             <?php
             $typeInfoJa = array_map(function ($value){
-                switch ($value){
-                    case 'lily':
-                        return 'リリィ';
-                    case 'character':
-                        return 'その他';
-                    case 'teacher':
-                        return '教導官';
-                    default:
-                        return $value;
-                }
+                return match ($value) {
+                    'lily' => 'リリィ',
+                    'character' => 'その他',
+                    'teacher' => '教導官',
+                    'madec' => 'マディック',
+                    default => $value,
+                };
             }, $typeInfo);
             ?>
             <p class="center">
@@ -237,12 +234,15 @@
             <div style="max-height: 450px; overflow-y: scroll; margin: 0 -20px; padding: 0 20px 5px">
                 <h3>表示設定</h3>
                 <div id="viewMode-selector">
+                    <!-- TODO: チェックボックス式への改修 -->
                     <a href="javascript:location.href = changeGetParam('type', null)" class="button">リリィのみ</a>
                     <a href="javascript:location.href = changeGetParam('type', 'lily,teacher')" class="button">教導官を含む</a>
                     <a href="javascript:location.href = changeGetParam('type', 'teacher')" class="button">教導官のみ</a>
                     <a href="javascript:location.href = changeGetParam('type', 'lily,character')" class="button">その他を含む</a>
                     <a href="javascript:location.href = changeGetParam('type', 'character')" class="button">その他のみ</a>
-                    <a href="javascript:location.href = changeGetParam('type', 'lily,teacher,character')" class="button">すべて</a>
+                    <a href="javascript:location.href = changeGetParam('type', 'lily,madec')" class="button">マディックを含む</a>
+                    <a href="javascript:location.href = changeGetParam('type', 'madec')" class="button">マディックのみ</a>
+                    <a href="javascript:location.href = changeGetParam('type', 'lily,teacher,character,madec')" class="button">すべて</a>
                 </div>
 
                 <h3>生命状態</h3>

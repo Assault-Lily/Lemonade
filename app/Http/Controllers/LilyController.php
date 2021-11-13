@@ -57,6 +57,17 @@ WHERE {
     }
     UNION
     {
+        VALUES ?predicate {
+            schema:name lily:nameKana lily:givenNameKana foaf:age schema:birthDate
+            lily:rareSkill lily:subSkill lily:isBoosted lily:boostedSkill
+            lily:garden lily:grade lily:legion lily:position rdf:type lily:color
+            schema:height schema:weight lily:bloodType lily:isBoosted lily:lifeStatus
+        }
+        ?subject a lily:Madec;
+                 ?predicate ?object.
+    }
+    UNION
+    {
         VALUES ?predicate { schema:name schema:alternateName rdf:type }
         ?subject a lily:Legion;
                  ?predicate ?object.
@@ -70,7 +81,7 @@ SPQRQL
         $legions = array();
 
         // 表示設定
-        $approvalType = ['character', 'lily', 'teacher'];
+        $approvalType = ['character', 'lily', 'teacher', 'madec'];
         $approveType = explode(',',request()->get('type', 'lily'));
         if(!empty(array_diff($approveType, $approvalType))) // 許容されないタイプの検出
             abort(400 ,'表示設定の値に誤りがあります。');
@@ -404,7 +415,7 @@ SPARQL
 );
         $triples = sparqlToArray($triples_sparql);
 
-        $approve_type = ['lily:Lily', 'lily:Teacher', 'lily:Character'];
+        $approve_type = ['lily:Lily', 'lily:Teacher', 'lily:Character', 'lily:Madec'];
         if(empty($triples['lilyrdf:'.$slug]['rdf:type'][0]) or !in_array($triples['lilyrdf:'.$slug]['rdf:type'][0], $approve_type) ) abort(404, '該当するリリィのデータが存在しません');
 
         $triples_model = Triple::whereLilySlug($slug)->get();

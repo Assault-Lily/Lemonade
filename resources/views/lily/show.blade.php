@@ -154,6 +154,46 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         </tr>
                         {!! (count($triples[$ts]['lily:pastLegion']) >= 2) ? '<tr><td class="spacer"></td></tr>' : '' !!}
                     @endif
+                    @if(!empty($triples[$ts]['lily:taskforce']))
+                        <tr>
+                            <th>所属<!--している-->部隊</th><!-- TODO: 対応完了次第コメント解除 -->
+                            <td {!! (count($triples[$ts]['lily:taskforce']) >= 2) ? 'rowspan="2" style="height: 4em;"' : '' !!}>
+                                @foreach($triples[$ts]['lily:taskforce'] as $taskforce)
+                                    <?php
+                                    $taskforce_name = $triples[$taskforce ?? 0]['schema:name'][0] ?? null;
+                                    if(!empty($taskforce_name) and !empty($triples[$taskforce]['schema:alternateName'][0])){
+                                        $taskforce_name .= ' ('.$triples[$taskforce]['schema:alternateName'][0].')';
+                                    }
+                                    ?>
+                                    <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$taskforce)]) }}"
+                                       style="display: block">
+                                        {{ $taskforce_name }}
+                                    </a>
+                                @endforeach
+                            </td>
+                        </tr>
+                        {!! (count($triples[$ts]['lily:taskforce']) >= 2) ? '<tr><td class="spacer"></td></tr>' : '' !!}
+                    @endif
+                    @if(!empty($triples[$ts]['lily:pastTaskforce']))
+                        <tr>
+                            <th>過去所属した部隊</th>
+                            <td {!! (count($triples[$ts]['lily:pastTaskforce']) >= 2) ? 'rowspan="2" style="height: 4em;"' : '' !!}>
+                                @foreach($triples[$ts]['lily:pastTaskforce'] as $past_taskforce)
+                                    <?php
+                                    $past_taskforce_name = $triples[$past_taskforce ?? 0]['schema:name'][0] ?? null;
+                                    if(!empty($past_taskforce_name) and !empty($triples[$past_taskforce]['schema:alternateName'][0])){
+                                        $past_taskforce_name .= ' ('.$triples[$past_taskforce]['schema:alternateName'][0].')';
+                                    }
+                                    ?>
+                                    <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$past_taskforce)]) }}"
+                                       style="display: block">
+                                        {{ $past_taskforce_name }}
+                                    </a>
+                                @endforeach
+                            </td>
+                        </tr>
+                        {!! (count($triples[$ts]['lily:pastTaskforce']) >= 2) ? '<tr><td class="spacer"></td></tr>' : '' !!}
+                    @endif
                     @if(!empty($triples[$ts]['lily:position']))
                         @include('app.lilyprofiletable.filterRecord',['object' => $triples[$ts]['lily:position'], 'th' => 'ポジション', 'key' => 'position'])
                     @endif
@@ -333,6 +373,9 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @endif
                     @if(!empty($triples[$ts]['rdf:type']) and $triples[$ts]['rdf:type'][0] === 'lily:Teacher')
                         <div class="teacher">教導官</div>
+                    @endif
+                    @if(!empty($triples[$ts]['rdf:type']) and $triples[$ts]['rdf:type'][0] === 'lily:Madec')
+                        <div class="madec">マディック</div>
                     @endif
                 </div>
 

@@ -138,6 +138,9 @@
 #right-tag .teacher{
     background: darkblue;
 }
+#right-tag .madec{
+    background: rebeccapurple;
+}
 
 #pics{
     min-height: 324px;
