@@ -10,10 +10,15 @@
                 <a href="{{ route('admin.image.index', ['export' => 'json']) }}" class="button">JSONで表示</a>
             </div>
             <hr>
-            <div>
-                <p class="center">
+            <div style="display: flex; justify-content: center; gap: 15px; align-content: center;">
+                <div>
                     件数 : {{ count($images) }}
-                </p>
+                </div>
+                <form action="{{ route('admin.image.index') }}" method="get">
+                    <label>
+                        <input type="search" name="author" value="{{ request()->get('author') }}" placeholder="作者名(部分一致)">
+                    </label>
+                </form>
             </div>
             <hr>
             <table style="min-width: 100%; text-align: center">

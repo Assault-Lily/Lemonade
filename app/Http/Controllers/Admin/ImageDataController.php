@@ -23,7 +23,11 @@ class ImageDataController extends Controller
      */
     public function index(Request $request)
     {
-        $images = Image::all()->sortBy('id')->values();
+        if(!empty($request->author)){
+            $images = Image::where('author', 'contains', $request->author)->sortBy('id')->get()->values();
+        }else{
+            $images = Image::all()->sortBy('id')->values();
+        }
 
         if($request->export === 'json'){
             return response($images->toJson());
