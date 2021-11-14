@@ -33,7 +33,8 @@
                 更新日時 : {{ $image->updated_at->format('Y-m-d H:i:s') }}
             </p>
             <hr>
-            <form action="{{ route('admin.image.update', ['image' => $image->id]) }}" method="post">
+            <form action="{{ route('admin.image.update', ['image' => $image->id]) }}"
+                  onsubmit="return confirm('画像データの上書きをしようとしています。続けますか？')" method="post">
                 @csrf
                 @method('patch')
                 <input type="hidden" name="id" value="{{ $image->id }}">
