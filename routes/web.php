@@ -57,6 +57,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
     Route::resource('/triple', TripleDataController::class);
 
     Route::get('/image/createByJson', [ImageDataController::class, 'createByJson'])->name('image.createByJson');
+    Route::get('/image/bulkUpdate', [ImageDataController::class, 'bulkUpdate'])->name('image.bulkUpdate');
+    Route::patch('/image/bulkUpdate', [ImageDataController::class, 'bulkUpdateExec'])->name('image.bulkUpdateExec');
     Route::post('/image/storeJson', [ImageDataController::class, 'storeJson'])->name('image.storeJson');
     Route::resource('/image', ImageDataController::class);
 

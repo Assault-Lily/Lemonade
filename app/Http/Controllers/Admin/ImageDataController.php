@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Image;
+use Aws\DynamoDb\Exception\DynamoDbException;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -187,6 +189,45 @@ class ImageDataController extends Controller
         ]);
 
         return redirect(route('admin.image.edit',['image' => $id]))->with('message', 'レコードを更新しました');
+    }
+
+    public function bulkUpdate(Request $request)
+    {
+        $author = $request->author;
+        if(empty($author)) abort(400, 'Authorを指定してください');
+        try {
+            $images = Image::where('author', $author)->get();
+        }catch (Exception $e){
+            abort(500, $e->getMessage());
+        }
+
+        if ($images->count() === 0) abort(404, '指定された作者のデータは存在しません');
+
+        return view('admin.image.bulkUpdate', compact('images', 'author'));
+    }
+
+    public function bulkUpdateExec(Request $request)
+    {
+        $oldAuthor = $request->oldAuthor;
+        $author = $request->author;
+        $author_info = $request->author_info;
+        if(empty($oldAuthor)) abort(400, '現Authorの指定がありません');
+        if(empty($author)) abort(400, '作者名を空文字列とすることはできません');
+
+        try {
+            $images = Image::where('author', $author)->get();
+
+            foreach ($images as $image){
+                $image->author = $author;
+                $image->author_info = $author_info;
+                $image->save();
+            }
+        }catch (Exception $e){
+            abort(500, $e->getMessage());
+            report($e);
+        }
+
+        return redirect(route('admin.image.index', ['author' => $author]))->with('message', 'レコードを更新しました');
     }
 
     /**
