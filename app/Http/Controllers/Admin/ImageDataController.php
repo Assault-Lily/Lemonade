@@ -208,14 +208,14 @@ class ImageDataController extends Controller
 
     public function bulkUpdateExec(Request $request)
     {
-        $oldAuthor = $request->oldAuthor;
+        $old_author = $request->oldAuthor;
         $author = $request->author;
         $author_info = $request->author_info;
-        if(empty($oldAuthor)) abort(400, '現Authorの指定がありません');
+        if(empty($old_author)) abort(400, '現Authorの指定がありません');
         if(empty($author)) abort(400, '作者名を空文字列とすることはできません');
 
         try {
-            $images = Image::where('author', $author)->get();
+            $images = Image::where('author', $old_author)->get();
 
             foreach ($images as $image){
                 $image->author = $author;
@@ -226,6 +226,39 @@ class ImageDataController extends Controller
             abort(500, $e->getMessage());
             report($e);
         }
+
+        $user = \Auth::user();
+        if(!empty(config('lemonade.webhooks.discord-log'))) Http::post(config('lemonade.webhooks.discord-log'), [
+            'content' => '画像データの一括更新が実行されました。',
+            'embeds' => [
+                'title' => '処理内容',
+                'url' => route('admin.image.index',['author' => $author]),
+                'footer' => [
+                    'text' => config('app.name').' Ver'.config('lemonade.version')
+                ],
+                'timestamp' => now()->format(\DateTime::ISO8601),
+                'fields' => [
+                    [
+                        'name' => '更新前作者名',
+                        'value' => $old_author,
+                        'inline' => true,
+                    ],
+                    [
+                        'name' => '更新後作者名',
+                        'value' => $author,
+                        'inline' => true,
+                    ],
+                    [
+                        'name' => '更新後追加情報',
+                        'value' => $author_info,
+                    ],
+                    [
+                        'name' => 'データ更新実施ユーザ',
+                        'value' => $user->name.' ('.$user->email.')'
+                    ]
+                ]
+            ],
+        ]);
 
         return redirect(route('admin.image.index', ['author' => $author]))->with('message', 'レコードを更新しました');
     }
