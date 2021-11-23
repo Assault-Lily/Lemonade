@@ -90,6 +90,7 @@
                     ]
                     ?>
                     <a href="{{ route('admin.image.create', $parameter) }}" class="button">複製</a>
+                    <a href="{{ route('admin.image.bulkUpdate', ['author' => $image->author]) }}" class="button">一括書換</a>
                     <input type="reset" class="button" value="初期化">
                     <input type="submit" class="button primary" value="更新実行">
                 </div>
