@@ -520,8 +520,10 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         <?php
                         $infos = array();
                         foreach (explode("\n", str_replace(array("\r\n", "\r", "\n"), "\n", $icon->author_info)) as $line){
-                            $title = e(explode(',', $line)[0]);
-                            $value = e(explode(',', $line)[1]);
+                            $info = explode(',',$line);
+                            if(count($info) !== 2) continue;
+                            $title = e($info[0]);
+                            $value = e($info[1]);
                             $infos[] = match ($title) {
                                 'twitter' => "Twitter : <a href='https://twitter.com/$value' target='_blank'>@$value</a>",
                                 'pixiv' => "pixiv : <a href='https://pixiv.net/$value' target='_blank'>$value</a>",
