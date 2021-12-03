@@ -97,8 +97,8 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                 <div class="body">
                     <p style="text-align: center">
                         本日
-                        <span style="font-size: large">{{ \Carbon\Carbon::now()->format('n月j日') }}</span>
-                        がお誕生日のリリィがいます！
+                        <span style="font-size: large">{{ now()->format('n月j日') }}</span>
+                        がお誕生日の方がいます！
                     </p>
                     <div class="list" style="justify-content: space-around">
                         @forelse($birthday as $key => $lily)

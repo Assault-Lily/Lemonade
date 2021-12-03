@@ -25,9 +25,10 @@ PREFIX schema: <http://schema.org/>
 SELECT ?subject ?predicate ?object
 WHERE {
   {
-    ?subject a lily:Lily;
+    ?subject a ?type;
              ?predicate ?object;
-             schema:birthDate "$today"^^<http://www.w3.org/2001/XMLSchema#gMonthDay>
+             schema:birthDate "$today"^^<http://www.w3.org/2001/XMLSchema#gMonthDay>.
+    FILTER(?type IN(lily:Lily, lily:Teacher, lily:Madec, lily:Character))
   }
   UNION
   {
@@ -46,7 +47,7 @@ SPARQL
 
         // レギオンとリリィの振り分け
         foreach ($birthday as $key => $triple){
-            if($triple['rdf:type'][0] === 'lily:Lily'){
+            if(in_array($triple['rdf:type'][0], ['lily:Lily', 'lily:Teacher', 'lily:Madec', 'lily:Character'])){
                 $lilies[$key] = $triple;
                 // アイコンを取得するリリィのリスト
                 $image_pull_list[] = removePrefix($key);
