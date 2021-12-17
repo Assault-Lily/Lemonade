@@ -406,7 +406,7 @@ WHERE {
     }
     UNION
     {
-        VALUES ?predicate { lily:genre schema:name schema:alternateName rdf:type }
+        VALUES ?predicate { lily:genre schema:name schema:alternateName schema:startDate rdf:type }
         lilyrdf:$slug lily:cast/lily:performIn ?subject.
         ?subject ?predicate ?object.
     }
@@ -421,6 +421,26 @@ SPARQL
         $triples_model = Triple::whereLilySlug($slug)->get();
         foreach ($triples_model as $triple){
             $triples['lilyrdf:'.$slug][$triple->predicate][] = $triple->object;
+        }
+
+        // キャスト欄の出演作一覧を、初演日・公開日・配信開始日の速い順にソート
+        foreach ($triples['lilyrdf:'.$slug]['lily:cast'] ?? array() as $cast){
+            // キャスト名がない場合のスキップ
+            if(empty($triples[$cast]['schema:name'][0])) continue;
+            
+            $play_sortKey = [];
+            $play_sortKeyForKeyUnknown = [];
+            foreach ($triples[$cast]['lily:performIn'] ?? array() as $play) {
+                $startDate = $triples[$play]['schema:startDate'][0];
+                if (empty($startDate)) {
+                    $play_sortKey[] = NULL;
+                    $play_sortKeyForKeyUnknown[] = 1;
+                } else {
+                    $play_sortKey[] = convertDateString($triples[$play]['schema:startDate'][0]);
+                    $play_sortKeyForKeyUnknown[] = 0;
+                }
+            }
+            array_multisort($play_sortKeyForKeyUnknown, SORT_ASC, SORT_NUMERIC, $play_sortKey, SORT_ASC, SORT_REGULAR, $triples[$cast]['lily:performIn']);
         }
 
         // アイコン・メモリアデータ取得
