@@ -61,4 +61,7 @@ return [
             'debug' => true,
         ],
     ],
+
+    'defaultTimeout' => env('DYNAMODB_TIMEOUT', 2),
+    'disable' => env('DYNAMODB_DISABLE', false),
 ];
