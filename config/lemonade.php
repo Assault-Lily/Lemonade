@@ -68,5 +68,11 @@ return [
         'エレンスゲ女学園' => '楯の乙女',
     ],
 
+    'type' => [
+        'Lily' => 'リリィ',
+        'Madec' => 'マディック',
+        'Teacher' => '教導官',
+    ],
+
     'dictionaryGUID' => env('DICTIONARY_GUID'),
 ];

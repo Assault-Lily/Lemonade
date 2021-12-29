@@ -19,12 +19,13 @@ else {
 
 $ogp['title'] = $triples[$ts]['schema:name'][0];
 $ogp['type'] = 'lily';
-$ogp['description'] = "リリィ「{$triples[$ts]['schema:name'][0]}」のプロフィールを閲覧できます。";
+$rdf_type = config('lemonade.type.'.removePrefix($triples[$ts]['rdf:type'][0]), '人物');
+$ogp['description'] = "アサルトリリィに登場する".$rdf_type."「{$triples[$ts]['schema:name'][0]}」のプロフィールです。";
 if(!empty($triples[$ts]['lily:garden'][0])){
     $ogp['description'] .= $triples[$ts]['lily:garden'][0].
         ($triples[$ts]['lily:gardenDepartment'][0] ?? '');
     if(!empty($triples[$ts]['lily:grade'][0])) $ogp['description'] .= convertGradeString($triples[$ts]['lily:grade'][0]).'です。';
-    else $ogp['description'] .= 'のリリィです。';
+    else $ogp['description'] .= 'の'.$rdf_type.'です。';
 }
 
 if(!empty($triples[$ts]['lily:legion'][0]) && !empty($triples[$triples[$ts]['lily:legion'][0]]['schema:name'][0]))
@@ -38,7 +39,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
 ?>
 
 @extends('app.layout',[
-    'title' => 'リリィプロフィール', 'titlebar' => $triples[$ts]['schema:name'][0] ,
+    'title' => $rdf_type.'プロフィール', 'titlebar' => $triples[$ts]['schema:name'][0] ,
     'pagetype' => 'back-triangle'])
 
 @section('head')
