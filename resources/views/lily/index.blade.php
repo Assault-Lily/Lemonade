@@ -111,6 +111,18 @@
                     location.href = changeGetParam('filterValue', filterValue, changeGetParam('filterBy', filterBy));
                 });
             });
+
+            document.getElementById('submitViewMode').addEventListener('click', () => {
+                let typeList = [];
+                document.querySelectorAll('div#viewMode-selector > label > input[type="checkbox"]').forEach((el) => {
+                    if(el.checked) typeList.push(el.value);
+                });
+                if(typeList.length === 0){
+                    alert('表示する種別は1つ以上選択してください');
+                }else{
+                    location.href = changeGetParam('type', typeList.join(','));
+                }
+            });
         });
     </script>
     <style>
@@ -234,15 +246,19 @@
             <div style="max-height: 450px; overflow-y: scroll; margin: 0 -20px; padding: 0 20px 5px">
                 <h3>表示設定</h3>
                 <div id="viewMode-selector">
-                    <!-- TODO: チェックボックス式への改修 -->
-                    <a href="javascript:location.href = changeGetParam('type', null)" class="button">リリィのみ</a>
-                    <a href="javascript:location.href = changeGetParam('type', 'lily,teacher')" class="button">教導官を含む</a>
-                    <a href="javascript:location.href = changeGetParam('type', 'teacher')" class="button">教導官のみ</a>
-                    <a href="javascript:location.href = changeGetParam('type', 'lily,character')" class="button">その他を含む</a>
-                    <a href="javascript:location.href = changeGetParam('type', 'character')" class="button">その他のみ</a>
-                    <a href="javascript:location.href = changeGetParam('type', 'lily,madec')" class="button">マディックを含む</a>
-                    <a href="javascript:location.href = changeGetParam('type', 'madec')" class="button">マディックのみ</a>
-                    <a href="javascript:location.href = changeGetParam('type', 'lily,teacher,character,madec')" class="button">すべて</a>
+                    <label class="button">
+                        <input type="checkbox" value="lily" @if(in_array('lily', $typeInfo)) checked @endif>リリィ
+                    </label>
+                    <label class="button">
+                        <input type="checkbox" value="teacher" @if(in_array('teacher', $typeInfo)) checked @endif>教導官
+                    </label>
+                    <label class="button">
+                        <input type="checkbox" value="madec" @if(in_array('madec', $typeInfo)) checked @endif>マディック
+                    </label>
+                    <label class="button">
+                        <input type="checkbox" value="character" @if(in_array('character', $typeInfo)) checked @endif>その他
+                    </label>
+                    <button id="submitViewMode" class="button primary">フィルタ</button>
                 </div>
 
                 <h3>生命状態</h3>
