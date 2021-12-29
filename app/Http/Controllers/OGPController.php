@@ -17,25 +17,14 @@ class OGPController extends Controller
         });
 
         // SubLine or SiteName
-        switch ($type){
-            case 'lily':
-                $subLine = 'リリィプロフィール';
-                break;
-            case 'legion':
-                $subLine = 'レギオン詳細';
-                break;
-            case 'book':
-                $subLine = '書籍詳細';
-                break;
-            case 'play':
-                $subLine = '舞台公演詳細';
-                break;
-            case 'other':
-                $subLine = config('app.name');
-                break;
-            default:
-                abort(400);
-        }
+        $subLine = match ($type) {
+            'lily' => 'プロフィール',
+            'legion' => 'レギオン詳細',
+            'book' => '書籍詳細',
+            'play' => '舞台公演詳細',
+            'other' => config('app.name'),
+            default => abort(400),
+        };
         $img->text($subLine, 70, 100, function ($font){
             $font->size(50);
             $font->color('#333');
