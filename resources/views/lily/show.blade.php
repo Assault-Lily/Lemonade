@@ -67,16 +67,17 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         @if(empty($triples[$ts]['lily:nameKana'][0]))
                             <div class="name-ruby" style="color: gray">読みデータなし</div>
                             <div class="name">{{ $triples[$ts]['schema:name'][0] }}</div>
-                        @elseif(mb_strlen($triples[$ts]['lily:nameKana'][0]) < 16 || empty($triples[$ts]['schema:name@en'][0]))
+                        @elseif(mb_strlen($triples[$ts]['lily:nameKana'][0]) < 14 || empty($triples[$ts]['schema:name@en'][0]))
                             <div class="name-ruby">{{ $triples[$ts]['lily:nameKana'][0] }}
                                 {{(!empty($triples[$ts]['schema:name@en'][0]) ? ' - '.$triples[$ts]['schema:name@en'][0] : '') }}</div>
                             <div class="name">{{ $triples[$ts]['schema:name'][0] }}</div>
                         @else
                             <div class="name-ruby flip">
-                                <span class="name-y">{{ $triples[$ts]['lily:nameKana'][0] }}</span>
+                                <span class="name-y">{{ $triples[$ts]['lily:nameKana'][0] }} <i class="fas fa-language"></i></span>
                                 <span class="name-a">{{ $triples[$ts]['schema:name@en'][0] }}</span>
                             </div>
-                            <div class="name name-long">{{  $triples[$ts]['schema:name'][0]  }}</div>
+                            <div class="name {{ mb_strlen($triples[$ts]['schema:name'][0]) > 14 ? 'name-long' : '' }}">
+                                {{ $triples[$ts]['schema:name'][0] }}</div>
                         @endif
                         <div class="summary">
                             <div>誕生日 : {{ !empty($triples[$ts]['schema:birthDate'][0]) ?
