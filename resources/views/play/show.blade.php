@@ -161,7 +161,7 @@ $ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です�
                         <th>公演日時</th>
                         <td rowspan="2">
                             @foreach($play[$ps]['lily:showTime'] as $showTime)
-                                <div>{{ \Carbon\Carbon::make($showTime)->isoFormat('YYYY年M月D日 (ddd) HH:mm') }}</div>
+                                <div style="min-width: 220px;">{{ \Carbon\Carbon::make($showTime)->isoFormat('YYYY年M月D日 (ddd) HH:mm') }}</div>
                             @endforeach
                         </td>
                     </tr>
