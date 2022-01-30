@@ -304,17 +304,23 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                                     <details>
                                         <summary>{{ $triples[$cast]['schema:name'][0] }}</summary>
                                 <?php
-                                foreach ($triples[$cast]['lily:performIn'] ?? array() as $play){
+                                foreach ($triples[$cast]['lily:performIn'] ?? array() as $media){
                                     ?><div style="font-size: smaller; padding-left: .5em">
-                                            <span class="indicator">{{ $triples[$play]['lily:genre'][0] ?? '不明' }}</span>
-                                            @if($triples[$play]['rdf:type'][0] === 'lily:Play')
-                                                <a href="{{ route('play.show', ['play' => str_replace('lilyrdf:', '', $play)]) }}">
-                                                    {{ (mb_strlen($triples[$play]['schema:name'][0]) > 30 and !empty($triples[$play]['schema:alternateName'][0]))
-                                                        ? $triples[$play]['schema:alternateName'][0]
-                                                        : $triples[$play]['schema:name'][0] }}
+                                            <span class="indicator">{{ $triples[$media]['lily:genre'][0] ?? '不明' }}</span>
+                                            @if($triples[$media]['rdf:type'][0] === 'lily:Play')
+                                                <a href="{{ route('play.show', ['play' => removePrefix($media)]) }}">
+                                                    {{ (mb_strlen($triples[$media]['schema:name'][0]) > 30 and !empty($triples[$media]['schema:alternateName'][0]))
+                                                        ? $triples[$media]['schema:alternateName'][0]
+                                                        : $triples[$media]['schema:name'][0] }}
+                                                </a>
+                                            @elseif($triples[$media]['rdf:type'][0] === 'lily:AnimeSeries')
+                                                <a href="{{ route('anime.series.show', ['series' => removePrefix($media)]) }}">
+                                                    {{ (mb_strlen($triples[$media]['schema:name'][0]) > 30 and !empty($triples[$media]['schema:alternateName'][0]))
+                                                        ? $triples[$media]['schema:alternateName'][0]
+                                                        : $triples[$media]['schema:name'][0] }}
                                                 </a>
                                             @else
-                                                {{ $triples[$play]['schema:name'][0] }}
+                                                {{ $triples[$media]['schema:name'][0] }}
                                             @endif
 
                                         </div><?php
