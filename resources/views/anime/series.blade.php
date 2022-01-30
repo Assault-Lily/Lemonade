@@ -15,9 +15,13 @@ if (!empty($details[$ts]['schema:episode']) && is_array($details[$ts]['schema:ep
     }
     array_multisort($episode_no, SORT_ASC, $episodes);
 }
+
+$ogp['title'] = $details[$ts]['schema:name'][0];
+$ogp['type'] = 'anime-series';
+$ogp['description'] = "アニメシリーズ「".$details[$ts]['schema:name'][0]."」のデータです。";
 ?>
 
-@extends('app.layout', ['title' => 'シリーズ詳細'])
+@extends('app.layout', ['title' => 'シリーズ詳細', 'titlebar' => $details[$ts]['schema:name'][0]])
 
 @section('head')
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">

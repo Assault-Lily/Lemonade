@@ -7,9 +7,17 @@
 $ts = 'lilyrdf:'.$episode;
 $isBouquet = str_contains($details[$ts]['schema:name@en'][0], 'Assault Lily BOUQUET');
 $fontOverride = $isBouquet ? "font-family: 'Noto Serif JP', serif;" : null;
+
+if(!empty($details[$ts]['lily:subtitle'][0])){
+    $ogp['title'] = '第'.$details[$ts]['schema:episodeNumber'][0].'話 '.$details[$ts]['lily:subtitle'][0];
+}else{
+    $ogp['title'] = $details[$ts]['schema:name'][0];
+}
+$ogp['type'] = 'anime-episode';
+$ogp['description'] = "アニメ ".$details[$ts]['schema:name'][0].' '.($details[$ts]['lily:subtitle'][0] ?? '')." のデータです。";
 ?>
 
-@extends('app.layout', ['title' => '各話詳細'])
+@extends('app.layout', ['title' => '各話詳細', 'titlebar' => $details[$ts]['schema:name'][0]])
 
 @section('head')
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
