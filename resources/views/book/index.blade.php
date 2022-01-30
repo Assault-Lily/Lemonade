@@ -46,8 +46,8 @@ $ogp['description'] = '書籍の一覧を表示します。現在'.count($books)
         @forelse($books as $bookKey => $book)
             <a class="book list-item-b" href="{{ route('book.show', ['book' => str_replace('lilyrdf:','',$bookKey)]) }}">
                 <div class="title">
-                    {{ $book['schema:name'][0] }}
                     @if(!empty($book['lily:genre'][0]))<span class="tag">{{ $book['lily:genre'][0] }}</span>@endif
+                    {{ $book['schema:name'][0] }}
                 </div>
                 <div style="margin: .5em 0">
                     <span class="tag">著者</span> {{ implode(', ',$book['schema:author'] ?? array()) }}

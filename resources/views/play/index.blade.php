@@ -21,8 +21,8 @@ $ogp['description'] = '公演の一覧を表示します。現在'.count($plays)
         @forelse($plays as $playKey => $play)
             <a class="book list-item-b" href="{{ route('play.show', ['play' => str_replace('lilyrdf:','',$playKey)]) }}">
                 <div class="title">
-                    {{ $play['schema:name'][0] }}
                     @if(!empty($play['lily:genre'][0]))<span class="tag">{{ $play['lily:genre'][0] }}</span>@endif
+                    {{ $play['schema:name'][0] }}
                 </div>
                 <div style="margin: .5em 0">
                     @if(!empty($play['lily:originalAuthor']))
