@@ -51,6 +51,7 @@ Route::resource('/charm', CharmController::class, ['only' => ['index', 'show']])
 Route::prefix('anime')->group(function (){
     Route::get('/', [AnimeController::class, 'seriesIndex'])->name('anime.series.index');
     Route::get('/{series}', [AnimeController::class, 'seriesShow'])->name('anime.series.show');
+    Route::get('/{series}/{episode}', [AnimeController::class, 'episodeShow'])->name('anime.episode.show');
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){

@@ -50,8 +50,42 @@ WHERE{
 }
 SPARQL
 ));
-        if(empty($details) || empty($details['lilyrdf:'.$series]) === 0)abort(404, "該当するデータが見つかりません");
+        if(empty($details) || empty($details['lilyrdf:'.$series]))
+            abort(404, "該当するシリーズデータが見つかりません");
 
         return view('anime.series', compact('details', 'series'));
+    }
+
+    public function episodeShow(string $series, string $episode, Request $request)
+    {
+        $details = sparqlToArray(sparqlQueryOrDie(<<<SPARQL
+PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?subject ?predicate ?object
+WHERE{
+  {
+    VALUES ?subject { lilyrdf:$episode }
+    ?subject ?predicate ?object;
+             schema:partOfSeries lilyrdf:$series;
+             a lily:AnimeEpisode.
+  }
+  UNION
+  {
+    VALUES ?predicate {
+      schema:name lily:color
+    }
+    lilyrdf:$episode schema:character ?subject.
+    ?subject ?predicate ?object.
+  }
+
+}
+SPARQL
+));
+        if(empty($details) || empty($details['lilyrdf:'.$episode]))
+            abort(404, "該当する各話データが見つかりません");
+
+        return view('anime.episode', compact('details', 'series', 'episode'));
     }
 }

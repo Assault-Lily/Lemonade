@@ -2,22 +2,14 @@
 /**
  * @var $details array
  * @var $series string
+ * @var $episode string
  */
-$ts = 'lilyrdf:'.$series;
-$fontOverride = $details[$ts]['schema:name@en'][0] === 'Assault Lily BOUQUET'
-    ? "font-family: 'Noto Serif JP', serif;" : null;
-if (!empty($details[$ts]['schema:episode']) && is_array($details[$ts]['schema:episode'])){
-    $episodes = array();
-    $episode_no = array();
-    foreach ($details[$ts]['schema:episode'] as $ep){
-        $episodes[$ep] = $details[$ep];
-        $episode_no[$ep] = $details[$ep]['schema:episodeNumber'][0] ?? null;
-    }
-    array_multisort($episode_no, SORT_ASC, $episodes);
-}
+$ts = 'lilyrdf:'.$episode;
+$isBouquet = str_contains($details[$ts]['schema:name@en'][0], 'Assault Lily BOUQUET');
+$fontOverride = $isBouquet ? "font-family: 'Noto Serif JP', serif;" : null;
 ?>
 
-@extends('app.layout', ['title' => 'シリーズ詳細'])
+@extends('app.layout', ['title' => '各話詳細'])
 
 @section('head')
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -30,13 +22,13 @@ if (!empty($details[$ts]['schema:episode']) && is_array($details[$ts]['schema:ep
             width: 100%;
             overflow: hidden;
         }
-        #episode_list{
-            flex-shrink: 0;
+        #character_list{
+            flex-shrink: 1;
             width: 350px;
             margin-left: 15px;
             background: rgba(100,100,100,0.1);
         }
-        #episode_list > h2{
+        #character_list > h2{
             margin: 0;
             font-size: 18px;
             padding: 5px 12px;
@@ -62,15 +54,52 @@ if (!empty($details[$ts]['schema:episode']) && is_array($details[$ts]['schema:ep
             font-weight: normal;
             box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
-        #episode_list > h2::before{
+        #character_list > h2::before{
             position: static;
+        }
+
+        #episode_board{
+            text-align: center;
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 500;
+            margin-top: -60px;
+            padding: 75px 0 60px;
+            background: linear-gradient(
+            {{ '#'.($details[$ts]['lily:subtitleColor'][0] ?? 'ffffff') }},
+            {{ '#'.($details[$ts]['lily:subtitleColor'][0] ?? 'ffffff') }} 85%,
+            transparent
+            );
+            @if(($details[$ts]['lily:subtitleColor'][0] ?? '') === '000000')
+            color: white;
+            @endif
+        }
+        #episode_board > #episode_no{
+            font-size: 20px;
+        }
+        #episode_board > #episode_no > span{
+            font-size: 30px;
+            vertical-align: center;
+            padding: 0 20px;
+        }
+        #episode_board > #subtitle{
+            font-size: 60px;
+            margin: 15px 0;
+        }
+        #episode_board > #subtitle_en{
+            font-size: 20px;
+            font-weight: normal;
+            margin: 15px 0;
+        }
+        #episode_board > #parentheses{
+            font-weight: normal;
+            margin: 25px 0 15px;
         }
 
         @media screen and (max-width:500px) and (orientation:portrait){
             #container{
                 display: block;
             }
-            #episode_list{
+            #character_list{
                 width: 100%;
                 margin: 0;
             }
@@ -79,8 +108,20 @@ if (!empty($details[$ts]['schema:episode']) && is_array($details[$ts]['schema:ep
 @endsection
 
 @section('main')
+    @if($isBouquet)
+        <div id="episode_board">
+            <div id="episode_no">
+                第<span>{{ $details[$ts]['schema:episodeNumber'][0] }}</span>話
+            </div>
+            <div id="subtitle">{{ $details[$ts]['lily:subtitle'][0] }}</div>
+            <div id="subtitle_en">{{ $details[$ts]['lily:subtitle@en'][0] }}</div>
+            <div id="parentheses">
+                {{ $details[$ts]['lily:parentheses@en'][0]}} - {{ $details[$ts]['lily:parentheses'][0] }}
+            </div>
+        </div>
+    @endif
     <main>
-        <h1 style="{!! $fontOverride !!}">{{ $details[$ts]['schema:name'][0] }}</h1>
+        @if(!$isBouquet) <h1 style="{!! $fontOverride !!}">{{ $details[$ts]['schema:name'][0] }}</h1> @endif
         <div id="container">
             <div id="details">
                 @if(!empty($details[$ts]['schema:abstract'][0]))
@@ -94,7 +135,12 @@ if (!empty($details[$ts]['schema:episode']) && is_array($details[$ts]['schema:ep
                     'lily:characterDesign' => 'キャラクターデザイン',
                     'lily:subCharacterDesign' => 'サブキャラクターデザイン',
                     'lily:scenarioWriter' => 'ストーリー原案',
+                    'lily:storyboard' => '絵コンテ',
+                    'lily:episodeDirection' => '演出',
                     'lily:chiefAnimationSupervisor' => '総作画監督',
+                    'lily:CASAssistance' => '総作画監督協力',
+                    'lily:animationSupervisor' => '作画監督',
+                    'lily:ASAssistance' => '作画監督協力',
                     'lily:actionDirector' => 'アクションディレクター',
                     'lily:assistantDirector' => '副監督',
                     'lily:chiefEpisodeDirection' => 'チーフ演出',
@@ -126,24 +172,20 @@ if (!empty($details[$ts]['schema:episode']) && is_array($details[$ts]['schema:ep
                     @endforeach
                 </table>
             </div>
-            @if(!empty($details[$ts]['schema:episode']))
-                <div id="episode_list">
-                    <h2>各話リスト</h2>
-                    <div style="padding: 10px">
-                        @foreach($episodes as $epKey => $ep)
-                            <a href="{{ route('anime.episode.show', ['series' => $series, 'episode' => removePrefix($epKey)]) }}" class="list-item-a" style="display: block; width: calc(100% - 6px); margin-bottom: 10px">
+            @if(!empty($details[$ts]['schema:character']))
+                <div id="character_list">
+                    <h2>登場したリリィ・人物</h2>
+                    <div style="padding: 10px; max-height: 500px; overflow-y: scroll;">
+                        @foreach($details[$ts]['schema:character'] as $character)
+                            @if(empty($details[$character])) @continue @endif
+                            <a href="{{ route('lily.show', ['lily' => removePrefix($character)]) }}" class="list-item-a" style="display: block; width: calc(100% - 6px); margin-bottom: 10px">
                                 <div class="list-item-data">
-                                    <div class="title">
-                                        @if(!empty($ep['schema:episodeNumber'][0]))
-                                            <span style="font-size: smaller">第{{ $ep['schema:episodeNumber'][0] }}話</span>
+                                    <div class="title" style="font-size: 16px">
+                                        @if(!empty($details[$character]['lily:color'][0]))
+                                            <span style="color: {{ '#'.$details[$character]['lily:color'][0] }}">■</span>
                                         @endif
-                                        @if(!empty($ep['lily:subtitleColor'][0]))
-                                            <span style="color: {{ '#'.$ep['lily:subtitleColor'][0] }}"
-                                                  title="{{ '#'.$ep['lily:subtitleColor'][0] }}">■</span>
-                                        @endif
-                                        {{ $ep['lily:subtitle'][0] }}
+                                        {{ $details[$character]['schema:name'][0] ?? '' }}
                                     </div>
-                                    <div>{{ $ep['lily:parentheses'][0] ?? '' }}</div>
                                 </div>
                             </a>
                         @endforeach
