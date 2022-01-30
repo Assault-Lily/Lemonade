@@ -165,9 +165,13 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                 <span>IME辞書生成</span>
             </a>
             <hr>
-            <a href="{{ route('book.index') }}" >
+            <!--<a href="{{ route('book.index') }}" >
                 <i class="fas fa-book"></i>
                 <span>書籍一覧</span>
+            </a>-->
+            <a href="{{ route('anime.series.index') }}" >
+                <i class="fas fa-film"></i>
+                <span>アニメシリーズ一覧</span>
             </a>
             <hr>
             <a href="{{ route('play.index') }}" >
