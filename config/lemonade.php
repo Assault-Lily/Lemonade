@@ -17,7 +17,7 @@ return [
     ],
 
     'developer' => [
-        'twitter' => 'miyacorata',
+        'twitter' => 'lily_dot_garden',
         'github' => 'miyacorata'
     ],
     'repository' => 'https://github.com/miyacorata/lemonade',
