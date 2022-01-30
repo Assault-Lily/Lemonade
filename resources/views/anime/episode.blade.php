@@ -179,6 +179,12 @@ $ogp['description'] = "アニメ ".$details[$ts]['schema:name'][0].' '.($details
                         </tr>
                     @endforeach
                 </table>
+                <div>
+                    <a href="{{ route('anime.series.show', ['series' => $series]) }}" class="button smaller">
+                        <i class="fas fa-arrow-left"></i>
+                        シリーズ詳細・各話リストに戻る
+                    </a>
+                </div>
             </div>
             @if(!empty($details[$ts]['schema:character']))
                 <div id="character_list">
@@ -200,7 +206,6 @@ $ogp['description'] = "アニメ ".$details[$ts]['schema:name'][0].' '.($details
                     </div>
                 </div>
             @endif
-
         </div>
 
 
