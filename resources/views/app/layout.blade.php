@@ -114,7 +114,6 @@
             <a href="{{ config('lemonade.statusPageUrl') }}" class="button smaller" target="_blank">Status</a>
         @endif
         <a href="{{ config('lemonade.repository') }}" class="button smaller" target="_blank">GitHub Repository</a>
-        <a href="{{ config('lemonade.mastodon.server').'/'.config('lemonade.mastodon.account') }}" class="button smaller" target="_blank" rel="me">Mastodon</a>
         <a href="{{ 'https://twitter.com/'.config('lemonade.developer.twitter') }}" class="button smaller" target="_blank">Twitter {{ '@'.config('lemonade.developer.twitter') }}</a>
     </div>
 </footer>

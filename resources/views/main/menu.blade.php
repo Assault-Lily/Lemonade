@@ -47,10 +47,9 @@ $ogp['title'] = "サイトメニュー";
 
         <h2>このウェブサイトについて</h2>
         <div class="buttons three">
-            <a href="{{ config('lemonade.mastodon.server').'/'.config('lemonade.mastodon.account') }}" class="button" target="_blank">
-                Mastodon {{ config('lemonade.mastodon.account') }}
+            <a href="{{ 'https://twitter.com/'.config('lemonade.developer.twitter') }}" class="button" target="_blank">
+                Twitter {{ '@'.config('lemonade.developer.twitter') }}
             </a>
-            <a href="{{ 'https://twitter.com/'.config('lemonade.developer.twitter') }}" class="button" target="_blank">開発者のTwitter</a>
             <br>
             <a href="{{ config('lemonade.repository') }}" class="button" target="_blank">Lemonade - GitHubリポジトリ</a>
             <a href="{{ config('lemonade.rdf.repository') }}" class="button" target="_blank">assaultlily-rdf - GitHubリポジトリ</a>

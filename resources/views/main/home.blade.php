@@ -138,8 +138,7 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                     <p class="center notice">現在、重要なお知らせはありません。</p>
                 @endforelse
                     <p class="center">
-                        お知らせは <a href="https://twitter.com/{{ config('lemonade.developer.twitter') }}" target="_blank">開発者Twitter</a>
-                        や <a href="{{ config('lemonade.mastodon.server').'/'.config('lemonade.mastodon.account') }}" target="_blank">Mastodon</a> でも配信しています。</p>
+                        お知らせは <a href="https://twitter.com/{{ config('lemonade.developer.twitter') }}" target="_blank">Twitter</a> でも配信しています。</p>
             </div>
         </div>
         @endif
