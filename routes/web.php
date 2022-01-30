@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\LilyDataController;
 use App\Http\Controllers\Admin\LilyRdfController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\TripleDataController;
+use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CharmController;
 use App\Http\Controllers\InfoController;
@@ -46,6 +47,12 @@ Route::resource('/legion', LegionController::class, ['only' => ['index', 'show']
 Route::resource('/book', BookController::class, ['only' => ['index', 'show']]);
 Route::resource('/play', PlayController::class, ['only' => ['index', 'show']]);
 Route::resource('/charm', CharmController::class, ['only' => ['index', 'show']]);
+
+Route::prefix('anime')->group(function (){
+    Route::get('/', [AnimeController::class, 'seriesIndex'])->name('anime.series.index');
+    Route::get('/{series}', [AnimeController::class, 'seriesShow'])->name('anime.series.show');
+    Route::get('/{series}/{episode}', [AnimeController::class, 'episodeShow'])->name('anime.episode.show');
+});
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
     Route::get('/', [AdminController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');

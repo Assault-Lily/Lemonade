@@ -22,6 +22,8 @@ class OGPController extends Controller
             'legion' => 'レギオン詳細',
             'book' => '書籍詳細',
             'play' => '舞台公演詳細',
+            'anime-series' => 'アニメシリーズ詳細',
+            'anime-episode' => 'アニメ各話詳細',
             'other' => config('app.name'),
             default => abort(400),
         };
