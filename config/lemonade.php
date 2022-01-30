@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '9.7.3 Shichirigahama',
+    'version' => '10.0.0 Inamuragasaki',
 
     'webhooks' => [
         'discord-log' => env('DISCORD_URL'),
