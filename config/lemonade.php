@@ -75,4 +75,10 @@ return [
     ],
 
     'dictionaryGUID' => env('DICTIONARY_GUID'),
+
+    'redirect' => [
+        'lily' => [
+            'Toda_Eulalia_Kotohi' => 'Toda_Kotohi',
+        ],
+    ],
 ];

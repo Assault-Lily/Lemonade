@@ -364,10 +364,16 @@ SPQRQL
      * Display the specified resource.
      *
      * @param  string $slug
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function show(string $slug)
     {
+        // リダイレクト判定
+        if(array_key_exists($slug, config('lemonade.redirect.lily'))){
+            return redirect(route('lily.show', ['lily' => config('lemonade.redirect.lily.'.$slug)]))
+                ->with('message', 'このリリィはURLが変更されたため、新しいURLに自動で転送されました。');
+        }
+
         $triples_sparql = sparqlQueryOrDie(<<<SPARQL
 PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
 PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
@@ -427,7 +433,7 @@ SPARQL
         foreach ($triples['lilyrdf:'.$slug]['lily:cast'] ?? array() as $cast){
             // キャスト名がない場合のスキップ
             if(empty($triples[$cast]['schema:name'][0])) continue;
-            
+
             $play_sortKey = [];
             $play_sortKeyForKeyUnknown = [];
             foreach ($triples[$cast]['lily:performIn'] ?? array() as $play) {
