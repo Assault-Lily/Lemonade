@@ -1,0 +1,31 @@
+{
+    "name": "Lemonade",
+    "short_name": "Lemonade",
+    "description": "AssaultLily Unofficial fansite.",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#F4F5F9",
+    "theme_color": "#23232D",
+    "icons": [
+        {
+            "src": "./image/icon/16x16.png",
+            "sizes": "16x16"
+        },
+        {
+            "src": "./image/icon/32x32.png",
+            "sizes": "32x32"
+        },
+        {
+            "src": "./image/icon/64x64.png",
+            "sizes": "64x64"
+        },
+        {
+            "src": "./image/icon/128x128.png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "./image/icon/256x256.png",
+            "sizes": "256x256"
+        }
+    ]
+}

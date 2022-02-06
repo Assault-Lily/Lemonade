@@ -8,6 +8,7 @@
 <head>
     <meta charset="utf-8">
     <title>{{ $title_long }}</title>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.6/dialog-polyfill.min.css" integrity="sha512-J2+1q+RsZuJXabBfH1q/fgRr6jMy9By5SwVLk7bScEW7NFJkMUXxfeOyyxtDe6fsaJ4jsciexSlGrPYn9YbBIg==" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('css/lemonade.css').$resource_qs }}">
     <link rel="stylesheet" href="{{ asset('css/lemonade-mobile.css').$resource_qs }}" media="screen and (max-width:500px) and (orientation:portrait)">
@@ -18,6 +19,14 @@
     <script src="{{ asset('js/clock.js').$resource_qs }}"></script>
     <script src="{{ asset('js/lemonade.js').$resource_qs }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.6/dialog-polyfill.min.js" integrity="sha512-qUIG93zKzcLBVD5RGRbx2PBmbVRu+tJIl+EPLTus0z8I1AMru9sQYdlf6cBacSzYmZVncB9rcc8rYBnazqgrxA==" crossorigin="anonymous"></script>
+    <script src="{{ asset('service-worker.js') }}"></script>
+    <script>
+        if('serviceWorker' in navigator){
+            navigator.serviceWorker.register('/service-worker.js').then(function(){
+                console.log("[Service Worker] Registered");
+            });
+        }
+    </script>
     <meta name="viewport" content="width=500">
     <meta name="description" content="{{ $ogp['description'] ?? $desc_default }}">
     <meta property="og:title" content="{{ $title_long }}">
