@@ -32,6 +32,10 @@ return [
         'lb' => 'https://assaultlily.bushimo.jp/character/{slug}/',
     ],
 
+    'wikiUrls' => [
+        'atwiki' => 'https://w.atwiki.jp/assault_lily/?page={name}'
+    ],
+
     'specialLegion' => [
         'anime' => ['lilyrdf:Radgrid'],
         'lb' => ['lilyrdf:Radgrid', 'lilyrdf:Hervarar', 'lilyrdf:Gran_Eple'],

@@ -407,7 +407,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     </div>
                 @endif
                 <div>
-                    <h3>イラスト・画像を探す</h3>
+                    <h3>イラスト・画像・Wikiを探す</h3>
                     <div class="buttons two">
                         <a href="https://twitter.com/search?q={{ urlencode('#アサルトリリィ_FA '.($triples[$ts]['schema:givenName'][0] ?? $triples[$ts]['schema:name'][0])) }}&f=live"
                            target="_blank" class="button">
@@ -422,6 +422,11 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                            target="_blank" class="button">
                             <i class="fab fa-google"></i>
                             Google画像検索
+                        </a>
+                        <a href="{{ str_replace('{name}', $triples[$ts]['schema:name'][0], config('lemonade.wikiUrls.atwiki')) }}"
+                           target="_blank" class="button">
+                            <i class="fas fa-at"></i>
+                            アサルトリリィ Wiki
                         </a>
                     </div>
                 </div>
