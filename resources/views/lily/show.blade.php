@@ -284,7 +284,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                         <tr>
                             <th>カラーコード</th>
                             <td>
-                                <span onclick="copyString('{{ '#'.$triples[$ts]['lily:color'][0] }}')"
+                                <span onclick="copyString('{{ $triples[$ts]['lily:color'][0] }}')"
                                       style="font-weight: bold; color: {{ '#'.$triples[$ts]['lily:color'][0] }}; cursor: pointer;"
                                       title="クリックしてカラーコードをコピー">
                                     {{ '#'.$triples[$ts]['lily:color'][0] }}
