@@ -1,5 +1,26 @@
 @extends('app.layout', ['title' => '画像データ管理', 'previous' => route('admin.dashboard')])
 
+@section('head')
+    <style>
+        .sort{
+            cursor: pointer;
+        }
+        .sort::after{
+            content: '◆';
+            color: lightgray;
+            padding-left: 4px;
+        }
+        .sort.asc::after{
+            content: '▲';
+            color: black;
+        }
+        .sort.desc::after{
+            content: '▼';
+            color: black;
+        }
+    </style>
+@endsection
+
 @section('main')
     <main>
         <h1>画像データ一覧</h1>
@@ -21,22 +42,29 @@
                 </form>
             </div>
             <hr>
-            <table style="min-width: 100%; text-align: center">
+            <table style="min-width: 100%; text-align: center" id="images">
                 <thead>
                 <tr>
-                    <th>ID</th><th>対象リソース</th><th>画像種別</th><th>作者</th><th>画像ホスト</th><th>操作</th>
+                    {{--<th class="sort" data-sort="created-at">作成日時</th>--}}
+                    <th class="sort" data-sort="updated-at">更新日時</th>
+                    <th class="sort" data-sort="for">対象リソース</th>
+                    <th class="sort" data-sort="type">画像種別</th>
+                    <th class="sort" data-sort="author">作者</th>
+                    <th>画像ホスト</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="sort-list">
                 @forelse($images as $image)
                     <?php
                         /** @var $image \App\Models\Image */
                     ?>
                     <tr>
-                        <td>{{ $image->id }}</td>
-                        <td>{{ $image->for }}</td>
-                        <td>{{ $image->type }}</td>
-                        <td>{{ $image->author }}</td>
+                        {{--<td class="created-at" data-created="{{ $image->created_at->format('U') }}">{{ $image->created_at->format('Y-m-d - H:i') }}</td>--}}
+                        <td class="updated-at" data-updated="{{ $image->updated_at->format('U') }}">{{ $image->updated_at->format('Y-m-d - H:i') }}</td>
+                        <td class="for">{{ $image->for }}</td>
+                        <td class="type">{{ $image->type }}</td>
+                        <td class="author">{{ $image->author }}</td>
                         <td>{{ parse_url($image->image_url, PHP_URL_HOST) ?? 'N/A' }}</td>
                         <td>
                             <a href="{{ route('admin.image.edit', ['image' => $image->id]) }}" class="button smaller">確認・編集</a>
@@ -51,6 +79,14 @@
                 @endforelse
                 </tbody>
             </table>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+            <script>
+                let options = {
+                    valueNames: [/*{name: 'created-at', attr: 'data-created'},*/ {name: 'updated-at', attr: 'data-updated'}, 'for', 'type', 'author'],
+                    listClass: 'sort-list'
+                };
+                let imageList = new List('images', options);
+            </script>
         </div>
     </main>
 @endsection

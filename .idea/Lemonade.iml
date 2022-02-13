@@ -145,5 +145,6 @@
     <orderEntry type="library" name="codemirror" level="application" />
     <orderEntry type="library" name="xml" level="application" />
     <orderEntry type="library" name="turtle" level="application" />
+    <orderEntry type="library" name="list" level="application" />
   </component>
 </module>
