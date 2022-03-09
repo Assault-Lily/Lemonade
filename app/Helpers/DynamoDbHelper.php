@@ -1,8 +1,12 @@
 <?php
 
 /**
- * @param string $type
- * @param string | array $for
+ * DynamoDB 画像取得関数
+ *
+ * DynamoDB
+ *
+ * @param string | array $type 取得画像種別(icon等) 配列指定可
+ * @param string | array $for 対象リソースネーム 配列指定可
  */
 function getImage(string|array $type, $for = null){
     if(config('dynamodb.disable')){

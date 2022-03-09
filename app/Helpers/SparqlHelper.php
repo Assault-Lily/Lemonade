@@ -1,9 +1,15 @@
 <?php
 
 /**
- * @param string $query SPARQL Query
- * @param int $timeout
- * @param bool $predicateReplace Replace predicate to prefixed string
+ * SPARQL問い合わせ関数
+ *
+ * 設定されたSPARQLエンドポイントへクエリを発行する
+ * 応答はJSON形式をデコードしたオブジェクトとして返される
+ * クエリ誤りを含むエラー等は例外を返す
+ *
+ * @param string $query SPARQL クエリ
+ * @param int $timeout タイムアウト
+ * @param bool $predicateReplace 述語をPREFIXで置き換えるか
  * @return object
  * @throws \Illuminate\Http\Client\RequestException
  * @throws \Illuminate\Http\Client\ConnectionException
@@ -27,9 +33,16 @@ function sparqlQuery(string $query, int $timeout = 5, bool $predicateReplace = t
 }
 
 /**
- * @param string $query SPARQL Query
- * @param int $timeout
- * @param bool $predicateReplace Replace predicate to prefixed string
+ * SPARQL問い合わせ関数
+ *
+ * 設定されたSPARQLエンドポイントへクエリを発行する
+ * 応答はJSON形式をデコードしたオブジェクトとして返される
+ * 例外発生時は全ての処理を中断しエラーメッセージを表示する
+ * 500エラーの場合は(設定されていれば)アラートも併せて飛ばす
+ *
+ * @param string $query SPARQL クエリ
+ * @param int $timeout タイムアウト
+ * @param bool $predicateReplace 述語をプレフィックスで置き換えるか
  * @return object
  */
 function sparqlQueryOrDie(string $query, int $timeout = 5, bool $predicateReplace = true): object
@@ -40,8 +53,7 @@ function sparqlQueryOrDie(string $query, int $timeout = 5, bool $predicateReplac
         report($e);
         Log::channel()->critical('SPARQL-EP 接続エラー'.PHP_EOL.$e->getMessage());
         $message = "SPARQLエンドポイントに接続できませんでした。\n管理者までご連絡ください。";
-        abort(502, $message);
-        exit();
+        abort(500, $message);
     }catch (\Illuminate\Http\Client\RequestException $e){
         if (($e->response->status() ?? 500) === 503){
             $message = "SPARQLエンドポイントがメンテナンス中か混雑しています。2分ほど待って再度お試しください。\n";
@@ -54,12 +66,21 @@ function sparqlQueryOrDie(string $query, int $timeout = 5, bool $predicateReplac
             Log::channel('slack')->critical('SPARQL-EP 無効応答'.PHP_EOL.$e->getMessage());
         }
         $message .= PHP_EOL.'SPARQL endpoint returned '.$e->getCode();
-        abort(502, $message);
-        exit();
+        abort(500, $message);
     }
     return $res;
 }
 
+/**
+ * SPARQLクエリ結果配列変換関数
+ *
+ * sparqlQuery()もしくはsparqlQueryOrDie()で得た結果をネストされた連想配列に変換する
+ * ただし Subject(主語) Predicate(述語) Object(目的語) の順にSELECTされている必要がある
+ * 言語指定がある場合日本語以外の場合に言語サフィックスをつけて返す
+ *
+ * @param object $sparqlObject
+ * @return array
+ */
 function sparqlToArray(object $sparqlObject): array
 {
     $result = array();
