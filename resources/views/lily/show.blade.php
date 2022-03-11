@@ -239,8 +239,8 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                                 }else{
                                     $charm_used_in = '';
                                 }
-                                ?><a href="{{ route('charm.show', ['charm' => removePrefix($triples[$charm]['lily:resource'][0])]) }}" style="display: block"
-                                    {!! !empty($charm_used_in) ? 'title="'.e($charm_used_in).'"' : '' !!}>{{ $charm_name }}</a><?php
+                                ?><div><a href="{{ route('charm.show', ['charm' => removePrefix($triples[$charm]['lily:resource'][0])]) }}"
+                                        {!! !empty($charm_used_in) ? 'title="'.e($charm_used_in).'"' : '' !!}>{{ $charm_name }}</a></div><?php
                             }
                             ?>
                             @if(count($triples[$ts]['lily:charm'] ?? array()) < 1)
@@ -301,8 +301,8 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                                 // キャスト名がない場合のスキップ
                                 if(empty($triples[$cast]['schema:name'][0])) continue;
                                 ?>
-                                    <details>
-                                        <summary>{{ $triples[$cast]['schema:name'][0] }}</summary>
+                                    <div style="margin-bottom: 5px">
+                                        <span>{{ $triples[$cast]['schema:name'][0] }}</span>
                                 <?php
                                 foreach ($triples[$cast]['lily:performIn'] ?? array() as $media){
                                     ?><div style="font-size: smaller; padding-left: .5em">
@@ -325,7 +325,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
 
                                         </div><?php
                                 }
-                                ?></details><?php
+                                ?></div><?php
                                 }
                                 ?>
                             </td>
