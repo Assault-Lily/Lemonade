@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Log;
-use Sarhan\Flatten\Flatten;
 
 class TripleDataController extends Controller
 {
@@ -89,8 +89,7 @@ SPARQL
             $lilies = array();
         }
 
-        $flatten = new Flatten();
-        $predicates = $flatten->flattenToArray(config('triplePredicate'));
+        $predicates = \Arr::dot(config('triplePredicate'));
 
         return view('admin.triple.create', compact('args', 'predicates', 'lilies'));
     }
@@ -156,8 +155,7 @@ SPARQL
             abort(404, '指定されたトリプルが存在しません');
         }
 
-        $flatten = new Flatten();
-        $predicates = $flatten->flattenToArray(config('triplePredicate'));
+        $predicates = Arr::dot(config('triplePredicate'));
 
         return view('admin.triple.edit', compact('triple', 'predicates'));
     }

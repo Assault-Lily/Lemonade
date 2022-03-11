@@ -1,5 +1,22 @@
 <?php
 return [
+    // Lemonade 独自項目
+
+    'officialUrls' => [
+        'acus' => 'acus版公式ページURL',
+        'anime' => 'アニメ版公式ページスラッグ',
+        'lb' => 'ラスバレ版公式ページスラッグ',
+    ],
+
+    'lily' => [
+        'assumedColor' => 'カラーコード(暫定)'
+    ],
+
+    'remarks' => '特記事項',
+
+
+    // RDF項目
+
     'rdf:type' => 'RDF種別',
     'rdfs:label' => 'RDFラベル',
 
@@ -57,12 +74,4 @@ return [
     'lily:castName' => 'キャスト名',
     'lily:castResource' => 'キャストリソース',
     'lily:color' => 'カラーコード',
-
-    'miyadoc' => 'MiyaDoc記事名',
-    'officialUrls' => [
-        'acus' => 'acus版公式ページURL',
-        'anime' => 'アニメ版公式ページスラッグ',
-        'lb' => 'ラスバレ版公式ページスラッグ',
-    ],
-    'remarks' => '特記事項',
 ];

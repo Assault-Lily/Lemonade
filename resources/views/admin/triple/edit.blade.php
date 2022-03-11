@@ -74,7 +74,7 @@
                         データ管理上の観点から、不要になったトリプルは再利用せず、削除してください。<br>
                         (削除したトリプルは、システム内部では論理的に削除されレストアが可能です。)<br>
                         述語の記述子を間違えた場合などを除いて、述語を変更するべきではありません。<br>
-                        <a href="javascript:document.getElementById('predicate').removeAttribute('readonly')">
+                        <a href="javascript:document.getElementById('predicate').removeAttribute('readonly')" target="_self">
                             理解した上で、編集ロックを解除します。
                         </a>
                     </p>
