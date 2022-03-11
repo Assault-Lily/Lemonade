@@ -20,8 +20,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.5",
         "laravel/framework": "^8.12",
-        "laravel/tinker": "^2.5",
-        "sarhan/php-flatten": "^4.0"
+        "laravel/tinker": "^2.5"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",
