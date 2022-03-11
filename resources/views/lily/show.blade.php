@@ -8,13 +8,13 @@
 
 $ts = 'lilyrdf:'.$slug;
 
-$color_rgb = str_replace('#','',$triples[$ts]['lily:color'][0] ?? '');
+$color_rgb = str_replace('#','',$triples[$ts]['lily:color'][0] ?? $triples[$ts]['lily.assumedColor'][0] ?? '');
 if(strlen($color_rgb) !== 6) $color_rgba = 'rgba(0,0,0,0.1)';
 else {
     $r = hexdec(substr($color_rgb,0,2));
     $g = hexdec(substr($color_rgb,2,2));
     $b = hexdec(substr($color_rgb,4,2));
-    $color_rgba = 'rgba('.$r.','.$g.','.$b.',0.6)';
+    $color_rgba = 'rgba('.$r.','.$g.','.$b.',0.8)';
 }
 
 $ogp['title'] = $triples[$ts]['schema:name'][0];
