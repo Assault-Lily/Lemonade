@@ -3,10 +3,12 @@
 /**
  * DynamoDB 画像取得関数
  *
- * DynamoDB
+ * DynamoDBから指定の種別及びリソースに紐づく画像データを問い合わせる。
+ * 条件に合致するもの全てをCollectionの形式で返す。
  *
  * @param string | array $type 取得画像種別(icon等) 配列指定可
- * @param string | array $for 対象リソースネーム 配列指定可
+ * @param string | array $for 対象リソースネーム 配列指定可 省略可
+ * @return \Illuminate\Support\Collection | \BaoPham\DynamoDb\DynamoDbCollection
  */
 function getImage(string|array $type, $for = null){
     if(config('dynamodb.disable')){
