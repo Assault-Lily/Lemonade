@@ -23,7 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'){
+        if(
+            isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ||
+            isset($_SERVER['CLOUDFRONT_FORWARDED_PROTO']) && $_SERVER['CLOUDFRONT_FORWARDED_PROTO'] == 'https'
+        ){
             \URL::forceScheme('https');
         }
         \Schema::defaultStringLength(191);
