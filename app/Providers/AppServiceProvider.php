@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if(
             isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ||
-            isset($_SERVER['CLOUDFRONT_FORWARDED_PROTO']) && $_SERVER['CLOUDFRONT_FORWARDED_PROTO'] == 'https'
+            isset($_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO']) && $_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO'] == 'https'
         ){
             \URL::forceScheme('https');
         }
