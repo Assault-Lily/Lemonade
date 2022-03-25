@@ -367,17 +367,10 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
             </div>
             <div class="right">
                 <div id="right-tag">
-                    @if(!empty($triples[$ts]['lily:lifeStatus']) and $triples[$ts]['lily:lifeStatus'][0] === 'dead')
-                        <div class="KIA">故人</div>
-                    @endif
-                    @if(!empty($triples[$ts]['lily:lifeStatus']) and $triples[$ts]['lily:lifeStatus'][0] === 'unknown')
-                        <div class="KIA">生死不明</div>
-                    @endif
-                    @if(!empty($triples[$ts]['lily:killedIn'][0]))
-                        <div class="KIA">{{ $triples[$ts]['lily:killedIn'][0] }}<br>戦死・殉職者</div>
-                    @endif
                     @if(!empty($triples[$ts]['lily:isBoosted']) and $triples[$ts]['lily:isBoosted'][0] === 'true')
                         <div class="boosted">強化リリィ</div>
+                    @elseif(!empty($triples[$ts]['rdf:type']) and $triples[$ts]['rdf:type'][0] === 'lily:Lily')
+                        <div class="lily">リリィ</div>
                     @endif
                     @if(!empty($triples[$ts]['rdf:type']) and $triples[$ts]['rdf:type'][0] === 'lily:Teacher')
                         <div class="teacher">教導官</div>
@@ -385,27 +378,18 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     @if(!empty($triples[$ts]['rdf:type']) and $triples[$ts]['rdf:type'][0] === 'lily:Madec')
                         <div class="madec">マディック</div>
                     @endif
+                    @if(!empty($triples[$ts]['lily:lifeStatus']) and $triples[$ts]['lily:lifeStatus'][0] === 'dead')
+                        <div class="KIA">故人</div>
+                    @endif
+                    @if(!empty($triples[$ts]['lily:lifeStatus']) and $triples[$ts]['lily:lifeStatus'][0] === 'unknown')
+                        <div class="KIA">生死不明</div>
+                    @endif
+                    @if(!empty($triples[$ts]['lily:killedIn'][0]))
+                            <div class="KIA">{{ $triples[$ts]['lily:killedIn'][0] }}<br>
+                                <span style="font-size: smaller">戦死・殉職者</span></div>
+                    @endif
                 </div>
 
-                <?php
-                /** @var \Illuminate\Support\Collection $memorias */
-                ?>
-                @if(!$memorias->isEmpty())
-                    <?php $memoria = $memorias->random(); ?>
-                    <div id="pics">
-                        <img src="{{ $memoria->image_url }}" alt="{{ $memoria->author }}">
-                        <div id="memoria-info">メモリア寄稿 : {{ $memoria->author }}</div>
-                    </div>
-                @else
-                    <div id="pics">
-                        <div style="text-align: center; padding-top: 130px; color: gray;">
-                            <div style="margin-bottom: .4em">Image Unavailable</div>
-                            <p style="font-size: smaller">
-                                メモリア(写真やイラストなど)の投稿がランダムで表示されます
-                            </p>
-                        </div>
-                    </div>
-                @endif
                 <div>
                     <h3>イラスト・画像・Wikiを探す</h3>
                     <div class="buttons two">
