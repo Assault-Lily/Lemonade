@@ -9,7 +9,7 @@
         #main{
             display: flex;
             justify-content: space-around;
-            margin-bottom: 10px;
+            margin: 10px 0;
         }
         #main input{
             width: 350px;
@@ -28,14 +28,25 @@
                 @csrf
                 @method('patch')
                 <input type="hidden" name="id" value="{{ $notice->id }}">
+                <div>
+                    <label>
+                        タイトル<br>
+                        <input type="text" name="title" required placeholder="タイトル" value="{{ old('title', $notice->title) }}" style="font-size: large; width: 500px">
+                    </label>
+                </div>
                 <div id="main">
                     <label>
                         スラッグ<br>
                         <input type="text" name="slug" placeholder="TitleSlug" value="{{ old('slug', $notice->slug) }}">
                     </label>
                     <label>
-                        タイトル<br>
-                        <input type="text" name="title" required placeholder="タイトル" value="{{ old('title', $notice->title) }}">
+                        カテゴリ<br>
+                        <input type="text" name="category" placeholder="Category" list="categories" value="{{ old('category', $notice->category) }}">
+                        <datalist id="categories">
+                            @foreach(config('noticeCategories') as $key => $val)
+                                <option value="{{ $key }}">{{ $val }}</option>
+                            @endforeach
+                        </datalist>
                     </label>
                     <label>
                         重要度<br>

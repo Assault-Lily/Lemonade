@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\TripleDataController;
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CharmController;
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\LegionController;
 use App\Http\Controllers\LilyController;
@@ -35,6 +36,8 @@ Route::get('/menu', [MainController::class, 'menu'])->name('menu');
 Route::get('/imedic', [MainController::class, 'generateImeDic'])->name('imedic');
 
 Route::get('/rdfDescribe/{resource}', [MainController::class, 'rdfDescribe'])->name('rdfDescribe');
+
+Route::resource('/info', InfoController::class, ['only' => ['index', 'show']]);
 
 Route::middleware('throttle:30,1')->group(function (){
     Route::get('/ogp/{type}/{title}.jpg', [OGPController::class, 'generate'])->name('ogp');

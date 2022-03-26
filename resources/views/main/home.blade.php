@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Mail\Markdown;
+
 $ogp['title'] = "アサルトリリィ非公式ファンサイト";
 ?>
 
@@ -121,16 +123,16 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
             <a href="https://github.com/fvh-P/assaultlily-rdf" style="font-weight: bold" target="_blank">assaultlily-rdf</a>
             の情報を基にサービスを提供しています。
         </p>
-        @if(!$notices->isEmpty()) {{-- TODO: お知らせ一覧ページ実装でき次第IFを撤去 --}}
         <div class="window-a" style="margin-top: 15px;">
             <div class="header">{{ config('app.name', 'Lemonade') }}からのお知らせ</div>
             <div class="body">
                 @forelse($notices as $notice) <?php /** @var $notice \App\Models\Notice */ ?>
                     <article>
                         <h3>{{ $notice->title }}</h3>
-                        <div>{!! base64_decode($notice->body) !!}</div>
+                        <div>{!! Illuminate\Mail\Markdown::parse(base64_decode($notice->body)) !!}</div>
                         <p style="font-size: smaller">
                             {{ $notice->updated_at->format('Y/m/d H:i:s') }}
+                            <span class="tag">{{ $notice->category ?? '未分類' }}</span>
                         </p>
                     </article>
                     <hr>
@@ -138,10 +140,11 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                     <p class="center notice">現在、重要なお知らせはありません。</p>
                 @endforelse
                     <p class="center">
-                        お知らせは <a href="https://twitter.com/{{ config('lemonade.developer.twitter') }}" target="_blank">Twitter</a> でも配信しています。</p>
+                        お知らせは <a href="https://twitter.com/{{ config('lemonade.developer.twitter') }}" target="_blank">Twitter</a> でも配信しています。<br>
+                        過去のお知らせなどは <a href="{{ route('info.index') }}">こちら</a> からご覧いただけます。
+                    </p>
             </div>
         </div>
-        @endif
         <h2>Start</h2>
         <div class="white-box big-buttons" style="text-align: center">
             <a href="{{ route('lily.index') }}" >

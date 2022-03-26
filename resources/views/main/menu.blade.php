@@ -48,6 +48,9 @@ $ogp['title'] = "サイトメニュー";
 
         <h2>このウェブサイトについて</h2>
         <div class="buttons three">
+            <a href="{{ route('info.index') }}" class="button">お知らせ一覧</a>
+        </div>
+        <div class="buttons three">
             <a href="{{ 'https://twitter.com/'.config('lemonade.developer.twitter') }}" class="button" target="_blank">
                 Twitter {{ '@'.config('lemonade.developer.twitter') }}
             </a>
