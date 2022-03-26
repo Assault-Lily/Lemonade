@@ -8,7 +8,7 @@ use Exception;
 use ZipArchive;
 use Illuminate\Support\Facades\Http;
 
-class InfoController extends Controller
+class MainController extends Controller
 {
     public function index(){
         try {
