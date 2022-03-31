@@ -20,10 +20,10 @@ return [
         'twitter' => 'lily_dot_garden',
         'github' => 'miyacorata'
     ],
-    'repository' => 'https://github.com/miyacorata/lemonade',
+    'repository' => 'https://github.com/Assault-Lily/Lemonade',
 
     'rdf' => [
-        'repository' => 'https://github.com/fvh-P/assaultlily-rdf',
+        'repository' => 'https://github.com/fvh-P/LuciaDB',
     ],
 
     'officialUrls' => [

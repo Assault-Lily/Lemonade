@@ -120,7 +120,8 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
         </p>
         <p>
             {{ config('app.name', 'Lemonade') }}はデータソースとしてアサルトリリィ非公式データベース
-            <a href="https://github.com/fvh-P/assaultlily-rdf" style="font-weight: bold" target="_blank">assaultlily-rdf</a>
+            <a href="{{ config('lemonade.rdf.repository') }}" style="font-weight: bold" target="_blank"
+               title="Lily's unified correlation information as DataBase">LuciaDB</a>
             の情報を基にサービスを提供しています。
         </p>
         <div class="window-a" style="margin-top: 15px;">
