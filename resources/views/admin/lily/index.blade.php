@@ -5,7 +5,7 @@
         <h1>データ一覧</h1>
         <div class="white-box">
             <p style="color: darkred;text-align: center">
-                現状すべてのリリィのデータはassaultlily-rdfより取得されており、リリィデータをこちらで管理する必要はありません。
+                現状すべてのリリィのデータはLuciaDBより取得されており、リリィデータをこちらで管理する必要はありません。
             </p>
             <div class="buttons three">
                 <a href="{{ route('admin.lily.create') }}" class="button">新規登録</a>

@@ -183,7 +183,7 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                 <span>舞台公演一覧</span>
             </a>
         </div>
-        <h2>assaultlily-rdf 更新情報</h2>
+        <h2>LuciaDB 更新情報</h2>
         <div class="white-box" id="rdf-updates">
             <table>
                 <thead>

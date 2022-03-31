@@ -21,7 +21,7 @@ $ogp['title'] = "サイトメニュー";
     <main>
         <p class="center" style="margin: 30px 0;font-size: large">
             どんな情報をお探しですか？
-            <a href="{{ config('lemonade.rdf.repository') }}" target="_blank">assaultlily-rdf</a> と
+            <a href="{{ config('lemonade.rdf.repository') }}" target="_blank">LuciaDB</a> と
             {{ config('app.name') }} がお手伝いします。
         </p>
         <div class="buttons three" id="top-link">
@@ -56,7 +56,7 @@ $ogp['title'] = "サイトメニュー";
             </a>
             <br>
             <a href="{{ config('lemonade.repository') }}" class="button" target="_blank">Lemonade - GitHubリポジトリ</a>
-            <a href="{{ config('lemonade.rdf.repository') }}" class="button" target="_blank">assaultlily-rdf - GitHubリポジトリ</a>
+            <a href="{{ config('lemonade.rdf.repository') }}" class="button" target="_blank">LuciaDB - GitHubリポジトリ</a>
         </div>
     </main>
 @endsection

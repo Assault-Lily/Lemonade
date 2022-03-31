@@ -27,7 +27,7 @@
             @else
                 <p>
                     トリプルは指定されたスラッグを基に紐付けられます。<br>
-                    先にリリィのデータがassaultlily-rdf上に存在するか、あるいは独自リリィとして存在するか確認してください。</p>
+                    先にリリィのデータがLuciaDB上に存在するか、あるいは独自リリィとして存在するか確認してください。</p>
             @endif
             <hr>
             <form action="{{ route('admin.triple.store') }}" method="post">
