@@ -51,6 +51,7 @@ class NoticeController extends Controller
 
         $notice->slug = $request->slug;
         $notice->title = $request->title;
+        $notice->category = $request->category;
         $notice->importance = $request->importance;
         $notice->body = base64_encode($request->body);
 
@@ -115,6 +116,7 @@ class NoticeController extends Controller
 
         $notice->slug = $request->slug;
         $notice->title = $request->title;
+        $notice->category = $request->category;
         $notice->importance = $request->importance;
         $notice->body = base64_encode($request->body);
 

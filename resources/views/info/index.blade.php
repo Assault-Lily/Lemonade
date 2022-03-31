@@ -26,7 +26,10 @@ $ogp['description'] = config('app.name', 'Lemonade').'からのお知らせの�
                     </div>
                     <div>
                         {{ $notice->updated_at->format('Y年 n月j日 H:i') }}
-                        <div class="tag">{{ $notice->category ?? '未分類' }}</div>
+                        <div class="tag">{{ config('noticeCategories.'.$notice->category) ?? '未分類' }}</div>
+                        @if($notice->importance === 100)
+                            <div class="tag">重要</div>
+                        @endif
                     </div>
                 </a>
             @empty

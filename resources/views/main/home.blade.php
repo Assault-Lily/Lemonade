@@ -132,7 +132,7 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
                         <div>{!! Illuminate\Mail\Markdown::parse(base64_decode($notice->body)) !!}</div>
                         <p style="font-size: smaller">
                             {{ $notice->updated_at->format('Y/m/d H:i:s') }}
-                            <span class="tag">{{ $notice->category ?? '未分類' }}</span>
+                            <span class="tag">{{ config('noticeCategories.'.$notice->category) ?? '未分類' }}</span>
                         </p>
                     </article>
                     <hr>

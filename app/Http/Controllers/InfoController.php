@@ -10,7 +10,7 @@ class InfoController extends Controller
 {
     public function index(Request $request)
     {
-        $notices = Notice::select(['slug', 'title', 'category', 'updated_at'])
+        $notices = Notice::select(['*'])
             ->whereNotIn('category', ['fixed'])
             ->orWhereNull('category')
             ->get();

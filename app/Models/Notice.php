@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property string $slug
  * @property string $title
+ * @property string $category
  * @property int $importance
  * @property string $body
  * @property \Illuminate\Support\Carbon|null $deleted_at

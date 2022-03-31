@@ -28,14 +28,25 @@
             <hr>
             <form action="{{ route('admin.notice.store') }}" method="post">
                 @csrf
+                <div>
+                    <label>
+                        タイトル<br>
+                        <input type="text" name="title" required placeholder="タイトル" value="{{ old('title', old('title')) }}" style="font-size: large; width: 500px">
+                    </label>
+                </div>
                 <div id="main">
                     <label>
                         スラッグ<br>
                         <input type="text" name="slug" placeholder="TitleSlug" value="{{ old('slug', Str::uuid()) }}">
                     </label>
                     <label>
-                        タイトル<br>
-                        <input type="text" name="title" required placeholder="タイトル" value="{{ old('title') }}">
+                        カテゴリ<br>
+                        <input type="text" name="category" placeholder="Category" list="categories" value="{{ old('category') }}">
+                        <datalist id="categories">
+                            @foreach(config('noticeCategories') as $key => $val)
+                                <option value="{{ $key }}">{{ $val }}</option>
+                            @endforeach
+                        </datalist>
                     </label>
                     <label>
                         重要度<br>
