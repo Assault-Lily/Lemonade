@@ -119,7 +119,7 @@ $ogp['description'] = $ogp_genre.$play[$ps]['schema:name'][0]." の情報です�
                         <tr>
                             <th>特記事項</th><td colspan="3" rowspan="2">
                                 @foreach($play[$ps]['lily:additionalInformation'] as $playInfo)
-                                    <div>{{ $playInfo }}</div>
+                                    <div style="margin-bottom: .5em">{{ $playInfo }}</div>
                                 @endforeach
                             </td>
                         </tr>
@@ -163,7 +163,11 @@ $ogp['description'] = $ogp_genre.$play[$ps]['schema:name'][0]." の情報です�
                         <td rowspan="2">
                             @foreach($play[$ps]['lily:showTime'] as $showTime)
                                 @if(in_array($showTime, $play[$ps]['lily:cancelledShowTime'] ?? [], true))
-                                    <div style="min-width: 220px;"><s>{{ \Carbon\Carbon::make($showTime)->isoFormat('YYYY年M月D日 (ddd) HH:mm') }}</s> 中止</div>
+                                    <div style="min-width: 220px;">
+                                        <span style="text-decoration: line-through; color: gray">
+                                            {{ \Carbon\Carbon::make($showTime)->isoFormat('YYYY年M月D日 (ddd) HH:mm') }}</span>
+                                        <span class="indicator">中止</span>
+                                    </div>
                                 @else
                                     <div style="min-width: 220px;">{{ \Carbon\Carbon::make($showTime)->isoFormat('YYYY年M月D日 (ddd) HH:mm') }}</div>
                                 @endif
