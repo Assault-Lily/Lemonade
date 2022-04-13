@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '12.0.3 Hase',
+    'version' => '12.1.0 Hase',
 
     'webhooks' => [
         'discord-log' => env('DISCORD_URL'),
