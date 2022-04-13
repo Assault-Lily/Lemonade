@@ -3,10 +3,10 @@
  * @var $plays array
  */
 
-$ogp['title'] = '舞台公演一覧';
+$ogp['title'] = '舞台等公演一覧';
 $ogp['description'] = '公演の一覧を表示します。現在'.count($plays).'の演目が登録されています。'
 ?>
-@extends('app.layout', ['title' => '舞台公演一覧'])
+@extends('app.layout', ['title' => '舞台等公演一覧'])
 
 @section('main')
     <main>

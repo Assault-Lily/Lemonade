@@ -180,7 +180,7 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
             <hr>
             <a href="{{ route('play.index') }}" >
                 <i class="fas fa-street-view"></i>
-                <span>舞台公演一覧</span>
+                <span>舞台等公演一覧</span>
             </a>
         </div>
         <h2>LuciaDB 更新情報</h2>

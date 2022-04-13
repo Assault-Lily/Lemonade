@@ -6,13 +6,14 @@
 
 $ps = 'lilyrdf:'.$playSlug;
 $ogp['type'] = 'play';
-$ogp['title'] = "舞台 ".((mb_strlen($play[$ps]['schema:name'][0]) > 30 and !empty($play[$ps]['schema:alternateName'][0]))
+$ogp_genre = !empty($play[$ps]['lily:genre'][0]) ? $play[$ps]['lily:genre'][0].' ' : '';
+$ogp['title'] = $ogp_genre.((mb_strlen($play[$ps]['schema:name'][0]) > 30 and !empty($play[$ps]['schema:alternateName'][0]))
     ? $play[$ps]['schema:alternateName'][0]
     : $play[$ps]['schema:name'][0]);
-$ogp['description'] = "舞台 ".$play[$ps]['schema:name'][0]." の情報です。"
+$ogp['description'] = $ogp_genre.$play[$ps]['schema:name'][0]." の情報です。"
 ?>
 
-@extends('app.layout', ['title' => '舞台公演詳細', 'titlebar' => $play[$ps]['schema:name'][0]])
+@extends('app.layout', ['title' => '公演詳細', 'titlebar' => $play[$ps]['schema:name'][0]])
 
 @section('head')
     <style>
