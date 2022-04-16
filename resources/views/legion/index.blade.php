@@ -22,14 +22,54 @@ $ogp['description'] = "レギオンの一覧を表示します。現在".count($
 
             }
         }
+
+        #sort-select > option{
+            text-align: right;
+        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('#sort-select > option').forEach((item)=>{
+                if(item.attributes.value.value === "{{ $sortKey }}")
+                    item.setAttribute('selected', true);
+            });
+            document.getElementById('sort-select').addEventListener('change',(e)=>{
+                let order = e.target.value.substr(0,1);
+                switch (order){
+                    case 'a':
+                        order = 'asc'; break;
+                    case 'd':
+                        order = 'desc'; break;
+                    default:
+                        order = false;
+                }
+                let sort = e.target.value.substr(2);
+                let url = new URL(location.href);
+                url.searchParams.set('sort',sort);
+                if(order !== false) url.searchParams.set('order',order);
+                location.href = url.toString();
+                document.body.classList.add('hide');
+            });
+        });
+    </script>
 @endsection
 
 @section('main')
     <main>
         <div class="top-options">
             <div>
-                ならべかえ : リソースキー順
+                <label>
+                    <select id="sort-select">
+                        <option value="a-name">名前順 | 昇順</option>
+                        <option value="d-name">名前順 | 降順</option>
+                        <option value="a-name_en">ABC順 | 昇順</option>
+                        <option value="d-name_en">ABC順 | 降順</option>
+                        <option value="a-grade">格付け順 | 昇順</option>
+                        <option value="d-grade">格付け順 | 降順</option>
+                        <option value="a-members_count">人数順 | 昇順</option>
+                        <option value="d-members_count">人数順 | 降順</option>
+                    </select>
+                </label>
             </div>
             <div>
                 <span class="info">レギオン登録数 : {{ count($legions) }}</span>

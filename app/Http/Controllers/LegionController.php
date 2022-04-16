@@ -28,9 +28,58 @@ SPARQL
 
         $legions = sparqlToArray($legions_sparql);
 
-        ksort($legions);
+        // ソート判別
+        $sortKey = request()->get('sort', 'name');
+        switch ($sortKey){
+            case 'name':
+                $sort = 'schema:name';
+                break;
+            case 'name_en':
+                $sort = 'schema:name@en';
+                break;
+            case 'grade':
+                $sort = 'lily:legionGrade';
+                break;
+            case 'members_count':
+                $sort = 'lily:numberOfMembers';
+                $sortType = SORT_NUMERIC;
+                break;
+            default:
+                abort(400, '指定されたキーではソートできません');
+        }
+        $orderGet = request()->get('order', 'asc');
+        switch ($orderGet){
+            case 'asc':
+                $order = SORT_ASC;
+                break;
+            case 'desc':
+                $order = SORT_DESC;
+                break;
+            default:
+                abort(400, '昇順降順指定に誤りがあります');
+        }
 
-        return view('legion.index', compact('legions'));
+        $legion_sortKey = array();
+        $legion_sortKeyForKeyUnknown = array();
+        $legion_sortKeyKana = array();
+        $legion_sortKeyForKanaUnknown = array();
+        foreach ($legions as $legion){
+            // ソート用キー配列生成
+            $legion_sortKey[] = implode(',' ,$legion[$sort] ?? ['-']);
+            $legion_sortKeyForKeyUnknown[] = !empty($legion[$sort][0]) ? 0 : 1;
+            $legion_sortKeyKana[] = $legion['schema:name'][0] ?? '-';
+            $legion_sortKeyForKanaUnknown[] = !empty($legion['schema:name'][0]) ? 0 : 1;
+        }
+        unset($legion);
+
+        array_multisort($legion_sortKeyForKeyUnknown, SORT_ASC, SORT_NUMERIC,
+            $legion_sortKey, $order, $sortType ?? SORT_STRING,
+            $legion_sortKeyForKanaUnknown, SORT_ASC, SORT_NUMERIC,
+            $legion_sortKeyKana, $order, SORT_STRING, $legions);
+
+        $sortKey = substr(request()->get('order', 'asc'), 0, 1).'-'.$sortKey;
+
+        return view('legion.index', compact('legions', 'sortKey'));
     }
 
     public function show($legionSlug){
