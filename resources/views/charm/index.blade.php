@@ -11,13 +11,55 @@
                 width: 100%;
             }
         }
+
+        #sort-select > option{
+            text-align: right;
+        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('#sort-select > option').forEach((item)=>{
+                if(item.attributes.value.value === "{{ $sortKey }}")
+                    item.setAttribute('selected', true);
+            });
+            document.getElementById('sort-select').addEventListener('change',(e)=>{
+                let order = e.target.value.substr(0,1);
+                switch (order){
+                    case 'a':
+                        order = 'asc'; break;
+                    case 'd':
+                        order = 'desc'; break;
+                    default:
+                        order = false;
+                }
+                let sort = e.target.value.substr(2);
+                let url = new URL(location.href);
+                url.searchParams.set('sort',sort);
+                if(order !== false) url.searchParams.set('order',order);
+                location.href = url.toString();
+                document.body.classList.add('hide');
+            });
+        });
+    </script>
 @endsection
 
 @section('main')
     <main>
         <div class="top-options">
-            <div>ならべかえ : リソースキー順</div>
+            <div>
+                <label>
+                    <select id="sort-select">
+                        <option value="a-name">名前順 | 昇順</option>
+                        <option value="d-name">名前順 | 降順</option>
+                        <option value="a-name_en">ABC順 | 昇順</option>
+                        <option value="d-name_en">ABC順 | 降順</option>
+                        <option value="a-manufacturer">メーカー順 | 昇順</option>
+                        <option value="d-manufacturer">メーカー順 | 降順</option>
+                        <option value="a-product_no">機体番号順 | 昇順</option>
+                        <option value="d-product_no">機体番号順 | 降順</option>
+                    </select>
+                </label>
+            </div>
             <div><span class="info">登録機種数 : {{ count($charms) }}機種</span></div>
         </div>
         <div class="list two">

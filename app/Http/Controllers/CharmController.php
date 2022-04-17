@@ -39,9 +39,57 @@ SPARQL
             if($item['rdf:type'][0] === 'lily:Corporation') $corporation[$key] = $item;
         }
 
-        ksort($charms);
+        // ソート判別
+        $sortKey = request()->get('sort', 'name');
+        switch ($sortKey){
+            case 'name':
+                $sort = 'schema:name';
+                break;
+            case 'name_en':
+                $sort = 'schema:name@en';
+                break;
+            case 'manufacturer':
+                $sort = 'schema:manufacturer';
+                break;
+            case 'product_no':
+                $sort = 'schema:productID';
+                break;
+            default:
+                abort(400, '指定されたキーではソートできません');
+        }
+        $orderGet = request()->get('order', 'asc');
+        switch ($orderGet){
+            case 'asc':
+                $order = SORT_ASC;
+                break;
+            case 'desc':
+                $order = SORT_DESC;
+                break;
+            default:
+                abort(400, '昇順降順指定に誤りがあります');
+        }
 
-        return view('charm.index', compact('charms', 'corporation'));
+        $charm_sortKey = array();
+        $charm_sortKeyForKeyUnknown = array();
+        $charm_sortKeyKana = array();
+        $charm_sortKeyForKanaUnknown = array();
+        foreach ($charms as $charm){
+            // ソート用キー配列生成
+            $charm_sortKey[] = implode(',' ,$charm[$sort] ?? ['-']);
+            $charm_sortKeyForKeyUnknown[] = !empty($charm[$sort][0]) ? 0 : 1;
+            $charm_sortKeyKana[] = $charm['schema:name'][0] ?? '-';
+            $charm_sortKeyForKanaUnknown[] = !empty($charm['schema:name'][0]) ? 0 : 1;
+        }
+        unset($charm);
+
+        array_multisort($charm_sortKeyForKeyUnknown, SORT_ASC, SORT_NUMERIC,
+            $charm_sortKey, $order, $sortType ?? SORT_STRING,
+            $charm_sortKeyForKanaUnknown, SORT_ASC, SORT_NUMERIC,
+            $charm_sortKeyKana, $order, SORT_STRING, $charms);
+
+        $sortKey = substr(request()->get('order', 'asc'), 0, 1).'-'.$sortKey;
+
+        return view('charm.index', compact('charms', 'corporation', 'sortKey'));
     }
 
     public function show($slug){
