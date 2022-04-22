@@ -147,10 +147,11 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                                         $past_legion_name .= ' ('.$triples[$past_legion]['schema:alternateName'][0].')';
                                     }
                                     ?>
-                                    <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$past_legion)]) }}"
-                                       style="display: block">
-                                        {{ $past_legion_name }}
-                                    </a>
+                                    <div>
+                                        <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$past_legion)]) }}">
+                                            {{ $past_legion_name }}
+                                        </a>
+                                    </div>
                                 @endforeach
                             </td>
                         </tr>
@@ -167,10 +168,11 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                                         $taskforce_name .= ' ('.$triples[$taskforce]['schema:alternateName'][0].')';
                                     }
                                     ?>
-                                    <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$taskforce)]) }}"
-                                       style="display: block">
-                                        {{ $taskforce_name }}
-                                    </a>
+                                    <div>
+                                        <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$taskforce)]) }}">
+                                            {{ $taskforce_name }}
+                                        </a>
+                                    </div>
                                 @endforeach
                             </td>
                         </tr>
@@ -187,10 +189,11 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                                         $past_taskforce_name .= ' ('.$triples[$past_taskforce]['schema:alternateName'][0].')';
                                     }
                                     ?>
-                                    <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$past_taskforce)]) }}"
-                                       style="display: block">
-                                        {{ $past_taskforce_name }}
-                                    </a>
+                                    <div>
+                                        <a href="{{ route('legion.show',['legion' => str_replace('lilyrdf:','',$past_taskforce)]) }}">
+                                            {{ $past_taskforce_name }}
+                                        </a>
+                                    </div>
                                 @endforeach
                             </td>
                         </tr>
