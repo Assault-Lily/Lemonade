@@ -42,6 +42,12 @@
                     <label>
                         対象リソース<br>
                         <input type="text" name="for" required value="{{ old('for', $image->for) }}">
+                        @if($image->type === 'icon')
+                            <br>
+                            <a href="{{ route('lily.show', ['lily' => $image->for]) }}" target="_blank" style="font-size: small">
+                                {{ '/lily/'.$image->for }}
+                            </a>
+                        @endif
                     </label>
                     <label>
                         画像の種別<br>
