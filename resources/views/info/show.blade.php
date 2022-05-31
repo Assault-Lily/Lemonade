@@ -22,13 +22,18 @@ $ogp['description'] = config('app.name', 'Lemonade').'からのお知らせで�
             </div>
             <div>
                 <div class="tag">{{ config('noticeCategories.'.$notice->category) ?? '未分類' }}</div>
-                <span class="info">登録日時 : {{ $notice->updated_at->format('Y年 n月j日 H:i') }}</span>
+                <span class="info">登録日時 : {{ $notice->created_at->format('Y年 n月j日 H:i') }}</span>
             </div>
         </div>
         <div class="white-box">
             <h1>{{ $notice->title }}</h1>
             <hr>
             {!! \Illuminate\Mail\Markdown::parse(base64_decode($notice->body)) !!}
+            <hr>
+            <div style="font-size: small">
+                <span>登録 : {{ $notice->created_at->format('Y年 n月j日 H:i') }}</span>
+                <span>更新 : {{ $notice->updated_at->format('Y年 n月j日 H:i') }}</span>
+            </div>
         </div>
 
     </main>
