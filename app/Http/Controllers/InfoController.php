@@ -13,6 +13,7 @@ class InfoController extends Controller
         $notices = Notice::select(['*'])
             ->whereNotIn('category', ['fixed'])
             ->orWhereNull('category')
+            ->orderBy('updated_at', 'desc')
             ->get();
 
         return view('info.index', compact('notices'));
