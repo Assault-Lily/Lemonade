@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\LilyDataController;
 use App\Http\Controllers\Admin\LilyRdfController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\TripleDataController;
+use App\Http\Controllers\Admin\UrlDataController;
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CharmController;
@@ -73,6 +74,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
     Route::resource('/image', ImageDataController::class);
 
     Route::resource('/notice', NoticeController::class);
+
+    Route::resource('/url', UrlDataController::class);
 
     Route::get('/rdf',  [LilyRdfController::class, 'index'])->name('rdf.index');
     Route::get('/rdf/lily', [LilyRdfController::class, 'lily'])->name('rdf.lily');

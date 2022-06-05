@@ -33,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Notice withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Notice withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice whereCategory($value)
  */
 class Notice extends Model
 {

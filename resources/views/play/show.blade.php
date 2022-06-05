@@ -2,6 +2,8 @@
 /**
  * @var $play array
  * @var $playSlug string
+ * @var $urls \Illuminate\Database\Eloquent\Collection
+ * @var $url \App\Models\Url
  */
 
 $ps = 'lilyrdf:'.$playSlug;
@@ -66,6 +68,31 @@ $ogp['description'] = $ogp_genre.$play[$ps]['schema:name'][0]." の情報です�
                     <strong>この公演はまだすべての日程を終えていません。</strong><br>
                     最新の情報は必ず公式ウェブサイト等でご確認ください。
                 </p>
+            @endif
+            @if(!empty($urls->empty()))
+                <details class="white-box">
+                    <summary style="margin: .2em 0 0">この公演に関連する外部リンク</summary>
+                    @foreach($urls as $url)
+                        <a href="{{ $url->url }}" target="_blank" class="list-item-b" style="padding: 10px 20px;">
+                            <div class="title">{{ $url->title }} <i class="fas fa-external-link-alt" style="font-size: smaller"></i></div>
+                            <div style="font-size: small; color: dimgray">{{ $url->url }}</div>
+                            <div style="font-size: smaller; margin-top: 3px;">{{ $url->description }}</div>
+                        </a>
+                    @endforeach
+                    <hr>
+                    <p class="center" style="font-size: smaller">
+                        これらのリンク先はLemonadeが管理しているウェブサイトではありません。<br>
+                        また、ここに掲載しているリンクは管理者が手作業で登録しているものです。<br>
+                        これらのリンク先は今後移転・削除される、もしくは既にされている可能性があります。
+                    </p>
+                </details>
+            @endif
+            @if(Auth::user())
+                <div class="buttons" style="text-align: right">
+                    <a href="{{ route('admin.url.create', ['for' => $playSlug]) }}" class="button smaller" target="_blank">
+                        関連URLの追加
+                    </a>
+                </div>
             @endif
             <div id="summary">
                 <table class="table">
