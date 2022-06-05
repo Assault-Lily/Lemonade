@@ -71,6 +71,11 @@
             <a href="{{ route('admin.triple.create') }}" class="button">新規登録</a>
 {{--            <a href="javascript:void(0)" class="button">データ整合チェック</a>--}}
         </div>
+        <h2>関連URL管理</h2>
+        <div class="buttons three">
+            <a href="{{ route('admin.url.index') }}" class="button">データ一覧</a>
+            <a href="{{ route('admin.url.create') }}" class="button">新規登録</a>
+        </div>
         <h2>画像データ管理</h2>
         <div class="buttons three">
             <a href="{{ route('admin.image.index') }}" class="button">データ一覧</a>
