@@ -41,7 +41,7 @@ p.notice{
 a{
     color: #265abd;
 }
-a[target=_blank]:not(.button):after{
+a[target=_blank]:not([class]):after{
     content: '\f35d';
     font-family: "Font Awesome 5 Free", monospace;
     text-decoration: none;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Url;
 use Illuminate\Http\Request;
 
 class PlayController extends Controller
@@ -67,6 +68,8 @@ SPARQL
 
         if(empty($play) || empty($play['lilyrdf:'.$playSlug]) === 0)abort(404, "該当する公演データが見つかりません");
 
-        return view('play.show', compact('play', 'playSlug'));
+        $urls = Url::whereFor($playSlug)->orderBy('updated_at', 'desc')->get();
+
+        return view('play.show', compact('play', 'playSlug', 'urls'));
     }
 }
