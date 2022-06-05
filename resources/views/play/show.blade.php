@@ -69,7 +69,7 @@ $ogp['description'] = $ogp_genre.$play[$ps]['schema:name'][0]." の情報です�
                     最新の情報は必ず公式ウェブサイト等でご確認ください。
                 </p>
             @endif
-            @if(!empty($urls->empty()))
+            @if(!empty($urls->toArray()))
                 <details class="white-box">
                     <summary style="margin: .2em 0 0">この公演に関連する外部リンク</summary>
                     @foreach($urls as $url)
