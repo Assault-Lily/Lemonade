@@ -2,9 +2,9 @@
 
 @section('head')
     <meta name="robots" content="noindex">
-    <link rel=stylesheet href="//codemirror.net/lib/codemirror.css">
-    <script src="//codemirror.net/lib/codemirror.js"></script>
-    <script src="//codemirror.net/mode/turtle/turtle.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css" integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js" integrity="sha512-hG/Qw6E14LsVUaQRSgw0RrFA1wl5QPG1a4bCOUgwzkGPIVFsOPUPpbr90DFavEEqFMwFXPVI0NS4MzKsInlKxQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/turtle/turtle.min.js" integrity="sha512-wa7FFV53hnpoyBpyed3ASIng6HcJciZ7US1tBL/K3eQzfUOK8ZDu6qJ/wowimjY+BzHTqX+ee3vWMaPI/IXbcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 
 @section('main')
