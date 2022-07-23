@@ -16,7 +16,7 @@ class LilyController extends Controller
     public function index()
     {
         $triples_sparql = sparqlQueryOrDie(<<<SPQRQL
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
 PREFIX schema: <http://schema.org/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
@@ -375,8 +375,8 @@ SPQRQL
         }
 
         $triples_sparql = sparqlQueryOrDie(<<<SPARQL
-PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX lilyrdf: <https://luciadb.assaultlily.com/rdf/RDFs/detail/>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX schema: <http://schema.org/>
 

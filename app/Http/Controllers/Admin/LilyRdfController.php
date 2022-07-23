@@ -71,9 +71,9 @@ class LilyRdfController extends Controller
     private function getLiliesViaSparql(){
 
         $res = sparqlQueryOrDie(<<<SPARQL
-PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX lilyrdf: <https://luciadb.assaultlily.com/rdf/RDFs/detail/>
 PREFIX schema: <http://schema.org/>
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
 
 SELECT ?lily ?name ?nameen ?namekana
 WHERE {

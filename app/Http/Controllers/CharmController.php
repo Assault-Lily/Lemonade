@@ -8,8 +8,8 @@ class CharmController extends Controller
 {
     public function index(){
         $sparql = sparqlQueryOrDie(<<<SPARQL
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
-PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
+PREFIX lilyrdf: <https://luciadb.assaultlily.com/rdf/RDFs/detail/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX schema: <http://schema.org/>
 
@@ -94,8 +94,8 @@ SPARQL
 
     public function show($slug){
         $sparql = sparqlQueryOrDie(<<<SPARQL
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
-PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
+PREFIX lilyrdf: <https://luciadb.assaultlily.com/rdf/RDFs/detail/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 

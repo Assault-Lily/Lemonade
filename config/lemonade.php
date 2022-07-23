@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '12.5.3 Hase',
+    'version' => '13.0.0 Yuigahama',
 
     'webhooks' => [
         'discord-log' => env('DISCORD_URL'),
@@ -53,8 +53,8 @@ return [
         'schema' => 'http://schema.org/',
         'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
         'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
-        'lily' => 'https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#',
-        'lilyrdf' => 'https://lily.fvhp.net/rdf/RDFs/detail/',
+        'lily' => 'https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#',
+        'lilyrdf' => 'https://luciadb.assaultlily.com/rdf/RDFs/detail/',
         'foaf' => 'http://xmlns.com/foaf/0.1/',
     ],
 

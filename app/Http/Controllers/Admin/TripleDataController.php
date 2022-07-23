@@ -70,7 +70,7 @@ class TripleDataController extends Controller
 
         try {
             $lilies_sparql = sparqlQuery(<<<SPARQL
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
 PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?name

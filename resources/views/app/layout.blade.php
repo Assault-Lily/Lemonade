@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <?php
     $title_long = (!empty($titlebar) ? $titlebar.' - ' : (!empty($title) ? $title.' - ' : '')).config('app.name');
-    $desc_default = 'Lemonadeへようこそ。Lemonadeはアサルトリリィ関連情報を取り扱う非公式のファンサイトです。';
+    $desc_default = 'Lemonadeへようこそ。Lemonadeはアサルトリリィ関連情報を取り扱うファンサイトです。';
     $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
 ?>
 <head>
@@ -113,8 +113,14 @@
 <footer>
     <p>{{ config('app.name') }}<span style="font-size: smaller;margin-left: 1em">{{ 'Ver'.config('lemonade.version') }}</span></p>
     <p style="font-size: smaller; color: dimgray;line-height: 2em">
-        Dataset powered by AssaultLily unofficial database
-        <a href="{{ config('lemonade.rdf.repository') }}" target="_blank">"LuciaDB"</a><br>
+        &copy; AZONE INTERNATIONAL・acus<br>
+        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0; margin-top: 10px;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br>
+        <a href="{{ config('lemonade.rdf.repository') }}" target="_blank">"LuciaDB"</a>
+        のテキスト、及びLemonadeのソフトウェアについては
+        <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja" target="_blank">
+            クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際 ライセンス</a>
+        で利用できます。<br>
         アイコン等の画像の一部は製作者から提供を受けたものを掲載しています。
         これらの画像の権利の一切は製作者に帰属します。
     </p>

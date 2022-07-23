@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Mail\Markdown;
 
-$ogp['title'] = "アサルトリリィ非公式ファンサイト";
+$ogp['title'] = "アサルトリリィファンサイト";
 ?>
 
 @extends('app.layout', ['pagetype' => 'back-triangle', 'previous' => ['route' => url('/'), 'fa' => 'fas fa-home'], 'ogp' => $ogp])
@@ -116,10 +116,10 @@ $ogp['title'] = "アサルトリリィ非公式ファンサイト";
         <h1>Welcome to {{ config('app.name', 'Lemonade') }}</h1>
         <p>
             {{ config('app.name', 'Lemonade') }}へようこそ。
-            {{ config('app.name', 'Lemonade') }}はアサルトリリィ関連情報を取り扱う非公式ファンサイトです。
+            {{ config('app.name', 'Lemonade') }}はアサルトリリィ関連情報を取り扱うファンサイトです。
         </p>
         <p>
-            {{ config('app.name', 'Lemonade') }}はデータソースとしてアサルトリリィ非公式データベース
+            {{ config('app.name', 'Lemonade') }}はデータソースとしてアサルトリリィRDFデータベース
             <a href="{{ config('lemonade.rdf.repository') }}" style="font-weight: bold" target="_blank"
                title="Lily's unified correlation information as DataBase">LuciaDB</a>
             の情報を基にサービスを提供しています。

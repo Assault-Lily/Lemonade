@@ -87,7 +87,7 @@
 <div id="infos-wrap">
     <div id="infos">
         <h1>{{ config('app.name', 'Lemonade') }}</h1>
-        <div id="subline">AssaultLily Unofficial FanSite</div>
+        <div id="subline">AssaultLily FanSite</div>
         <p>
             ただいまメンテナンス中です。メンテナンスの詳細はTwitterで配信しているお知らせをご確認ください。
         </p>

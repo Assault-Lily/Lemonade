@@ -19,7 +19,7 @@ class MainController extends Controller
 
         $today = Carbon::now()->format('--m-d');
         $birthday_rdf = sparqlQueryOrDie(<<<SPARQL
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
 PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?predicate ?object
@@ -77,7 +77,7 @@ SPARQL
 
     public function generateImeDic(){
         $sparql = sparqlQueryOrDie(<<<SPARQL
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
 PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?name ?nameKana ?givenName ?givenNameKana ?garden ?legion ?type
@@ -181,8 +181,8 @@ PLIST;
 		<ns1:DictionaryVersion>{$softwareInfo['dicVersion']}</ns1:DictionaryVersion>
 		<ns1:CommentInsertion>true</ns1:CommentInsertion>
 		<ns1:DictionaryInfo Language="ja-jp">
-		    <ns1:ShortName>アサルトリリィ非公式辞書</ns1:ShortName>
-			<ns1:LongName>アサルトリリィ非公式オープン拡張辞書</ns1:LongName>
+		    <ns1:ShortName>アサルトリリィ辞書</ns1:ShortName>
+			<ns1:LongName>アサルトリリィオープン拡張辞書</ns1:LongName>
 			<ns1:Description>Dataset powered by LuciaDB
 {$softwareInfo['rdfRepository']}
 
@@ -291,7 +291,7 @@ DCTX;
         $turtle = http::get(config('lemonade.sparqlEndpoint'), [
             'format' => 'turtle',
             'query' => <<<SPARQL
-PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX lilyrdf: <https://luciadb.assaultlily.com/rdf/RDFs/detail/>
 DESCRIBE lilyrdf:$resource
 SPARQL
         ])->throw(function ($response, $e){

@@ -8,7 +8,7 @@ class BookController extends Controller
 {
     public function index(){
         $sparql = sparqlQueryOrDie(<<<SPARQL
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
 
 SELECT ?subject ?predicate ?object
 WHERE {
@@ -25,8 +25,8 @@ SPARQL
 
     public function show($bookSlug){
         $sparql = sparqlQueryOrDie(<<<SPARQL
-PREFIX lily: <https://lily.fvhp.net/rdf/IRIs/lily_schema.ttl#>
-PREFIX lilyrdf: <https://lily.fvhp.net/rdf/RDFs/detail/>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
+PREFIX lilyrdf: <https://luciadb.assaultlily.com/rdf/RDFs/detail/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX schema: <http://schema.org/>
 
