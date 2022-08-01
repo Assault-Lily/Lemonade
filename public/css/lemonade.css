@@ -688,3 +688,22 @@ table.table td.spacer{
     height: 2px;
     background: linear-gradient(90deg, gray, gray 38px, white 38px, white 40px, black 40px, black);
 }
+@font-face {
+    font-family: "Ricty Diminished Discord";
+    src: local("Ricty Diminished Discord");
+}
+@font-face {
+    font-family: "Ricty Diminished";
+    src: local("Ricty Diminished");
+}
+@font-face {
+    font-family: "Lucida Console";
+    src: local("Lucida Console");
+}
+.CodeMirror * {
+    font-family: 'Noto Sans Mono CJK JP', 'Noto Sans JP', 'Ricty Diminished Discord', 'Ricty Diminished', 'Lucida Console', monospace;
+    font-size: 16px;
+}
+.CodeMirror pre.CodeMirror-line-like.CodeMirror-placeholder {
+    color: #999;
+}

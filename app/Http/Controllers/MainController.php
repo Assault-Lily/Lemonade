@@ -6,6 +6,7 @@ use App\Models\Notice;
 use Carbon\Carbon;
 use Exception;
 use ZipArchive;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class MainController extends Controller
@@ -303,6 +304,25 @@ SPARQL
             abort(404, "該当するリソースが存在しません");
 
         return view('main.rdfDescribe', compact('turtle', 'resource'));
+    }
+
+    public function queryEditor(Request $request) {
+        $query = $request->input('query') ?? <<<SPARQL
+PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
+
+SELECT ?name
+WHERE {
+    ?lily rdf:type lily:Lily;
+          lily:nameKana ?namekana.
+    FILTER(CONTAINS(?namekana, "あ"))
+    ?lily schema:name ?name.
+    FILTER(lang(?name) = "ja")
+}
+
+SPARQL;
+        return view('main.queryEditor', compact('query'));
     }
 
     public function ed403(){
