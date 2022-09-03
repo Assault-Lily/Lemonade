@@ -40,6 +40,8 @@ Route::get('/rdfDescribe/{resource}', [MainController::class, 'rdfDescribe'])->n
 
 Route::resource('/info', InfoController::class, ['only' => ['index', 'show']]);
 
+Route::get('/contributors', [MainController::class, 'contributors'])->name('contributors');
+
 Route::middleware('throttle:30,1')->group(function (){
     Route::get('/ogp/{type}/{title}.jpg', [OGPController::class, 'generate'])->name('ogp');
 });

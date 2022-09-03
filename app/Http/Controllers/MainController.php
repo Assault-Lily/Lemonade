@@ -305,6 +305,10 @@ SPARQL
         return view('main.rdfDescribe', compact('turtle', 'resource'));
     }
 
+    public function contributors(){
+        return view('main.contributors');
+    }
+
     public function ed403(){
         abort(403);
     }
