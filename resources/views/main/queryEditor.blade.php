@@ -53,6 +53,8 @@
                 placeholder: "実行結果がここに表示されます...",
                 mode: 'application/json',
             });
+            const wrapper= resultArea.getWrapperElement();
+            wrapper.classList.add("CodeMirror-readonly");
 
             const button = document.getElementById('execute');
             button.addEventListener('click', (e) => {

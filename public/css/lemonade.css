@@ -692,6 +692,9 @@ table.table td.spacer{
     font-family: 'Noto Sans Mono CJK JP', monospace;
     font-size: 16px;
 }
+.CodeMirror-readonly .CodeMirror-cursors {
+    display: none !important
+}
 .CodeMirror pre.CodeMirror-line-like.CodeMirror-placeholder {
     color: #999;
 }
