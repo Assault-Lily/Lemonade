@@ -114,7 +114,7 @@
     <p>{{ config('app.name') }}<span style="font-size: smaller;margin-left: 1em">{{ 'Ver'.config('lemonade.version') }}</span></p>
     <p style="font-size: smaller; color: dimgray;line-height: 2em">
         &copy; AZONE INTERNATIONAL・acus<br>
-        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="">
             <img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0; margin-top: 10px;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br>
         <a href="{{ config('lemonade.rdf.repository') }}" target="_blank">"LuciaDB"</a>
         のテキスト、及びLemonadeのソフトウェアについては
@@ -125,6 +125,7 @@
         これらの画像の権利の一切は製作者に帰属します。
     </p>
     <div class="buttons" style="font-size: smaller">
+        <a href="{{ route('info.index', ['list' => 'terms']) }}" class="button smaller" title="規約・方針">Terms</a>
         @if(!empty(config('lemonade.statusPageUrl')))
             <a href="{{ config('lemonade.statusPageUrl') }}" class="button smaller" target="_blank">Status</a>
         @endif
