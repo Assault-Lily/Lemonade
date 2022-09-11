@@ -1,11 +1,11 @@
 <?php
 use App\Models\Notice;
 
-$ogp['title'] = 'お知らせ一覧';
+$ogp['title'] = $page_info['type'] ?? 'お知らせ一覧';
 $ogp['description'] = config('app.name', 'Lemonade').'からのお知らせの一覧です。';
 ?>
 
-@extends('app.layout', ['title' => 'お知らせ一覧', 'ogp' => $ogp])
+@extends('app.layout', ['title' => $page_info['type'] ?? 'お知らせ一覧', 'ogp' => $ogp])
 
 @section('main')
     <main>
@@ -25,7 +25,9 @@ $ogp['description'] = config('app.name', 'Lemonade').'からのお知らせの�
                         {{ $notice->title }}
                     </div>
                     <div>
-                        {{ $notice->updated_at->format('Y年 n月j日 H:i') }}
+                        @if(($page_info['type'] ?? null) !== '規約・方針')
+                            {{ $notice->updated_at->format('Y年 n月j日 H:i') }}
+                        @endif
                         <div class="tag">{{ config('noticeCategories.'.$notice->category) ?? '未分類' }}</div>
                         @if($notice->importance === 100)
                             <div class="tag">重要</div>

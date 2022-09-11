@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\Notice;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -10,13 +10,39 @@ class InfoController extends Controller
 {
     public function index(Request $request)
     {
+        $categories = match ($request->get('list', 'default')) {
+            'fixed' => ['fixed'],
+            'terms' => ['terms'],
+            'default' => array_filter(array_keys(config('noticeCategories')), function ($c) {
+                return !in_array($c, [
+                    'fixed',
+                    'terms',
+                ], true);
+            }),
+            default => abort(400)
+        };
+
+        $page_info = [];
+        $order_column = 'updated_at';
+        $order_direction = 'desc';
+
+        switch ($request->get('list')) {
+            case 'terms':
+                $page_info['type'] = '規約・方針';
+                $order_column = 'title';
+                $order_direction = 'asc';
+                break;
+            default:
+                $page_info['type'] = 'お知らせ一覧';
+                break;
+        }
+
         $notices = Notice::select(['*'])
-            ->whereNotIn('category', ['fixed'])
-            ->orWhereNull('category')
-            ->orderBy('updated_at', 'desc')
+            ->whereIn('category', $categories)
+            ->orderBy($order_column, $order_direction)
             ->get();
 
-        return view('info.index', compact('notices'));
+        return view('info.index', compact('notices', 'page_info'));
     }
 
     public function show(string $slug, Request $request)
@@ -27,6 +53,11 @@ class InfoController extends Controller
             abort(404, '該当するお知らせは存在しないか、削除されました。');
         }
 
-        return view('info.show', compact('notice'));
+        $blade = match ($notice->category) {
+            'terms' => 'info.showTerms',
+            default => 'info.show',
+        };
+
+        return view($blade ?: 'info.show', compact('notice'));
     }
 }
