@@ -11,7 +11,7 @@ $ogp['description'] = config('app.name', 'Lemonade').'からのお知らせの�
     <main>
         <div class="top-options">
             <div>
-                <span>更新が新しい順</span>
+                <span>{{ $order_info_ja }}</span>
             </div>
             <div>
                 <span class="info">登録数 : {{ count($notices) }}</span>

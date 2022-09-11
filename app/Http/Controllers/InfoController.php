@@ -25,12 +25,14 @@ class InfoController extends Controller
         $page_info = [];
         $order_column = 'updated_at';
         $order_direction = 'desc';
+        $order_info_ja = '更新が新しい順';
 
         switch ($request->get('list')) {
             case 'terms':
                 $page_info['type'] = '規約・方針';
                 $order_column = 'title';
                 $order_direction = 'asc';
+                $order_info_ja = '辞書順';
                 break;
             default:
                 $page_info['type'] = 'お知らせ一覧';
@@ -42,7 +44,7 @@ class InfoController extends Controller
             ->orderBy($order_column, $order_direction)
             ->get();
 
-        return view('info.index', compact('notices', 'page_info'));
+        return view('info.index', compact('notices', 'page_info', 'order_info_ja'));
     }
 
     public function show(string $slug, Request $request)
