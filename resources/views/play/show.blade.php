@@ -162,13 +162,20 @@ $ogp['description'] = $ogp_genre.$play[$ps]['schema:name'][0]." の情報です�
                                     <tr>
                                         <td>{{ $play[$cast]['schema:name'][0] }}</td>
                                         <td>
-                                            @if(!empty($play[$cast]['lily:performAs'][0]))
-                                                @if(!empty($play[$play[$cast]['lily:performAs'][0]]))
-                                                    {{ '(' }} <a href="{{ route('lily.show', ['lily' => str_replace('lilyrdf:', '', $play[$cast]['lily:performAs'][0])]) }}">
-                                                        {{ $play[$play[$cast]['lily:performAs'][0]]['schema:name'][0] }}</a> 役 )
-                                                @else
-                                                    {{ '( '.$play[$cast]['lily:performAs'][0] }} 役 )
-                                                @endif
+                                            @if(count($play[$cast]['lily:performAs']) > 0)
+                                                (
+                                                @foreach($play[$cast]['lily:performAs'] as $performAs)
+                                                    @if(!empty($play[$performAs]))
+                                                        <a href="{{ route('lily.show', ['lily' => str_replace('lilyrdf:', '', $performAs)]) }}">
+                                                            {{ $play[$performAs]['schema:name'][0] }}</a> 役
+                                                    @else
+                                                        {{ $performAs }} 役
+                                                    @endif
+                                                    @if(!$loop->last)
+                                                        ・
+                                                    @endif
+                                                @endforeach
+                                                )
                                             @endif
                                         </td>
                                     </tr>
