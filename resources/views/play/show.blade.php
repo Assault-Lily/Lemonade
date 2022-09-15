@@ -162,11 +162,11 @@ $ogp['description'] = $ogp_genre.$play[$ps]['schema:name'][0]." の情報です�
                                     <tr>
                                         <td>{{ $play[$cast]['schema:name'][0] }}</td>
                                         <td>
-                                            @if(count($play[$cast]['lily:performAs']) > 0)
-                                                (
+                                            @if(!empty($play[$cast]['lily:performAs']))
+                                                &#x0028;
                                                 @foreach($play[$cast]['lily:performAs'] as $performAs)
                                                     @if(!empty($play[$performAs]))
-                                                        <a href="{{ route('lily.show', ['lily' => str_replace('lilyrdf:', '', $performAs)]) }}">
+                                                        <a href="{{ route('lily.show', ['lily' => removePrefix($performAs)]) }}">
                                                             {{ $play[$performAs]['schema:name'][0] }}</a> 役
                                                     @else
                                                         {{ $performAs }} 役
@@ -175,7 +175,7 @@ $ogp['description'] = $ogp_genre.$play[$ps]['schema:name'][0]." の情報です�
                                                         ・
                                                     @endif
                                                 @endforeach
-                                                )
+                                                &#x0029;
                                             @endif
                                         </td>
                                     </tr>
