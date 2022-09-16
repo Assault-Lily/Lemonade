@@ -83,6 +83,7 @@ return [
     'redirect' => [
         'lily' => [
             'Toda_Eulalia_Kotohi' => 'Toda_Kotohi',
+            'Akutsu_Lucifer_Maaya' => 'Akutsu_Magdalena_Maaya',
         ],
     ],
 ];
