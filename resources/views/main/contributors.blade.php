@@ -80,6 +80,28 @@
                 Lemonadeでは以下の皆様からご提供いただいたイラストをアイコンとして使用させていただいています。
             </p>
             <div id="illustration">
+                @forelse($authors as $author)
+                    <div class="list-item-b" style="vertical-align: top">
+                        <div class="list-item-data" style="min-height: 80px">
+                            <div class="title">{{ $author['name'] }}</div>
+                            @if(!empty($author['info']['twitter']))
+                                <div>
+                                    Twitter : <a href="https://twitter.com/{{ $author['info']['twitter'] }}" target="_blank">
+                                        {{ '@'.$author['info']['twitter'] }}</a>
+                                </div>
+                            @endif
+                            @if(!empty($author['info']['pixiv']))
+                                <div>
+                                    pixiv : <a href="https://pixiv.net/{{ $author['info']['pixiv'] }}" target="_blank">
+                                        {{ $author['info']['pixiv'] }}</a>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                @empty
+                @endforelse
+            </div>
+            <!--<div id="illustration">
                 <div class="list-item-b">
                     <div class="list-item-data">
                         <div class="title">K Miyano</div>
@@ -105,7 +127,7 @@
                         <div class="title">コントリビュータ</div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </main>
 @endsection
