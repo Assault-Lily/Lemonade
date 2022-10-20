@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Notice;
 use Carbon\Carbon;
 use Exception;
@@ -303,6 +304,24 @@ SPARQL
             abort(404, "該当するリソースが存在しません");
 
         return view('main.rdfDescribe', compact('turtle', 'resource'));
+    }
+
+    public function contributors(){
+        $authors_raw = Image::select(['author', 'author_info'])->distinct()->get()->toArray();
+        $authors = [];
+        foreach ($authors_raw as $author) {
+            $author_info = explode("\n", $author['author_info']);
+            $authors[$author['author']] = [
+                'name' => $author['author'],
+                'info' => [],
+            ];
+            foreach ($author_info as $ai) {
+                $air = explode(',', str_replace("\r", "", $ai));
+                if (empty($air[1])) continue;
+                $authors[$author['author']]['info'][$air[0]] = $air[1];
+            }
+        }
+        return view('main.contributors', compact('authors'));
     }
 
     public function ed403(){
