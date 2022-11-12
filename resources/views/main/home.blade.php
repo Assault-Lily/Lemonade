@@ -199,7 +199,7 @@ $ogp['title'] = "アサルトリリィファンサイト";
                             <td>{{ date('Y/m/d H:i', strtotime($entry->updated)) }}</td>
                             <td><a href="{{ $entry->link->attributes()->href }}" target="_blank" class="button smaller"
                                    title="GitHubのコミットログ詳細を開きます">GitHub</a></td>
-                            <td style="text-align: left">{{ $entry->title }}</td>
+                            <td style="text-align: left">{!! $entry->title !!}</td>
                         </tr>
                     @endforeach
                 @else
