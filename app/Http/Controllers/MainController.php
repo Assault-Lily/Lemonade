@@ -12,8 +12,71 @@ class MainController extends Controller
 {
     public function index(){
         try {
+            // LuciaDB 更新情報の取得
             $rdf_feed = simplexml_load_file(config('lemonade.rdf.repository').'/commits/deploy.atom');
-        }catch (Exception $exception){
+
+            // LuciaDB から (rdf:type, schema:name@ja) のペアを取得
+            $name_list_rdf = sparqlQueryOrDie(<<<SPARQL
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?subject ?predicate ?object
+WHERE {
+  {
+    VALUES ?predicate { rdf:type }
+    VALUES ?object { lily:Lily lily:Teacher lily:Madec lily:Character lily:Legion lily:Taskforce lily:Charm lily:Book lily:Play lily:AnimeSeries }
+    ?subject ?predicate ?object .
+  }
+  UNION
+  {
+    VALUES ?predicate { schema:name }
+    ?subject ?predicate ?object .
+    FILTER(lang(?object) = "ja")
+  }
+  FILTER(!isBlank(?subject))
+}
+SPARQL
+);
+            $name_list = sparqlToArray($name_list_rdf);
+
+            // 更新情報エントリのタイトル中に LuciaDB に schema:name として登録されている文字列があったら、その部分をLemonadeの詳細ページへのリンクに置換する
+            foreach ($rdf_feed->entry as $entry) {
+                foreach ($name_list as $name_key => $name_item) {
+                    if (strpos($entry->title, $name_item['schema:name'][0])) {
+                        $slug = str_replace('lilyrdf:', '', $name_key);
+                        switch ($name_item['rdf:type'][0]) {
+                            case "lily:Lily":
+                            case "lily:Teacher":
+                            case "lily:Madec":
+                            case "lily:Character":
+                                $path = "/lily/{$slug}";
+                                break;
+                            case "lily:Legion":
+                            case "lily:Taskforce":
+                                $path = "/legion/{$slug}";
+                                break;
+                            case "lily:Charm":
+                                $path = "/charm/{$slug}";
+                                break;
+                            case "lily:Book":
+                                $path = "/book/{$slug}";
+                                break;
+                            case "lily:Play":
+                                $path = "/play/{$slug}";
+                                break;
+                            case "lily:AnimeSeries":
+                                $path = "/anime/{$slug}";
+                                break;
+                            default:
+                                break;
+                        }
+                        $a_tag = "<a href={$path}>{$name_item['schema:name'][0]}</a>";
+                        $entry->title = mb_ereg_replace($name_item['schema:name'][0], $a_tag, $entry->title);
+                    }
+                }
+            }
+        } catch (Exception $exception){
             $rdf_feed = null;
         }
 
@@ -68,7 +131,7 @@ SPARQL
 
         $birthday = $lilies;
 
-        return view('main.home', compact('rdf_feed', 'birthday', 'legions', 'images', 'notices'));
+        return view('main.home', compact('rdf_feed', 'name_list', 'birthday', 'legions', 'images', 'notices'));
     }
 
     public function menu(){
