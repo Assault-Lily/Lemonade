@@ -688,3 +688,13 @@ table.table td.spacer{
     height: 2px;
     background: linear-gradient(90deg, gray, gray 38px, white 38px, white 40px, black 40px, black);
 }
+.CodeMirror * {
+    font-family: 'Noto Sans Mono CJK JP', monospace;
+    font-size: 16px;
+}
+.CodeMirror-readonly .CodeMirror-cursors {
+    display: none !important
+}
+.CodeMirror pre.CodeMirror-line-like.CodeMirror-placeholder {
+    color: #999;
+}

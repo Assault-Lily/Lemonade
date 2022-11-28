@@ -44,6 +44,7 @@ $ogp['title'] = "サイトメニュー";
         <h2>プチ機能</h2>
         <div class="buttons three">
             <a href="{{ route('imedic') }}" class="button">アサルトリリィIME辞書生成</a>
+            <a href="{{ route('queryEditor') }}" class="button">SPARQLクエリエディタ―</a>
         </div>
 
         <h2>このウェブサイトについて</h2>

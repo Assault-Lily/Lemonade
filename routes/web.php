@@ -38,6 +38,8 @@ Route::get('/imedic', [MainController::class, 'generateImeDic'])->name('imedic')
 
 Route::get('/rdfDescribe/{resource}', [MainController::class, 'rdfDescribe'])->name('rdfDescribe');
 
+Route::get('/queryEditor', [MainController::class, 'queryEditor'])->name('queryEditor');
+
 Route::resource('/info', InfoController::class, ['only' => ['index', 'show']]);
 
 Route::middleware('throttle:30,1')->group(function (){
