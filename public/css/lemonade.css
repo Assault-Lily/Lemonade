@@ -391,6 +391,7 @@ button, .button{
     font-weight: 500;
     transition: transform .1s;
     text-align: center;
+    cursor: pointer;
 }
 button:active, .button:active{
     transform: scale(0.95);
