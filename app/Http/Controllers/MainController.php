@@ -24,17 +24,11 @@ PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?predicate ?object
 WHERE {
-  {
-    VALUES ?predicate { rdf:type }
-    VALUES ?object { lily:Lily lily:Teacher lily:Madec lily:Character lily:Legion lily:Taskforce lily:Charm lily:Book lily:Play lily:AnimeSeries }
-    ?subject ?predicate ?object .
-  }
-  UNION
-  {
-    VALUES ?predicate { schema:name }
-    ?subject ?predicate ?object .
-    FILTER(lang(?object) = "ja")
-  }
+  VALUES ?predicate { schema:name rdf:type }
+  VALUES ?type { lily:Lily lily:Teacher lily:Madec lily:Character lily:Legion lily:Taskforce lily:Charm lily:Book lily:Play lily:AnimeSeries }
+  ?subject ?predicate ?object ;
+           a          ?type .
+  FILTER(!isLiteral(?object) || lang(?object) = "ja")
   FILTER(!isBlank(?subject))
 }
 SPARQL
