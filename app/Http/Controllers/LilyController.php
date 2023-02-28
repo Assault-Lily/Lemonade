@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use App\Models\Triple;
 use Aws\DynamoDb\Exception\DynamoDbException;
+use Carbon\Carbon;
 
 class LilyController extends Controller
 {
@@ -236,6 +237,7 @@ SPQRQL
 
         // ソート判別
         $sortKey = request()->get('sort', 'name');
+        $sortingType = SORT_STRING;
         switch ($sortKey){
             case 'name':
                 $sort = 'lily:nameKana';
@@ -248,6 +250,7 @@ SPQRQL
                 break;
             case 'age':
                 $sort = 'foaf:age';
+                $sortingType = SORT_NUMERIC;
                 $additional = [
                     'key' => $sort,
                     'suffix' => '歳'
@@ -267,6 +270,7 @@ SPQRQL
                 break;
             case 'height':
                 $sort = 'schema:height';
+                $sortingType = SORT_NUMERIC;
                 $additional = [
                     'key' => $sort,
                     'suffix' => 'cm'
@@ -274,6 +278,7 @@ SPQRQL
                 break;
             case 'weight':
                 $sort = 'schema:weight';
+                $sortingType = SORT_NUMERIC;
                 $additional = [
                     'key' => $sort,
                     'suffix' => 'kg'
@@ -292,6 +297,32 @@ SPQRQL
                     'key' => $sort,
                     'type' => 'date'
                 ];
+                break;
+            case 'birthdatediff':
+                $sort = 'birthDateDiff';
+                $sortingType = SORT_NUMERIC;
+                $additional = [
+                    'key' => 'schema:birthDate',
+                    'type' => 'date'
+                ];
+                // 今日と誕生日の差を計算して array に追加する
+                foreach ($lilies as $lilyKey => $lily){
+                    $today = Carbon::now();
+                    if (!empty($lily['schema:birthDate'][0])) {
+                        // 今年の誕生日を表すインスタンスを作成
+                        $birthday = Carbon::createFromFormat('Y--m-d', $today->year.$lily['schema:birthDate'][0]);
+
+                        // もし今年の誕生日がすぎていたら、誕生日に1年足す
+                        if ($birthday->isPast()) {
+                            $birthday->addYear();
+                        }
+
+                        $diff = $today->diffInDays($birthday);
+                        $lily['birthDateDiff'] = [$diff];
+                        $lilies[$lilyKey] = $lily;
+                    }
+                }
+                unset($lily);
                 break;
             default:
                 abort(400, '指定されたキーではソートできません');
@@ -322,7 +353,7 @@ SPQRQL
         unset($lily);
         // リリィのソート
         array_multisort($lily_sortKeyForKeyUnknown, SORT_ASC, SORT_NUMERIC,
-            $lily_sortKey, $order, SORT_STRING,
+            $lily_sortKey, $order, $sortingType,
             $lily_sortKeyForKanaUnknown, SORT_ASC, SORT_NUMERIC,
             $lily_sortKeyKana, $order, SORT_STRING, $lilies);
 
