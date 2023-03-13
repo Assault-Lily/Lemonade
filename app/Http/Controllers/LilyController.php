@@ -307,10 +307,11 @@ SPQRQL
                 ];
                 // 今日と誕生日の差を計算して array に追加する
                 foreach ($lilies as $lilyKey => $lily){
-                    $today = Carbon::now();
+                    // 今日の0時ちょうど
+                    $today = Carbon::today();
                     if (!empty($lily['schema:birthDate'][0])) {
-                        // 今年の誕生日を表すインスタンスを作成
-                        $birthday = Carbon::createFromFormat('Y--m-d', $today->year.$lily['schema:birthDate'][0]);
+                        // 今年の誕生日の0時ちょうどを表すインスタンスを作成
+                        $birthday = Carbon::createFromFormat('Y--m-d', $today->year.$lily['schema:birthDate'][0])->startOfDay();
 
                         // もし今年の誕生日がすぎていたら、誕生日に1年足す
                         if ($birthday->isPast()) {
@@ -346,9 +347,9 @@ SPQRQL
         foreach ($lilies as $lily){
             // ソート用キー配列生成
             $lily_sortKey[] = implode(',' ,$lily[$sort] ?? ['-']);
-            $lily_sortKeyForKeyUnknown[] = !empty($lily[$sort][0]) ? 0 : 1;
+            $lily_sortKeyForKeyUnknown[] = isset($lily[$sort][0]) ? 0 : 1;
             $lily_sortKeyKana[] = $lily['lily:nameKana'][0] ?? '-';
-            $lily_sortKeyForKanaUnknown[] = !empty($lily['lily:nameKana'][0]) ? 0 : 1;
+            $lily_sortKeyForKanaUnknown[] = isset($lily['lily:nameKana'][0]) ? 0 : 1;
         }
         unset($lily);
         // リリィのソート
