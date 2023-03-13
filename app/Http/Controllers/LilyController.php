@@ -314,7 +314,7 @@ SPQRQL
                         $birthday = Carbon::createFromFormat('Y--m-d', $today->year.$lily['schema:birthDate'][0])->startOfDay();
 
                         // もし今年の誕生日がすぎていたら、誕生日に1年足す
-                        if ($birthday->isPast()) {
+                        if ($birthday->isPast() && !$birthday->isToday()) {
                             $birthday->addYear();
                         }
 
