@@ -48,7 +48,7 @@ class OGPController extends Controller
         });
 
         // Footer
-        $footer = config('app.name', 'Lemonade').' : AssaultLily Unofficial FanSite';
+        $footer = config('app.name', 'Lemonade').' : AssaultLily FanSite';
         $img->text($footer, 70, 450, function ($font){
             $font->size(43);
             $font->color('#444');
