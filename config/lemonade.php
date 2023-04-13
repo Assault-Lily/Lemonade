@@ -23,7 +23,7 @@ return [
     'repository' => 'https://github.com/Assault-Lily/Lemonade',
 
     'rdf' => [
-        'repository' => 'https://github.com/fvh-P/LuciaDB',
+        'repository' => 'https://github.com/Assault-Lily/LuciaDB',
     ],
 
     'officialUrls' => [
