@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '13.4.2 Yuigahama',
+    'version' => '13.4.3 Yuigahama',
 
     'webhooks' => [
         'discord-log' => env('DISCORD_URL'),
