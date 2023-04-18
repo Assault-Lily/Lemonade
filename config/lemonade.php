@@ -29,7 +29,7 @@ return [
     'officialUrls' => [
         'acus' => 'https://www.assaultlily.com/character/{no}.html/',
         'anime' => 'https://anime.assaultlily-pj.com/character/{slug}',
-        'lb' => 'https://assaultlily.bushimo.jp/character/{slug}/',
+        'lb' => 'https://assaultlily.jp/character/{slug}/',
     ],
 
     'wikiUrls' => [
