@@ -38,6 +38,7 @@ SPARQL
             // 更新情報エントリのタイトル中に LuciaDB に schema:name として登録されている文字列があったら、その部分をLemonadeの詳細ページへのリンクに置換する
             foreach ($rdf_feed->entry as $entry) {
                 foreach ($name_list as $name_key => $name_item) {
+                    if ($name_item['schema:name'][0] === "L") continue;
                     if (strpos($entry->title, $name_item['schema:name'][0])) {
                         $slug = str_replace('lilyrdf:', '', $name_key);
                         switch ($name_item['rdf:type'][0]) {
