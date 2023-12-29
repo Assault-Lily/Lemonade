@@ -30,7 +30,7 @@ WHERE {
            a          ?type .
   FILTER(!isLiteral(?object) || lang(?object) = "ja")
   FILTER(!isBlank(?subject))
-}
+}ORDER BY DESC(?object)
 SPARQL
 );
             $name_list = sparqlToArray($name_list_rdf);
@@ -38,8 +38,9 @@ SPARQL
             // 更新情報エントリのタイトル中に LuciaDB に schema:name として登録されている文字列があったら、その部分をLemonadeの詳細ページへのリンクに置換する
             foreach ($rdf_feed->entry as $entry) {
                 foreach ($name_list as $name_key => $name_item) {
-                    if ($name_item['schema:name'][0] === "L") continue;
-                    if (strpos($entry->title, $name_item['schema:name'][0])) {
+                    $name_temp = $name_item['schema:name'][0];
+                    if ($name_temp === "L") continue;
+                    if (strpos($entry->title, $name_temp)) {
                         $slug = str_replace('lilyrdf:', '', $name_key);
                         switch ($name_item['rdf:type'][0]) {
                             case "lily:Lily":
@@ -53,6 +54,8 @@ SPARQL
                                 $path = "/legion/{$slug}";
                                 break;
                             case "lily:Charm":
+                                //誤ったリンクを防ぐため、置換する文字列を変化させる
+                                $name_temp = preg_replace("/^.{0,1}+\K/us", "\u{2020}", $name_temp);
                                 $path = "/charm/{$slug}";
                                 break;
                             case "lily:Book":
@@ -67,10 +70,12 @@ SPARQL
                             default:
                                 break;
                         }
-                        $a_tag = "<a href={$path}>{$name_item['schema:name'][0]}</a>";
+                        $a_tag = "<a href={$path}>{$name_temp}</a>";
                         $entry->title = mb_ereg_replace($name_item['schema:name'][0], $a_tag, $entry->title);
                     }
                 }
+                //置換終了後の文字列は戻しておく
+                $entry->title = str_replace("\u{2020}", "", $entry->title);
             }
         } catch (Exception $exception){
             $rdf_feed = null;
