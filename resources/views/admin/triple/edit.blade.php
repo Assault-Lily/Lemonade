@@ -112,7 +112,7 @@
                 </p>
                 <hr>
                 <p style="font-size: 20px">
-                    {{ $triple->lily->name }} ->
+                    {{ $triple->lily_slug }} ->
                     {{ config('triplePredicate.'.$triple->predicate).'('.$triple->predicate.')' }} ->
                     {{ $triple->object }}
                 </p>
