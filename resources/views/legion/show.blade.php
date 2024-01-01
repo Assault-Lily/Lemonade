@@ -90,6 +90,7 @@ if(empty($legion[$ls]['lily:disbanded'][0]) || $legion[$ls]['lily:disbanded'][0]
                              *  @var string $key
                              */
                             if($key !== 'schema:member') $additional = null;
+                            if($legion[$ls]['rdf:type'][0] === 'lily:Taskforce') $additional = null;
                             ?>
                             @include('app.button_lily',['key' => $member, 'lily' => $legion[$member], 'legion' => $legion[$legion[$member]['lily:legion'][0] ?? '-'] ?? array(), 'additional' => $additional, 'icons' => $icons[$member] ?? array()])
                         @endforeach
