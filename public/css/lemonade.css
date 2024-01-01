@@ -547,6 +547,24 @@ select{
     text-align: center;
     font-size: 13px;
 }
+.list-item-a > .ribbon {
+    display: block;
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    background: linear-gradient(-135deg, transparent, transparent 25%, white 25%, white 50%, transparent 50%, transparent);
+    filter: drop-shadow(0 0 3px rgba(0,0,0,.1));
+    pointer-events: none;
+}
+.list-item-a > .ribbon.dead {
+    background: linear-gradient(-135deg, transparent, transparent 25%, #181818 25%, #181818 50%, transparent 50%, transparent);
+}
+.list-item-a > .ribbon.unknown {
+    background: linear-gradient(-135deg, transparent, transparent 25%, #707070 25%, #707070 50%, transparent 50%, transparent);
+}
 
 .list-item-b{
     display: block;

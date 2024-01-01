@@ -8,6 +8,9 @@
  */
 $icon = !empty($icons) ? $icons[array_rand($icons)] : null;
 ?><a class="list-item-a" href="{{ route('lily.show',['lily' => str_replace('lilyrdf:','',$key)]) }}" title="{{ $lily['schema:name'][0] }}">
+    @if(($lily['lily:lifeStatus'][0] ?? 'alive') !== 'alive')
+        <div class="ribbon {{ $lily['lily:lifeStatus'][0] }}"></div>
+    @endif
     <div class="list-item-image">
         @if(!empty($additional['key']) && !empty($lily[$additional['key']]))
             @if(!empty($additional['type']) && $additional['type'] === 'date')

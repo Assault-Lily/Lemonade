@@ -98,7 +98,7 @@ WHERE {
   }
   UNION
   {
-    VALUES ?predicate { schema:name lily:nameKana lily:garden lily:grade lily:legion lily:legionJobTitle lily:rareSkill lily:color }
+    VALUES ?predicate { schema:name lily:nameKana lily:garden lily:grade lily:legion lily:legionJobTitle lily:rareSkill lily:color lily:lifeStatus }
     lilyrdf:$legionSlug schema:member|schema:alumni|lily:submember ?subject.
     ?subject ?predicate ?object.
   }
