@@ -16,7 +16,7 @@
         "baopham/dynamodb": "^6.1",
         "endroid/qr-code": "^4.1",
         "guzzlehttp/guzzle": "^7.0.1",
-        "intervention/image": "^2.5",
+        "intervention/image": "^3.2",
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.5"
     },
