@@ -29,5 +29,5 @@ The license was changed from the [MIT license](https://opensource.org/licenses/M
 ## Requirement
 
 * Web server(e.g. Apache)
-* PHP after Ver7.4
+* PHP after Ver8.1
 * MySQL or MariaDB
