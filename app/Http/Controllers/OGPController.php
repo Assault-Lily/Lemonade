@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
 
 class OGPController extends Controller
 {
     public function generate($type, $title){
-        $img = Image::canvas(1200,630, '#F4F5F9');
+        $manager = ImageManager::imagick();
+        $img = $manager->create(1200, 630); //Image(1200,630, '#F4F5F9');
 
         // Background
-        $img->polygon([
-            0,0, 700,0, 550,630, 0,630
-        ], function ($draw){
-            $draw->background('#E4E7EE');
+        $img->fill('#F4F5F9');
+        $img->drawPolygon(function ($polygon){
+            $polygon->point(0,0);
+            $polygon->point(700,0);
+            $polygon->point(550,630);
+            $polygon->point(0,630);
+            $polygon->background('#E4E7EE');
         });
+
+        // 0,0, 700,0, 550,630, 0,630
 
         // SubLine or SiteName
         $subLine = match ($type) {
@@ -30,7 +36,7 @@ class OGPController extends Controller
         $img->text($subLine, 70, 100, function ($font){
             $font->size(50);
             $font->color('#333');
-            $font->file(resource_path('fonts/SourceHanSans-Normal.otf'));
+            $font->filename(resource_path('fonts/SourceHanSans-Normal.otf'));
         });
 
         // Title
@@ -44,7 +50,7 @@ class OGPController extends Controller
             }
             $font->size($size);
             $font->color('#222');
-            $font->file(resource_path('fonts/SourceHanSans-Normal.otf'));
+            $font->filename(resource_path('fonts/SourceHanSans-Normal.otf'));
         });
 
         // Footer
@@ -52,17 +58,17 @@ class OGPController extends Controller
         $img->text($footer, 70, 450, function ($font){
             $font->size(43);
             $font->color('#444');
-            $font->file(resource_path('fonts/SourceHanSans-Normal.otf'));
+            $font->filename(resource_path('fonts/SourceHanSans-Normal.otf'));
         });
 
         $info =  $_SERVER['HTTP_HOST'].PHP_EOL;
         $info .= config('app.name', 'Lemonade').' - Ver'.config('lemonade.version');
-        $img->text($info, 70, 520, function ($font){
+        $img->text($info, 70, 530, function ($font){
             $font->size(30);
             $font->color('#444');
-            $font->file(resource_path('fonts/SourceHanSans-Normal.otf'));
+            $font->filename(resource_path('fonts/SourceHanSans-Normal.otf'));
         });
 
-        return $img->response('jpg');
+        return response($img->toJpeg())->header('Content-Type', 'image/jpeg');
     }
 }
