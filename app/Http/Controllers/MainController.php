@@ -30,7 +30,7 @@ WHERE {
            a          ?type .
   FILTER(!isLiteral(?object) || lang(?object) = "ja")
   FILTER(!isBlank(?subject))
-}ORDER BY DESC(?object)
+}ORDER BY DESC(strlen(?object))
 SPARQL
 );
             $name_list = sparqlToArray($name_list_rdf);
