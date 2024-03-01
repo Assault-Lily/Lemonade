@@ -21,7 +21,7 @@
         "laravel/tinker": "^2.5"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.9",
+        "barryvdh/laravel-ide-helper": "^3.0",
         "spatie/laravel-ignition": "^2.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.0",
