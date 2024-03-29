@@ -195,40 +195,43 @@ $ogp['description'] = $ogp_genre . $play[$ps]['schema:name'][0] . " の情報で
                     <tr>
                         <th>キャスト</th>
                         <td rowspan="2">
-                            <table id="cast-list">
-                                @foreach($play[$ps]['lily:cast'] as $cast)
-                                    <tr>
-                                        <td>{{ $play[$cast]['schema:name'][0] }}</td>
-                                        <td>
-                                            @if(!empty($play[$cast]['lily:performAs']))
-                                                &#x0028;
-                                                @foreach($play[$cast]['lily:performAs'] as $performAs)
-                                                    @if(!empty($play[$performAs]))
-                                                        <a href="{{ route('lily.show', ['lily' => removePrefix($performAs)]) }}">
-                                                            {{ $play[$performAs]['schema:name'][0] }}</a> 役
-                                                    @else
-                                                        {{ $performAs }} 役
-                                                    @endif
-                                                    @if(!$loop->last)
-                                                        ・
-                                                    @endif
-                                                @endforeach
-                                                &#x0029;
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @if(!empty($play[$cast]['lily:additionalInformation']))
+                            @if(!empty($play[$ps]['lily:cast']))
+                                <table id="cast-list">
+                                    @foreach($play[$ps]['lily:cast'] as $cast)
                                         <tr>
-                                            <td colspan="2" style="font-size: small; padding-left: 2em">
-                                                @foreach($play[$cast]['lily:additionalInformation'] as $castInfo)
-                                                    <div>{{ $castInfo }}</div>
-                                                @endforeach
+                                            <td>{{ $play[$cast]['schema:name'][0] }}</td>
+                                            <td>
+                                                @if(!empty($play[$cast]['lily:performAs']))
+                                                    &#x0028;
+                                                    @foreach($play[$cast]['lily:performAs'] as $performAs)
+                                                        @if(!empty($play[$performAs]))
+                                                            <a href="{{ route('lily.show', ['lily' => removePrefix($performAs)]) }}">
+                                                                {{ $play[$performAs]['schema:name'][0] }}</a> 役
+                                                        @else
+                                                            {{ $performAs }} 役
+                                                        @endif
+                                                        @if(!$loop->last)
+                                                            ・
+                                                        @endif
+                                                    @endforeach
+                                                    &#x0029;
+                                                @endif
                                             </td>
                                         </tr>
-                                    @endif
-                                @endforeach
-                            </table>
-
+                                        @if(!empty($play[$cast]['lily:additionalInformation']))
+                                            <tr>
+                                                <td colspan="2" style="font-size: small; padding-left: 2em">
+                                                    @foreach($play[$cast]['lily:additionalInformation'] as $castInfo)
+                                                        <div>{{ $castInfo }}</div>
+                                                    @endforeach
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </table>
+                            @else
+                                <span style="color:gray">N/A</span>
+                            @endif
                         </td>
 
                         <th>公演日時</th>
