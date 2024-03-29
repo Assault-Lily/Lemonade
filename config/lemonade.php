@@ -3,7 +3,7 @@
 return [
 
     /* Application Version */
-    'version' => '14.0.0 Wadazuka',
+    'version' => '14.0.1 Wadazuka',
 
     'webhooks' => [
         'discord-log' => env('DISCORD_URL'),
