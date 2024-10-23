@@ -89,7 +89,7 @@
         <h1>{{ config('app.name', 'Lemonade') }}</h1>
         <div id="subline">AssaultLily FanSite</div>
         <p>
-            ただいまメンテナンス中です。メンテナンスの詳細はTwitterで配信しているお知らせをご確認ください。
+            ただいまメンテナンス中です。メンテナンスの詳細は X で配信しているお知らせをご確認ください。
         </p>
         @if(!empty($exception->getMessage()) or !empty($message))
             <p style="color: #FA0A00">
@@ -100,7 +100,7 @@
             @if(!empty(config('lemonade.statusPageUrl')))
                 <a href="{{ config('lemonade.statusPageUrl') }}" class="button primary" target="_blank">Status</a>
             @endif
-            <a href="{{ 'https://twitter.com/'.config('lemonade.developer.twitter') }}" class="button primary" target="_blank">Twitter</a>
+            <a href="{{ 'https://x.com/'.config('lemonade.developer.twitter') }}" class="button primary" target="_blank">X</a>
             <a href="javascript:location.reload()" class="button">リロード</a>
         </div>
     </div>
