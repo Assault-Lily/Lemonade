@@ -14,7 +14,7 @@
         "ext-simplexml": "*",
         "ext-zip": "*",
         "baopham/dynamodb": "^6.1",
-        "endroid/qr-code": "^5.0",
+        "endroid/qr-code": "^6.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^3.2",
         "laravel/framework": "^10.0",
