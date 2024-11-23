@@ -344,7 +344,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                 </table>
                 <div style="display: flex; justify-content: space-between">
                     <div>
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="ja" data-show-count="false">Tweet</a>
+                        <a href="https://x.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="ja" data-show-count="false">Post</a>
                         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
                     <div style="font-size: smaller;">
@@ -396,7 +396,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                 <div>
                     <h3>イラスト・画像・Wikiを探す</h3>
                     <div class="buttons two">
-                        <a href="https://twitter.com/search?q={{ urlencode('#アサルトリリィ_FA '.($triples[$ts]['schema:givenName'][0] ?? $triples[$ts]['schema:name'][0])) }}&f=live"
+                        <a href="https://x.com/search?q={{ urlencode('#アサルトリリィ_FA '.($triples[$ts]['schema:givenName'][0] ?? $triples[$ts]['schema:name'][0])) }}&f=live"
                            target="_blank" class="button">
                             <i class="fab fa-twitter"></i>
                             #アサルトリリィ_FA
@@ -423,7 +423,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                     <?php
                     $slug = strtolower($triples[$ts]['schema:givenName@en'][0] ?? '');
 
-                    $tweet_search = 'https://twitter.com/search?q=from%3A'.config('lemonade.fumi.twitter').'%20';
+                    $tweet_search = 'https://x.com/search?q=from%3A'.config('lemonade.fumi.twitter').'%20';
                     $tweet_search .= urlencode($triples[$ts]['schema:givenName'][0] ?? '').'&f=live';
 
                     if (!empty($triples[$ts]['officialUrls.acus'][0]) && !str_starts_with($triples[$ts]['officialUrls.acus'][0],'http')){
@@ -444,7 +444,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                                title="原作公式サイトのキャラクターページを開きます">AssaultLily.com (原作公式)</a>
                         @endif
                             <a class="button" href="{{ $tweet_search }}" target="_blank"
-                               title="二水ちゃんのツイートを検索します">{{ '@'.config('lemonade.fumi.twitter') }} ツイート検索</a>
+                               title="Xで二水ちゃんのポストを検索します">{{ '@'.config('lemonade.fumi.twitter') }} ポスト検索</a>
                         @if(!empty($official_urls['anime']))
                             <a class="button" href="{{ $official_urls['anime'] }}" target="_blank"
                                title="アニメ「アサルトリリィ BOUQUET」のキャラクターページを開きます">BOUQUET (アニメ版)</a>
@@ -527,7 +527,7 @@ $resource_qs = '?v'.explode(' ', config('lemonade.version'))[0];
                             $title = e($info[0]);
                             $value = e($info[1]);
                             $infos[] = match ($title) {
-                                'twitter' => "Twitter : <a href='https://twitter.com/$value' target='_blank'>@$value</a>",
+                                'twitter' => "X : <a href='https://x.com/$value' target='_blank'>@$value</a>",
                                 'pixiv' => "pixiv : <a href='https://pixiv.net/$value' target='_blank'>$value</a>",
                                 default => "$title : <a href='$value' target='_blank'>$value</a>",
                             };

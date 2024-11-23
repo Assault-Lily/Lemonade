@@ -73,8 +73,8 @@ $ogp['description'] = $ogp_genre . $play[$ps]['schema:name'][0] . " の情報で
             @endif
             <h3 style="display: flex; justify-content: flex-start; align-items: flex-end">
                 <span style="margin-right: 10px">公演概要</span>
-                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="ja"
-                   data-show-count="false">Tweet</a>
+                <a href="https://x.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="ja"
+                   data-show-count="false">Post</a>
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </h3>
             @if(Carbon::now()->lt(convertDateString($play[$ps]['schema:startDate'][0])))

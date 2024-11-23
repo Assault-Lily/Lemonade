@@ -28,7 +28,7 @@ $message = $exception->getMessage() && $sc !== 500 ? $exception->getMessage() : 
         @if((int)($sc / 100) === 5)
             <div class="buttons" style="margin-top: 30px;">
                 <a href="javascript:location.reload()" class="button primary">リロード</a>
-                <a href="https://twitter.com/{{ config('lemonade.developer.twitter') }}" class="button" target="_blank">管理者に連絡</a>
+                <a href="https://x.com/{{ config('lemonade.developer.twitter') }}" class="button" target="_blank">管理者に連絡</a>
             </div>
         @endif
     </div>
