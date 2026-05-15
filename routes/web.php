@@ -61,28 +61,30 @@ Route::prefix('anime')->group(function (){
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
-    Route::get('/', [AdminController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
     require __DIR__.'/auth.php';
 
-    Route::resource('/lily', LilyDataController::class);
+    Route::middleware('auth')->group(function (){
+        Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
 
-    Route::resource('/triple', TripleDataController::class);
+        Route::resource('/lily', LilyDataController::class);
 
-    Route::get('/image/createByJson', [ImageDataController::class, 'createByJson'])->name('image.createByJson');
-    Route::get('/image/bulkUpdate', [ImageDataController::class, 'bulkUpdate'])->name('image.bulkUpdate');
-    Route::patch('/image/bulkUpdate', [ImageDataController::class, 'bulkUpdateExec'])->name('image.bulkUpdateExec');
-    Route::post('/image/storeJson', [ImageDataController::class, 'storeJson'])->name('image.storeJson');
-    Route::resource('/image', ImageDataController::class);
+        Route::resource('/triple', TripleDataController::class);
 
-    Route::resource('/notice', NoticeController::class);
+        Route::get('/image/createByJson', [ImageDataController::class, 'createByJson'])->name('image.createByJson');
+        Route::get('/image/bulkUpdate', [ImageDataController::class, 'bulkUpdate'])->name('image.bulkUpdate');
+        Route::patch('/image/bulkUpdate', [ImageDataController::class, 'bulkUpdateExec'])->name('image.bulkUpdateExec');
+        Route::post('/image/storeJson', [ImageDataController::class, 'storeJson'])->name('image.storeJson');
+        Route::resource('/image', ImageDataController::class);
 
-    Route::resource('/url', UrlDataController::class);
+        Route::resource('/notice', NoticeController::class);
 
-    Route::get('/rdf',  [LilyRdfController::class, 'index'])->name('rdf.index');
-    Route::get('/rdf/lily', [LilyRdfController::class, 'lily'])->name('rdf.lily');
-    Route::post('/rdf/lily',[LilyRdfController::class, 'lilySync'])->name('rdf.lilySync');
+        Route::resource('/url', UrlDataController::class);
 
+        Route::get('/rdf',  [LilyRdfController::class, 'index'])->name('rdf.index');
+        Route::get('/rdf/lily', [LilyRdfController::class, 'lily'])->name('rdf.lily');
+        Route::post('/rdf/lily',[LilyRdfController::class, 'lilySync'])->name('rdf.lilySync');
+    });
 
 });
 
