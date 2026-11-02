@@ -6,8 +6,5 @@ php:
     not-name:
       - index.blade.php
       - server.php
-js:
-  finder:
-    not-name:
-      - webpack.mix.js
+js: true
 css: true
