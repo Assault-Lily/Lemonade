@@ -318,7 +318,7 @@ SPQRQL
                             $birthday->addYear();
                         }
 
-                        $diff = $today->diffInDays($birthday);
+                        $diff = (int) $today->diffInDays($birthday);
                         $lily['birthDateDiff'] = [$diff];
                         $lilies[$lilyKey] = $lily;
                     }
