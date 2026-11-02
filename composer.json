@@ -15,7 +15,7 @@
         "ext-zip": "*",
         "baopham/dynamodb": "^7.0",
         "endroid/qr-code": "^5.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^8.3.1",
         "intervention/image": "^3.2",
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0"
